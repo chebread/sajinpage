@@ -10,6 +10,7 @@ import Bowser from 'bowser';
 import Home from 'pages/Home';
 import NotFoundPage from 'pages/NotFoundPage';
 import ForbiddenPage from 'pages/ForbiddenPage';
+import ServiceUnavailable from 'pages/ServiceUnavailable';
 
 const Router = () => {
   const browser = Bowser.getParser(window.navigator.userAgent);
@@ -33,6 +34,7 @@ const Router = () => {
         }
       >
         <Route path="/" element={<Home />} />
+        <Route path="503" element={<ServiceUnavailable />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )

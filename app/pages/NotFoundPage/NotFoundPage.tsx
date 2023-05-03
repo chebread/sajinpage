@@ -3,10 +3,10 @@ import ErrorPage from 'components/ErrorPage';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  const onClick = () => {
+  const onClickRedirect = () => {
     navigate('/');
   };
-  return <ErrorPage errorCode={404} onClick={onClick} />;
+  return <ErrorPage errorCode={404} onClick={onClickRedirect} />;
 };
 
 export default NotFoundPage;
