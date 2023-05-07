@@ -13,7 +13,6 @@
     "@supabase/supabase-js": "^2.21.0",
     "add": "^2.0.6",
     "bowser": "^2.11.0",
-    "firebase": "^9.21.0",
     "gsap": "^3.11.4",
     "jotai": "^2.0.1",
     "react": "^18.2.0",
