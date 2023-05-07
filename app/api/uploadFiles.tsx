@@ -1,28 +1,25 @@
+import supabase from 'components/supabase';
 import hashConstructor from 'lib/hashMaker';
-import {
-  db,
-  setDoc,
-  doc,
-  storage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from 'components/firebase';
 
-const uploadFile = async ({ file }) => {
-  const fileRefId = hashConstructor();
-  const docRefId = hashConstructor();
-  const fileRef = ref(storage, `images/${fileRefId}`);
-  const docRef = doc(db, 'images', `${docRefId}`);
-  const metadata = {
-    contentType: null,
-  };
-  await uploadBytes(fileRef, file, metadata);
-  await setDoc(docRef, {
-    url: await getDownloadURL(fileRef),
-    filename: fileRefId,
+const uploadFiles = async (file: any) => {
+  const docId = hashConstructor();
+  const fileId = hashConstructor();
+  // check bucket
+  // create bucket
+  // upload file
+  await supabase.storage.from('images').upload(fileId, file, {
+    cacheControl: '3600',
+    upsert: false,
   });
-  return docRefId;
+  // create file viewer url
+  const fileUrl = supabase.storage.from('images').getPublicUrl(fileId);
+  // create table
+  // create columns
+  // upload db
+  await supabase
+    .from('refs')
+    .insert({ id: docId, url: fileUrl.data.publicUrl, fileId: fileId });
+  return docId;
 };
 
-export default uploadFile;
+export default uploadFiles;

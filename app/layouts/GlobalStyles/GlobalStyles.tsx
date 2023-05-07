@@ -1,6 +1,10 @@
 import { DisabledScrollbar } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
 
+// 770px 이하: mobile
+// 1200 이하: tablet and desktop
+// 1200 이상: only desktop
+
 const GlobalStyles = createGlobalStyle`
   body {
     // font-family
@@ -15,6 +19,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    // background
+    background-color: #fff;
     // font
     color: #000;
     font-weight: 600;
@@ -24,17 +30,11 @@ const GlobalStyles = createGlobalStyle`
     ${DisabledScrollbar}
   }
 
-
-
   /* ::selection {
     background-color: rgb(7, 238, 0, 99.9999999999999%); // 99%: 사파리 대응을 위해 반투명 설정함
     color: #000;
   } */
 
-
-  // 770px 이하: mobile
-  // 770px: tablet and desktop
-  // 1200: only desktop
 `;
 
 export default GlobalStyles;
