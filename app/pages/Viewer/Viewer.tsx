@@ -30,7 +30,7 @@ const Viewer = () => {
     <NullFile />
   ) : isLoaded ? (
     // 2) 파일이 로드됨
-    <ImagesViewer src={fileUrl} />
+    <ImagesViewer src={fileUrl} docId={docId} />
   ) : (
     // 1) 로딩
     <PageLoading />

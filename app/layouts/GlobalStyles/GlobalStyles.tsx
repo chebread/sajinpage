@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: #fff;
     // font
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     // cursur
     cursor: text;
     // scrollbar

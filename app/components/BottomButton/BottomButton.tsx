@@ -34,16 +34,22 @@ const Button = styled.button`
   // background
   backdrop-filter: blur(18.75px);
   background-color: rgba(233, 236, 239, 65%);
+  // animation
+  transition: all;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+  // svg
+  svg {
+    height: 45px;
+    width: 45px;
+    fill: #000;
+  }
+  // hover
   &:hover {
     background-color: rgba(222, 226, 230, 65%);
   }
   &:active {
     background-color: rgba(206, 212, 218, 65%);
-  }
-  // svg
-  svg {
-    height: 45px;
-    width: 45px;
   }
   // tablet
   @media (min-width: 770px) {

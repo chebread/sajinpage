@@ -1,7 +1,7 @@
 import loadFiles from './loadFiles';
 
-const getFileUrl = async (id: string) => {
-  const db = await loadFiles(id);
+const getFileUrl = async (docId: string) => {
+  const db = await loadFiles(docId);
   const fileUrl = db.url;
   return fileUrl;
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CenterScreen from './CenterScreen';
 
 const ImagesScreen = ({ src }) => {
   return (
@@ -7,14 +8,8 @@ const ImagesScreen = ({ src }) => {
     </ImageWrapper>
   );
 };
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(CenterScreen)`
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: rgb(15, 15, 15);
 `;
 const Image = styled.img`
   display: block;

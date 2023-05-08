@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { FullScreen } from 'layouts/Screens';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Dropzone from 'react-dropzone';
 
-// (*): 유한적 접근모드 추가 (1h만 사진 확인하고 세션이 끝나면 세션이 끝난 파일이라고 경고뜸)
-// (*): 업로드시 사진 avif로 변경하는 기능
+// (*): 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸
 
 const Uploader = ({ onDrop }) => {
   const acceptTypes = useRef({
