@@ -40,7 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["add", "npm:2.0.6"],\
             ["bowser", "npm:2.11.0"],\
             ["gsap", "npm:3.11.5"],\
-            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.0.4"],\
+            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-copy-to-clipboard", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.1.0"],\
             ["react-dom", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:18.2.0"],\
@@ -3163,17 +3163,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["jotai", [\
-        ["npm:2.0.4", {\
-          "packageLocation": "./.yarn/cache/jotai-npm-2.0.4-30ac07c50b-8e32fa126e.zip/node_modules/jotai/",\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/jotai-npm-2.1.0-f16b6dd4b8-060b78dd22.zip/node_modules/jotai/",\
           "packageDependencies": [\
-            ["jotai", "npm:2.0.4"]\
+            ["jotai", "npm:2.1.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.0.4", {\
-          "packageLocation": "./.yarn/__virtual__/jotai-virtual-40e73ca894/0/cache/jotai-npm-2.0.4-30ac07c50b-8e32fa126e.zip/node_modules/jotai/",\
+        ["virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/jotai-virtual-3393e291c2/0/cache/jotai-npm-2.1.0-f16b6dd4b8-060b78dd22.zip/node_modules/jotai/",\
           "packageDependencies": [\
-            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.0.4"],\
+            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
             ["@types/react", "npm:18.2.0"],\
             ["react", "npm:18.2.0"]\
           ],\
@@ -4257,7 +4257,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["add", "npm:2.0.6"],\
             ["bowser", "npm:2.11.0"],\
             ["gsap", "npm:3.11.5"],\
-            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.0.4"],\
+            ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-copy-to-clipboard", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.1.0"],\
             ["react-dom", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:18.2.0"],\
