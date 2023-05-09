@@ -1,3 +1,17 @@
-import { fileAtom, isFileAtom, docIdAtom } from './uploadFileAtom';
+import {
+  fileAtom,
+  isFileAtom,
+  docIdAtom,
+  isSelectedAtom,
+  limitAtom,
+  timeLimitAtom,
+} from './uploadFileAtom';
 
-export { fileAtom, isFileAtom, docIdAtom };
+export {
+  fileAtom,
+  isFileAtom,
+  docIdAtom,
+  isSelectedAtom,
+  limitAtom,
+  timeLimitAtom,
+};

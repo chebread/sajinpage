@@ -5,6 +5,7 @@ import PageLoading from 'pages/PageLoading';
 import ImagesViewer from './panels/ImagesViewer';
 import NullFile from './panels/NullFile';
 
+// (0): limit mode 세션 종료시 처리하는 것 추가
 const Viewer = () => {
   const params = useParams();
   const docId = params.id; // doc id
