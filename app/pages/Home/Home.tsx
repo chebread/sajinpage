@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import cancelUploadFiles from 'api/cancelUploadFiles';
 import Uploading from './panels/Uploading';
 import Uploader from './panels/Uploader';
-import { uploadFiles } from 'api';
+// import { uploadFiles } from 'api';
 import { useAtom } from 'jotai';
 import { docIdAtom, fileAtom, isFileAtom } from 'atoms';
 
@@ -12,9 +12,9 @@ import { docIdAtom, fileAtom, isFileAtom } from 'atoms';
 // (0): 업로드는 uploading component 에서 수행함 (jotai로 통합하기)
 
 const Home = () => {
-  const [file, setFile] = useAtom(fileAtom);
-  const [isFile, setIsFile] = useAtom(isFileAtom);
-  const [docId, setDocId] = useAtom(docIdAtom);
+  const [file, setFile] = useState();
+  const [isFile, setIsFile] = useState(false);
+  const [docId, setDocId] = useState('');
   const [uploadMode, setUploadMode] = useState('');
 
   const onDropFiles = async (files: any) => {
@@ -45,18 +45,8 @@ const Home = () => {
     } = e;
     setUploadMode(value);
     console.log('모드를 선택했습니다');
-    // await uploadFiles(file)
-    //   .then(id => {
-    //     setDocId(id);
-    //   })
-    //   .catch(error => {
-    //     alert('파일 업로드중 오류 발생');
-    //     setIsFile(false); // 아직 docId 저장 안되었기에 처음 화면으로 돌아감
-    //   });
-    // console.log('파일을 업로드했습니다');
   };
 
-  // (0): is error true시 useEffect 무한으로 되는 오류 발생 => setIsFile(false)로 해결함
   return !isFile ? (
     // 1) 입력된 파일이 없을때
     <Uploader onDrop={onDropFiles} />
@@ -73,8 +63,14 @@ const Home = () => {
         </button>
       </div>
     ) : (
-      // 3) 업로딩중
-      <Uploading onCancel={onClickCancle} file={file} />
+      // 3) 업로딩중 (파일 업로드 및 로딩 같이 수행)
+      <Uploading
+        onCancel={onClickCancle}
+        file={file}
+        setIsFile={setIsFile}
+        setDocId={setDocId}
+        setUploadMode={setUploadMode}
+      />
     )
   ) : (
     // 4) 업로딩 완료
