@@ -6,6 +6,8 @@ import ImagesViewer from './panels/ImagesViewer';
 import NullFile from './panels/NullFile';
 
 // (0): limit mode 세션 종료시 처리하는 것 추가
+// (0): (아직은 구현하지 않음) time limit 에 현재시간에 종료시간을 빼어서 세션 유지 시간 기능 추가해야 함
+
 const Viewer = () => {
   const params = useParams();
   const docId = params.id; // doc id
@@ -19,7 +21,7 @@ const Viewer = () => {
       const fileUrl = await getFileUrl(docId);
       setFileUrl(fileUrl);
       setIsLoaded(true); // 파일 로드됨
-      // (*): file description 가져오기
+      // (*): file description 가져오기 => 있으면 출력 없으면 바로 create desc 하기
     };
     onLoad().catch(() => {
       setIsNullFile(true); // 파일이 존재하지 않음
