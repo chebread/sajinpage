@@ -8,6 +8,10 @@ import {
 } from './uploadFileAtom';
 import timeLimitOptionsAtom from './timeLimitOptionsAtom';
 import docIdsAtom from './docIdsAtom';
+import {
+  isSupportedIndexedDbAtom,
+  isIeAccessDeniedAtom,
+} from './errorCodesAtom';
 
 export {
   fileAtom,
@@ -18,4 +22,6 @@ export {
   timeLimitAtom,
   timeLimitOptionsAtom,
   docIdsAtom,
+  isSupportedIndexedDbAtom,
+  isIeAccessDeniedAtom,
 };

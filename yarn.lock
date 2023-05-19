@@ -2648,6 +2648,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"idb@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "idb@npm:7.1.1"
+  checksum: 1973c28d53c784b177bdef9f527ec89ec239ec7cf5fcbd987dae75a16c03f5b7dfcc8c6d3285716fd0309dd57739805390bd9f98ce23b1b7d8849a3b52de8d56
+  languageName: node
+  linkType: hard
+
 "ignore@npm:^5.2.0":
   version: 5.2.4
   resolution: "ignore@npm:5.2.4"
@@ -3826,6 +3833,7 @@ __metadata:
     bowser: ^2.11.0
     clipboardy: ^3.0.0
     gsap: ^3.11.4
+    idb: ^7.1.1
     jotai: ^2.1.0
     react: ^18.2.0
     react-copy-to-clipboard: ^5.1.0

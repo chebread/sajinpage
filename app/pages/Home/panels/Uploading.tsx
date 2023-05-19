@@ -5,6 +5,7 @@ import { docIdAtom, fileAtom, limitAtom, timeLimitAtom } from 'atoms';
 
 // (0): 업로딩중에 취소 기능 추가하기 => 없다고 하는데 구현은 언젠가는 해야함
 
+// 파일을 업로드하는 부분
 const Uploading = ({ init }) => {
   const [file] = useAtom(fileAtom);
   const [, setDocId] = useAtom(docIdAtom);

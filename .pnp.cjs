@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bowser", "npm:2.11.0"],\
             ["clipboardy", "npm:3.0.0"],\
             ["gsap", "npm:3.11.5"],\
+            ["idb", "npm:7.1.1"],\
             ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-copy-to-clipboard", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.1.0"],\
@@ -3299,6 +3300,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["idb", [\
+        ["npm:7.1.1", {\
+          "packageLocation": "./.yarn/cache/idb-npm-7.1.1-739f072039-1973c28d53.zip/node_modules/idb/",\
+          "packageDependencies": [\
+            ["idb", "npm:7.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ignore", [\
         ["npm:5.2.4", {\
           "packageLocation": "./.yarn/cache/ignore-npm-5.2.4-fbe6e989e5-3d4c309c60.zip/node_modules/ignore/",\
@@ -4787,6 +4797,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bowser", "npm:2.11.0"],\
             ["clipboardy", "npm:3.0.0"],\
             ["gsap", "npm:3.11.5"],\
+            ["idb", "npm:7.1.1"],\
             ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-copy-to-clipboard", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.1.0"],\

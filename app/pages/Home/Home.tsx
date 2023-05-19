@@ -12,6 +12,7 @@ import {
 import Uploaded from './panels/Uploaded';
 import SelectModes from './panels/SelectModes';
 
+// 업로드의 중심부
 const Home = () => {
   const [, setFile] = useAtom(fileAtom);
   const [isFile, setIsFile] = useAtom(isFileAtom);

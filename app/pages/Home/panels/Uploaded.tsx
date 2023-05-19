@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 // 업로드 완료시 모든 값을 초기화 해줌
 
+// 업로드 완료
 const Uploaded = ({ init }) => {
   const [docId] = useAtom(docIdAtom);
   const localDocId = useRef(docId); // docId 초기화를 위해 미리 값을 컴포넌트 내부에 받아 둠
