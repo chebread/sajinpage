@@ -6,30 +6,46 @@ import {
 } from 'react-router-dom';
 import Home from 'pages/Home';
 import NotFoundPage from 'pages/NotFoundPage';
-import ServiceUnavailable from 'pages/ServiceUnavailable';
 import ForbiddenPage from 'pages/ForbiddenPage';
 import Viewer from 'pages/Viewer';
+import MyFiles from 'pages/MyFiles';
+import Header from 'components/Header';
 
-const forbiddenRouter = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route path="*" element={<ForbiddenPage />} />
-    </Route>
-  )
-);
+const forbiddenRouter = ({ errorCode, errorMessage }) =>
+  createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        element={
+          <>
+            <Header />
+            <Outlet />
+          </>
+        }
+      >
+        <Route
+          path="*"
+          element={
+            <ForbiddenPage errorCode={errorCode} errorMessage={errorMessage} />
+          }
+        />
+      </Route>
+    )
+  );
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       element={
         <>
+          <Header />
           <Outlet />
         </>
       }
+      // errorElement={<ErrorPage />}
     >
       <Route path="/" element={<Home />} />
       <Route path="v/:id" element={<Viewer />} />
-      <Route path="503" element={<ServiceUnavailable />} />
+      <Route path="f" element={<MyFiles />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   )

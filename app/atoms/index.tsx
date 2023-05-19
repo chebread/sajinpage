@@ -6,6 +6,8 @@ import {
   limitAtom,
   timeLimitAtom,
 } from './uploadFileAtom';
+import timeLimitOptionsAtom from './timeLimitOptionsAtom';
+import docIdsAtom from './docIdsAtom';
 
 export {
   fileAtom,
@@ -14,4 +16,6 @@ export {
   isSelectedAtom,
   limitAtom,
   timeLimitAtom,
+  timeLimitOptionsAtom,
+  docIdsAtom,
 };

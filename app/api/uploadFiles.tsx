@@ -36,7 +36,8 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
     fileId: fileId,
     desc: null, // 값이 지정되지 않으면 null로서 처리하기
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
-    timeLimit: limit // (0): (아직은 구현하지 않음) sTime 에 현재 시간, eTime에 종료 시간 (알람 같음)
+    // (아직은 구현하지 않음)
+    timeLimit: limit // (0): sTime 에 현재 시간, eTime에 종료 시간 (알람 같음)
       ? {
           sTime: timeLimit,
           eTime: timeLimit,

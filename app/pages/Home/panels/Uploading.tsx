@@ -3,22 +3,24 @@ import { uploadFiles } from 'api';
 import { useAtom } from 'jotai';
 import { docIdAtom, fileAtom, limitAtom, timeLimitAtom } from 'atoms';
 
-// (0): 업로딩중에 취소 기능 추가하기
-// *(0): 업로드 후 back 이 안됨 (/ 으로 가는)
-const Uploading = ({ onCancel, init }) => {
+// (0): 업로딩중에 취소 기능 추가하기 => 없다고 하는데 구현은 언젠가는 해야함
+
+const Uploading = ({ init }) => {
   const [file] = useAtom(fileAtom);
   const [, setDocId] = useAtom(docIdAtom);
   const [limit] = useAtom(limitAtom);
   const [timeLimit] = useAtom(timeLimitAtom);
 
   useEffect(() => {
-    console.log(limit, timeLimit); // normal: false, 0
-
     const onLoad = async () => {
       // 파일 업로드
-      await uploadFiles({ file: file, limit: limit, timeLimit: timeLimit })
+      await uploadFiles({
+        file: file,
+        limit: limit,
+        timeLimit: timeLimit,
+      })
         .then(id => {
-          console.log('파일을 업로드했습니다');
+          // 파일 업로드 완료
           setDocId(id);
         })
         .catch(() => {
@@ -33,7 +35,6 @@ const Uploading = ({ onCancel, init }) => {
   return (
     <>
       <div>Uploading...</div>
-      <button onClick={onCancel}>cancel uploading</button>
     </>
   );
 };

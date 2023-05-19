@@ -2,11 +2,12 @@ import { CenterAlign, DisabledSelection } from 'layouts/properties';
 import { CenterScreen } from 'layouts/Screens';
 import styled from 'styled-components';
 
-const ErrorPage = ({ errorCode, onClick }) => {
+const ErrorPage = ({ errorCode, errorMessage, onClick }) => {
   return (
-    <Screen>
-      <Notice>{errorCode}</Notice>
-    </Screen>
+    <div>
+      <div>{errorCode}</div>
+      <div>{errorMessage}</div>
+    </div>
   );
 };
 
