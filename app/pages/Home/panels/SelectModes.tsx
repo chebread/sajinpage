@@ -5,6 +5,8 @@ import {
   timeLimitOptionsAtom,
 } from 'atoms';
 import { useAtom } from 'jotai';
+import addTime from 'lib/addTime';
+import getCurrentTime from 'lib/getCurrentTime';
 import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
@@ -19,9 +21,15 @@ const SelectModes = () => {
     const { value } = e;
     // normal upload mode = e.value가 undefined임 / limit upload mode = e.value 존재
     if (value) {
-      // limit upload mode
+      // value = sec
       // limit mode의 값들을 지정해주며, timeLimit에는 현재 업로드된 시간과 제한모드 활성화 시간을 더한 시간의 끝시간을 각각저장함
-      setTimeLimit(value);
+      const startTime = getCurrentTime(); // current time
+      const endTime = addTime({ currentTime: startTime, sec: value }); // time limit
+      const timeLimit = {
+        startTime: startTime,
+        endTime: endTime,
+      };
+      setTimeLimit(timeLimit); // sTime = now time ~ eTime = now time + sec 지정하기
       setLimit(true);
     }
     setIsSelected(true); // 선택됨

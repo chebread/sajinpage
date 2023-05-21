@@ -4,9 +4,10 @@ import hashConstructor from 'lib/hashMaker';
 type uploadFilesProps = {
   file: any;
   limit: boolean;
-  timeLimit: number;
+  timeLimit: any;
 };
 
+// limit 로직이 여기 있음 여기서 바꾸자
 const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
   const docId = hashConstructor();
   const fileId = hashConstructor();

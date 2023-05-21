@@ -5,7 +5,7 @@ const isFileAtom = atom(false);
 const docIdAtom = atom('');
 const isSelectedAtom = atom(false);
 const limitAtom = atom(false);
-const timeLimitAtom = atom(0);
+const timeLimitAtom = atom({});
 
 export {
   fileAtom,
