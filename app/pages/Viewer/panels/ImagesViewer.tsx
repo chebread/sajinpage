@@ -8,6 +8,7 @@ import onDownload from 'components/Viewer/onDownload';
 import ModalEditor from 'components/Viewer/ModalEditor';
 import styled from 'styled-components';
 
+// 여기에서 파일의 정보를 가져오는 이유는 viewer는 파일이 존재하는지 않하는지 체킹하는 부분이라 그럼 (제한 모드도 앞에서 체킹함)
 // (0): 파일 업로드후 여기에서 desc 가져와서 bottom modal로 출력하며, 없거나 있어도 편집하기 버튼을 통해 description 수정 가능
 // => 수정은 useState로 저장하며 하나의 컴포넌트에서 수행함
 // (0): Download btn
@@ -15,6 +16,7 @@ import styled from 'styled-components';
 // (0): Copy url btn
 
 const ImagesViewer = ({ src, docId }) => {
+  // const src = db.url
   const url = useRef(getUrl()); // current app url
   const [editToggle, setEditToggle] = useState(true);
 

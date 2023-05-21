@@ -10,28 +10,29 @@ import getCurrentTime from 'lib/getCurrentTime';
 import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
+
 const SelectModes = () => {
   const [, setLimit] = useAtom(limitAtom);
   const [, setTimeLimit] = useAtom(timeLimitAtom);
   const [, setIsSelected] = useAtom(isSelectedAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
 
-  const onModeSelect = async (e: any) => {
-    // (0): 안정적이게 e.target.value === normal 로서 로직을 구현하기
-    const { value } = e;
-    // normal upload mode = e.value가 undefined임 / limit upload mode = e.value 존재
+  const onModeSelect = (e: any) => {
+    const { value } = e; // value = sec
+    // normal upload mode = e.value가 존재하지 않음
+    // limit upload mode = e.value가 존재
     if (value) {
-      // value = sec
-      // limit mode의 값들을 지정해주며, timeLimit에는 현재 업로드된 시간과 제한모드 활성화 시간을 더한 시간의 끝시간을 각각저장함
+      // limit mode
       const startTime = getCurrentTime(); // current time
       const endTime = addTime({ currentTime: startTime, sec: value }); // time limit
       const timeLimit = {
         startTime: startTime,
         endTime: endTime,
       };
-      setTimeLimit(timeLimit); // sTime = now time ~ eTime = now time + sec 지정하기
+      setTimeLimit(timeLimit);
       setLimit(true);
     }
+    // normal mode && limit mode
     setIsSelected(true); // 선택됨
   };
 

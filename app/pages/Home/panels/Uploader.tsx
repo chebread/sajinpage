@@ -11,6 +11,7 @@ import { AbsolutePos, RelativePos } from 'layouts/properties';
 // (0): alert 부분은 notify로 change 하기
 
 // 파일을 사용자로부터 받아오는 부분
+
 const Uploader = () => {
   const [, setFile] = useAtom(fileAtom);
   const [, setIsFile] = useAtom(isFileAtom);
