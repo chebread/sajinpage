@@ -19,7 +19,7 @@ const Uploading = ({ init }) => {
       await uploadFiles({
         file: file,
         limit: limit,
-        timeLimit: timeLimit, // {} or { ... }
+        timeLimit: timeLimit, // '' or 'new date'
       })
         .then(id => {
           // 파일 업로드 완료

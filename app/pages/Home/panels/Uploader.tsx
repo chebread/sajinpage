@@ -16,7 +16,9 @@ const Uploader = () => {
   const [, setFile] = useAtom(fileAtom);
   const [, setIsFile] = useAtom(isFileAtom);
   const acceptTypes = useRef({
+    // []의 뜻은 없지만 꼭 써주어야 함
     'image/*': [], // 이미지 파일 전체를 받음
+    // 'application/pdf': [], // pdf 파일을 받음
   });
 
   const onPaste = (e: any) => {
@@ -44,7 +46,7 @@ const Uploader = () => {
       return;
     }
     const file = files[0];
-    const isImageFile = file.type.match(/image/g);
+    const isImageFile = file.type.match(/image/g); // 파일 체크 // |(application\/pdf)
     if (isImageFile === null) {
       // 이미지 파일 이외의 파일은 받지 않음
       alert('이 파일 형식은 업로드 될 수 없음');

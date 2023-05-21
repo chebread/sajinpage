@@ -12,6 +12,7 @@ import {
   isSupportedIndexedDbAtom,
   isIeAccessDeniedAtom,
 } from './errorCodesAtom';
+import acceptFileTypesAtom from './acceptFileTypesAtom';
 
 export {
   fileAtom,
@@ -24,4 +25,5 @@ export {
   docIdsAtom,
   isSupportedIndexedDbAtom,
   isIeAccessDeniedAtom,
+  acceptFileTypesAtom,
 };

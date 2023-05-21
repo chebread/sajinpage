@@ -33,15 +33,13 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
     docId: docId,
     url: fileUrl,
     fileId: fileId,
-    desc: null,
+    desc: '',
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
     // timeLimit의 sql type은 Json인데 이는 js object type과 같은 역할을 수행한다
     timeLimit: limit
-      ? {
-          startTime: timeLimit.startTime.toString(), // string 타입으로 저장한후에 사용시에는 date 타입으로 바꿈
-          endTime: timeLimit.endTime.toString(),
-        }
-      : null,
+      ? // 이미 timeLimit은 string 타입임
+        timeLimit
+      : '',
   });
   if (uploadDb.error) {
     throw new Error('file을 db에 업로드중 오류 발생');

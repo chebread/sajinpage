@@ -1,13 +1,20 @@
 type isExceedTimeLimitProps = {
-  startTime: any; // current time
-  endTime: any;
+  currentTime: Date; // current time
+  endTime: Date;
 };
 
-const isExceedTimeLimit = ({ startTime, endTime }: isExceedTimeLimitProps) => {
-  if (startTime >= endTime) {
-    return true; // 초과함
+const isExceedTimeLimit = ({
+  currentTime,
+  endTime,
+}: isExceedTimeLimitProps) => {
+  const diff = currentTime.getTime() - endTime.getTime(); // 음수면 남은 초 (세션이 살아 있음) or 양수면 초과된 초가 도출됨 (세션이 종료됨)
+
+  if (diff >= 0) {
+    // 세션이 종료됨
+    return true;
   } else {
-    return false; // 초과하지 않음
+    // 세션이 아직 살아 있음
+    return false;
   }
 };
 

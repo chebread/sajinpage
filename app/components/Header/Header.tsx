@@ -14,6 +14,7 @@ const Header = () => {
       target: { value },
     } = e;
     navigate(value);
+    // (0): 이거할때도 init atom values 하기
   };
 
   return (

@@ -6,6 +6,7 @@ import {
 } from 'atoms';
 import { useAtom } from 'jotai';
 import addTime from 'lib/addTime';
+import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import Select from 'react-select';
 
@@ -23,13 +24,9 @@ const SelectModes = () => {
     // limit upload mode = e.value가 존재
     if (value) {
       // limit mode
-      const startTime = getCurrentTime(); // current time
-      const endTime = addTime({ currentTime: startTime, sec: value }); // time limit
-      const timeLimit = {
-        startTime: startTime,
-        endTime: endTime,
-      };
-      setTimeLimit(timeLimit);
+      const currentTime = getCurrentTime();
+      const timeLimit = addTime({ currentTime: currentTime, sec: value }); // time limit
+      setTimeLimit(dateToString(timeLimit)); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
       setLimit(true);
     }
     // normal mode && limit mode

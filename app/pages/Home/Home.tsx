@@ -28,7 +28,7 @@ const Home = () => {
     setIsFile(false);
     setDocId('');
     setLimit(false);
-    setTimeLimit({});
+    setTimeLimit('');
     setIsSelected(false);
   };
 

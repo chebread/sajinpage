@@ -1,43 +1,71 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { loadFiles } from 'api';
+import { deleteFiles, loadFiles } from 'api';
 import PageLoading from 'pages/PageLoading';
 import ImagesViewer from './panels/ImagesViewer';
+import stringToDate from 'lib/stringToDate';
+import isExceedTimeLimit from 'lib/isExceedTimeLimit';
+import getCurrentTime from 'lib/getCurrentTime';
 
-// (0): (아직은 구현하지 않음) time limit 에 현재시간에 종료시간을 빼어서 세션 유지 시간 통보 기능 추가해야 함
-
-// (0): 여기에서 time limit을 가져와야함 time limit checking logic을 구현해야함 => 여기에서 체킹하는 이유는 파일이 존재 유무와 흡사하기 때문임
+// (0): 예시로 pdf 파일 띄워보기
 
 const Viewer = () => {
   const params = useParams();
   const docId = params.id; // doc id
-  const [fileUrl, setFileUrl] = useState(''); // file viewer url
+  const [fileDb, setFileDb] = useState({});
   const [isLoaded, setIsLoaded] = useState(false); // 파일 로드 유무
-  const [isError, setIsError] = useState(false); // 파일 존재 유무
+  const [error, setError]: any = useState(); // 파일 존재 유무
+
+  const initValues = () => {
+    setFileDb({});
+    setIsLoaded(false);
+    setError();
+  };
+
+  const loadFile = async () => {
+    initValues(); // 재로딩을 위해 모든 값을 초기화하고 시작한다
+    // file db 가져오기
+    const fileDb = await loadFiles(docId);
+    setFileDb(fileDb);
+    // limit: true시 세션 종료 확인하기
+    // string으로 저장된 data를 date 객체로 변환하기
+    const limit = fileDb.limit;
+    const currentTime = getCurrentTime();
+    const timeLimit = stringToDate(fileDb.timeLimit);
+    if (limit) {
+      // file이 limit mode 일때
+      const isSessionEnded = isExceedTimeLimit({
+        currentTime: currentTime,
+        endTime: timeLimit,
+      });
+      if (isSessionEnded) {
+        // 세션 종료시
+        // 파일을 삭제해 버리고 세션 종료 애러띄움 => 처음에 404 페이지는 세션 종료 에러이겠지만, 재접근시 그냥 없는 파일이라고만 뜸
+        console.log('세션이 종료되었습니다');
+        deleteFiles(docId);
+        throw new Error('세션이 종료되어 파일 접근이 불가능합니다');
+      }
+      console.log('세션이 아직 유효합니다');
+    }
+    setIsLoaded(true); // 파일 로드됨
+  };
 
   useEffect(() => {
-    const onLoad = async () => {
-      // file db 가져오기
-      const db = await loadFiles(docId);
-      // file viewer url 가져오기
-      const fileUrl = db.url;
-      setFileUrl(fileUrl);
-      // file limit options 가져오기
-      setIsLoaded(true); // 파일 로드됨
-    };
-    onLoad().catch(error => {
-      setIsError(true);
-      // 404 에러 발생만 함
+    loadFile().catch(error => {
+      // 404 에러 (파일 접근 불가) / 403 에러 (세션 종료) 뜸
+      console.log(error);
+      setError(true);
     });
   }, []);
 
-  return isError ? (
+  return error ? (
     // 2) 에러가 발생함
     // (0): errorElement 사용하여 해결하기
+    // (0): error page를 동작시키기
     <>Error 발생</>
   ) : isLoaded ? (
     // 2) 파일이 로드됨
-    <ImagesViewer src={fileUrl} docId={docId} />
+    <ImagesViewer db={fileDb} load={loadFile} />
   ) : (
     // 1) 로딩
     <PageLoading />

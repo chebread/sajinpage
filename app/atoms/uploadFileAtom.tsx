@@ -5,7 +5,7 @@ const isFileAtom = atom(false);
 const docIdAtom = atom('');
 const isSelectedAtom = atom(false);
 const limitAtom = atom(false);
-const timeLimitAtom = atom({});
+const timeLimitAtom = atom(''); // 단일 end time 값만 저장함
 
 export {
   fileAtom,
