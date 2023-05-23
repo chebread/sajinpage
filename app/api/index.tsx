@@ -4,6 +4,8 @@ import loadFiles from './loadFiles';
 import cancelUploadFiles from './cancelUploadFiles';
 import editFilesDesc from './editFileDesc';
 import downloadFiles from './downloadFiles';
+import editFiles from './editFiles';
+import fetchRealtimeFiles from './fetchRealtimeFiles';
 
 export {
   uploadFiles,
@@ -12,4 +14,6 @@ export {
   cancelUploadFiles,
   editFilesDesc,
   downloadFiles,
+  editFiles,
+  fetchRealtimeFiles,
 };

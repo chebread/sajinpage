@@ -7,7 +7,7 @@ import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import Select from 'react-select';
 import { useAtom } from 'jotai';
-import { timeLimitOptionsAtom } from 'atoms';
+import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
 
 // (0): 파일 업로드후 여기에서 desc 가져와서 bottom modal로 출력하며, 없거나 있어도 편집하기 버튼을 통해 description 수정 가능
 // => 수정은 useState로 저장하며 하나의 컴포넌트에서 수행함
@@ -15,21 +15,16 @@ import { timeLimitOptionsAtom } from 'atoms';
 // (0): Delete btn
 // (0): Copy url btn
 // (0): (style) limit 모드 켜고 킬 수 있는 모드 만들기 => select time limit modal 필요
-// editFiles 후에 다시 file의 db 불러오기! => load로 viewer에서 했던 짓을 다시 또 함
 
-const ImagesViewer = ({ db, load }) => {
-  // docId는 toggle limit mode 를 위해 필요함
+const ImagesViewer = () => {
+  const [fileDb] = useAtom(fileDbAtom);
   const url = useRef(getUrl()); // current app url
-  const docId = db.docId;
-  const src = db.url;
-  const limit = db.limit;
+  const docId = fileDb.docId;
+  const src = fileDb.url;
+  const limit = fileDb.limit;
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
-
-  useEffect(() => {
-    console.log(db);
-  }, []);
 
   const initValues = () => {
     setModeToggle(false);
@@ -51,7 +46,6 @@ const ImagesViewer = ({ db, load }) => {
       alert('수정중 오류 발생');
     });
     initValues();
-    load();
   };
   const onModeSelect = async (e: any) => {
     const { value } = e; // value = sec
@@ -68,7 +62,6 @@ const ImagesViewer = ({ db, load }) => {
         alert('수정중 오류 발생');
       });
       initValues();
-      load();
     }
   };
 
