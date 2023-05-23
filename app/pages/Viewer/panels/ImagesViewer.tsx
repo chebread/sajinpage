@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import getUrl from 'lib/getUrl';
-import { ImagesScreen } from 'layouts/Screens';
-import onDelete from 'components/Viewer/onDelete';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import onCopy from 'components/Viewer/onCopy';
-import onDownload from 'components/Viewer/onDownload';
-import ModalEditor from 'components/Viewer/ModalEditor';
 import styled from 'styled-components';
 import editFiles from 'api/editFiles';
 import getCurrentTime from 'lib/getCurrentTime';
@@ -20,9 +14,8 @@ import { timeLimitOptionsAtom } from 'atoms';
 // (0): Download btn
 // (0): Delete btn
 // (0): Copy url btn
-
-// (0): limit 모드 켜고 킬 수 있는 모드 만들기 => select time limit modal 필요
-// *(0): editFiles 후에 다시 file의 db 불러오기! => load로 viewer에서 했던 짓을 다시 또 함
+// (0): (style) limit 모드 켜고 킬 수 있는 모드 만들기 => select time limit modal 필요
+// editFiles 후에 다시 file의 db 불러오기! => load로 viewer에서 했던 짓을 다시 또 함
 
 const ImagesViewer = ({ db, load }) => {
   // docId는 toggle limit mode 를 위해 필요함
@@ -30,10 +23,9 @@ const ImagesViewer = ({ db, load }) => {
   const docId = db.docId;
   const src = db.url;
   const limit = db.limit;
+  const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
-  const [editToggle, setEditToggle] = useState(true);
-  const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
 
   useEffect(() => {
     console.log(db);
@@ -42,10 +34,6 @@ const ImagesViewer = ({ db, load }) => {
   const initValues = () => {
     setModeToggle(false);
     setResetToggle(false);
-  };
-
-  const onEditToggle = () => {
-    setEditToggle(!editToggle);
   };
   const onModeToggle = () => {
     setModeToggle(!modeToggle);
@@ -69,11 +57,13 @@ const ImagesViewer = ({ db, load }) => {
     const { value } = e; // value = sec
     if (value) {
       const currentTime = getCurrentTime();
-      const timeLimit = addTime({ currentTime: currentTime, sec: value }); // time limit
+      const timeLimit = dateToString(
+        addTime({ currentTime: currentTime, sec: value })
+      ); // time limit
       await editFiles({
         docId: docId,
         limit: true,
-        timeLimit: dateToString(timeLimit),
+        timeLimit: timeLimit,
       }).catch(error => {
         alert('수정중 오류 발생');
       });

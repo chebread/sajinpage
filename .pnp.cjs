@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hotkeys-hook", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:4.4.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-pdf", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:6.2.2"],\
+            ["react-player", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.12.0"],\
             ["react-router-dom", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:6.11.0"],\
             ["react-select", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.7.3"],\
             ["react-textarea-autosize", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:8.4.1"],\
@@ -2615,6 +2616,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["deepmerge", [\
+        ["npm:4.3.1", {\
+          "packageLocation": "./.yarn/cache/deepmerge-npm-4.3.1-4f751a0844-2024c6a980.zip/node_modules/deepmerge/",\
+          "packageDependencies": [\
+            ["deepmerge", "npm:4.3.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["defer-to-connect", [\
         ["npm:2.0.1", {\
           "packageLocation": "./.yarn/cache/defer-to-connect-npm-2.0.1-9005cc8c60-8a9b50d2f2.zip/node_modules/defer-to-connect/",\
@@ -3634,6 +3644,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["load-script", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/load-script-npm-1.0.0-32a3163a57-8458e3f07b.zip/node_modules/load-script/",\
+          "packageDependencies": [\
+            ["load-script", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lodash", [\
         ["npm:4.17.21", {\
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
@@ -3731,6 +3750,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["memoize-one", [\
+        ["npm:5.2.1", {\
+          "packageLocation": "./.yarn/cache/memoize-one-npm-5.2.1-ee0f8be979-a3cba7b824.zip/node_modules/memoize-one/",\
+          "packageDependencies": [\
+            ["memoize-one", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:6.0.0", {\
           "packageLocation": "./.yarn/cache/memoize-one-npm-6.0.0-8b2a2cd020-f185ea69f7.zip/node_modules/memoize-one/",\
           "packageDependencies": [\
@@ -4465,6 +4491,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-fast-compare", "npm:3.2.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.2.2", {\
+          "packageLocation": "./.yarn/cache/react-fast-compare-npm-3.2.2-45b585a872-2071415b4f.zip/node_modules/react-fast-compare/",\
+          "packageDependencies": [\
+            ["react-fast-compare", "npm:3.2.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["react-helmet-async", [\
@@ -4574,6 +4607,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",\
             "file-loader",\
             "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-player", [\
+        ["npm:2.12.0", {\
+          "packageLocation": "./.yarn/cache/react-player-npm-2.12.0-9b493fb807-77d3e55ed6.zip/node_modules/react-player/",\
+          "packageDependencies": [\
+            ["react-player", "npm:2.12.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.12.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-player-virtual-9ed10b7077/0/cache/react-player-npm-2.12.0-9b493fb807-77d3e55ed6.zip/node_modules/react-player/",\
+          "packageDependencies": [\
+            ["react-player", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.12.0"],\
+            ["@types/react", "npm:18.2.0"],\
+            ["deepmerge", "npm:4.3.1"],\
+            ["load-script", "npm:1.0.0"],\
+            ["memoize-one", "npm:5.2.1"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:18.2.0"],\
+            ["react-fast-compare", "npm:3.2.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
             "react"\
           ],\
           "linkType": "HARD"\
@@ -4921,6 +4981,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hotkeys-hook", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:4.4.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-pdf", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:6.2.2"],\
+            ["react-player", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.12.0"],\
             ["react-router-dom", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:6.11.0"],\
             ["react-select", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.7.3"],\
             ["react-textarea-autosize", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:8.4.1"],\

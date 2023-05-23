@@ -8,6 +8,7 @@ import isExceedTimeLimit from 'lib/isExceedTimeLimit';
 import getCurrentTime from 'lib/getCurrentTime';
 
 // (0): 예시로 pdf 파일 띄워보기
+// (0): load() 함수 쓰지 않고 atom state로 limit 반영하기 다시 재로드 시에만 db의 limit 값이 반영되게 됨!
 
 const Viewer = () => {
   const params = useParams();

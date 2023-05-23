@@ -25,8 +25,10 @@ const SelectModes = () => {
     if (value) {
       // limit mode
       const currentTime = getCurrentTime();
-      const timeLimit = addTime({ currentTime: currentTime, sec: value }); // time limit
-      setTimeLimit(dateToString(timeLimit)); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
+      const timeLimit = dateToString(
+        addTime({ currentTime: currentTime, sec: value })
+      ); // time limit
+      setTimeLimit(timeLimit); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
       setLimit(true);
     }
     // normal mode && limit mode
