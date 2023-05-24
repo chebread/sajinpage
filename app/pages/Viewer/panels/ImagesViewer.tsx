@@ -8,6 +8,7 @@ import dateToString from 'lib/dateToString';
 import Select from 'react-select';
 import { useAtom } from 'jotai';
 import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
+import onDelete from 'components/Viewer/onDelete';
 
 // (0): 파일 업로드후 여기에서 desc 가져와서 bottom modal로 출력하며, 없거나 있어도 편집하기 버튼을 통해 description 수정 가능
 // => 수정은 useState로 저장하며 하나의 컴포넌트에서 수행함
@@ -69,6 +70,7 @@ const ImagesViewer = () => {
   return (
     <>
       <Img src={src} />
+      <button onClick={() => onDelete(docId)}>delete file</button>
       {limit ? (
         // limit mode
         modeToggle ? (

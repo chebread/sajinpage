@@ -7,13 +7,13 @@ import {
   timeLimitAtom,
 } from './uploadFileAtom';
 import timeLimitOptionsAtom from './timeLimitOptionsAtom';
-import docIdsAtom from './docIdsAtom';
 import {
   isSupportedIndexedDbAtom,
   isIeAccessDeniedAtom,
 } from './errorCodesAtom';
 import acceptFileTypesAtom from './acceptFileTypesAtom';
 import fileDbAtom from './fileDbAtom';
+import initValuesAtom from './initValuesAtom';
 
 export {
   fileAtom,
@@ -23,9 +23,9 @@ export {
   limitAtom,
   timeLimitAtom,
   timeLimitOptionsAtom,
-  docIdsAtom,
   isSupportedIndexedDbAtom,
   isIeAccessDeniedAtom,
   acceptFileTypesAtom,
   fileDbAtom,
+  initValuesAtom,
 };

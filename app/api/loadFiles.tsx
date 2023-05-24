@@ -7,7 +7,6 @@ const loadFiles = async (docId: any) => {
   if (db === undefined) {
     throw new Error('존재하지 않는 파일입니다');
   }
-
   return db;
 };
 
