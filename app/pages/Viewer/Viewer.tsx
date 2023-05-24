@@ -28,7 +28,7 @@ const Viewer = () => {
       // file is loaded
       setIsLoaded(true); // 여기서 값을 설정하더라도 함수가 끝나야 반영됨
       // 최초 접근시 파일의 세션을 확인함
-      checkFileSession(fileDb);
+      await checkFileSession(fileDb);
       // fetch data as realtime
       fetchRealtimeFiles({
         tableId: 'refs',
@@ -37,33 +37,42 @@ const Viewer = () => {
           setFileDb(payload.new);
         },
         onDelete: (payload: any) => {
+          // (0): onDelete를 없에고 수동으로 delete file시에 onError 되게끔 설정할까? 그래야 세션 종료시에도 onDelete 이벤트가 감지되지 않음
           // 실시간으로 파일이 삭제됨을 감지 (실시간 o)
           // => 최초 접근시 세션이 종료되면 이 이벤트는 작동하지 않음
           console.log('파일이 삭제됨');
           setFileDb(payload.new);
-          onError('파일이 삭제됨');
+          onError({
+            code: 404,
+            message: '파일이 삭제됨',
+          });
+          // throw new Error('파일이 삭제됨');
         },
       });
     };
     onLoad().catch(error => {
       // 최초 접근시 파일이 삭제되어 접근 불가 (실시간 x)
-      console.log('파일이 존재하지 않음');
-      onError('파일이 존재하지 않음'); // (0): onError 처리가 아닌 new Error 로 해볼까?
+
+      // console.log('파일이 존재하지 않음');
+      onError({
+        code: 404,
+        message: '파일이 존재하지 않음',
+      }); // (0): onError 처리가 아닌 new Error 로 해볼까?
     });
     return () => {
       initValues(); // 컴포넌트 끝날시에 값 초기화
     };
   }, []);
 
-  useInterval(() => {
+  useInterval(async () => {
     // 1초마다 파일의 세션 확인
     if (!error && fileDb.limit) {
       // 에러가 나지 않을때 && limit mode 일때만 작동함
-      checkFileSession(fileDb);
+      await checkFileSession(fileDb);
     }
   }, 1000);
 
-  const checkFileSession = (db: any) => {
+  const checkFileSession = async (db: any) => {
     const currentTime = getCurrentTime();
     const timeLimit = stringToDate(db.timeLimit);
     // limit mode일때
@@ -74,20 +83,30 @@ const Viewer = () => {
     if (isSessionEnded) {
       // 세션 종료시
       console.log('세션 종료');
-      deleteFiles(docId);
-      onError('세션이 종료됨');
+      await deleteFiles(docId);
+      onError({
+        code: 403,
+        message: '세션이 종료됨',
+      }); // (0): 이게 realtime에서 delete를 감지하여 세션 종료가 소용이 없음. 세션 종료시에는 세션 종료 에러가 뜨게끔 하기!
     }
     // 세션이 유효함
   };
 
-  const onError = (errorMessage: string) => {
-    setError(errorMessage);
+  const onError = ({ code, message }) => {
+    setError({
+      code: code,
+      message: message,
+    });
     initValues(); // 에러가 뜬다는 것은 파일의 데이터가 필요하지 않다는 것으로 파일의 데이터가 필요없기에 바로 버린다
   };
 
   return error ? (
     // 2) 에러가 발생함
-    <>Error</>
+    // (0): 각각의 code 마다 에러 페이지에다가 에러 코드와 에러 메시지를 전달하여 띄우기
+    <>
+      <h1>{error.code} Error</h1>
+      <div>{error.message}</div>
+    </>
   ) : isLoaded ? (
     // 2) 파일이 로드됨
     <ImagesViewer />
