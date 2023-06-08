@@ -3,21 +3,20 @@ import { useParams } from 'react-router-dom';
 import { deleteFiles, fetchRealtimeFiles, loadFiles } from 'api';
 import PageLoading from 'pages/PageLoading';
 import ImagesViewer from './panels/ImagesViewer';
-import stringToDate from 'lib/stringToDate';
-import isExceedTimeLimit from 'lib/isExceedTimeLimit';
-import getCurrentTime from 'lib/getCurrentTime';
 import { useAtom } from 'jotai';
 import { fileDbAtom, initValuesAtom, isFileAtom } from 'atoms';
 import useInterval from 'hooks/useInterval';
+import checkFileSession from 'api/checkFiledSession';
 
 // (0): 예시로 pdf 파일 띄워보기
+// (0): 전체 api 로직 개선하기 => 모든 것을 실시간으로!
 
 const Viewer = () => {
   const params = useParams();
   const docId = params.id;
   const [fileDb, setFileDb] = useAtom(fileDbAtom);
   const [isLoaded, setIsLoaded] = useState(false); // 파일 로드 유무
-  const [error, setError]: any = useState(); // 파일 존재 유무 및 세션 유무 체크로 viewer를 중지시키는 역할을함
+  const [error, setError]: any = useState(); // 이걸로 오류를 띄우게 됨
   const [, initValues] = useAtom(initValuesAtom);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const Viewer = () => {
       // file is loaded
       setIsLoaded(true); // 여기서 값을 설정하더라도 함수가 끝나야 반영됨
       // 최초 접근시 파일의 세션을 확인함
-      await checkFileSession(fileDb);
+      await checkFileSession(fileDb, sessionEnded);
       // fetch data as realtime
       fetchRealtimeFiles({
         tableId: 'refs',
@@ -50,9 +49,8 @@ const Viewer = () => {
         },
       });
     };
-    onLoad().catch(error => {
+    onLoad().catch(() => {
       // 최초 접근시 파일이 삭제되어 접근 불가 (실시간 x)
-
       // console.log('파일이 존재하지 않음');
       onError({
         code: 404,
@@ -68,30 +66,18 @@ const Viewer = () => {
     // 1초마다 파일의 세션 확인
     if (!error && fileDb.limit) {
       // 에러가 나지 않을때 && limit mode 일때만 작동함
-      await checkFileSession(fileDb);
+      await checkFileSession(fileDb, sessionEnded);
     }
   }, 1000);
 
-  const checkFileSession = async (db: any) => {
-    const currentTime = getCurrentTime();
-    const timeLimit = stringToDate(db.timeLimit);
-    // limit mode일때
-    const isSessionEnded = isExceedTimeLimit({
-      currentTime: currentTime,
-      endTime: timeLimit,
-    });
-    if (isSessionEnded) {
-      // 세션 종료시
-      console.log('세션 종료');
-      await deleteFiles(docId);
-      onError({
-        code: 403,
-        message: '세션이 종료됨',
-      }); // (0): 이게 realtime에서 delete를 감지하여 세션 종료가 소용이 없음. 세션 종료시에는 세션 종료 에러가 뜨게끔 하기!
-    }
-    // 세션이 유효함
+  const sessionEnded = async () => {
+    console.log('세션 종료');
+    await deleteFiles(docId); // (0): 세션 종료와 onDelete를 분리해야함
+    onError({
+      code: 403,
+      message: '세션이 종료됨',
+    }); // (0): 이게 realtime에서 delete를 감지하여 세션 종료가 소용이 없음. 세션 종료시에는 세션 종료 에러가 뜨게끔 하기!
   };
-
   const onError = ({ code, message }) => {
     setError({
       code: code,
