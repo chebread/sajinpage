@@ -15,12 +15,9 @@ import SelectModes from './panels/SelectModes';
 // 업로드의 중심부
 
 const Home = () => {
-  const [, setFile] = useAtom(fileAtom);
-  const [isFile, setIsFile] = useAtom(isFileAtom);
-  const [docId, setDocId] = useAtom(docIdAtom);
-  const [, setLimit] = useAtom(limitAtom);
-  const [, setTimeLimit] = useAtom(timeLimitAtom);
-  const [isSelected, setIsSelected] = useAtom(isSelectedAtom);
+  const [isFile] = useAtom(isFileAtom);
+  const [docId] = useAtom(docIdAtom);
+  const [isSelected] = useAtom(isSelectedAtom);
 
   return !isFile ? (
     // 1) 입력된 파일이 없을때

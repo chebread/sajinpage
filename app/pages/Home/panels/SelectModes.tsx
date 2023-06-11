@@ -5,9 +5,6 @@ import {
   timeLimitOptionsAtom,
 } from 'atoms';
 import { useAtom } from 'jotai';
-import addTime from 'lib/addTime';
-import dateToString from 'lib/dateToString';
-import getCurrentTime from 'lib/getCurrentTime';
 import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
@@ -19,16 +16,12 @@ const SelectModes = () => {
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
 
   const onModeSelect = (e: any) => {
-    const { value } = e; // value = sec
+    const { value } = e; // value = limit sec
     // normal upload mode = e.value가 존재하지 않음
     // limit upload mode = e.value가 존재
     if (value) {
       // limit mode
-      const currentTime = getCurrentTime();
-      const timeLimit = dateToString(
-        addTime({ currentTime: currentTime, sec: value })
-      ); // time limit
-      setTimeLimit(timeLimit); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
+      setTimeLimit(value); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
       setLimit(true);
     }
     // normal mode && limit mode

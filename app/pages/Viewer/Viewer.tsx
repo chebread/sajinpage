@@ -19,6 +19,9 @@ const Viewer = () => {
   const [error, setError]: any = useState(); // 이걸로 오류를 띄우게 됨
   const [, initValues] = useAtom(initValuesAtom);
 
+  // (0): 여기 로직 완전히 바꾸고, checking file을 timelimit으로 처리하는 것이 아닌 api fetching 으로 limit time 알아내거나 아니면 지속적으로 fetching 하여 유효한지 않한지 체크하기
+  // (0): mode 수정하거나 limit time 수정부분을 완전히 바꾸기, file 참조로 새로운 url 생성하기!!!!!
+
   useEffect(() => {
     const onLoad = async () => {
       // file db 가져오기
