@@ -62,7 +62,13 @@ const ImagesViewer = () => {
   // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
     <>
-      <Img src={src} />
+      <Img
+        src={src}
+        onError={() => {
+          // (0): 세션 초과시 or public url 접근 오류시
+          console.log('세션 초과됨');
+        }}
+      />
       <button onClick={() => onDelete(docId)}>delete file</button>
       {limit ? (
         // limit mode

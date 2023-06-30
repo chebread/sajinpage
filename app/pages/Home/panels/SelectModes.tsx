@@ -21,7 +21,7 @@ const SelectModes = () => {
     // limit upload mode = e.value가 존재
     if (value) {
       // limit mode
-      setTimeLimit(value); // 어차피 server에 저장하는 값이니 문자열로 저장해야하니 문자열로 치환함
+      setTimeLimit(value); // value는 시간초를 의미함
       setLimit(true);
     }
     // normal mode && limit mode

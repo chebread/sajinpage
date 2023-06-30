@@ -27,6 +27,7 @@ const Viewer = () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
+      // test
       // file is loaded
       setIsLoaded(true); // 여기서 값을 설정하더라도 함수가 끝나야 반영됨
       // 최초 접근시 파일의 세션을 확인함

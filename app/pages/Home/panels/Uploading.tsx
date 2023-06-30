@@ -34,7 +34,6 @@ const Uploading = () => {
         })
         .catch(error => {
           console.log(error);
-
           alert('파일 업로드중 오류 발생');
           // 값들을 초기화 하여 처음 화면으로 돌아가기
           initValues(); // 모든 전역 상태를 초기화하여 uploader로 갈 수 있게 하게끔 한다
