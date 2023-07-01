@@ -25,7 +25,7 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
   // create file viewer url
   const { data: fileUrl, error: fileUrlError }: any = limit
     ? await supabase.storage.from('images').createSignedUrl(fileId, timeLimit)
-    : supabase.storage.from('images').getPublicUrl(fileId);
+    : supabase.storage.from('imagexs').getPublicUrl(fileId);
 
   if (limit) {
     // signed url error checking
@@ -58,7 +58,7 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
     fileId: fileId,
     desc: '',
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
-    // timeLimit의 sql type은 Json인데 이는 js object type과 같은 역할을 수행한다
+    // timeLimit은 저장할 필요가 없음 왜냐면 그냥 생성될때만 필요함
   };
   // create table
   // create columns

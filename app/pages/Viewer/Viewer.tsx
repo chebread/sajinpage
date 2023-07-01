@@ -19,6 +19,8 @@ const Viewer = () => {
   const [error, setError]: any = useState(); // 이걸로 오류를 띄우게 됨
   const [, initValues] = useAtom(initValuesAtom);
 
+  // (0): 이제 여기 부분만 개편하면 됨. 처음 불러올때 이미지 완전 확인은 안해도 되며, 실시간 확인을 해야함 (limit or public 일때 하기 public은 다른 이용자가 삭제할 수도 있으니 확인해야함. 즉 파일 변경시는 즉시 반영되게 실시간으로 함)
+
   // (0): 여기 로직 완전히 바꾸고, checking file을 timelimit으로 처리하는 것이 아닌 api fetching 으로 limit time 알아내거나 아니면 지속적으로 fetching 하여 유효한지 않한지 체크하기
   // (0): mode 수정하거나 limit time 수정부분을 완전히 바꾸기, file 참조로 새로운 url 생성하기!!!!!
 

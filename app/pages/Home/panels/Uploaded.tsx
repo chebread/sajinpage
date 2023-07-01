@@ -14,7 +14,7 @@ const Uploaded = () => {
 
   useEffect(() => {
     initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
-    // my files 접근을 위해 indexdb에 저장함
+    // (0): my files 접근을 위해 indexdb에 url만 저장함 파일명은 그냥 무작위로 docId로함
   }, []);
 
   return <Navigate to={`v/${localDocId.current}`} />;

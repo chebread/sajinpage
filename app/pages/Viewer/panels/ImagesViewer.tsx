@@ -65,8 +65,9 @@ const ImagesViewer = () => {
       <Img
         src={src}
         onError={() => {
+          // 처음 사진 불러올때 에러 확인하는 곳
           // (0): 세션 초과시 or public url 접근 오류시
-          console.log('세션 초과됨');
+          console.log('사진 불러오기 오류 발생');
         }}
       />
       <button onClick={() => onDelete(docId)}>delete file</button>
