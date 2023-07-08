@@ -14,6 +14,7 @@ import {
 import acceptFileTypesAtom from './acceptFileTypesAtom';
 import fileDbAtom from './fileDbAtom';
 import initValuesAtom from './initValuesAtom';
+import { errorAtom, onErrorAtom } from './errorAtom';
 
 export {
   fileAtom,
@@ -28,4 +29,6 @@ export {
   acceptFileTypesAtom,
   fileDbAtom,
   initValuesAtom,
+  errorAtom,
+  onErrorAtom,
 };

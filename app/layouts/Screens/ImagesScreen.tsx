@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import CenterScreen from './CenterScreen';
 
 const ImagesScreen = ({ src }) => {
+  console.log(src);
+
   return (
     <ImageWrapper>
       <Image src={src} />

@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { errorAtom } from './errorAtom';
 import fileDbAtom from './fileDbAtom';
 import {
   docIdAtom,
@@ -17,6 +18,7 @@ const initValuesAtom = atom(null, (get, set) => {
   set(timeLimitAtom, '');
   set(isSelectedAtom, false);
   set(fileDbAtom, {});
+  set(errorAtom, {});
 });
 
 export default initValuesAtom;

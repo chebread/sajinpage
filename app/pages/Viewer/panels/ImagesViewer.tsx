@@ -11,10 +11,6 @@ import supabase from 'components/supabase';
 const ImagesViewer = ({ endedSession }) => {
   const [fileDb] = useAtom(fileDbAtom);
   const url = useRef(getUrl()); // current app url
-  const docId = fileDb.docId;
-  const fileId = fileDb.fileId;
-  const src = fileDb.url;
-  const limit = fileDb.limit;
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
@@ -34,11 +30,11 @@ const ImagesViewer = ({ endedSession }) => {
     // turn on public mode
     const { data: fileUrl, error: fileUrlError }: any = supabase.storage
       .from('images')
-      .getPublicUrl(fileId);
+      .getPublicUrl(fileDb.fileId);
     const url = fileUrl.publicUrl;
     // update files
     await updateFiles({
-      docId: docId,
+      docId: fileDb.docId,
       url: url,
       limit: false,
     }).catch(error => {
@@ -52,7 +48,7 @@ const ImagesViewer = ({ endedSession }) => {
     if (value) {
       const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
         .from('images')
-        .createSignedUrl(fileId, value);
+        .createSignedUrl(fileDb.fileId, value);
       // signed url error checking
       if (fileUrlError) {
         // an error occurs
@@ -61,7 +57,7 @@ const ImagesViewer = ({ endedSession }) => {
       const url = fileUrl.signedUrl;
       // update file
       await updateFiles({
-        docId: docId,
+        docId: fileDb.docId,
         url: url,
         limit: true,
       }).catch(error => {
@@ -70,20 +66,19 @@ const ImagesViewer = ({ endedSession }) => {
       initValues();
     }
   };
-
   // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
     <>
       <Img
-        src={src}
+        src={fileDb.url}
         onError={() => {
           // 처음 로드하여 세션 초과확인
           console.log(1);
           endedSession();
         }}
       />
-      <button onClick={() => onDelete(docId)}>delete file</button>
-      {limit ? (
+      <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+      {fileDb.limit ? (
         // limit mode
         modeToggle ? (
           <>
