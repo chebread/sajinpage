@@ -2,9 +2,9 @@ import uploadFiles from './uploadFiles';
 import deleteFiles from './deleteFiles';
 import loadFiles from './loadFiles';
 import cancelUploadFiles from './cancelUploadFiles';
-import editFilesDesc from './editFileDesc';
+import updateFilesDesc from './updateFileDesc';
 import downloadFiles from './downloadFiles';
-import editFiles from './editFiles';
+import updateFiles from './updateFiles';
 import fetchRealtimeFiles from './fetchRealtimeFiles';
 
 export {
@@ -12,8 +12,8 @@ export {
   deleteFiles,
   loadFiles,
   cancelUploadFiles,
-  editFilesDesc,
+  updateFilesDesc,
   downloadFiles,
-  editFiles,
+  updateFiles,
   fetchRealtimeFiles,
 };

@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
-import editFiles from 'api/editFiles';
-import getCurrentTime from 'lib/getCurrentTime';
-import addTime from 'lib/addTime';
-import dateToString from 'lib/dateToString';
+import updateFiles from 'api/updateFiles';
 import Select from 'react-select';
 import { useAtom } from 'jotai';
 import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
 import onDelete from 'components/Viewer/onDelete';
+import supabase from 'components/supabase';
 
-const ImagesViewer = () => {
+const ImagesViewer = ({ endedSession }) => {
   const [fileDb] = useAtom(fileDbAtom);
   const url = useRef(getUrl()); // current app url
   const docId = fileDb.docId;
+  const fileId = fileDb.fileId;
   const src = fileDb.url;
   const limit = fileDb.limit;
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
@@ -32,28 +31,41 @@ const ImagesViewer = () => {
   };
 
   const onTurnOffLimitMode = async () => {
-    await editFiles({
+    // turn on public mode
+    const { data: fileUrl, error: fileUrlError }: any = supabase.storage
+      .from('images')
+      .getPublicUrl(fileId);
+    const url = fileUrl.publicUrl;
+    // update files
+    await updateFiles({
       docId: docId,
+      url: url,
       limit: false,
-      timeLimit: '', // 값 초기화함
-    }).catch(() => {
-      alert('수정중 오류 발생');
+    }).catch(error => {
+      console.log(error);
     });
     initValues();
   };
   const onModeSelect = async (e: any) => {
-    const { value } = e; // value = sec
+    // turn on limit mode
+    const { value } = e; // value is timeLimit
     if (value) {
-      const currentTime = getCurrentTime();
-      const timeLimit = dateToString(
-        addTime({ currentTime: currentTime, sec: value })
-      ); // time limit
-      await editFiles({
+      const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
+        .from('images')
+        .createSignedUrl(fileId, value);
+      // signed url error checking
+      if (fileUrlError) {
+        // an error occurs
+        throw new Error('file signed url 생성중 오류 발생');
+      }
+      const url = fileUrl.signedUrl;
+      // update file
+      await updateFiles({
         docId: docId,
+        url: url,
         limit: true,
-        timeLimit: timeLimit,
       }).catch(error => {
-        alert('수정중 오류 발생');
+        console.log(error);
       });
       initValues();
     }
@@ -65,9 +77,9 @@ const ImagesViewer = () => {
       <Img
         src={src}
         onError={() => {
-          // 처음 사진 불러올때 에러 확인하는 곳
-          // (0): 세션 초과시 or public url 접근 오류시
-          console.log('사진 불러오기 오류 발생');
+          // 처음 로드하여 세션 초과확인
+          console.log(1);
+          endedSession();
         }}
       />
       <button onClick={() => onDelete(docId)}>delete file</button>

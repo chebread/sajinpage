@@ -1,20 +1,15 @@
-import getCurrentTime from 'lib/getCurrentTime';
-import isExceedTimeLimit from 'lib/isExceedTimeLimit';
-import stringToDate from 'lib/stringToDate';
+// (0): fetch할때 get 400 console error 없에는 법은?
 
-const checkFileSession = async (db: any, f: any) => {
-  const currentTime = getCurrentTime();
-  const timeLimit = stringToDate(db.timeLimit);
+const checkFileSession = async (url: any, f: any) => {
   // limit mode일때
-  const isSessionEnded = isExceedTimeLimit({
-    currentTime: currentTime,
-    endTime: timeLimit,
+  const response = await fetch(url, {
+    method: 'GET',
   });
-  if (isSessionEnded) {
-    // 세션 종료시
+  console.log('check session');
+  if (response.ok != true) {
+    // file excessed
     await f();
   }
-  // 세션이 유효함
 };
 
 export default checkFileSession;
