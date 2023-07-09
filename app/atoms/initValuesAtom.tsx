@@ -4,14 +4,16 @@ import fileDbAtom from './fileDbAtom';
 import {
   docIdAtom,
   fileAtom,
+  fileTypeAtom,
   isFileAtom,
   isSelectedAtom,
   limitAtom,
   timeLimitAtom,
-} from './uploadFileAtom';
+} from './filesAtom';
 
 const initValuesAtom = atom(null, (get, set) => {
-  set(fileAtom, '');
+  set(fileAtom, new File([''], ''));
+  set(fileTypeAtom, '');
   set(isFileAtom, false);
   set(docIdAtom, '');
   set(limitAtom, false);
