@@ -17,7 +17,6 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
     await supabase.storage.from('images').upload(fileId, file, {
       cacheControl: '3600',
       upsert: false,
-      contentType: 'application/pdf',
     });
 
   if (uploadStorageError) {

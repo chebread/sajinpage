@@ -1,14 +1,7 @@
 import Uploading from './panels/Uploading';
 import Uploader from './panels/Uploader';
 import { useAtom } from 'jotai';
-import {
-  docIdAtom,
-  fileAtom,
-  isFileAtom,
-  isSelectedAtom,
-  limitAtom,
-  timeLimitAtom,
-} from 'atoms';
+import { docIdAtom, isFileAtom, isSelectedAtom } from 'atoms';
 import Uploaded from './panels/Uploaded';
 import SelectModes from './panels/SelectModes';
 
@@ -29,12 +22,12 @@ const Home = () => {
       <SelectModes />
     ) : (
       // 3) 업로딩중 + 파일 업로드 및 로딩 같이 수행
-      // => 파일 업로드중 오류 발생시 / 으로 가며, 아직 빈 값인 docId 빼고 모든 값들을 초기화 하여 / 으로 접속될 수 있도록 함
+      // 파일 업로드중 오류 발생시 / 으로 가며, 아직 빈 값인 docId 빼고 모든 값들을 초기화 하여 / 으로 접속될 수 있도록 함
       <Uploading />
     )
   ) : (
     // 4) 업로딩 완료
-    // => atoms를 모두 초기화하여 다시 / 올때 docId이 빈 값이 아닐때 redirect가 되지 않도록 함
+    // atoms를 모두 초기화하여 다시 / 올때 docId이 빈 값이 아닐때 redirect가 되지 않도록 함
     <Uploaded />
   );
 };

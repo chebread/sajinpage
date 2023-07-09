@@ -6,7 +6,13 @@ const NotFoundPage = () => {
   const onClickRedirect = () => {
     navigate('/');
   };
-  return <ErrorPage errorCode={404} onClick={onClickRedirect} />;
+  return (
+    <ErrorPage
+      errorCode={404}
+      errorMessage="Page is not found"
+      onClick={onClickRedirect}
+    />
+  );
 };
 
 export default NotFoundPage;

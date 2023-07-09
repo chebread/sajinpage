@@ -7,8 +7,8 @@ type fetchRealtimeFiles = {
 };
 
 // types: update, insert, delete
-const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete }) => {
-  const channel = supabase
+const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
+  const fetchChannel = supabase
     .channel('any')
     .on(
       'postgres_changes',
@@ -28,7 +28,14 @@ const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete }) => {
         onDelete(payload);
       }
     )
-    .subscribe();
+    .subscribe(status => {
+      // realtime subscribed 후에 viewer를 실행함
+      console.log(status);
+      if (status === 'SUBSCRIBED') {
+        onSubscribed();
+      }
+    });
+  return fetchChannel;
 };
 
 export default fetchRealtimeFiles;

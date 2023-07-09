@@ -1,5 +1,5 @@
 # Sajin
-> Sajin shares photos and provides an intuitive photo view.
+> Sajin (pronounced /sɑdʑin/) shares photos and provides an intuitive photo view
 > <br/>
 > This app is constructed by React and Supabase and deployed by Vercel
 

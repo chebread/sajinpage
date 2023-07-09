@@ -9,6 +9,7 @@ import useInterval from 'hooks/useInterval';
 import checkFileSession from 'api/checkFiledSession';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
+import supabase from 'components/supabase';
 
 const Viewer = () => {
   const [error] = useAtom(errorAtom); // 이걸로 오류를 띄워 viewer라우트를 전환하게 함
@@ -38,31 +39,37 @@ const Viewer = () => {
         });
       }
       // fetch data and as realtime
-      fetchRealtimeFiles({
-        tableId: 'refs',
-        onUpdate: (payload: any) => {
-          // file update
-          console.log('파일의 정보가 업데이트됨'); // toast 안함
-          setFileDb(payload.new);
-        },
-        onDelete: (payload: any) => {
-          // file deleted
-          console.log('파일이 삭제됨');
-          setFileDb(payload.new);
-          initValues(); // 가기전에 초기화
-          navigate('/'); // 라우트 안하고 홈으로 가기
-        },
-      });
     };
-    onLoad().catch(() => {
-      // file not existed
-      console.log('파일이 존재하지 않음');
-      onError({
-        code: 404,
-        message: '파일이 존재하지 않음',
-      });
+    // subscribe as realtime
+    const fetchChannel = fetchRealtimeFiles({
+      tableId: 'refs',
+      onUpdate: (payload: any) => {
+        // file update
+        console.log('파일의 정보가 업데이트됨'); // toast 안함
+        setFileDb(payload.new);
+      },
+      onDelete: (payload: any) => {
+        // file deleted
+        console.log('파일이 삭제됨');
+        setFileDb(payload.new);
+        initValues(); // 가기전에 초기화
+        navigate('/'); // 라우트 안하고 홈으로 가기
+      },
+      onSubscribed: () => {
+        // realtime subscribed 후에 viewer를 실행함
+        onLoad().catch(() => {
+          // file not existed
+          console.log('파일이 존재하지 않음');
+          onError({
+            code: 404,
+            message: '파일이 존재하지 않음',
+          });
+        });
+      },
     });
     return () => {
+      supabase.removeChannel(fetchChannel);
+      console.log('unChannel');
       initValues(); // viewer 컴포넌트 끝날시에 값 초기화
     };
   }, []);
