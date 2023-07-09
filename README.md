@@ -1,7 +1,7 @@
 # Sajin
 > Sajin shares photos and provides an intuitive photo view.
 > <br/>
-> This app is constructed by React and Supabase
+> This app is constructed by React and Supabase and deployed by Vercel
 
 ## Website link
 [sajin.page](https://sajin.page/)
