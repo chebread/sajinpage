@@ -10,15 +10,6 @@ import checkFileSession from 'api/checkFiledSession';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 
-// (0): 예시로 pdf 파일 띄워보기 => image(gif), pdf, video (1분 30초 까지만의 mb용량) 지원하기
-// (0): updatefile 시 image viewer에 반영이 안됨 => 반영되는 것을 확인함
-// (0): return의 src가 업데이트 되도 안먹힘 => 되는 것을 확인함
-// (0): 로직 전체다 개편하기!!! (viewer 쪽만) => 개편완료
-// (0): 이제부터 git 관리는 제대로 수행한다.
-// (0): 고민은 실시간 세션확인을 하지 않고 그냥 처음에만 확인하는 것이 고민임. 왜냐면 supabase는 세션 확인 툴을 제공하지 않고 있음 그냥 fetch 해야 함
-// (0): delete file 안됨 (실시간이 안먹힘) => 가끔 그런데 확인해봐야할 듯
-// (0): 세션 초과 event 가 가끔 2번 되는 경우가 있음 그것의 원인 분석후 막기
-
 const Viewer = () => {
   const [error] = useAtom(errorAtom); // 이걸로 오류를 띄워 viewer라우트를 전환하게 함
   const [, onError] = useAtom(onErrorAtom);
