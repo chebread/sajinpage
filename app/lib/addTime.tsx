@@ -9,7 +9,7 @@ type addTimeProps = {
 const addTime = ({ currentTime, sec }: addTimeProps) => {
   const date = new Date(currentTime); // 현재 시간
   date.setSeconds(date.getSeconds() + sec); // 초를 더함
-  return date; // 더해진 시간을 내보냄
+  return date; // 더해진 시간을 Date Object로 내보냄
 };
 
 export default addTime;

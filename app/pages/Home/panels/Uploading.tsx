@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { uploadFiles } from 'api';
 import { useAtom } from 'jotai';
 import {
+  accessTimeAtom,
   docIdAtom,
   fileAtom,
   initValuesAtom,
@@ -18,6 +19,7 @@ const Uploading = () => {
   const [, setDocId] = useAtom(docIdAtom);
   const [limit] = useAtom(limitAtom);
   const [timeLimit] = useAtom(timeLimitAtom);
+  const [accessTime] = useAtom(accessTimeAtom);
   const [, initValues] = useAtom(initValuesAtom);
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const Uploading = () => {
         file: file,
         limit: limit,
         timeLimit: timeLimit, // '' or sec
+        accessTime: accessTime,
       })
         .then(id => {
           // 파일 업로드 완료

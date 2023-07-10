@@ -5,9 +5,15 @@ type uploadFilesProps = {
   file: any;
   limit: boolean;
   timeLimit: any;
+  accessTime: any;
 };
 
-const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
+const uploadFiles = async ({
+  file,
+  limit,
+  timeLimit,
+  accessTime,
+}: uploadFilesProps) => {
   const docId = hashConstructor();
   const fileId = hashConstructor();
   // check bucket
@@ -50,8 +56,11 @@ const uploadFiles = async ({ file, limit, timeLimit }: uploadFilesProps) => {
     url: url,
     desc: '',
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
-    // timeLimit은 저장할 필요가 없음 왜냐면 그냥 생성될때만 필요함
     excess: false,
+    accessTime: limit
+      ? // 이미 acessTime은 string 타입임
+        accessTime
+      : '',
   };
   // create table
   // create columns

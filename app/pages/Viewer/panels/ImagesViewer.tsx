@@ -7,14 +7,21 @@ import { useAtom } from 'jotai';
 import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
 import onDelete from 'components/Viewer/onDelete';
 import supabase from 'components/supabase';
+import addTime from 'lib/addTime';
+import dateToString from 'lib/dateToString';
+import getCurrentTime from 'lib/getCurrentTime';
 
-const ImagesViewer = ({ endedSession }) => {
+// 처음확인 로직도 그냥 viewer로 넘기기
+const ImagesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
   const url = useRef(getUrl()); // current app url
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
 
+  useEffect(() => {
+    console.log('image viewer');
+  });
   const initValues = () => {
     setModeToggle(false);
     setResetToggle(false);
@@ -37,6 +44,7 @@ const ImagesViewer = ({ endedSession }) => {
       docId: fileDb.docId,
       url: url,
       limit: false,
+      accessTime: '',
     }).catch(error => {
       console.log(error);
     });
@@ -46,9 +54,16 @@ const ImagesViewer = ({ endedSession }) => {
     // turn on limit mode
     const { value } = e; // value is timeLimit
     if (value) {
+      const timeLimit = value;
+      // update accessTime
+      const currentTime = getCurrentTime();
+      const accessTime = dateToString(
+        addTime({ currentTime: currentTime, sec: timeLimit })
+      );
+      // update limit url
       const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
         .from('images')
-        .createSignedUrl(fileDb.fileId, value);
+        .createSignedUrl(fileDb.fileId, timeLimit);
       // signed url error checking
       if (fileUrlError) {
         // an error occurs
@@ -60,6 +75,7 @@ const ImagesViewer = ({ endedSession }) => {
         docId: fileDb.docId,
         url: url,
         limit: true,
+        accessTime: accessTime,
       }).catch(error => {
         console.log(error);
       });
@@ -73,8 +89,8 @@ const ImagesViewer = ({ endedSession }) => {
         src={fileDb.url}
         onError={() => {
           // 처음 로드하여 세션 초과확인
-          console.log(1);
-          endedSession();
+          // console.log('first access checking if file is excessed');
+          // endedSession();
         }}
       />
       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>

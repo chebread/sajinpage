@@ -4,9 +4,9 @@ type useIntervalProps = {
   (callback: () => void, delay: number): void;
 };
 
+// closure로 clearInterval 수동하는 방법 없나?
 const useInterval: useIntervalProps = (callback, delay) => {
   const savedCallback = useRef<(() => void) | null>();
-
   // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
