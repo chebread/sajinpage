@@ -11,7 +11,6 @@ import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 
-// 처음확인 로직도 그냥 viewer로 넘기기
 const ImagesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
   const url = useRef(getUrl()); // current app url

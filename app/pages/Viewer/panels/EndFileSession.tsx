@@ -8,6 +8,7 @@ const EndFileSession = () => {
 
   return (
     <>
+      <div>403</div>
       <div>파일 세션이 종료됨</div>
       <div>
         <button onClick={() => onDelete(fileDb.docId)}>Delete</button>
