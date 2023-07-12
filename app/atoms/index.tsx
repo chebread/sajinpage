@@ -7,6 +7,7 @@ import {
   timeLimitAtom,
   fileTypeAtom,
   accessTimeAtom,
+  urlAtom,
 } from './filesAtom';
 import timeLimitOptionsAtom from './timeLimitOptionsAtom';
 import {
@@ -33,4 +34,5 @@ export {
   onErrorAtom,
   fileTypeAtom,
   accessTimeAtom,
+  urlAtom,
 };

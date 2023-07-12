@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 
 const fileAtom = atom<File>(new File([''], '')); // 바이너리 파일 자체를 저장
 const fileTypeAtom = atom(''); // 파일의 type을 저장
+const urlAtom = atom(''); // 파일 참조하는 url을 저장
 const isFileAtom = atom(false); // 파일의 전송 유무를 저장
 const docIdAtom = atom(''); // 파일의 docId를 저장
 const isSelectedAtom = atom(false); // 파일의 출력 모드를 저장
@@ -18,4 +19,5 @@ export {
   limitAtom,
   timeLimitAtom,
   accessTimeAtom,
+  urlAtom,
 };

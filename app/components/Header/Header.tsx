@@ -28,6 +28,9 @@ const Header = () => {
       <button onClick={onRedict} value="/f">
         My files
       </button>
+      <button onClick={onRedict} value="/s">
+        Settings
+      </button>
       <hr />
     </Container>
   );

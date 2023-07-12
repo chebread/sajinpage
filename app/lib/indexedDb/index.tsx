@@ -1,3 +1,3 @@
-import filesIndexedDb from './filesIndexedDb';
+import localDb from './localDb';
 
-export { filesIndexedDb };
+export { localDb };

@@ -11,6 +11,8 @@ import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'components/supabase';
 
+// 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
+
 const Viewer = () => {
   const [isRunningInterval, setIsRunningInterval] = useState(false);
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
@@ -63,7 +65,7 @@ const Viewer = () => {
         // file update
         console.log('파일의 정보가 업데이트됨'); // toast 안함
         setFileDb(payload.new);
-        console.log(payload.new);
+        // console.log(payload.new);
       },
       onDelete: (payload: any) => {
         // file deleted
@@ -88,7 +90,7 @@ const Viewer = () => {
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
       supabase.removeChannel(fetchChannel);
-      console.log('unChannel');
+      // console.log('unChannel');
       initValues();
     };
   }, []);
@@ -97,13 +99,13 @@ const Viewer = () => {
   // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 작동함
   useInterval(
     async () => {
-      console.log('running interval');
+      // console.log('running interval');
       if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) {
         const accessTime = fileDb.accessTime;
         const isFileExcess = await checkFileSessionByAccessTime(accessTime);
         if (isFileExcess) {
           endedSession();
-          console.log('killed interval');
+          // console.log('killed interval');
           // kill interval
           setIsRunningInterval(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
         }
@@ -114,7 +116,7 @@ const Viewer = () => {
       : null
   );
   const endedSession = async () => {
-    console.log('세션 종료');
+    // console.log('세션 종료');
     await updateFiles({
       docId: fileDb.docId,
       excess: true, // 파일 세션 종료됨

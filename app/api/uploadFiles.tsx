@@ -72,7 +72,7 @@ const uploadFiles = async ({
     throw new Error('file을 db에 업로드중 오류 발생');
   }
 
-  return docId;
+  return { docId, url };
 };
 
 export default uploadFiles;

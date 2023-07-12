@@ -9,6 +9,7 @@ import {
   limitAtom,
   timeLimitAtom,
 } from 'atoms';
+import { urlAtom } from 'atoms';
 
 // (0): 업로딩중에 취소 기능 추가하기 => 없다고 하는데 구현은 언젠가는 해야함
 
@@ -17,6 +18,7 @@ import {
 const Uploading = () => {
   const [file] = useAtom(fileAtom);
   const [, setDocId] = useAtom(docIdAtom);
+  const [, setUrl] = useAtom(urlAtom);
   const [limit] = useAtom(limitAtom);
   const [timeLimit] = useAtom(timeLimitAtom);
   const [accessTime] = useAtom(accessTimeAtom);
@@ -31,9 +33,10 @@ const Uploading = () => {
         timeLimit: timeLimit, // '' or sec
         accessTime: accessTime,
       })
-        .then(id => {
+        .then(({ docId, url }) => {
           // 파일 업로드 완료
-          setDocId(id);
+          setDocId(docId);
+          setUrl(url);
         })
         .catch(error => {
           console.log(error);

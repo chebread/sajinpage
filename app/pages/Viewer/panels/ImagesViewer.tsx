@@ -18,9 +18,6 @@ const ImagesViewer = () => {
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
 
-  useEffect(() => {
-    console.log('image viewer');
-  });
   const initValues = () => {
     setModeToggle(false);
     setResetToggle(false);
@@ -87,9 +84,7 @@ const ImagesViewer = () => {
       <Img
         src={fileDb.url}
         onError={() => {
-          // 처음 로드하여 세션 초과확인
-          // console.log('first access checking if file is excessed');
-          // endedSession();
+          // 예외로 url이 404일때
         }}
       />
       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
