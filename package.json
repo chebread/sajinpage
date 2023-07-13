@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.21.0",
+    "@types/react-router-dom": "^5.3.3",
     "bowser": "^2.11.0",
     "browser-image-compression": "^2.0.2",
     "clipboardy": "^3.0.0",
@@ -18,6 +19,7 @@
     "idb": "^7.1.1",
     "idb-keyval": "^6.2.1",
     "jotai": "^2.1.0",
+    "lockr": "^0.9.0-beta.2",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",

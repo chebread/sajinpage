@@ -13,6 +13,8 @@ import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
 
+// (0): 중도 포기할 수 있게 하기
+
 const SelectModes = () => {
   const [, setLimit] = useAtom(limitAtom);
   const [, setTimeLimit] = useAtom(timeLimitAtom);

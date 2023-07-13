@@ -1,8 +1,9 @@
 import { docIdAtom, initValuesAtom, urlAtom } from 'atoms';
-import { set } from 'idb-keyval';
+import { set } from 'lib/localStorage';
 import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
+import hashMaker from 'lib/hashMaker';
 
 // 업로드 완료시 모든 값을 초기화 해줌
 
@@ -16,7 +17,8 @@ const Uploaded = () => {
 
   useEffect(() => {
     // (0): my files 접근을 위해 db에 key: docId / value: url을 저장
-    set(docId, url);
+    const localDbKey = hashMaker();
+    set(localDbKey, docId);
     initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
   }, []);
 

@@ -1,5 +1,5 @@
 import supabase from 'components/supabase';
-import hashConstructor from 'lib/hashMaker';
+import hashMaker from 'lib/hashMaker';
 
 type uploadFilesProps = {
   file: any;
@@ -14,8 +14,8 @@ const uploadFiles = async ({
   timeLimit,
   accessTime,
 }: uploadFilesProps) => {
-  const docId = hashConstructor();
-  const fileId = hashConstructor();
+  const docId = hashMaker();
+  const fileId = hashMaker();
   // check bucket
   // create bucket
   // upload file

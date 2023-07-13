@@ -1230,7 +1230,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router@npm:^5.1.20":
+"@types/react-router-dom@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "@types/react-router-dom@npm:5.3.3"
+  dependencies:
+    "@types/history": ^4.7.11
+    "@types/react": "*"
+    "@types/react-router": "*"
+  checksum: 28c4ea48909803c414bf5a08502acbb8ba414669b4b43bb51297c05fe5addc4df0b8fd00e0a9d1e3535ec4073ef38aaafac2c4a2b95b787167d113bc059beff3
+  languageName: node
+  linkType: hard
+
+"@types/react-router@npm:*, @types/react-router@npm:^5.1.20":
   version: 5.1.20
   resolution: "@types/react-router@npm:5.1.20"
   dependencies:
@@ -3125,6 +3136,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lockr@npm:^0.9.0-beta.2":
+  version: 0.9.0-beta.2
+  resolution: "lockr@npm:0.9.0-beta.2"
+  checksum: 47e2db37e78d09c4d8c568ec169da43b465086f2cfc29cfdc6dacc397964d7f9578247a39f79264889419c98b00fc6464e71f17132e14a0eeb921185249d600f
+  languageName: node
+  linkType: hard
+
 "lodash@npm:^4.17.15, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
@@ -4213,6 +4231,7 @@ __metadata:
     "@types/react-dom": ^18.0.11
     "@types/react-pdf": ^6
     "@types/react-router": ^5.1.20
+    "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     "@types/uuid": ^9
     "@vitejs/plugin-react": ^4.0.0
@@ -4224,6 +4243,7 @@ __metadata:
     idb: ^7.1.1
     idb-keyval: ^6.2.1
     jotai: ^2.1.0
+    lockr: ^0.9.0-beta.2
     react: ^18.2.0
     react-copy-to-clipboard: ^5.1.0
     react-dom: ^18.2.0
