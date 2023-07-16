@@ -72,8 +72,6 @@ const uploadFiles = async ({
   if (uploadDbError) {
     throw new Error('file을 db에 업로드중 오류 발생');
   }
-
-  return { url };
 };
 
 export default uploadFiles;

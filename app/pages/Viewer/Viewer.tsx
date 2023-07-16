@@ -17,7 +17,9 @@ const Viewer = () => {
   const [delay, setDalay] = useState(false);
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
   // 처음부터 false 해야지 subscribed 되고 나서 활성화할 수 있음
-  const [error] = useAtom(errorAtom); // 이걸로 오류를 띄워 viewer 라우트를 전환하게 함
+  const [error] = useAtom(errorAtom);
+  // 이걸로 오류를 띄워 viewer 라우트를 전환하게 함
+  // 굳이 atom으로 처리하는 이유는 error content를 많은 곳에서 (다른 라우트) 사용하기 때문임!
   const [, onError] = useAtom(onErrorAtom);
   const params = useParams();
   const docId = params.id;
@@ -32,8 +34,6 @@ const Viewer = () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
-      console.log(fileDb.docId);
-      console.log(fileDb.fileId);
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       // check file excess (excess가 true가 아닌 경우 => 처음으로 파일이 excess인지 확인하기)
@@ -139,9 +139,3 @@ const Viewer = () => {
 };
 
 export default Viewer;
-
-// (0): limit: true일때, excess = false일때, no error일때 running 하기
-// normal일때 (limit 변경 가능성 존재하여), limit 일때 (원래 작동해야하니) 작동하며
-// excess일때 404 일때는 아예 작동하지 않음
-
-// 세션 종료시 파일 삭제하지 않으며 doc의 excess: true로 하여 파일의 세션이 종료됨을 알려줌 삭제는 수동으로 진행해야함

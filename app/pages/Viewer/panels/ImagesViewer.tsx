@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import updateFiles from 'api/updateFiles';
 import Select from 'react-select';
 import { useAtom } from 'jotai';
-import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
+import { errorAtom, fileDbAtom, timeLimitOptionsAtom } from 'atoms';
 import onDelete from 'components/Viewer/onDelete';
 import supabase from 'lib/supabase';
 import addTime from 'lib/addTime';
@@ -17,6 +17,7 @@ const ImagesViewer = () => {
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
+  const [, onErrors] = useAtom(errorAtom);
 
   const initValues = () => {
     setModeToggle(false);
@@ -84,7 +85,10 @@ const ImagesViewer = () => {
       <Img
         src={fileDb.url}
         onError={() => {
-          // 예외로 url이 404일때
+          onErrors({
+            code: 405,
+            message: 'ImagesViewer에서 image를 불러오는 중에 에러가 발생함',
+          });
         }}
       />
       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>

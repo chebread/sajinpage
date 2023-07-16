@@ -1,4 +1,5 @@
-import { docIdAtom, initValuesAtom, urlAtom } from 'atoms';
+import { docIdAtom } from 'atoms/filesAtom';
+import initValuesAtom from 'atoms/initValuesAtom';
 import { set, get } from 'idb-keyval';
 import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
@@ -11,13 +12,12 @@ import { onEventChannel } from 'lib/broadcastChannel';
 
 const Uploaded = () => {
   const [docId] = useAtom(docIdAtom);
-  const [url] = useAtom(urlAtom);
   const localDocId = useRef(docId); // docId 초기화를 위해 미리 값을 컴포넌트 내부에 받아 둠
   const [, initValues] = useAtom(initValuesAtom);
 
   useEffect(() => {
     const onLoad = async () => {
-      // add data in idb
+      // add data in idb for myfiles
       const urls = await get('urls');
       const notExistedUrls = urls === undefined;
       if (!notExistedUrls) {

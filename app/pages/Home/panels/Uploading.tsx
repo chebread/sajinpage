@@ -39,11 +39,9 @@ const Uploading = () => {
         timeLimit: timeLimit, // '' or sec
         accessTime: accessTime,
       })
-        .then(({ url }) => {
+        .then(() => {
           // 파일 업로드 완료
-          setUrl(url);
-          // (0): setUrl(url) 이것을 왜 해야하는가? uploaded component를 위해서 인가? 그럼 이게 왜 필요한가?
-          // => 처음에 idb를 위한 "my files 접근을 위해 db에 key: docId / value: url을 저장" 여기서 필요해서 그런 것임. 이제 setUrl은 필요없음!
+          // setUrl이 처음에 idb를 위한 "my files 접근을 위해 db에 key: docId / value: url을 저장" 여기서 필요해서 그런 것임. 이제 setUrl은 필요없음
           setIsUploaded(true); // 파일이 업로드됨을 알림 (home에서 uploaded로 넘어가기 위해서)
         })
         .catch(error => {
