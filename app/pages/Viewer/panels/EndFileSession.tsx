@@ -1,4 +1,5 @@
-import { errorAtom, fileDbAtom } from 'atoms';
+import { errorAtom } from 'atoms/errorAtom';
+import fileDbAtom from 'atoms/fileDbAtom';
 import onDelete from 'components/Viewer/onDelete';
 import { useAtom } from 'jotai';
 

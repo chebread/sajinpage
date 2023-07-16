@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import { FullScreen } from 'layouts/Screens';
 import { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
-import { docIdAtom, fileAtom, isFileAtom } from 'atoms';
+import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
 import { AbsolutePos, RelativePos } from 'layouts/properties';
 import hashMaker from 'lib/hashMaker';
-import { fileIdAtom } from 'atoms/filesAtom';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸
 // (0): 간략한 도움말 만들기

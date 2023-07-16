@@ -1,10 +1,9 @@
 import Uploading from './panels/Uploading';
 import Uploader from './panels/Uploader';
 import { useAtom } from 'jotai';
-import { isFileAtom, isSelectedAtom } from 'atoms';
+import { isFileAtom, isSelectedAtom, isUploadedAtom } from 'atoms/filesAtom';
 import Uploaded from './panels/Uploaded';
 import SelectModes from './panels/SelectModes';
-import { isUploadedAtom } from 'atoms/filesAtom';
 
 // 업로드의 중심부
 

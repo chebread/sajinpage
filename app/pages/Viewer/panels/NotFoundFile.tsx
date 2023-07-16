@@ -1,4 +1,4 @@
-import { errorAtom } from 'atoms';
+import { errorAtom } from 'atoms/errorAtom';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 

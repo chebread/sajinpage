@@ -5,7 +5,6 @@ const Settings = () => {
   const onClearDb = () => {
     clear()
       .then(async () => {
-        console.log('cleared db', await values());
         onEventChannel('clear');
       })
       .catch(error => {

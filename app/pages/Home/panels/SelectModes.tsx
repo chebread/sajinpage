@@ -3,8 +3,8 @@ import {
   isSelectedAtom,
   limitAtom,
   timeLimitAtom,
-  timeLimitOptionsAtom,
-} from 'atoms';
+} from 'atoms/filesAtom';
+import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import { useAtom } from 'jotai';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';

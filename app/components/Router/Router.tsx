@@ -1,6 +1,9 @@
 import { RouterProvider } from 'react-router-dom';
 import { forbiddenRouter, router } from './routes';
-import { isIeAccessDeniedAtom, isSupportedIndexedDbAtom } from 'atoms';
+import {
+  isIeAccessDeniedAtom,
+  isSupportedIndexedDbAtom,
+} from 'atoms/serviceRestrictionsAtom';
 import { useAtom } from 'jotai';
 
 const Router = () => {
