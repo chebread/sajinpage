@@ -1,9 +1,9 @@
 import { docIdAtom, initValuesAtom, urlAtom } from 'atoms';
-import { set } from 'lib/localStorage';
+import { set, get } from 'lib/localStorage';
 import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
-import hashMaker from 'lib/hashMaker';
+import { onEventChannel } from 'lib/broadcastChannel';
 
 // 업로드 완료시 모든 값을 초기화 해줌
 
@@ -16,10 +16,15 @@ const Uploaded = () => {
   const [, initValues] = useAtom(initValuesAtom);
 
   useEffect(() => {
-    // (0): my files 접근을 위해 db에 key: docId / value: url을 저장
     const onLoad = async () => {
-      const localDbKey = hashMaker();
-      await set(localDbKey, docId);
+      const urls: any = await get('urls');
+      const notExistedUrls = urls === null;
+      if (!notExistedUrls) {
+        await set('urls', [...urls, docId]);
+      } else {
+        await set('urls', [docId]);
+      }
+      onEventChannel('add');
       initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
     };
     onLoad().catch(error => {

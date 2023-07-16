@@ -1,10 +1,12 @@
 import { clear, values } from 'lib/localStorage';
+import { onEventChannel } from 'lib/broadcastChannel';
 
 const Settings = () => {
   const onClearDb = () => {
     clear()
       .then(async () => {
         console.log('cleared db', await values());
+        onEventChannel('clear');
       })
       .catch(error => {
         console.log(error); // toast

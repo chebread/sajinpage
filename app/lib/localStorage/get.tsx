@@ -1,6 +1,6 @@
 const get = (key: string) => {
   return new Promise(resolve => {
-    resolve(JSON.stringify(localStorage.getItem(key)));
+    resolve(JSON.parse(localStorage.getItem(key)));
   });
 };
 

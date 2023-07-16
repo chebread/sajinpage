@@ -14,7 +14,7 @@ import supabase from 'lib/supabase';
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
 const Viewer = () => {
-  const [isRunningInterval, setIsRunningInterval] = useState(false);
+  const [delay, setDalay] = useState(false);
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
   // 처음부터 false 해야지 subscribed 되고 나서 활성화할 수 있음
   const [error] = useAtom(errorAtom); // 이걸로 오류를 띄워 viewer 라우트를 전환하게 함
@@ -54,12 +54,12 @@ const Viewer = () => {
           // file is loaded
           setIsLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
           // first run interval
-          setIsRunningInterval(true); // if limit일때 setIsRunning 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
+          setDalay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
         }
       }
     };
     // subscribe as realtime
-    const fetchChannel = fetchRealtimeFiles({
+    const fetchRealtime = fetchRealtimeFiles({
       tableId: 'refs',
       onUpdate: (payload: any) => {
         // file update
@@ -89,7 +89,7 @@ const Viewer = () => {
     });
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
-      supabase.removeChannel(fetchChannel);
+      supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
     };
@@ -107,11 +107,11 @@ const Viewer = () => {
           endedSession();
           // console.log('killed interval');
           // kill interval
-          setIsRunningInterval(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
+          setDalay(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
         }
       }
     },
-    isRunningInterval && !isEmptyObject(error) && fileDb.limit && !fileDb.excess
+    delay && !isEmptyObject(error) && fileDb.limit && !fileDb.excess
       ? 1000
       : null
   );
