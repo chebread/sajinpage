@@ -2,14 +2,16 @@ import { useEffect } from 'react';
 import { uploadFiles } from 'api';
 import { useAtom } from 'jotai';
 import {
+  urlAtom,
+  fileIdAtom,
+  isUploadedAtom,
   accessTimeAtom,
   docIdAtom,
   fileAtom,
-  initValuesAtom,
   limitAtom,
   timeLimitAtom,
-} from 'atoms';
-import { urlAtom } from 'atoms';
+} from 'atoms/filesAtom';
+import { initValuesAtom } from 'atoms';
 
 // (0): 업로딩중에 취소 기능 추가하기 => 없다고 하는데 구현은 언젠가는 해야함
 
@@ -17,7 +19,9 @@ import { urlAtom } from 'atoms';
 
 const Uploading = () => {
   const [file] = useAtom(fileAtom);
-  const [, setDocId] = useAtom(docIdAtom);
+  const [docId] = useAtom(docIdAtom);
+  const [fileId] = useAtom(fileIdAtom);
+  const [, setIsUploaded] = useAtom(isUploadedAtom);
   const [, setUrl] = useAtom(urlAtom);
   const [limit] = useAtom(limitAtom);
   const [timeLimit] = useAtom(timeLimitAtom);
@@ -26,19 +30,19 @@ const Uploading = () => {
 
   useEffect(() => {
     const onLoad = async () => {
-      // (0): add data in idb
-
       // 파일 업로드
       await uploadFiles({
+        docId: docId,
+        fileId: fileId,
         file: file,
         limit: limit,
         timeLimit: timeLimit, // '' or sec
         accessTime: accessTime,
       })
-        .then(({ docId, url }) => {
+        .then(({ url }) => {
           // 파일 업로드 완료
-          setDocId(docId);
-          setUrl(url);
+          setUrl(url); // (0): 이것을 왜 해야하는가? uploaded component를 위해서 인가? 그럼 이게 왜 필요한가..
+          setIsUploaded(true); // 파일이 업로드됨을 알림 (home에서 uploaded로 넘어가기 위해서)
         })
         .catch(error => {
           console.log(error);

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { FullScreen } from 'layouts/Screens';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
-import { fileAtom, isFileAtom } from 'atoms';
+import { docIdAtom, fileAtom, isFileAtom } from 'atoms';
 import { useAtom } from 'jotai';
 import { AbsolutePos, RelativePos } from 'layouts/properties';
+import hashMaker from 'lib/hashMaker';
+import { fileIdAtom } from 'atoms/filesAtom';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸
 // (0): 간략한 도움말 만들기
@@ -15,6 +17,8 @@ import { AbsolutePos, RelativePos } from 'layouts/properties';
 const Uploader = () => {
   const [, setFile] = useAtom(fileAtom);
   const [, setIsFile] = useAtom(isFileAtom);
+  const [, setDocId] = useAtom(docIdAtom);
+  const [, setFileId] = useAtom(fileIdAtom);
   const fileAcceptTypes = {
     // MIME types
     // []의 뜻은 없지만 꼭 써주어야 함
@@ -62,10 +66,14 @@ const Uploader = () => {
       alert('파일의 크기가 너무 커 업로드 될 수 없음');
       return;
     }
+    const docId = hashMaker();
+    const fileId = hashMaker();
     // initialize file
     // 파일 최적화는 일단은 하지 않음
     setIsFile(true);
     setFile(file);
+    setDocId(docId);
+    setFileId(fileId);
     // (0): docId, fileId 설정하기
   };
 

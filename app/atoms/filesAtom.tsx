@@ -7,6 +7,7 @@ const isFileAtom = atom(false); // 파일의 전송 유무를 저장
 const docIdAtom = atom(''); // 파일의 docId를 저장
 const fileIdAtom = atom(''); // 파일의 fileId를 저장
 const isSelectedAtom = atom(false); // 파일의 출력 모드를 저장
+const isUploadedAtom = atom(false); // 파일이 업로드 됬는지를 저장함
 const limitAtom = atom(false); // limit 설정되어 있는지 저장하는 불리언값
 const timeLimitAtom = atom(''); // 단일 end time 값만 저장함 => 초만 저장함
 const accessTimeAtom = atom(''); // 파일의 허용 가능 시간을 저장함
@@ -21,4 +22,6 @@ export {
   timeLimitAtom,
   accessTimeAtom,
   urlAtom,
+  fileIdAtom,
+  isUploadedAtom,
 };

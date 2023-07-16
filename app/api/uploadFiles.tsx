@@ -1,21 +1,22 @@
 import supabase from 'lib/supabase';
-import hashMaker from 'lib/hashMaker';
 
 type uploadFilesProps = {
   file: any;
   limit: boolean;
   timeLimit: any;
   accessTime: any;
+  fileId: any;
+  docId: any;
 };
 
 const uploadFiles = async ({
+  docId,
+  fileId,
   file,
   limit,
   timeLimit,
   accessTime,
 }: uploadFilesProps) => {
-  const docId = hashMaker();
-  const fileId = hashMaker();
   // check bucket
   // create bucket
   // upload file
@@ -72,7 +73,7 @@ const uploadFiles = async ({
     throw new Error('file을 db에 업로드중 오류 발생');
   }
 
-  return { docId, url };
+  return { url };
 };
 
 export default uploadFiles;

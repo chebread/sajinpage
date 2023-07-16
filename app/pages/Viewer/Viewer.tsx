@@ -32,6 +32,8 @@ const Viewer = () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
+      console.log(fileDb.docId);
+      console.log(fileDb.fileId);
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       // check file excess (excess가 true가 아닌 경우 => 처음으로 파일이 excess인지 확인하기)
