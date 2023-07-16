@@ -26,6 +26,8 @@ const Uploading = () => {
 
   useEffect(() => {
     const onLoad = async () => {
+      // (0): add data in idb
+
       // 파일 업로드
       await uploadFiles({
         file: file,

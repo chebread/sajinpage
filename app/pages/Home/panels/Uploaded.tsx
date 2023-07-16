@@ -1,5 +1,5 @@
 import { docIdAtom, initValuesAtom, urlAtom } from 'atoms';
-import { set, get } from 'lib/localStorage';
+import { set, get } from 'idb-keyval';
 import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -17,8 +17,9 @@ const Uploaded = () => {
 
   useEffect(() => {
     const onLoad = async () => {
-      const urls: any = await get('urls');
-      const notExistedUrls = urls === null;
+      // add data in idb
+      const urls = await get('urls');
+      const notExistedUrls = urls === undefined;
       if (!notExistedUrls) {
         await set('urls', [...urls, docId]);
       } else {

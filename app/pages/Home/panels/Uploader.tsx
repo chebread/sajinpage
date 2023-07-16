@@ -66,6 +66,7 @@ const Uploader = () => {
     // 파일 최적화는 일단은 하지 않음
     setIsFile(true);
     setFile(file);
+    // (0): docId, fileId 설정하기
   };
 
   return (

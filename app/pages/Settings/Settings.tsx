@@ -1,4 +1,4 @@
-import { clear, values } from 'lib/localStorage';
+import { clear, values } from 'idb-keyval';
 import { onEventChannel } from 'lib/broadcastChannel';
 
 const Settings = () => {

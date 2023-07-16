@@ -2,9 +2,10 @@ import { RelativePos } from 'layouts/properties';
 import { FullScreen } from 'layouts/Screens';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { get } from 'lib/localStorage';
+import { get } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
 import { eventChannel } from 'lib/broadcastChannel';
+import NotExistedBuckets from './panels/NotExistedBuckets';
 
 // (0): 내가 업로드하면 그 파일의 docId를 Local storage에 차근차근 업로드될때마다 저장하여 홈에서 내가 만들 파일 (/f) 에서 local storage를 불러와서 파일들을
 // => 접근할 수 있도록 함. limit 이라면 local storage에도 limit이라고 저장되며 자물쇠 표시가 파일 옆에 떠 있음
@@ -29,9 +30,8 @@ const MyFiles = () => {
       // get datas in db
       const buckets: any = await get('urls');
       setBuckets(buckets);
-      // as realtime
-      // (0): 감지는 되지만, 버그는 다른 페이지에서 새로고침시 이 이벤트가 발생하는데 이유를 모르겠음
-      eventChannel.addEventListener('message', onMessage);
+      // track events
+      eventChannel.addEventListener('message', onMessage); // BroadcastChannel 은 같은 라우트에서는 동작하지 않음, 같은 라우터는 그냥 따로 구현해주기!
       return () => {
         eventChannel.removeEventListener('message', onMessage);
       };
@@ -43,7 +43,7 @@ const MyFiles = () => {
 
   const onMessage = async (e: any) => {
     const newBuckets: any = await get('urls');
-    console.log(e.data, newBuckets);
+    console.log(e.data);
     setBuckets(newBuckets);
   };
 
@@ -51,20 +51,23 @@ const MyFiles = () => {
     <Container>
       <h1>My files</h1>
       <div>
-        {buckets != null
-          ? buckets.map((value: any, index: number) => (
-              <div
+        {buckets != undefined ? (
+          buckets.map((value: any, index: number) => (
+            <div key={index}>
+              <button
                 onClick={() => {
                   navigate(`/v/${value}`);
                   console.log(value);
                 }}
-                key={index}
               >
                 {value}
-              </div>
-            ))
-          : // buckets에 아무 값도 없을때
-            ''}
+              </button>
+            </div>
+          ))
+        ) : (
+          // buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
+          <NotExistedBuckets />
+        )}
       </div>
     </Container>
   );
