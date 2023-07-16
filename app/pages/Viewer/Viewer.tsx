@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchRealtimeFiles, loadFiles, updateFiles } from 'api';
 import PageLoading from 'pages/PageLoading';
@@ -14,7 +14,7 @@ import supabase from 'lib/supabase';
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
 const Viewer = () => {
-  const [delay, setDalay] = useState(false);
+  const [delay, setDalay] = useState(false); // false가 중지, true가 실행
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
   // 처음부터 false 해야지 subscribed 되고 나서 활성화할 수 있음
   const [error] = useAtom(errorAtom);
@@ -101,7 +101,7 @@ const Viewer = () => {
   // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 작동함
   useInterval(
     async () => {
-      // console.log('running interval');
+      console.log('running interval');
       if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) {
         const accessTime = fileDb.accessTime;
         const isFileExcess = await checkFileSessionByAccessTime(accessTime);
@@ -124,6 +124,26 @@ const Viewer = () => {
       excess: true, // 파일 세션 종료됨
     });
     onError({ code: 403, message: '파일 세션 종료됨' });
+  };
+
+  // 해당 페이지가 안보이게될 시
+  useLayoutEffect(() => {
+    document.addEventListener('visibilitychange', onInvisibility);
+    return () =>
+      document.removeEventListener('visibilitychange', onInvisibility);
+  }, []);
+  const onInvisibility = async () => {
+    if (document.visibilityState === 'hidden') {
+      // 페이지가 안보일때
+      setDalay(false); // 실시간 확인을 끔
+      console.log('hidden');
+    }
+    if (document.visibilityState === 'visible') {
+      console.log('visible');
+      // 페이지가 보일때
+      // 1초뒤에 실행되더라도, 이것은 감수해야함
+      setDalay(true); // 실시간 확인을 켬
+    }
   };
 
   return isEmptyObject(error) ? (

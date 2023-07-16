@@ -18,8 +18,9 @@ import NotExistedBuckets from './panels/NotExistedBuckets';
 
 // storage의 key는 임의의 uid, value도 docId로 한다. 라이브러리는 localForage 사용하기
 
-// (0): db를 실시간으로 즉각 반응하기 (with observer)
+// (0): db를 실시간으로 즉각 반응하기 (with observer) => completed
 // (0): 각각의 url 삭제할 수 있게 하기 (idb - del func)
+// (0): dispatch event를 사용하여 같은 라우터에서 event 처리할 수 있도록 하기! (addeventlistener 추가해야함)
 
 const MyFiles = () => {
   const navigate = useNavigate();
@@ -57,7 +58,6 @@ const MyFiles = () => {
               <button
                 onClick={() => {
                   navigate(`/v/${value}`);
-                  console.log(value);
                 }}
               >
                 {value}

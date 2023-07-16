@@ -21,10 +21,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-// try {
-//   clear();
-//   console.log('cleared', values());
-// } catch (error) {
-//   console.log(error); // toast
-// }

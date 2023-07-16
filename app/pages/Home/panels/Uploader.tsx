@@ -20,7 +20,7 @@ const Uploader = () => {
   const [, setDocId] = useAtom(docIdAtom);
   const [, setFileId] = useAtom(fileIdAtom);
   const fileAcceptTypes = {
-    // MIME types
+    // MIME types를 사용함
     // []의 뜻은 없지만 꼭 써주어야 함
     'image/*': [], // 이미지 타입 전체
     'image/avif': [], // firefox에서 avif 파일은 open시에 안뜨기에 추가함
@@ -74,7 +74,6 @@ const Uploader = () => {
     setFile(file);
     setDocId(docId);
     setFileId(fileId);
-    // (0): docId, fileId 설정하기
   };
 
   return (

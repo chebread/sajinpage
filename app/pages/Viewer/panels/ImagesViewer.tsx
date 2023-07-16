@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
 import updateFiles from 'api/updateFiles';
@@ -13,7 +13,7 @@ import getCurrentTime from 'lib/getCurrentTime';
 
 const ImagesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
-  const url = useRef(getUrl()); // current app url
+  const url = getUrl(); // current app url
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);

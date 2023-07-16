@@ -6,9 +6,7 @@ import { useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { onEventChannel } from 'lib/broadcastChannel';
 
-// 업로드 완료시 모든 값을 초기화 해줌
-
-// 업로드 완료
+// 업로드 완료 (모든 값을 초기화 해줌)
 
 const Uploaded = () => {
   const [docId] = useAtom(docIdAtom);
@@ -26,6 +24,7 @@ const Uploaded = () => {
         await set('urls', [docId]);
       }
       onEventChannel('add');
+      // empty all atom datas
       initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
     };
     onLoad().catch(error => {
