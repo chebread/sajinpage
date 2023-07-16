@@ -16,7 +16,7 @@ import supabase from 'lib/supabase';
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
 const Viewer = () => {
-  const [delay, setDalay] = useState(false); // false가 중지, true가 실행
+  const [delay, setDelay] = useState(false); // false가 중지, true가 실행
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
   // 처음부터 false 해야지 subscribed 되고 나서 활성화할 수 있음
   const [error] = useAtom(errorAtom);
@@ -58,7 +58,7 @@ const Viewer = () => {
           // file is loaded
           setIsLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
           // first run interval
-          setDalay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
+          setDelay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
         }
       }
     };
@@ -100,19 +100,18 @@ const Viewer = () => {
   }, []);
 
   // check file session as realtime each 1sec
-  // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 작동함
+  // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 useinterval이 작동함
   useInterval(
     async () => {
       console.log('running interval');
-      if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) {
-        const accessTime = fileDb.accessTime;
-        const isFileExcess = await checkFileSessionByAccessTime(accessTime);
-        if (isFileExcess) {
-          endedSession();
-          // console.log('killed interval');
-          // kill interval
-          setDalay(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
-        }
+      // if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) 이거 안해도 됨. 이미 useInterval이 작동되기전에 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode를 체크함!
+      const accessTime = fileDb.accessTime;
+      const isFileExcess = await checkFileSessionByAccessTime(accessTime);
+      if (isFileExcess) {
+        endedSession();
+        // console.log('killed interval');
+        // kill interval
+        setDelay(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
       }
     },
     delay && !isEmptyObject(error) && fileDb.limit && !fileDb.excess
@@ -134,17 +133,18 @@ const Viewer = () => {
     return () =>
       document.removeEventListener('visibilitychange', onInvisibility);
   }, []);
+
   const onInvisibility = async () => {
     if (document.visibilityState === 'hidden') {
       // 페이지가 안보일때
-      setDalay(false); // 실시간 확인을 끔
-      console.log('hidden');
+      setDelay(false); // 실시간 확인을 끔
+      // console.log('hidden');
     }
     if (document.visibilityState === 'visible') {
-      console.log('visible');
+      // console.log('visible');
       // 페이지가 보일때
       // 1초뒤에 실행되더라도, 이것은 감수해야함
-      setDalay(true); // 실시간 확인을 켬
+      setDelay(true); // 실시간 확인을 켬 => normal 모드 이여도 켜야함! 이유는 if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임 이다
     }
   };
 

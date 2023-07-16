@@ -30,7 +30,7 @@ const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
     )
     .subscribe(status => {
       // realtime subscribed 후에 viewer를 실행함
-      console.log(status);
+      // console.log(status);
       if (status === 'SUBSCRIBED') {
         onSubscribed();
       }
