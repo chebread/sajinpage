@@ -1,5 +1,5 @@
 import { RelativePos } from 'layouts/properties';
-import { FullScreen } from 'layouts/Screens';
+import { FullScreen } from 'layouts/screens';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { get } from 'idb-keyval';

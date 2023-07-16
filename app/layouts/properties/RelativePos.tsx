@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
-const RelativePos = css`
+const relativePos = css`
   position: relative;
 `;
 
-export default RelativePos;
+export default relativePos;

@@ -1,4 +1,4 @@
-import { BottomScreen } from 'layouts/Screens';
+import { BottomScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
 type BottomButtonProps = {

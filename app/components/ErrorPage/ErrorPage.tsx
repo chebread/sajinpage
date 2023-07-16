@@ -1,5 +1,5 @@
 import { CenterAlign, DisabledSelection } from 'layouts/properties';
-import { CenterScreen } from 'layouts/Screens';
+import { CenterScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
 const ErrorPage = ({ errorCode, errorMessage, onClick }) => {

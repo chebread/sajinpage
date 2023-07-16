@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
-const AbsolutePos = css`
+const absolutePos = css`
   position: absolute;
 `;
 
-export default AbsolutePos;
+export default absolutePos;

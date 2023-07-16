@@ -1,5 +1,5 @@
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
-import { CenterScreen } from 'layouts/Screens';
+import { CenterScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
 const PageLoading = () => {

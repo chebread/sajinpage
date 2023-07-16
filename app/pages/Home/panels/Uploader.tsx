@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FullScreen } from 'layouts/Screens';
+import { FullScreen } from 'layouts/screens';
 import { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';

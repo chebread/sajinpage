@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const DisabledScrollbar = css`
+const disabledScrollbar = css`
   -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
 
@@ -9,4 +9,4 @@ const DisabledScrollbar = css`
   }
 `;
 
-export default DisabledScrollbar;
+export default disabledScrollbar;

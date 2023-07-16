@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 
-const DisabledSelection = css`
+const disabledSelection = css`
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
 `;
 
-export default DisabledSelection;
+export default disabledSelection;

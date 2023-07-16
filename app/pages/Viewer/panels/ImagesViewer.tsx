@@ -124,22 +124,8 @@ const ImagesViewer = () => {
   );
 };
 
-/*
-type ImgTypes = {
-  src: string;
-};
-
-const Img = styled.div<ImgTypes>`
-  width: 300px;
-  height: 300px;
-  background-image: ${({ src }) =>
-    `url('${src}'), url('https://www.jeong-min.com/static/d7ef5f98d66961b6564652f8522c7414/7bf07/9-23.png')`}; // position default value = relative
-  background-size: contain;
-`;
-*/
 const Img = styled.img`
-  width: 300px;
-  height: 300px;
+  height: 400px;
 `;
 
 export default ImagesViewer;
