@@ -1,4 +1,4 @@
-import supabase from 'components/supabase';
+import supabase from 'lib/supabase';
 import { loadFiles } from 'api';
 
 const deleteFiles = async (docId: string) => {

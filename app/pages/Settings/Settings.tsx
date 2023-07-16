@@ -1,4 +1,4 @@
-import { clear, values } from 'idb-keyval';
+import { clear, values } from 'lib/localStorage';
 
 const Settings = () => {
   const onClearDb = () => {
@@ -19,3 +19,10 @@ const Settings = () => {
 };
 
 export default Settings;
+
+// try {
+//   clear();
+//   console.log('cleared', values());
+// } catch (error) {
+//   console.log(error); // toast
+// }

@@ -1,4 +1,4 @@
-import supabase from 'components/supabase';
+import supabase from 'lib/supabase';
 
 // (0): 실시간으로 데이터 fetching 하기
 const loadFiles = async (docId: any) => {

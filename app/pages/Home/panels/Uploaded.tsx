@@ -17,9 +17,14 @@ const Uploaded = () => {
 
   useEffect(() => {
     // (0): my files 접근을 위해 db에 key: docId / value: url을 저장
-    const localDbKey = hashMaker();
-    set(localDbKey, docId);
-    initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
+    const onLoad = async () => {
+      const localDbKey = hashMaker();
+      await set(localDbKey, docId);
+      initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
+    };
+    onLoad().catch(error => {
+      console.log(error);
+    });
   }, []);
 
   return <Navigate to={`v/${localDocId.current}`} />;

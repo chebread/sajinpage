@@ -6,7 +6,7 @@ import Select from 'react-select';
 import { useAtom } from 'jotai';
 import { fileDbAtom, timeLimitOptionsAtom } from 'atoms';
 import onDelete from 'components/Viewer/onDelete';
-import supabase from 'components/supabase';
+import supabase from 'lib/supabase';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';

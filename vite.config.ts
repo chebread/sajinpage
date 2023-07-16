@@ -15,7 +15,6 @@ export default defineConfig(async () => {
     server: {
       port: 5050,
       https: true,
-      open: true, // 브라우저에서 열음
     },
   };
 });

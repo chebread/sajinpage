@@ -1,4 +1,4 @@
-import supabase from 'components/supabase';
+import supabase from 'lib/supabase';
 
 const updateFiles = async ({ docId, ...datas }) => {
   const { data, error } = await supabase

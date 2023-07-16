@@ -1,6 +1,7 @@
 const values = () => {
-  const values = Object.values(localStorage);
-  return values;
+  return new Promise(resolve => {
+    resolve(Object.values(localStorage));
+  });
 };
 
 export default values;

@@ -1,5 +1,7 @@
 const get = (key: string) => {
-  localStorage.getItem(key);
+  return new Promise(resolve => {
+    resolve(JSON.stringify(localStorage.getItem(key)));
+  });
 };
 
 export default get;

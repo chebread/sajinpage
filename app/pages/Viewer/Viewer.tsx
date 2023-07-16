@@ -9,7 +9,7 @@ import useInterval from 'hooks/useInterval';
 import checkFileSessionByAccessTime from 'api/checkFileSessionByAccessTime';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
-import supabase from 'components/supabase';
+import supabase from 'lib/supabase';
 
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 

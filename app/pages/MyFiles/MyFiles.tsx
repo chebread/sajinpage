@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { values } from 'lib/localStorage';
 import { useNavigate } from 'react-router-dom';
+import { useEventListener } from 'usehooks-ts';
 
 // (0): 내가 업로드하면 그 파일의 docId를 Local storage에 차근차근 업로드될때마다 저장하여 홈에서 내가 만들 파일 (/f) 에서 local storage를 불러와서 파일들을
 // => 접근할 수 있도록 함. limit 이라면 local storage에도 limit이라고 저장되며 자물쇠 표시가 파일 옆에 떠 있음
@@ -26,21 +27,19 @@ const MyFiles = () => {
   useEffect(() => {
     const onLoad = async () => {
       // get datas in db
-      const buckets = values();
+      const buckets = await values();
       setBuckets(buckets);
       // as realtime
+      // (0): 감지는 되지만, 버그는 다른 페이지에서 새로고침시 이 이벤트가 발생하는데 이유를 모르겠음
     };
     onLoad().catch(error => {
       console.log(error.url);
     });
-    return () => {
-      removeEventListener('storage', onStorage);
-    };
   }, []);
 
-  const onStorage = e => {
+  useEventListener('storage', e => {
     console.log(e);
-  };
+  });
 
   return (
     <Container>
