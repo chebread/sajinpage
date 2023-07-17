@@ -103,7 +103,7 @@ const Viewer = () => {
   // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 useinterval이 작동함
   useInterval(
     async () => {
-      console.log('running interval');
+      // console.log('running interval');
       // if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) 이거 안해도 됨. 이미 useInterval이 작동되기전에 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode를 체크함!
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
