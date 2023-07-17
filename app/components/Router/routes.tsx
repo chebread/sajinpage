@@ -12,7 +12,7 @@ import MyFiles from 'pages/MyFiles';
 import Header from 'components/Header';
 import Settings from 'pages/Settings';
 
-const forbiddenRouter = ({ errorMessage }) =>
+const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
     createRoutesFromElements(
       <Route
@@ -25,7 +25,7 @@ const forbiddenRouter = ({ errorMessage }) =>
       >
         <Route
           path="*"
-          element={<ForbiddenPage errorMessage={errorMessage} />}
+          element={<ForbiddenPage code={code} message={message} />}
         />
       </Route>
     )

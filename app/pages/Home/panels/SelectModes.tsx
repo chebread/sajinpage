@@ -4,11 +4,13 @@ import {
   limitAtom,
   timeLimitAtom,
 } from 'atoms/filesAtom';
+import initValuesAtom from 'atoms/initValuesAtom';
 import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import { useAtom } from 'jotai';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
+import { useCallback } from 'react';
 import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
@@ -21,6 +23,7 @@ const SelectModes = () => {
   const [, setAcessTime] = useAtom(accessTimeAtom);
   const [, setIsSelected] = useAtom(isSelectedAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
+  const [, initValues] = useAtom(initValuesAtom);
 
   const onModeSelect = (e: any) => {
     const { value } = e; // value = limit sec
@@ -41,6 +44,10 @@ const SelectModes = () => {
     setIsSelected(true); // 선택됨
   };
 
+  const onGoHome = () => {
+    initValues();
+  };
+
   return (
     <div>
       <h1>Normal upload mode</h1>
@@ -49,6 +56,8 @@ const SelectModes = () => {
       </button>
       <h1>Limit upload mode</h1>
       <Select onChange={onModeSelect} options={timeLimitOptions} />
+      <h1>Navigator</h1>
+      <button onClick={onGoHome}>Cancel</button>
     </div>
   );
 };

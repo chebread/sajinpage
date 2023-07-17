@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FullScreen } from 'layouts/screens';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
@@ -46,7 +46,7 @@ const Uploader = () => {
     };
   }, []);
 
-  const onDropFiles = async (files: any) => {
+  const onDropFiles = useCallback(async (files: any) => {
     if (files.length > 1) {
       // 1개 초과 파일은 받지 않음
       alert('한 개의 파일만 업로드 가능');
@@ -73,7 +73,7 @@ const Uploader = () => {
     setFile(file);
     setDocId(docId);
     setFileId(fileId);
-  };
+  }, []); // (0): useCallback에서 [] 전달해도 상관이없나? 일반함수보다 이게 더 효율적인가?
 
   return (
     <>

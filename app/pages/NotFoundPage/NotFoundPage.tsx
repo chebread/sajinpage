@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import ErrorPage from 'components/ErrorPage';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  const onClickRedirect = () => {
+  const onRedirect = () => {
     navigate('/');
   };
+
   return (
-    <ErrorPage
-      errorCode={404}
-      errorMessage="Page is not found"
-      onClick={onClickRedirect}
-    />
+    <>
+      <h1>404</h1>
+      <div>Page is not found</div>
+      <button onClick={onRedirect}>Go home</button>
+    </>
   );
 };
 
