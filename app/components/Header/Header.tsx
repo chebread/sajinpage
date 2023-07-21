@@ -1,12 +1,12 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp } from 'layouts/properties';
+import { desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
-import { useEffect, useState } from 'react';
+import { ReactComponent as Menu } from 'assets/svg/Menu.svg';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import getUrl from 'lib/getUrl';
 
 // redirect시 atom value 초기화는 필요 없음
 // (0): / 일때는 uploader 버튼이 색상이 있으며 /f 일때는 myfiles 버튼이 색상이 있다 (thisishaneum v2 같이 한다)
@@ -15,13 +15,13 @@ import getUrl from 'lib/getUrl';
 const Header = () => {
   // is viewer
   const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
+  const [isHovered, setIsHovered] = useState(true); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
 
   const onHover = () => {
-    // setIsHovered(true);
+    setIsHovered(true);
   };
   const unHover = () => {
-    // setIsHovered(false);
+    setIsHovered(false);
   };
   return (
     <Container

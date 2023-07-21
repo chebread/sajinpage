@@ -101,7 +101,7 @@ const Viewer = () => {
     };*/
     setIsLoaded(true);
     setFileDb({
-      url: `https://lh3.google.com/u/0/d/1MztwB0dYpDHLjkL5rns-QhG-JWl_hGsv=w2880-h1466-iv1`,
+      url: `https://lh3.google.com/u/0/d/1RzXs4QgJ2vzgCYK-Z6VlIbd6UQWCTtU7=w2880-h1464-iv1`,
     });
   }, []);
 
