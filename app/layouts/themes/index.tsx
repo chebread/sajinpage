@@ -1,5 +1,5 @@
 import appThemes from './appThemes';
 import themedPalette from './themedPalette';
-import themeVariables from './themeVariables';
+import themeVars from './themeVars';
 
-export { themeVariables, themedPalette, appThemes };
+export { themeVars, themedPalette, appThemes };

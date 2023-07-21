@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import FullScreen from './FullScreen';
+import FullScreen from './fullScreen';
 
-const BottomScreen = styled(FullScreen)`
+const bottomScreen = styled(FullScreen)`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -12,4 +12,4 @@ const BottomScreen = styled(FullScreen)`
   align-items: center;
 `;
 
-export default BottomScreen;
+export default bottomScreen;

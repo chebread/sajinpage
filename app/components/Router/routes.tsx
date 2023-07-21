@@ -11,6 +11,8 @@ import Viewer from 'pages/Viewer';
 import MyFiles from 'pages/MyFiles';
 import Header from 'components/Header';
 import Settings from 'pages/Settings';
+import styled from 'styled-components';
+import { relativePos } from 'layouts/properties';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
@@ -31,6 +33,9 @@ const forbiddenRouter = ({ code, message }) =>
     )
   );
 
+const X = styled.div`
+  position: relative;
+`;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route

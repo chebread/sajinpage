@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import FullScreen from './FullScreen';
+import FullScreen from './fullScreen';
 
-const CenterModalScreen = styled(FullScreen)`
+const centerModalScreen = styled(FullScreen)`
   position: absolute;
 `;
 
-export default CenterModalScreen;
+export default centerModalScreen;

@@ -11,9 +11,29 @@ const PageLoading = () => {
 };
 
 const Container = styled(CenterScreen)`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #ffffff; // (0): 이것을 왜 해야할까
   svg {
-    height: 20%;
-    fill: #000;
+    // animation
+    transition: height;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+    // mobile
+    height: 12%; // 100px
+    /* // tablet
+    @media (min-width: 770px) {
+      // height: 15%; // 120px
+      height: 15%; // 140px
+    } */
+    // desktop
+    @media (min-width: 960px) {
+      height: 17%; // 140px
+    }
+    fill: #000000;
   }
 `;
 

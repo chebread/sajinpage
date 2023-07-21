@@ -12,6 +12,12 @@ import supabase from 'lib/supabase';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
+import { FullScreen, ImagesScreen } from 'layouts/screens';
+import { absolutePos, desktopVp, relativePos } from 'layouts/properties';
+import Header from 'components/Header';
+import transition from 'layouts/properties/transition';
+import { cssVarsPalette } from 'layouts/cssVars';
+import FullContentScreen from 'layouts/screens/FullContentScreen';
 
 const ImagesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -19,7 +25,6 @@ const ImagesViewer = () => {
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
-  const [, onErrors] = useAtom(errorAtom);
 
   const initValues = () => {
     setModeToggle(false);
@@ -81,32 +86,34 @@ const ImagesViewer = () => {
       initValues();
     }
   };
+  const onCancel = () => {
+    setModeToggle(false);
+    setResetToggle(false);
+  };
+
   // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
-    <>
-      <Img
-        src={fileDb.url}
-        onError={() => {
-          onErrors({
-            code: 405,
-            message: 'ImagesViewer에서 image를 불러오는 중에 에러가 발생함',
-          });
-        }}
-      />
-      <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+    <Container>
+      <ImagesScreen src={fileDb.url} />
+      {/* test code */}
+      {/* <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
       {fileDb.limit ? (
         // limit mode
         modeToggle ? (
           <>
             {resetToggle ? (
               //  time limit 시간 설정하기 (같음)
-              <Select onChange={onModeSelect} options={timeLimitOptions} />
+              <>
+                <Select onChange={onModeSelect} options={timeLimitOptions} />
+                <button onClick={onCancel}>Cancel</button>
+              </>
             ) : (
               <>
                 <button onClick={onResetToggle}>
                   limit mode 값 재설정하기
                 </button>
                 <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+                <button onClick={onCancel}>Cancel</button>
               </>
             )}
           </>
@@ -116,16 +123,19 @@ const ImagesViewer = () => {
       ) : // normal mode
       modeToggle ? (
         //  time limit 시간 설정하기 (같음)
-        <Select onChange={onModeSelect} options={timeLimitOptions} />
+        <>
+          <Select onChange={onModeSelect} options={timeLimitOptions} />
+          <button onClick={onCancel}>Cancel</button>
+        </>
       ) : (
         <button onClick={onModeToggle}>limit mode 켜기</button>
-      )}
-    </>
+      )} */}
+    </Container>
   );
 };
 
-const Img = styled.img`
-  height: 400px;
+const Container = styled(FullContentScreen)`
+  // (0): 왜 전체의 height가 적용되는지는 모르겠음, 아 맞네, 전체의 height를 img도 전체를 Height로 잡으니 영향을 받는 것임 ㅋㅋㅋㅋ
 `;
 
 export default ImagesViewer;

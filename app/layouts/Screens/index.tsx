@@ -1,8 +1,8 @@
 import CenterScreen from './CenterScreen';
-import FullScreen from './FullScreen';
 import BottomScreen from './BottomScreen';
 import ImagesScreen from './ImagesScreen';
 import BottomModalScreen from './BottomModalScreen';
+import FullScreen from './FullScreen';
 
 export {
   CenterScreen,

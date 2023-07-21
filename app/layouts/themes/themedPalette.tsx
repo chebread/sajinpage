@@ -1,9 +1,9 @@
-import themeVariables from './themeVariables';
+import stringToCssVar from 'lib/stringToCssVar';
+import themeVariables from './themeVars';
 
-const cssVar = (name: string) => `var(--${name.replace(/_/g, '-')})`;
 const variableKeys = Object.keys(themeVariables.light);
 const themedPalette = variableKeys.reduce((acc, current) => {
-  acc[current] = cssVar(current);
+  acc[current] = stringToCssVar(current);
   return acc;
 }, {} as any);
 

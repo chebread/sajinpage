@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bowser", "npm:2.11.0"],\
             ["browser-image-compression", "npm:2.0.2"],\
             ["clipboardy", "npm:3.0.0"],\
+            ["framer-motion", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:10.12.22"],\
             ["gsap", "npm:3.11.5"],\
             ["idb-keyval", "npm:6.2.1"],\
             ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
@@ -58,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["styled-components", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.3.10"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["use-long-press", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:3.1.3"],\
+            ["use-web-animations", "npm:0.1.0"],\
             ["usehooks-ts", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.9.1"],\
             ["uuid", "npm:9.0.0"],\
             ["vite", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:4.4.2"],\
@@ -473,6 +475,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@emotion/is-prop-valid", [\
+        ["npm:0.8.8", {\
+          "packageLocation": "./.yarn/cache/@emotion-is-prop-valid-npm-0.8.8-261a0f2426-bb7ec6d48c.zip/node_modules/@emotion/is-prop-valid/",\
+          "packageDependencies": [\
+            ["@emotion/is-prop-valid", "npm:0.8.8"],\
+            ["@emotion/memoize", "npm:0.7.4"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:1.2.0", {\
           "packageLocation": "./.yarn/cache/@emotion-is-prop-valid-npm-1.2.0-332d343e3d-cc7a19850a.zip/node_modules/@emotion/is-prop-valid/",\
           "packageDependencies": [\
@@ -483,6 +493,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@emotion/memoize", [\
+        ["npm:0.7.4", {\
+          "packageLocation": "./.yarn/cache/@emotion-memoize-npm-0.7.4-5648cf11b8-4e3920d4ec.zip/node_modules/@emotion/memoize/",\
+          "packageDependencies": [\
+            ["@emotion/memoize", "npm:0.7.4"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:0.8.0", {\
           "packageLocation": "./.yarn/cache/@emotion-memoize-npm-0.8.0-c5dd451828-c87bb110b8.zip/node_modules/@emotion/memoize/",\
           "packageDependencies": [\
@@ -3174,6 +3191,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["framer-motion", [\
+        ["npm:10.12.22", {\
+          "packageLocation": "./.yarn/cache/framer-motion-npm-10.12.22-bfc7c734a0-ed24d3f92a.zip/node_modules/framer-motion/",\
+          "packageDependencies": [\
+            ["framer-motion", "npm:10.12.22"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:10.12.22", {\
+          "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-fb35400309/0/cache/framer-motion-npm-10.12.22-bfc7c734a0-ed24d3f92a.zip/node_modules/framer-motion/",\
+          "packageDependencies": [\
+            ["framer-motion", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:10.12.22"],\
+            ["@emotion/is-prop-valid", "npm:0.8.8"],\
+            ["@types/react", "npm:18.2.0"],\
+            ["@types/react-dom", "npm:18.2.1"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:18.2.0"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fs-minipass", [\
         ["npm:2.1.0", {\
           "packageLocation": "./.yarn/cache/fs-minipass-npm-2.1.0-501ef87306-1b8d128dae.zip/node_modules/fs-minipass/",\
@@ -5105,6 +5150,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bowser", "npm:2.11.0"],\
             ["browser-image-compression", "npm:2.0.2"],\
             ["clipboardy", "npm:3.0.0"],\
+            ["framer-motion", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:10.12.22"],\
             ["gsap", "npm:3.11.5"],\
             ["idb-keyval", "npm:6.2.1"],\
             ["jotai", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.1.0"],\
@@ -5122,6 +5168,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["styled-components", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:5.3.10"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["use-long-press", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:3.1.3"],\
+            ["use-web-animations", "npm:0.1.0"],\
             ["usehooks-ts", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:2.9.1"],\
             ["uuid", "npm:9.0.0"],\
             ["vite", "virtual:d1b8a2f4060dfb5207a2b0f51e7a3f9e38f939c5618a0447c809aa0a686551a80e3fc0078bfab44f65d19c4391cb0b815bcf3e92cd785dfa832319029ac3a879#npm:4.4.2"],\
@@ -5784,6 +5831,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/react",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["use-web-animations", [\
+        ["npm:0.1.0", {\
+          "packageLocation": "./.yarn/cache/use-web-animations-npm-0.1.0-acc30cce90-791464bb52.zip/node_modules/use-web-animations/",\
+          "packageDependencies": [\
+            ["use-web-animations", "npm:0.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\

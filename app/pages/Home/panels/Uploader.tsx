@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
-import { AbsolutePos, RelativePos } from 'layouts/properties';
+import { absolutePos, relativePos } from 'layouts/properties';
 import hashMaker from 'lib/hashMaker';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸
@@ -93,15 +93,15 @@ const Uploader = () => {
   );
 };
 
-const Container = styled(FullScreen)`
-  ${RelativePos}
+const Container = styled.div`
+  ${relativePos}
 `;
-const DropZone = styled(FullScreen)`
-  ${AbsolutePos}
+const DropZone = styled.div`
+  ${absolutePos}
   z-index: 1;
 `;
 const Button = styled.button`
-  ${AbsolutePos}
+  ${absolutePos}
   z-index: 1;
 `;
 

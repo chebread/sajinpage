@@ -12,6 +12,7 @@ import checkFileSessionByAccessTime from 'api/checkFileSessionByAccessTime';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
+import Header from 'components/Header';
 
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
@@ -32,7 +33,8 @@ const Viewer = () => {
 
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
-    const onLoad = async () => {
+    // test code //
+    /* const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
@@ -96,7 +98,11 @@ const Viewer = () => {
       supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
-    };
+    };*/
+    setIsLoaded(true);
+    setFileDb({
+      url: `https://lh3.google.com/u/0/d/1MztwB0dYpDHLjkL5rns-QhG-JWl_hGsv=w2880-h1466-iv1`,
+    });
   }, []);
 
   // check file session as realtime each 1sec

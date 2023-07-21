@@ -10,12 +10,9 @@ import { useAtom } from 'jotai';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
-import { useCallback } from 'react';
 import Select from 'react-select';
 
 // 파일 업로드 모드를 설정하는 부분
-
-// (0): 중도 포기할 수 있게 하기
 
 const SelectModes = () => {
   const [, setLimit] = useAtom(limitAtom);

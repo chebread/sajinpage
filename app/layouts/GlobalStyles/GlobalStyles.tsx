@@ -1,13 +1,25 @@
-import { DisabledScrollbar } from 'layouts/properties';
+import { disabledScrollbar } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
 import { appThemes, themedPalette } from 'layouts/themes';
+import initStyles from './initStyles';
+import buildCssVariables from 'lib/buildCssVariables';
+import { cssVars } from 'layouts/cssVars';
 
 // 770px 이하: mobile
 // 1200 이하: tablet and desktop
 // 1200 이상: only desktop
 
+// 960 이하: table & mobile
+// 960 이상: desktop
+
 const GlobalStyles = createGlobalStyle`
-  // initialize app's theme
+  // init styles
+  ${initStyles}
+  // init css vars
+  body {
+    ${buildCssVariables(cssVars)}
+  }
+  // init app's theme
   body {
     ${appThemes.light};
   }
@@ -16,13 +28,11 @@ const GlobalStyles = createGlobalStyle`
       ${appThemes.dark}
     }
   }
-  
+  // init typo
   body {
-    // font-family
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-      sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family:  system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, Tossface; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
   }
-  
+  // defaults
   html, body, #root {
     // screen
     position: relative;
@@ -38,13 +48,8 @@ const GlobalStyles = createGlobalStyle`
     // cursur
     cursor: text;
     // scrollbar
-    ${DisabledScrollbar}
+    ${disabledScrollbar}
   }
-
-  /* ::selection {
-    background-color: rgb(7, 238, 0, 99.9999999999999%); // 99%: 사파리 대응을 위해 반투명 설정함
-    color: #000;
-  } */
 `;
 
 export default GlobalStyles;

@@ -337,12 +337,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emotion/is-prop-valid@npm:^0.8.2":
+  version: 0.8.8
+  resolution: "@emotion/is-prop-valid@npm:0.8.8"
+  dependencies:
+    "@emotion/memoize": 0.7.4
+  checksum: bb7ec6d48c572c540e24e47cc94fc2f8dec2d6a342ae97bc9c8b6388d9b8d283862672172a1bb62d335c02662afe6291e10c71e9b8642664a8b43416cdceffac
+  languageName: node
+  linkType: hard
+
 "@emotion/is-prop-valid@npm:^1.1.0":
   version: 1.2.0
   resolution: "@emotion/is-prop-valid@npm:1.2.0"
   dependencies:
     "@emotion/memoize": ^0.8.0
   checksum: cc7a19850a4c5b24f1514665289442c8c641709e6f7711067ad550e05df331da0692a16148e85eda6f47e31b3261b64d74c5e25194d053223be16231f969d633
+  languageName: node
+  linkType: hard
+
+"@emotion/memoize@npm:0.7.4":
+  version: 0.7.4
+  resolution: "@emotion/memoize@npm:0.7.4"
+  checksum: 4e3920d4ec95995657a37beb43d3f4b7d89fed6caa2b173a4c04d10482d089d5c3ea50bbc96618d918b020f26ed6e9c4026bbd45433566576c1f7b056c3271dc
   languageName: node
   linkType: hard
 
@@ -2527,6 +2543,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^10.12.22":
+  version: 10.12.22
+  resolution: "framer-motion@npm:10.12.22"
+  dependencies:
+    "@emotion/is-prop-valid": ^0.8.2
+    tslib: ^2.4.0
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  dependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: ed24d3f92ad3d5578303f25a846921acbd49ccde7de45445fcaaef8e8d77d962cfec8b35426ba9ee26f3fd3af0216bf65d15782c7e0f72babeac59c90a4f571b
+  languageName: node
+  linkType: hard
+
 "fs-minipass@npm:^2.0.0, fs-minipass@npm:^2.1.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -4102,6 +4139,7 @@ __metadata:
     bowser: ^2.11.0
     browser-image-compression: ^2.0.2
     clipboardy: ^3.0.0
+    framer-motion: ^10.12.22
     gsap: ^3.11.4
     idb-keyval: ^6.2.1
     jotai: ^2.1.0
@@ -4119,6 +4157,7 @@ __metadata:
     styled-components: ^5.3.6
     typescript: ^4.9.5
     use-long-press: ^3.1.3
+    use-web-animations: ^0.1.0
     usehooks-ts: ^2.9.1
     uuid: ^9.0.0
     vite: ^4.4.2
@@ -4638,6 +4677,13 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 9ee89a4c1d0f3b5e6c8937d74f0a7e938bafa18b2d18b1007c5d32d31ee5f8825be0a6b78b63b031af5e73f96ed82bac0264be8e7f8469b42718d956e1ac0a19
+  languageName: node
+  linkType: hard
+
+"use-web-animations@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "use-web-animations@npm:0.1.0"
+  checksum: 791464bb52ad13d2349d8b37730f3c9eadc8f01238200ce5257e66459dac7c2bf317a3976da4dfebd1e17246e21ba6a9ef7b7f569c9a8c35bd0419592bc1f0e7
   languageName: node
   linkType: hard
 
