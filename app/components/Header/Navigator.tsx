@@ -1,4 +1,4 @@
-// modal
+// modal 이 아닌 하단으로 nav 바 처럼 나오게 하기 (mobile 처럼) => 세로운 도전.
 
 import { centerAlign } from 'layouts/properties';
 import transition from 'layouts/properties/transition';

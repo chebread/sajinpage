@@ -9,10 +9,10 @@ import Navigator from './Navigator';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [isClicked, setIsClicked] = useState(true); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
+  const [isClicked, setIsClicked] = useState(false); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
 
   const onClick = () => {
-    setIsClicked(!isClicked);
+    // setIsClicked(!isClicked);
   };
 
   return (
