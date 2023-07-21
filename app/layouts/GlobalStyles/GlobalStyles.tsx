@@ -45,8 +45,6 @@ const GlobalStyles = createGlobalStyle`
     // font
     color: #000; // ${themedPalette.color}
     font-weight: 500;
-    // cursur
-    cursor: text;
     // scrollbar
     ${disabledScrollbar}
   }

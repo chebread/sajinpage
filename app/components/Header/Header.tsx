@@ -1,48 +1,41 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { desktopVp } from 'layouts/properties';
+import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as Menu } from 'assets/svg/Menu.svg';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
-// redirect시 atom value 초기화는 필요 없음
-// (0): / 일때는 uploader 버튼이 색상이 있으며 /f 일때는 myfiles 버튼이 색상이 있다 (thisishaneum v2 같이 한다)
-// (0): 해더를 뺀 full screen layout 추가하기
+import Navigator from './Navigator';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  // is viewer
-  const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(true); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
+  const [isClicked, setIsClicked] = useState(true); // 이 기능은 desktop에서만 적용함 (모바일은 그냥 바로 nav 제공)
 
-  const onHover = () => {
-    setIsHovered(true);
+  const onClick = () => {
+    setIsClicked(!isClicked);
   };
-  const unHover = () => {
-    setIsHovered(false);
-  };
+
   return (
-    <Container
-      onMouseEnter={onHover}
-      onMouseLeave={unHover}
-      onTouchStart={onHover}
-      onTouchEnd={unHover}
-    >
-      <AsideLeftWrapper isVisible={isHovered}>
-        <RedirectBtn to="/">Upload</RedirectBtn>
-        <RedirectBtn to="/f">My files</RedirectBtn>
-      </AsideLeftWrapper>
-      <LogoWrapper>
-        <LogoBtn to="/">
-          <Logo />
-        </LogoBtn>
-      </LogoWrapper>
-      <AsideRightWrapper isVisible={isHovered}>
-        <RedirectBtn to="/s">Settings</RedirectBtn>
-      </AsideRightWrapper>
-    </Container>
+    <>
+      <Container>
+        <AsideLeftWrapper>
+          <ButtonWrapper>
+            <MenuBtn onClick={onClick}>
+              <Menu />
+            </MenuBtn>
+          </ButtonWrapper>
+        </AsideLeftWrapper>
+        <LogoWrapper>
+          <LogoBtn to="/">
+            <Logo />
+          </LogoBtn>
+        </LogoWrapper>
+        <AsideRightWrapper>
+          <ButtonWrapper></ButtonWrapper>
+        </AsideRightWrapper>
+      </Container>
+      <Navigator isVisible={isClicked} onClickCancel={onClick} />
+    </>
   );
 };
 
@@ -56,15 +49,9 @@ const Container = styled.div`
   }
   display: flex;
   flex-direction: row;
-  &:hover {
-    opacity: 1;
-  }
 `;
-type WrapperPropsType = {
-  isVisible?: boolean;
-};
 
-const Wrapper = styled.div<WrapperPropsType>`
+const Wrapper = styled.div`
   height: 100%;
   width: 33%;
   display: flex;
@@ -72,27 +59,20 @@ const Wrapper = styled.div<WrapperPropsType>`
   flex: 1;
   align-items: center;
   ${transition('opacity')}
-  margin-left: 3rem;
-  margin-right: 3rem;
 `;
 const AsideLeftWrapper = styled(Wrapper)`
   justify-content: flex-start;
-  @media (${desktopVp}) {
-    opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  }
 `;
 const AsideRightWrapper = styled(Wrapper)`
   justify-content: flex-end;
-  @media (${desktopVp}) {
-    opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  }
 `;
 const LogoWrapper = styled(Wrapper)`
   justify-content: center;
 `;
 
-const LogoBtn = styled(NavLink)`
+const LogoBtn = styled(Link)`
   all: unset;
+  cursor: pointer;
   svg {
     ${transition('transform')}
     height: 2rem;
@@ -104,11 +84,42 @@ const LogoBtn = styled(NavLink)`
     }
   }
 `;
-const RedirectBtn = styled(NavLink)`
-  all: unset;
-  margin-right: 1rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+
+const ButtonWrapper = styled.div`
+  ${transition('all')}
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (${desktopVp}) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 `;
+const MenuBtn = styled.button`
+  all: unset;
+  cursor: pointer;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  ${centerAlign}
+  border-radius: 50%;
+  ${transition('background-color')}
+  &:hover {
+    background-color: rgb(235, 235, 235);
+    svg {
+      ${transition('transform')}
+      transform: scale(1.07);
+    }
+  }
+  &:active {
+    background-color: rgb(220, 220, 220);
+    svg {
+      ${transition('transform')}
+      transform: scale(0.98);
+    }
+  }
+  svg {
+    height: 1.1rem;
+  }
+`;
+
 export default Header;
