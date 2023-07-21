@@ -13,6 +13,7 @@ import Header from 'components/Header';
 import Settings from 'pages/Settings';
 import styled from 'styled-components';
 import { relativePos } from 'layouts/properties';
+import Navigator from 'components/Navigator';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
         <>
           <Header />
           <Outlet />
+          <Navigator />
         </>
       }
       // errorElement={<ErrorPage />}

@@ -70,8 +70,8 @@ const MyFiles = () => {
   );
 };
 
-const Container = styled(FullScreen)`
-  ${relativePos}
+const Container = styled.div`
+  position: relative;
 `;
 
 export default MyFiles;
