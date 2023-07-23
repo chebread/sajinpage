@@ -2,4 +2,6 @@ import { atom } from 'jotai';
 
 const loadedAtom = atom(false);
 
-export { loadedAtom };
+const clickedAtom = atom(false);
+
+export { loadedAtom, clickedAtom };

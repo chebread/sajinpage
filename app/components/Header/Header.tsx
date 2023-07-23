@@ -1,4 +1,3 @@
-import { useAtom } from 'jotai';
 import { cssVarsPalette } from 'layouts/cssVars';
 import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
@@ -29,7 +28,7 @@ const Header = () => {
 const Container = styled.div`
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10000;
   ${transition('height', 'width')}
   height: ${cssVarsPalette.mobile_header_height};
   @media (${desktopVp}) {
@@ -37,6 +36,7 @@ const Container = styled.div`
   }
   display: flex;
   flex-direction: row;
+  background-color: #ffffff;
 `;
 
 const Wrapper = styled.div`

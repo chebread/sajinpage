@@ -1,4 +1,4 @@
-import { CenterAlign, DisabledSelection } from 'layouts/properties';
+import { centerAlign, disabledSelection } from 'layouts/properties';
 import { CenterScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
@@ -12,14 +12,14 @@ const ErrorPage = ({ errorCode, errorMessage, onClick }) => {
 };
 
 const Screen = styled(CenterScreen)`
-  ${DisabledSelection}
+  ${disabledSelection}
 `;
 
 const Notice = styled.button`
   all: unset;
   font-size: 50px;
   display: flex;
-  ${CenterAlign}
+  ${centerAlign}
   // animation
   transition: box-shadow, margin, font-size;
   transition-duration: 0.25s;

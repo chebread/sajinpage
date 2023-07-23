@@ -15,15 +15,6 @@ const Uploaded = () => {
 
   useEffect(() => {
     const onLoad = async () => {
-      // add data in idb for myfiles
-      const urls = await get('urls');
-      const notExistedUrls = urls === undefined;
-      if (!notExistedUrls) {
-        await set('urls', [...urls, docId]);
-      } else {
-        await set('urls', [docId]);
-      }
-      onEventChannel('add');
       // empty all atom datas
       initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
     };

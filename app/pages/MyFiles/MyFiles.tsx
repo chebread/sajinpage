@@ -1,11 +1,11 @@
-import { relativePos } from 'layouts/properties';
-import { FullScreen } from 'layouts/screens';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { get } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
 import { eventChannel } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import getWebsiteUrl from 'lib/getWebsiteUrl';
 
 // (0): 각각의 url 삭제할 수 있게 하기 (idb - del func)
 
@@ -37,7 +37,7 @@ const MyFiles = () => {
   const onMessage = async (e: any) => {
     const newBuckets: any = await get('urls');
     setBuckets(newBuckets);
-    // test code
+    // test code //
     if (e.data != undefined) {
       console.log(e.data);
     } else {
@@ -59,6 +59,14 @@ const MyFiles = () => {
               >
                 {value}
               </button>
+              <CopyToClipboard
+                text={getWebsiteUrl(`/v/${value}`)}
+                onCopy={() => {
+                  // on copy
+                }}
+              >
+                <button>Share</button>
+              </CopyToClipboard>
             </div>
           ))
         ) : (

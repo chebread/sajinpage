@@ -26,7 +26,7 @@ const ImagesScreen = ({ src }) => {
 };
 const ImageWrapper = styled.div`
   position: absolute;
-  z-index: 100;
+  z-index: 10000;
   height: 100%;
   width: 100%;
   display: flex;

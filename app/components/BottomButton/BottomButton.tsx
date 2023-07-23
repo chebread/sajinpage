@@ -1,65 +1,63 @@
-import { BottomScreen } from 'layouts/screens';
+import { desktopVp } from 'layouts/properties';
+import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
 type BottomButtonProps = {
-  onClick?: any;
+  onClick: any;
   children: any;
 };
 
 const BottomButton = ({ children, onClick }: BottomButtonProps) => {
   return (
-    <BottomScreen>
-      <Button onClick={onClick}>{children}</Button>
-    </BottomScreen>
+    <BtnWrapper>
+      <Btn onClick={onClick}>{children}</Btn>
+    </BtnWrapper>
   );
 };
 
-const Button = styled.button`
+const BtnWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+`;
+const Btn = styled.button`
   all: unset;
-  // position
   position: fixed;
-  z-index: 1;
-  // alignment
+  z-index: 10000;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  // font
-  font-size: 20px;
-  // size
-  width: calc(100% - 60px);
-  height: 75px;
-  margin: 30px;
-  border-radius: 30px;
-  // background
-  backdrop-filter: blur(18.75px);
-  background-color: rgba(233, 236, 239, 65%);
-  // animation
-  transition: all;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-out;
-  // svg
-  svg {
-    height: 45px;
-    width: 45px;
-    fill: #000;
+  width: calc(100% - 6rem);
+  height: 4.5rem; //
+  @media (${desktopVp}) {
+    width: 50%;
+    height: 4.5rem;
   }
-  // hover
+  border-radius: 2rem;
+  ${transition('background-color', 'transform')}
+  background-color: rgb(240, 240, 240);
   &:hover {
-    background-color: rgba(222, 226, 230, 65%);
+    background-color: rgb(235, 235, 235);
+    transform: scale(1.07);
+    svg {
+      transform: scale(1.07);
+    }
   }
   &:active {
-    background-color: rgba(206, 212, 218, 65%);
+    background-color: rgb(220, 220, 220);
+    transform: scale(0.98);
+    svg {
+      transform: scale(0.98);
+    }
   }
-  // tablet
-  @media (min-width: 770px) {
-    font-size: 22.5px;
-    width: 70%;
-  }
-  // desktop
-  @media (min-width: 1200px) {
-    font-size: 25px;
-    width: 50%;
+  svg {
+    ${transition('transform')}
+    height: 2rem;
   }
 `;
+
 export default BottomButton;

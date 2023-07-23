@@ -1,5 +1,6 @@
 const getUrl = () => {
-  const url = window.location.href;
+  const win = window as Window;
+  const url = win.location.href;
   return url;
 };
 

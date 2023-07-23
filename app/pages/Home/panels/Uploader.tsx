@@ -7,9 +7,9 @@ import { useAtom } from 'jotai';
 import { absolutePos, relativePos } from 'layouts/properties';
 import hashMaker from 'lib/hashMaker';
 
-// (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸
-// (0): 간략한 도움말 만들기
-// (0): 여기서 setType하기 fileDb에 type이라는 것을 추가하기 (db에도)
+// (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성
+// (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가)
+// (0): 여기서 setType하기 fileDb에 type이라는 것을 추가하기 (db에도) => video 허용시에
 
 // 파일을 사용자로부터 받아오는 부분
 
@@ -95,7 +95,6 @@ const Uploader = () => {
 
 const Container = styled.div`
   ${relativePos}
-  height: 150vh;
 `;
 const DropZone = styled.div`
   ${absolutePos}

@@ -14,8 +14,12 @@ import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { loadedAtom } from 'atoms/viewerAtom';
 import ViewerMenu from 'components/Viewer/ViewerMenu';
+import { addIdb } from 'lib/idb';
 
-// 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
+// (0): viewer 확인할때마다 my files에 저장 (중복 있으면 저장 중지)
+
+// 파일들을 확인하는 곳
+// 각각의 url들을 Bucket이라 칭함
 
 const Viewer = () => {
   const [delay, setDelay] = useState(false); // false가 중지, true가 실행
@@ -35,10 +39,12 @@ const Viewer = () => {
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
     // test code //
-    /* const onLoad = async () => {
+    const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
+      // add data in idb for myfiles => 파일이 존재하지 않는 경우만 제외하고 모두 저장함
+      await addIdb(docId);
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       // check file excess (excess가 true가 아닌 경우 => 처음으로 파일이 excess인지 확인하기)
@@ -62,8 +68,6 @@ const Viewer = () => {
           setLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
           // first run interval
           setDelay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
-          // set now route
-          // ...
         }
       }
     };
@@ -101,10 +105,10 @@ const Viewer = () => {
       supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
-    }; */
+    };
     setLoaded(true);
     setFileDb({
-      url: `https://lh3.google.com/u/0/d/1MztwB0dYpDHLjkL5rns-QhG-JWl_hGsv=w2880-h1466-iv1`,
+      url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
     });
   }, []);
 
