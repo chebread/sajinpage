@@ -4,20 +4,9 @@ import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import ViewerMenu from 'components/Viewer/ViewerMenu';
-import { loadedAtom } from 'atoms/viewerAtom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
-import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 
 const Header = () => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [loaded] = useAtom(loadedAtom); // check that current route is viewer
-
-  const onClick = () => {
-    setIsClicked(!isClicked);
-  };
-
   return (
     <>
       <Container>
@@ -30,18 +19,9 @@ const Header = () => {
           </LogoBtn>
         </LogoWrapper>
         <AsideRightWrapper>
-          <ButtonWrapper>
-            {loaded ? (
-              <Btn onClick={onClick}>
-                <DotIcon />
-              </Btn>
-            ) : (
-              ''
-            )}
-          </ButtonWrapper>
+          <ButtonWrapper></ButtonWrapper>
         </AsideRightWrapper>
       </Container>
-      <ViewerMenu isVisible={isClicked} onCancel={onClick} />
     </>
   );
 };
@@ -57,7 +37,6 @@ const Container = styled.div`
   }
   display: flex;
   flex-direction: row;
-  background-color: #ffffff;
 `;
 
 const Wrapper = styled.div`
