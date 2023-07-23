@@ -13,6 +13,7 @@ import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { loadedAtom } from 'atoms/viewerAtom';
+import ViewerMenu from 'components/Viewer/ViewerMenu';
 
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
@@ -163,6 +164,7 @@ const Viewer = () => {
     // 2) 파일이 로드됨
     <>
       <ImagesViewer />
+      <ViewerMenu />
     </>
   ) : (
     // 1) 로딩

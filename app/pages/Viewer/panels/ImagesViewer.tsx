@@ -12,16 +12,7 @@ import supabase from 'lib/supabase';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
-import { FullScreen, ImagesScreen } from 'layouts/screens';
-import {
-  absolutePos,
-  centerAlign,
-  desktopVp,
-  relativePos,
-} from 'layouts/properties';
-import Header from 'components/Header';
-import transition from 'layouts/properties/transition';
-import { cssVarsPalette } from 'layouts/cssVars';
+import { ImagesScreen } from 'layouts/screens';
 import FullContentScreen from 'layouts/screens/FullContentScreen';
 
 const ImagesViewer = () => {

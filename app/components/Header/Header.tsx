@@ -31,13 +31,13 @@ const Header = () => {
         </LogoWrapper>
         <AsideRightWrapper>
           <ButtonWrapper>
-            {/* {loaded ? (
+            {loaded ? (
               <Btn onClick={onClick}>
                 <DotIcon />
               </Btn>
             ) : (
               ''
-            )} */}
+            )}
           </ButtonWrapper>
         </AsideRightWrapper>
       </Container>
