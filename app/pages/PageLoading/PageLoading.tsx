@@ -12,6 +12,7 @@ const PageLoading = () => {
 
 const Container = styled(CenterScreen)`
   position: fixed;
+  z-index: 10000;
   left: 0;
   right: 0;
   top: 0;
@@ -24,11 +25,6 @@ const Container = styled(CenterScreen)`
     transition-timing-function: ease-out;
     // mobile
     height: 12%; // 100px
-    /* // tablet
-    @media (min-width: 770px) {
-      // height: 15%; // 120px
-      height: 15%; // 140px
-    } */
     // desktop
     @media (min-width: 960px) {
       height: 17%; // 140px

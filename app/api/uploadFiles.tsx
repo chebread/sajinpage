@@ -9,19 +9,6 @@ type uploadFilesProps = {
   docId: any;
 };
 
-const units = ['bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-
-function niceBytes(x) {
-  let l = 0,
-    n = parseInt(x, 10) || 0;
-
-  while (n >= 1024 && ++l) {
-    n = n / 1024;
-  }
-
-  return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
-}
-
 const uploadFiles = async ({
   docId,
   fileId,
@@ -57,16 +44,13 @@ const uploadFiles = async ({
     // public url error checking
     // 이거 할 필요가 없는게 getPublicUrl은 오류가 나지 않음
   }
-
   const url = limit ? fileUrl.signedUrl : fileUrl.publicUrl;
-
   // db
   const db = {
     // 값을 공백으로 지정해야 할시는 null로 저장함
     docId: docId,
     fileId: fileId,
     url: url,
-    desc: '',
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
     excess: false,
     accessTime: limit

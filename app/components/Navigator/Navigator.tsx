@@ -31,14 +31,13 @@ const Navigator = () => {
 
 const Container = styled.div`
   position: fixed;
-  // animation
   ${transition('height', 'width')}
   height: ${cssVarsPalette.mobile_header_height};
-  width: 100%;
-  bottom: 0;
   @media (${desktopVp}) {
     height: ${cssVarsPalette.desktop_header_height};
   }
+  width: 100%;
+  bottom: 0; // fix bottom
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -48,8 +47,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  ${transition('opacity')}
+  ${centerAlign}
 `;
 
 const Navigate = styled(NavLink)`
@@ -64,18 +62,21 @@ const Navigate = styled(NavLink)`
   &:hover {
     background-color: rgb(235, 235, 235);
     svg {
-      ${transition('transform')}
-      transform: scale(1.07);
+      transform: scale(
+        1.07
+      ); // 외부 svg에 hover 설정시 svg 크기만 hover 영역이 되기에 Navigate 자체에서 hover 처리하여 svg 크기를 조절해 줘야함
     }
   }
   &:active {
     background-color: rgb(220, 220, 220);
     svg {
-      ${transition('transform')}
       transform: scale(0.98);
     }
   }
   svg {
+    ${transition(
+      'transform'
+    )} // 이렇게 전역에서 적용 해야줘야지 hover, active animation이 끊기지 않고 적용됨
     height: 2rem;
   }
 `;

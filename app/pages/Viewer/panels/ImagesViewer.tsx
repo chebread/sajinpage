@@ -13,7 +13,12 @@ import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import { FullScreen, ImagesScreen } from 'layouts/screens';
-import { absolutePos, desktopVp, relativePos } from 'layouts/properties';
+import {
+  absolutePos,
+  centerAlign,
+  desktopVp,
+  relativePos,
+} from 'layouts/properties';
 import Header from 'components/Header';
 import transition from 'layouts/properties/transition';
 import { cssVarsPalette } from 'layouts/cssVars';
@@ -95,8 +100,18 @@ const ImagesViewer = () => {
   return (
     <Container>
       <ImagesScreen src={fileDb.url} />
-      {/* test code */}
-      {/* <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+    </Container>
+  );
+};
+
+const Container = styled(FullContentScreen)`
+  // (0): 왜 전체의 height가 적용되는지는 모르겠음, 아 맞네, 전체의 height를 img도 전체를 Height로 잡으니 영향을 받는 것임 ㅋㅋㅋㅋ
+`;
+
+export default ImagesViewer;
+
+/*
+<button onClick={() => onDelete(fileDb.docId)}>delete file</button>
       {fileDb.limit ? (
         // limit mode
         modeToggle ? (
@@ -129,13 +144,5 @@ const ImagesViewer = () => {
         </>
       ) : (
         <button onClick={onModeToggle}>limit mode 켜기</button>
-      )} */}
-    </Container>
-  );
-};
-
-const Container = styled(FullContentScreen)`
-  // (0): 왜 전체의 height가 적용되는지는 모르겠음, 아 맞네, 전체의 height를 img도 전체를 Height로 잡으니 영향을 받는 것임 ㅋㅋㅋㅋ
-`;
-
-export default ImagesViewer;
+      )}
+      */

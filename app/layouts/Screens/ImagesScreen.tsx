@@ -26,6 +26,7 @@ const ImagesScreen = ({ src }) => {
 };
 const ImageWrapper = styled.div`
   position: absolute;
+  z-index: 100;
   height: 100%;
   width: 100%;
   display: flex;
@@ -35,7 +36,8 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   display: block;
   height: 100%; // (0): max-height 해야지만 처음에 object-fit이 맞춰지게 됨! <= 무슨 오류인지 모름
-  width: 100%;
+  margin: auto;
+  width: calc(100% - 2rem);
   object-fit: contain;
   object-position: center;
 `;

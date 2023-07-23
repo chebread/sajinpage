@@ -39,22 +39,34 @@ const X = styled.div`
 `;
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      element={
-        <>
-          <Header />
-          <Outlet />
-          <Navigator />
-        </>
-      }
-      // errorElement={<ErrorPage />}
-    >
-      <Route path="/" element={<Home />} />
-      <Route path="v/:id" element={<Viewer />} />
-      <Route path="f" element={<MyFiles />} />
-      <Route path="s" element={<Settings />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Route>
+    <>
+      <Route
+        element={
+          <>
+            <Header />
+            <Outlet />
+            <Navigator />
+          </>
+        }
+        // errorElement={<ErrorPage />}
+      >
+        <Route path="/" element={<Home />} />
+        <Route path="f" element={<MyFiles />} />
+        <Route path="s" element={<Settings />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+      <Route
+        element={
+          <>
+            <Header />
+            <Outlet />
+            <Navigator />
+          </>
+        }
+      >
+        <Route path="v/:id" element={<Viewer />} />
+      </Route>
+    </>
   )
 );
 

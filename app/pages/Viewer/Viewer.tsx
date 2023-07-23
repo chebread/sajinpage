@@ -12,7 +12,7 @@ import checkFileSessionByAccessTime from 'api/checkFileSessionByAccessTime';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
-import Header from 'components/Header';
+import { loadedAtom } from 'atoms/viewerAtom';
 
 // 파일들을 확인하는 곳으로 각각의 url들을 Bucket이라 칭함
 
@@ -27,7 +27,7 @@ const Viewer = () => {
   const params = useParams();
   const docId = params.id;
   const [fileDb, setFileDb] = useAtom(fileDbAtom);
-  const [isLoaded, setIsLoaded] = useState(false); // 파일 로드 유무
+  const [loaded, setLoaded] = useAtom(loadedAtom); // 파일 로드 유무
   const [, initValues] = useAtom(initValuesAtom);
   const navigate = useNavigate();
 
@@ -58,9 +58,11 @@ const Viewer = () => {
         } else {
           // file이 excess 아닌 경우 && 404가 아닌 경우 => public or limit mode (아직 유효시간 남은)
           // file is loaded
-          setIsLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
+          setLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
           // first run interval
           setDelay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
+          // set now route
+          // ...
         }
       }
     };
@@ -98,8 +100,8 @@ const Viewer = () => {
       supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
-    };*/
-    setIsLoaded(true);
+    }; */
+    setLoaded(true);
     setFileDb({
       url: `https://lh3.google.com/u/0/d/1MztwB0dYpDHLjkL5rns-QhG-JWl_hGsv=w2880-h1466-iv1`,
     });
@@ -157,9 +159,11 @@ const Viewer = () => {
   return isEmptyObject(error) ? (
     // 2) 에러가 발생함
     <ViewerErrorPage errorCode={error.code} />
-  ) : isLoaded ? (
+  ) : loaded ? (
     // 2) 파일이 로드됨
-    <ImagesViewer />
+    <>
+      <ImagesViewer />
+    </>
   ) : (
     // 1) 로딩
     <PageLoading />

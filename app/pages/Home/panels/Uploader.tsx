@@ -95,6 +95,7 @@ const Uploader = () => {
 
 const Container = styled.div`
   ${relativePos}
+  height: 150vh;
 `;
 const DropZone = styled.div`
   ${absolutePos}
