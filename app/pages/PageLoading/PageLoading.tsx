@@ -1,4 +1,6 @@
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
+import { desktopVp } from 'layouts/properties';
+import transition from 'layouts/properties/transition';
 import { CenterScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
@@ -19,17 +21,11 @@ const Container = styled(CenterScreen)`
   bottom: 0;
   background-color: #ffffff; // (0): 이것을 왜 해야할까
   svg {
-    // animation
-    transition: height;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out;
-    // mobile
-    height: 12%; // 100px
-    // desktop
-    @media (min-width: 960px) {
-      height: 17%; // 140px
+    ${transition('height')}
+    height: 5.5rem; // 12%
+    @media (${desktopVp}) {
+      height: 7.5rem; // 17% // 8rem
     }
-    fill: #000000;
   }
 `;
 

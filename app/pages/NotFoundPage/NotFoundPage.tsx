@@ -26,9 +26,9 @@ const NotFoundPage = () => {
           <Message>Page is not found</Message>
         </MessageWrapper>
       </Wrapper>
-      <BottomButton onClick={onRedirect}>
+      {/* <BottomButton onClick={onRedirect}>
         <HomeIcon />
-      </BottomButton>
+      </BottomButton> */}
     </Container>
   );
 };
@@ -55,9 +55,9 @@ const IconWrapper = styled.div`
   svg {
     cursor: pointer;
     ${transition('transform', 'height', 'width')}
-    height: 10rem; //
+    height: 5.5rem; //
     @media (${desktopVp}) {
-      height: 10rem;
+      height: 7.5rem;
     }
     &:hover {
       transform: scale(1.07);
@@ -72,9 +72,9 @@ const MessageWrapper = styled.div`
 `;
 const Message = styled.div`
   ${transition('all')}
-  font-size: 1.5rem; //
+  font-size: 20px; //
   @media (${desktopVp}) {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
   /* &:hover {
     transform: scale(1.07);

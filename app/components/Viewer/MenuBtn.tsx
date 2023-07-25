@@ -45,6 +45,7 @@ const Wrapper = styled.div`
 `;
 const Btn = styled.button`
   all: unset;
+  position: sticky;
   cursor: pointer;
   width: 3.5rem;
   height: 3.5rem;

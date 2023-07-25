@@ -32,7 +32,7 @@ const Btn = styled.button`
   justify-content: center;
   align-items: center;
   width: calc(100% - 6rem);
-  height: 4.5rem; //
+  height: 4rem; //
   @media (${desktopVp}) {
     width: 50%;
     height: 4.5rem;
