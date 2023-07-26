@@ -22,6 +22,7 @@ const forbiddenRouter = ({ code, message }) =>
           <>
             <Header />
             <Outlet />
+            <Navigator />
           </>
         }
       >

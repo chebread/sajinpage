@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 
+// (0): 그냥 여기서 처리하는 편이 나을 듯
+
 const Header = () => {
   return (
     <>
@@ -61,8 +63,11 @@ const LogoBtn = styled(Link)`
   all: unset;
   cursor: pointer;
   svg {
-    ${transition('transform')}
-    height: 2rem;
+    ${transition('transform', 'height')}
+    height: 1.5rem;
+    @media (${desktopVp}) {
+      height: 2rem;
+    }
     &:hover {
       transform: scale(1.07);
     }

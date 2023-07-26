@@ -1,4 +1,4 @@
-import { disabledScrollbar } from 'layouts/properties';
+import { disableScrollbar } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
 import { appThemes, themedPalette } from 'layouts/themes';
 import initStyles from './initStyles';
@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
     color: #000; // ${themedPalette.color}
     font-weight: 500;
     // scrollbar
-    ${disabledScrollbar}
+    ${disableScrollbar}
   }
 `;
 

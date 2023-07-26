@@ -37,7 +37,7 @@ const Image = styled.img`
   display: block;
   height: 100%; // (0): max-height 해야지만 처음에 object-fit이 맞춰지게 됨! <= 무슨 오류인지 모름
   margin: auto;
-  width: calc(100% - 2rem);
+  min-width: 100%; // calc(100% - 2rem);
   object-fit: contain;
   object-position: center;
 `;

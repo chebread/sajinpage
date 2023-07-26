@@ -20,6 +20,8 @@ import { clickedAtom } from 'atoms/viewerAtom';
 // reset time limit btn
 // copy url btn
 
+// (0): threads 모달 처럼 바꾸기
+
 const MenuModal = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
   const [fileDb] = useAtom(fileDbAtom);

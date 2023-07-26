@@ -1,5 +1,10 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp } from 'layouts/properties';
+import {
+  centerAlign,
+  desktopHover,
+  desktopVp,
+  disableTab,
+} from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as UploadIcon } from 'assets/svg/UploadIcon.svg';
@@ -11,7 +16,7 @@ const Navigator = () => {
   return (
     <Container>
       <Wrapper>
-        <Navigate to="f">
+        <Navigate to="f" onTouchStart={() => {}}>
           <MyFilesIcon />
         </Navigate>
       </Wrapper>
@@ -32,9 +37,9 @@ const Navigator = () => {
 const Container = styled.div`
   position: fixed;
   ${transition('height', 'width')}
-  height: ${cssVarsPalette.mobile_header_height};
+  height: ${cssVarsPalette.mobile_nav_height};
   @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_header_height};
+    height: ${cssVarsPalette.desktop_nav_height};
   }
   width: 100%;
   bottom: 0; // fix bottom
@@ -53,31 +58,40 @@ const Wrapper = styled.div`
 const Navigate = styled(NavLink)`
   all: unset;
   cursor: pointer;
-  width: 3.5rem;
-  height: 3.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  @media (${desktopVp}) {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-  ${transition('background-color')}
-  &:hover {
-    background-color: rgb(235, 235, 235);
-    svg {
-      transform: scale(
-        1.07
-      ); // 외부 svg에 hover 설정시 svg 크기만 hover 영역이 되기에 Navigate 자체에서 hover 처리하여 svg 크기를 조절해 줘야함
+  ${transition('background-color', 'all')}
+  @media (${desktopHover}) {
+    &:hover {
+      background-color: rgb(235, 235, 235);
+      svg {
+        transform: scale(
+          1.07
+        ); // 외부 svg에 hover 설정시 svg 크기만 hover 영역이 되기에 Navigate 자체에서 hover 처리하여 svg 크기를 조절해 줘야함
+      }
     }
   }
   &:active {
+    ${disableTab}
     background-color: rgb(220, 220, 220);
     svg {
       transform: scale(0.98);
     }
   }
   svg {
-    ${transition(
-      'transform'
-    )} // 이렇게 전역에서 적용 해야줘야지 hover, active animation이 끊기지 않고 적용됨
-    height: 2rem;
+    ${transition('transform', 'height')}
+    // 이렇게 전역에서 적용 해야줘야지 hover, active animation이 끊기지 않고 적용됨
+    height: 1.5rem;
+    @media (${desktopVp}) {
+      height: 2rem;
+    }
   }
 `;
 

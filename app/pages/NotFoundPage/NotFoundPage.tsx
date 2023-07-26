@@ -19,12 +19,12 @@ const NotFoundPage = () => {
   return (
     <Container>
       <Wrapper>
-        <IconWrapper onClick={onRedirect}>
+        {/* <IconWrapper onClick={onRedirect}>
           <WarningIcon />
         </IconWrapper>
         <MessageWrapper>
           <Message>Page is not found</Message>
-        </MessageWrapper>
+        </MessageWrapper> */}
       </Wrapper>
       {/* <BottomButton onClick={onRedirect}>
         <HomeIcon />

@@ -168,7 +168,7 @@ const Viewer = () => {
     // 2) 파일이 로드됨
     <>
       <ImagesViewer />
-      <ViewerMenu />
+      {/* <ViewerMenu /> */}
     </>
   ) : (
     // 1) 로딩

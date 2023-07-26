@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { get } from 'idb-keyval';
+import { get, set } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
-import { eventChannel } from 'lib/broadcastChannel';
+import { eventChannel, onEventChannel } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
@@ -62,11 +62,26 @@ const MyFiles = () => {
               <CopyToClipboard
                 text={getWebsiteUrl(`/v/${value}`)}
                 onCopy={() => {
-                  // on copy
+                  // when copied
                 }}
               >
                 <button>Share</button>
               </CopyToClipboard>
+              <button
+                onClick={async () => {
+                  const arr = [...buckets];
+                  console.log(arr);
+                  const index = arr.indexOf(value);
+                  console.log(index);
+                  const newArr = arr.splice(index, 1);
+                  console.log(arr.splice(3, 1));
+
+                  // await set('urls', newArr);
+                  // onEventChannel('delete');
+                }}
+              >
+                Delete
+              </button>
             </div>
           ))
         ) : (

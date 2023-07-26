@@ -1,15 +1,15 @@
 import centerAlign from './centerAlign';
-import disabledScrollbar from './disabledScrollbar';
-import disabledSelection from './disabledSelection';
-import absolutePos from './absolutePos';
-import relativePos from './relativePos';
+import disableScrollbar from './disabledScrollbar';
+import disableSelection from './disabledSelection';
 import desktopVp from './desktopVp';
+import disableTab from './disableTab';
+import desktopHover from './desktopHover';
 
 export {
   centerAlign,
-  disabledScrollbar,
-  disabledSelection,
-  absolutePos,
-  relativePos,
+  disableScrollbar,
+  disableSelection,
   desktopVp,
+  disableTab,
+  desktopHover,
 };
