@@ -1,10 +1,10 @@
-import MenuBtn from './MenuBtn';
+import Background from '../Background';
 import MenuModal from './MenuModal';
 
 const ViewerMenu = () => {
   return (
     <>
-      <MenuBtn />
+      <Background />
       <MenuModal />
     </>
   );

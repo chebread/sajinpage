@@ -5,7 +5,7 @@ import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
-import Background from './Background';
+import Background from '../Background';
 
 const MenuBtn = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   @media (${desktopVp}) {
     height: ${cssVarsPalette.desktop_header_height};
   }
-  position: absolute;
+  position: fixed; // (0): 이상함
   z-index: 10000;
   top: 0;
   right: 0;

@@ -13,6 +13,8 @@ import getUrl from 'lib/getUrl';
 import { useAtom } from 'jotai';
 import fileDbAtom from 'atoms/fileDbAtom';
 import { clickedAtom } from 'atoms/viewerAtom';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import getWebsiteUrl from 'lib/getWebsiteUrl';
 
 // delete btn
 // turn on private mode btn
@@ -96,6 +98,14 @@ const MenuModal = () => {
 
   return (
     <Container isVisible={clicked}>
+      <CopyToClipboard
+        text={getWebsiteUrl(`/v/${fileDb.docId}`)}
+        onCopy={() => {
+          // when copied
+        }}
+      >
+        <button>Share</button>
+      </CopyToClipboard>
       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
       {fileDb.limit ? (
         // limit mode

@@ -57,6 +57,7 @@ const Wrapper = styled.div`
 
 const Navigate = styled(NavLink)`
   all: unset;
+  ${disableTab}
   cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
@@ -68,26 +69,26 @@ const Navigate = styled(NavLink)`
   ${centerAlign}
   border-radius: 50%;
   ${transition('background-color', 'all')}
-  @media (${desktopHover}) {
+  @media (${desktopVp}) {
+    // (0): (${desktopHover}) 해도 되고 아무 상관은 없을 듯
     &:hover {
       background-color: rgb(235, 235, 235);
       svg {
-        transform: scale(
-          1.07
-        ); // 외부 svg에 hover 설정시 svg 크기만 hover 영역이 되기에 Navigate 자체에서 hover 처리하여 svg 크기를 조절해 줘야함
+        transform: scale(1.07);
       }
     }
   }
   &:active {
-    ${disableTab}
     background-color: rgb(220, 220, 220);
     svg {
-      transform: scale(0.98);
+      transform: scale(0.85);
+      @media (${desktopVp}) {
+        transform: scale(0.98);
+      }
     }
   }
   svg {
     ${transition('transform', 'height')}
-    // 이렇게 전역에서 적용 해야줘야지 hover, active animation이 끊기지 않고 적용됨
     height: 1.5rem;
     @media (${desktopVp}) {
       height: 2rem;

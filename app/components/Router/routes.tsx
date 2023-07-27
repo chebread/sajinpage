@@ -13,6 +13,7 @@ import Viewer from 'pages/Viewer';
 import MyFiles from 'pages/MyFiles';
 import Settings from 'pages/Settings';
 import Help from 'pages/Help';
+import ViewerHeader from 'components/Viewer/ViewerHeader';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
@@ -47,11 +48,21 @@ const router = createBrowserRouter(
         }
       >
         <Route path="/" element={<Home />} />
-        <Route path="v/:id" element={<Viewer />} />
         <Route path="f" element={<MyFiles />} />
         <Route path="s" element={<Settings />} />
         <Route path="h" element={<Help />} />
         <Route path="*" element={<NotFoundPage />} />
+      </Route>
+      <Route
+        element={
+          <>
+            <ViewerHeader />
+            <Outlet />
+            <Navigator />
+          </>
+        }
+      >
+        <Route path="v/:id" element={<Viewer />} />
       </Route>
     </>
   )

@@ -4,10 +4,19 @@ import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
+import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
+import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
+import { useAtom } from 'jotai';
+import ViewerMenu from '../ViewerMenu';
 
-// (0): 그냥 여기서 처리하는 편이 나을 듯
+const ViewerHeader = () => {
+  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [loaded] = useAtom(loadedAtom); // check that current route is viewer
 
-const Header = () => {
+  const onClick = () => {
+    setClicked(!clicked);
+  };
+
   return (
     <>
       <Container>
@@ -20,9 +29,18 @@ const Header = () => {
           </LogoBtn>
         </LogoWrapper>
         <AsideRightWrapper>
-          <ButtonWrapper></ButtonWrapper>
+          <ButtonWrapper>
+            {loaded ? (
+              <Btn onClick={onClick}>
+                <DotIcon />
+              </Btn>
+            ) : (
+              ''
+            )}
+          </ButtonWrapper>
         </AsideRightWrapper>
       </Container>
+      <ViewerMenu />
     </>
   );
 };
@@ -120,4 +138,4 @@ const Btn = styled.button`
   }
 `;
 
-export default Header;
+export default ViewerHeader;

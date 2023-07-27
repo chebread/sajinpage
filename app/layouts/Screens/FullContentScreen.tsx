@@ -3,7 +3,7 @@ import { desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
-const FullContentScreen = styled.div<{ position?: string }>`
+const FullContentScreen = styled.div`
   position: relative;
   // animation
   ${transition('height', 'width')}
