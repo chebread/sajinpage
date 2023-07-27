@@ -9,13 +9,15 @@ import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import ViewerMenu from '../ViewerMenu';
 
-const ViewerHeader = () => {
-  const [clicked, setClicked] = useAtom(clickedAtom);
-  const [loaded] = useAtom(loadedAtom); // check that current route is viewer
+// mobile은 header는 간략히 제공함
 
-  const onClick = () => {
-    setClicked(!clicked);
-  };
+const ViewerHeader = () => {
+  // const [clicked, setClicked] = useAtom(clickedAtom);
+  // const [loaded] = useAtom(loadedAtom); // check that current route is viewer
+
+  // const onClick = () => {
+  //   setClicked(!clicked);
+  // };
 
   return (
     <>
@@ -30,34 +32,37 @@ const ViewerHeader = () => {
         </LogoWrapper>
         <AsideRightWrapper>
           <ButtonWrapper>
-            {loaded ? (
-              <Btn onClick={onClick}>
-                <DotIcon />
-              </Btn>
-            ) : (
-              ''
-            )}
+            {/* {loaded ? (
+                <Btn onClick={onClick}>
+                  <DotIcon />
+                </Btn>
+              ) : (
+                ''
+              )} */}
           </ButtonWrapper>
         </AsideRightWrapper>
       </Container>
-      <ViewerMenu />
+      {/* <ViewerMenu /> */}
     </>
   );
 };
 
 const Container = styled.div`
-  position: sticky; // (0): fixed로 구성하기
-  top: 0;
-  z-index: 10000;
-  ${transition('height', 'width')}
-  height: ${cssVarsPalette.mobile_header_height};
+  display: none;
   @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_header_height};
+    position: sticky; // (0): fixed로 구성하기
+    top: 0;
+    z-index: 10000;
+    ${transition('height', 'width')}
+    height: ${cssVarsPalette.mobile_header_height};
+    @media (${desktopVp}) {
+      height: ${cssVarsPalette.desktop_header_height};
+    }
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
   }
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: #ffffff;
 `;
 
 const Wrapper = styled.div`

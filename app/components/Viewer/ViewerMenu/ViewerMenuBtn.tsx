@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import Background from '../Background';
 
-const MenuBtn = () => {
+const ViewerMenuBtn = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
 
   const onClickMenu = () => {
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   @media (${desktopVp}) {
     height: ${cssVarsPalette.desktop_header_height};
   }
-  position: fixed; // (0): 이상함
+  position: fixed;
   z-index: 10000;
   top: 0;
   right: 0;
@@ -71,4 +71,4 @@ const Btn = styled.button`
   }
 `;
 
-export default MenuBtn;
+export default ViewerMenuBtn;

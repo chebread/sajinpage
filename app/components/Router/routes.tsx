@@ -14,6 +14,7 @@ import MyFiles from 'pages/MyFiles';
 import Settings from 'pages/Settings';
 import Help from 'pages/Help';
 import ViewerHeader from 'components/Viewer/ViewerHeader';
+import ViewerNavigator from 'components/Viewer/ViewerNavigator';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
@@ -58,7 +59,7 @@ const router = createBrowserRouter(
           <>
             <ViewerHeader />
             <Outlet />
-            <Navigator />
+            <ViewerNavigator />
           </>
         }
       >

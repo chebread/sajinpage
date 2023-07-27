@@ -2,12 +2,12 @@
 
 const themeVars = {
   light: {
-    color: 'black',
-    background: 'white',
+    color: '#000000',
+    background: '#ffffff',
   },
   dark: {
-    color: 'white',
-    background: 'black',
+    color: '#ffffff',
+    background: '#0f0f0f',
   },
 };
 

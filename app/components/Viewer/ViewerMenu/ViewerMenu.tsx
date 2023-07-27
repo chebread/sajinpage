@@ -1,11 +1,13 @@
 import Background from '../Background';
-import MenuModal from './MenuModal';
+import ViewerMenuModal from './ViewerMenuModal';
+import ViewerMenuBtn from './ViewerMenuBtn';
 
 const ViewerMenu = () => {
   return (
     <>
+      <ViewerMenuBtn />
       <Background />
-      <MenuModal />
+      <ViewerMenuModal />
     </>
   );
 };
