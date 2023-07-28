@@ -20,7 +20,6 @@ const Container = styled.div<ViewerMenuPropsType>`
   display: none;
   @media (${desktopVp}) {
     // (0): background 수정하기
-    background-color: red;
     display: block;
     ${transition('all')}
     position: absolute;

@@ -24,13 +24,14 @@ import getWebsiteUrl from 'lib/getWebsiteUrl';
 
 // (0): threads 모달 처럼 바꾸기
 
-const MenuModal = () => {
+const ViewerMobileMenuModal = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
   const [fileDb] = useAtom(fileDbAtom);
   const url = getUrl(); // current app url
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
+  console.log(clicked);
 
   const initValues = () => {
     setModeToggle(false);
@@ -160,4 +161,4 @@ const Container = styled.div<ViewerMenuPropsType>`
   background-color: #fff;
 `;
 
-export default MenuModal;
+export default ViewerMobileMenuModal;

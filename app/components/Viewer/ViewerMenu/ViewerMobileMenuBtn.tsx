@@ -17,11 +17,11 @@ const ViewerMobileMenuBtn = () => {
   };
   return (
     <>
-      {/* <Wrapper>
+      <Wrapper>
         <Btn onClick={onClickMenu}>
           <DotIcon />
         </Btn>
-      </Wrapper> */}
+      </Wrapper>
     </>
   );
 };
@@ -43,6 +43,7 @@ const Wrapper = styled.div`
   }
   display: flex;
   align-items: center;
+  background-color: seagreen;
 `;
 const Btn = styled.button`
   all: unset;

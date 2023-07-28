@@ -7,12 +7,13 @@ import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
+import { useState } from 'react';
 
 // (0): mobile은 header는 간략히 제공함
 // (0): 컴포넌트를 분리하여 mobile, desktop 따로 처리하기
 
 const ViewerHeader = () => {
-  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [clicked, setClicked] = useState(false);
   const [loaded] = useAtom(loadedAtom); // check that current route is viewer
 
   const onClick = () => {
@@ -42,6 +43,7 @@ const ViewerHeader = () => {
           </ButtonWrapper>
         </AsideRightWrapper>
       </Container>
+      {/* threads 처럼 모달 구현하기 */}
     </>
   );
 };

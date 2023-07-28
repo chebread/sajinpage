@@ -5,7 +5,7 @@ import { ImagesScreen } from 'layouts/screens';
 import FullContentScreen from 'layouts/screens/FullContentScreen';
 import transition from 'layouts/properties/transition';
 import { cssVarsPalette } from 'layouts/cssVars';
-import { desktopVp } from 'layouts/properties';
+import { centerAlign, desktopVp } from 'layouts/properties';
 import ViewerMobileMenuBtn from 'components/Viewer/ViewerMenu/ViewerMobileMenuBtn';
 import MobileScreen from 'layouts/screens/MobileScreen';
 
@@ -18,17 +18,24 @@ const ImagesViewer = () => {
 
   // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
-    <Container>
-      <ImagesScreen src={fileDb.url} />
-      {/* <MobileScreen>
-        <ViewerMobileMenuBtn />
-      </MobileScreen> */}
-    </Container>
+    <CenterScreen>
+      <Container>
+        <ImagesScreen src={fileDb.url} />
+      </Container>
+    </CenterScreen>
   );
 };
 
+const CenterScreen = styled.div`
+  // 확대, 축소의 animation을 위해 center container를 추가함
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  ${centerAlign}
+  top: 0;
+`;
 const Container = styled.div`
-  // 안쪽으로 모였다, 넓혔다하는 약간 animation 적용하기 height로 조정하는 것이 아닌!
   ${transition('all')}
   position: absolute;
   height: 100%;
