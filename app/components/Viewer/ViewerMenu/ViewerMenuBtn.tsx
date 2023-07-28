@@ -5,11 +5,13 @@ import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
+import { useGesture } from '@use-gesture/react';
 
-// mobile viewer menu btn임
-// (0): threads 처럼 구성하기
+// mobile
 
-const ViewerMobileMenuBtn = () => {
+// (0): 위로 스크롤시 modal이 나오게 하거나 이미지 하단 클릭시 modal 나오게 하기 (유도 버튼 만들기)
+
+const ViewerMenuBtn = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
 
   const onClickMenu = () => {
@@ -18,9 +20,9 @@ const ViewerMobileMenuBtn = () => {
   return (
     <>
       <Wrapper>
-        <Btn onClick={onClickMenu}>
+        {/* <Btn onClick={onClickMenu}>
           <DotIcon />
-        </Btn>
+        </Btn> */}
       </Wrapper>
     </>
   );
@@ -28,14 +30,10 @@ const ViewerMobileMenuBtn = () => {
 
 const Wrapper = styled.div`
   ${transition('all')}
-  z-index: 10000;
   position: absolute;
   top: 0;
-  left: 0;
-  padding-left: 1rem;
-  padding-top: 3.5rem;
-  display: flex;
-  align-items: center;
+  height: 100%;
+  width: 100%;
 `;
 const Btn = styled.button`
   all: unset;
@@ -63,4 +61,4 @@ const Btn = styled.button`
   }
 `;
 
-export default ViewerMobileMenuBtn;
+export default ViewerMenuBtn;

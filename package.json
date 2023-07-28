@@ -13,6 +13,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.21.0",
     "@types/react-router-dom": "^5.3.3",
+    "@use-gesture/react": "^10.2.27",
     "bowser": "^2.11.0",
     "browser-image-compression": "^2.0.2",
     "clipboardy": "^3.0.0",

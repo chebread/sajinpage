@@ -4,7 +4,7 @@ import { desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
-const Background = () => {
+const ViewerBackground = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
   const onCancel = () => {
     setClicked(!clicked);
@@ -29,4 +29,4 @@ const Container = styled.div<ViewerMenuPropsType>`
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;
 
-export default Background;
+export default ViewerBackground;

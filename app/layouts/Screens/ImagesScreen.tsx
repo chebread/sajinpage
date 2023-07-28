@@ -1,10 +1,10 @@
 import { errorAtom } from 'atoms/errorAtom';
 import { useAtom } from 'jotai';
 import { centerAlign } from 'layouts/properties';
-import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
 // (0): border-radius 기능 추가하기
+// (0): 스크롤 막기
 
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);

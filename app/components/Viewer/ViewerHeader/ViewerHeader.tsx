@@ -22,7 +22,7 @@ const ViewerHeader = () => {
 
   return (
     <>
-      <Container>
+      <DesktopContainer>
         <AsideLeftWrapper>
           <ButtonWrapper></ButtonWrapper>
         </AsideLeftWrapper>
@@ -42,13 +42,26 @@ const ViewerHeader = () => {
             )}
           </ButtonWrapper>
         </AsideRightWrapper>
-      </Container>
-      {/* threads 처럼 모달 구현하기 */}
+      </DesktopContainer>
+      <MobileContainer>hello</MobileContainer>
     </>
   );
 };
 
-const Container = styled.div`
+const MobileContainer = styled.div`
+  ${transition('all')}
+  visibility: visible;
+  opacity: 1;
+  @media (${desktopVp}) {
+    visibility: hidden;
+    opacity: 0;
+  }
+  position: absolute;
+  top: 0;
+  padding: 1rem;
+`;
+
+const DesktopContainer = styled.div`
   ${transition('all')}
   margin-bottom: -3rem;
   transform: translateY(-100%);

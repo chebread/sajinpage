@@ -16,6 +16,8 @@ import { clickedAtom } from 'atoms/viewerAtom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 
+// mobile
+
 // delete btn
 // turn on private mode btn
 // turn off private mode btn
@@ -24,7 +26,7 @@ import getWebsiteUrl from 'lib/getWebsiteUrl';
 
 // (0): threads 모달 처럼 바꾸기
 
-const ViewerMobileMenuModal = () => {
+const ViewerMenuModal = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
   const [fileDb] = useAtom(fileDbAtom);
   const url = getUrl(); // current app url
@@ -161,4 +163,4 @@ const Container = styled.div<ViewerMenuPropsType>`
   background-color: #fff;
 `;
 
-export default ViewerMobileMenuModal;
+export default ViewerMenuModal;
