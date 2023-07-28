@@ -11,9 +11,9 @@ const ViewerMenu = () => {
     <>
       <Container>
         <ViewerMenuBtn />
-        <ViewerBackground />
-        <ViewerMenuModal />
       </Container>
+      <ViewerBackground />
+      <ViewerMenuModal />
     </>
   );
 };

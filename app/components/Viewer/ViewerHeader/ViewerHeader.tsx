@@ -9,8 +9,7 @@ import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
-// (0): mobile은 header는 간략히 제공함
-// (0): 컴포넌트를 분리하여 mobile, desktop 따로 처리하기
+// (0): desktop menu modal 만들기
 
 const ViewerHeader = () => {
   const [clicked, setClicked] = useState(false);
@@ -48,6 +47,7 @@ const ViewerHeader = () => {
           <Logo />
         </MobileLogoBtn>
       </MobileContainer> */}
+      {/* viewer modal */}
     </>
   );
 };

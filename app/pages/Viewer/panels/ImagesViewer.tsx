@@ -11,7 +11,6 @@ import MobileScreen from 'layouts/screens/MobileScreen';
 
 // (0): 세션 종료시 imageviewer 컴포넌트 / viewer menu 종료될때 천천히 사라지기 (transition) imageviewer 나타날때도 천천히 나타나기
 // (0): Threads 같은 zoom in-out 기능 구현하기
-// (0): Mobile은 여기서 버튼을 구동함
 
 const ImagesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -28,7 +27,7 @@ const ImagesViewer = () => {
 
 const CenterScreen = styled.div`
   // 확대, 축소의 animation을 위해 center container를 추가함
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   display: flex;
@@ -39,8 +38,10 @@ const Container = styled.div`
   ${transition('all')}
   position: absolute;
   height: 100%;
+  background-color: #101010;
   @media (${desktopVp}) {
     height: ${cssVarsPalette.desktop_content_full_height};
+    background-color: #ffffff;
   }
   width: 100%;
 `;
