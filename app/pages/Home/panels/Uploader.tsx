@@ -9,6 +9,8 @@ import hashMaker from 'lib/hashMaker';
 // (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가)
 // (0): 여기서 setType하기 fileDb에 type이라는 것을 추가하기 (db에도) => video 허용시에
 
+// (0): Upload와 Home을 분립하기, Uploader는 /u/로 처리함 home에서는 help 제공하기 아니면 upload방법을 public / normal / limited / private 로 나누기
+
 // 파일을 사용자로부터 받아오는 부분
 
 const Uploader = () => {
@@ -83,6 +85,7 @@ const Uploader = () => {
               <input {...getInputProps()} />
               {/* user custom components */}
             </DropZone>
+            <h1>Upload</h1>
             <Button onClick={open}>Import images</Button>
           </Container>
         )}

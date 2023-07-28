@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 
-// (0): 그냥 여기서 처리하는 편이 나을 듯
-
 const Header = () => {
   return (
     <>

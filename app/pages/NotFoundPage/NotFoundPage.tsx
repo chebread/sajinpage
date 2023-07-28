@@ -18,15 +18,18 @@ const NotFoundPage = () => {
 
   return (
     <Container>
-      <Wrapper>
-        {/* <IconWrapper onClick={onRedirect}>
+      <h1>404</h1>
+      <div>This page is not found</div>
+      <button onClick={onRedirect}>Go home</button>
+      {/* <Wrapper>
+       <IconWrapper onClick={onRedirect}>
           <WarningIcon />
         </IconWrapper>
         <MessageWrapper>
           <Message>Page is not found</Message>
-        </MessageWrapper> */}
+        </MessageWrapper>
       </Wrapper>
-      {/* <BottomButton onClick={onRedirect}>
+      <BottomButton onClick={onRedirect}>
         <HomeIcon />
       </BottomButton> */}
     </Container>

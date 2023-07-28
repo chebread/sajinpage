@@ -76,7 +76,6 @@ const ContainerWrapper = styled.div`
   @media (${desktopVp}) {
     padding-top: ${cssVarsPalette.desktop_header_height};
   }
-  background-color: seagreen;
 `;
 const Container = styled.div`
   ${transition('all')}

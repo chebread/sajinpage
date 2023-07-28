@@ -13,7 +13,7 @@ const Settings = () => {
   };
   return (
     <div>
-      <div>Settings</div>
+      <h1>Settings</h1>
       <button onClick={onClearDb}>Clear Db</button>
     </div>
   );

@@ -12,8 +12,6 @@ import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 
-// mobile은 nav 제공하지 않음
-
 // (0): desktop 용이기에 mobile 대응 제거하기
 
 const ViewerNavigator = () => {
