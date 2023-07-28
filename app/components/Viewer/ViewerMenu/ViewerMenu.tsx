@@ -18,11 +18,10 @@ const ViewerMenu = () => {
 };
 
 const Container = styled.div`
-  ${transition('all')}
-  transform: translateX(100%);
+  ${transition('all')}/* transform: translateX(100%);
   @media (${mobileVp}) {
     transform: translateX(0);
-  }
+  } */
 `;
 
 export default ViewerMenu;

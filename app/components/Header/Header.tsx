@@ -76,7 +76,7 @@ const LogoBtn = styled(Link)`
       }
     }
     &:active {
-      transform: scale(0.88);
+      transform: scale(0.85);
       @media (${desktopVp}) {
         transform: scale(0.98);
       }

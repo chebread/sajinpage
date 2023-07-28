@@ -70,7 +70,6 @@ const Navigate = styled(NavLink)`
   border-radius: 50%;
   ${transition('background-color', 'all')}
   @media (${desktopVp}) {
-    // (0): (${desktopHover}) 해도 되고 아무 상관은 없을 듯
     &:hover {
       background-color: rgb(235, 235, 235);
       svg {
