@@ -43,7 +43,11 @@ const ViewerHeader = () => {
           </ButtonWrapper>
         </AsideRightWrapper>
       </DesktopContainer>
-      <MobileContainer>hello</MobileContainer>
+      {/* <MobileContainer>
+        <MobileLogoBtn to="/">
+          <Logo />
+        </MobileLogoBtn>
+      </MobileContainer> */}
     </>
   );
 };
@@ -59,6 +63,8 @@ const MobileContainer = styled.div`
   position: absolute;
   top: 0;
   padding: 1rem;
+  display: flex;
+  ${centerAlign}
 `;
 
 const DesktopContainer = styled.div`
@@ -103,6 +109,30 @@ const LogoWrapper = styled(Wrapper)`
 const LogoBtn = styled(Link)`
   all: unset;
   cursor: pointer;
+  ${disableTab}
+  svg {
+    ${transition('transform', 'height')}
+    height: 1.5rem;
+    @media (${desktopVp}) {
+      height: 2rem;
+    }
+    @media (${desktopVp}) {
+      &:hover {
+        transform: scale(1.07);
+      }
+    }
+    &:active {
+      transform: scale(0.88);
+      @media (${desktopVp}) {
+        transform: scale(0.98);
+      }
+    }
+  }
+`;
+const MobileLogoBtn = styled(Link)`
+  all: unset;
+  cursor: pointer;
+  z-index: 10000;
   ${disableTab}
   svg {
     ${transition('transform', 'height')}
