@@ -26,9 +26,9 @@ const NotFoundPage = () => {
           <Message>Page is not found</Message>
         </MessageWrapper> */}
       </Wrapper>
-      <BottomButton onClick={onRedirect}>
+      {/* <BottomButton onClick={onRedirect}>
         <HomeIcon />
-      </BottomButton>
+      </BottomButton> */}
     </Container>
   );
 };

@@ -10,25 +10,34 @@ import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 const Header = () => {
   return (
     <>
-      <Container>
-        <AsideLeftWrapper>
-          <ButtonWrapper></ButtonWrapper>
-        </AsideLeftWrapper>
-        <LogoWrapper>
-          <LogoBtn to="/">
-            <Logo />
-          </LogoBtn>
-        </LogoWrapper>
-        <AsideRightWrapper>
-          <ButtonWrapper></ButtonWrapper>
-        </AsideRightWrapper>
-      </Container>
+      <ContainerWrapper>
+        <Container>
+          <AsideLeftWrapper>
+            <ButtonWrapper></ButtonWrapper>
+          </AsideLeftWrapper>
+          <LogoWrapper>
+            <LogoBtn to="/">
+              <Logo />
+            </LogoBtn>
+          </LogoWrapper>
+          <AsideRightWrapper>
+            <ButtonWrapper></ButtonWrapper>
+          </AsideRightWrapper>
+        </Container>
+      </ContainerWrapper>
     </>
   );
 };
 
+const ContainerWrapper = styled.div`
+  ${transition('padding-top')}
+  padding-top: ${cssVarsPalette.mobile_header_height};
+  @media (${desktopVp}) {
+    padding-top: ${cssVarsPalette.desktop_header_height};
+  }
+`;
 const Container = styled.div`
-  position: sticky; // (0): fixed로 구성하기
+  position: fixed; // (0): fixed로 구성하기
   top: 0;
   z-index: 10000;
   ${transition('height', 'width')}

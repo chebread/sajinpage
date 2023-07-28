@@ -10,6 +10,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 
 // (0): desktop menu modal 만들기
+// (0): desktop 용이기에 mobile 대응 제거하기
 
 const ViewerHeader = () => {
   const [clicked, setClicked] = useState(false);
@@ -21,27 +22,30 @@ const ViewerHeader = () => {
 
   return (
     <>
-      <DesktopContainer>
-        <AsideLeftWrapper>
-          <ButtonWrapper></ButtonWrapper>
-        </AsideLeftWrapper>
-        <LogoWrapper>
-          <LogoBtn to="/">
-            <Logo />
-          </LogoBtn>
-        </LogoWrapper>
-        <AsideRightWrapper>
-          <ButtonWrapper>
-            {loaded ? (
-              <Btn onClick={onClick}>
-                <DotIcon />
-              </Btn>
-            ) : (
-              ''
-            )}
-          </ButtonWrapper>
-        </AsideRightWrapper>
-      </DesktopContainer>
+      <ContainerWrapper>
+        <Container>
+          <AsideLeftWrapper>
+            <ButtonWrapper></ButtonWrapper>
+          </AsideLeftWrapper>
+          <LogoWrapper>
+            <LogoBtn to="/">
+              <Logo />
+            </LogoBtn>
+          </LogoWrapper>
+          <AsideRightWrapper>
+            <ButtonWrapper>
+              {loaded ? (
+                <Btn onClick={onClick}>
+                  <DotIcon />
+                </Btn>
+              ) : (
+                ''
+              )}
+            </ButtonWrapper>
+          </AsideRightWrapper>
+        </Container>
+      </ContainerWrapper>
+
       {/* <MobileContainer>
         <MobileLogoBtn to="/">
           <Logo />
@@ -66,16 +70,23 @@ const MobileContainer = styled.div`
   display: flex;
   ${centerAlign}
 `;
-
-const DesktopContainer = styled.div`
+const ContainerWrapper = styled.div`
+  ${transition('padding-top')}
+  padding-top: ${cssVarsPalette.mobile_header_height};
+  @media (${desktopVp}) {
+    padding-top: ${cssVarsPalette.desktop_header_height};
+  }
+  background-color: seagreen;
+`;
+const Container = styled.div`
   ${transition('all')}
+  position: fixed;
   margin-bottom: -3rem;
   transform: translateY(-100%);
   @media (${desktopVp}) {
     margin-bottom: auto;
     transform: translateY(0);
   }
-  position: sticky; // (0): fixed로 구성하기
   top: 0;
   z-index: 10000;
   height: ${cssVarsPalette.mobile_header_height};

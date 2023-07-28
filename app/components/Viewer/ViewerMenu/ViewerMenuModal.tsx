@@ -16,7 +16,7 @@ import { clickedAtom } from 'atoms/viewerAtom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 
-// mobile
+// mobile만
 
 // delete btn
 // turn on private mode btn
