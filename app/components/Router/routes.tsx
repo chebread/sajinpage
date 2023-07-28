@@ -15,6 +15,7 @@ import Settings from 'pages/Settings';
 import Help from 'pages/Help';
 import ViewerHeader from 'components/Viewer/ViewerHeader';
 import ViewerNavigator from 'components/Viewer/ViewerNavigator';
+import DesktopScreen from 'layouts/screens/DesktopScreen';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(

@@ -5,22 +5,23 @@ import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
-import Background from '../Background';
 
-const ViewerMenuBtn = () => {
+// mobile viewer menu btn임
+
+const ViewerDesktopMenuBtn = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
 
-  const onClickMenu = () => {
+  const onClick = () => {
     setClicked(!clicked);
   };
+
   return (
     <>
       <Wrapper>
-        <Btn onClick={onClickMenu}>
+        <Btn onClick={onClick}>
           <DotIcon />
         </Btn>
       </Wrapper>
-      <Background />
     </>
   );
 };
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
   @media (${desktopVp}) {
     height: ${cssVarsPalette.desktop_header_height};
   }
-  position: fixed;
+  position: relative;
   z-index: 10000;
   top: 0;
   right: 0;
@@ -47,8 +48,12 @@ const Btn = styled.button`
   all: unset;
   position: sticky;
   cursor: pointer;
-  width: 3.5rem;
-  height: 3.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  @media (${desktopVp}) {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
   display: flex;
   ${centerAlign}
   border-radius: 50%;
@@ -68,7 +73,10 @@ const Btn = styled.button`
   svg {
     ${transition('transform')}
     height: 1.1rem;
+    @media (${desktopVp}) {
+      height: 1.1rem;
+    }
   }
 `;
 
-export default ViewerMenuBtn;
+export default ViewerDesktopMenuBtn;

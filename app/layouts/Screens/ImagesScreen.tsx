@@ -1,9 +1,10 @@
 import { errorAtom } from 'atoms/errorAtom';
 import { useAtom } from 'jotai';
-import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp } from 'layouts/properties';
+import { centerAlign } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
+
+// (0): border-radius 기능 추가하기
 
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
@@ -29,7 +30,7 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  ${centerAlign}
+  ${centerAlign}/* background-color: seagreen; */
 `;
 const ImageWrapper = styled.div`
   position: absolute;
@@ -40,7 +41,6 @@ const ImageWrapper = styled.div`
   ${centerAlign}
 `;
 const Image = styled.img`
-  // (0): border-radius 기능 추가하기
   display: block;
   height: 100%;
   width: 100%;

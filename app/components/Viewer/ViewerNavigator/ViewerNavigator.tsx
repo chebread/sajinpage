@@ -16,43 +16,42 @@ import { NavLink } from 'react-router-dom';
 
 const ViewerNavigator = () => {
   return (
-    <Container>
-      <Wrapper>
-        <Navigate to="f" onTouchStart={() => {}}>
-          <MyFilesIcon />
-        </Navigate>
-      </Wrapper>
-      <Wrapper>
-        <Navigate to="/">
-          <UploadIcon />
-        </Navigate>
-      </Wrapper>
-      <Wrapper>
-        <Navigate to="s">
-          <SettingsIcon />
-        </Navigate>
-      </Wrapper>
-    </Container>
+    <>
+      <Container>
+        <Wrapper>
+          <Navigate to="f" onTouchStart={() => {}}>
+            <MyFilesIcon />
+          </Navigate>
+        </Wrapper>
+        <Wrapper>
+          <Navigate to="/">
+            <UploadIcon />
+          </Navigate>
+        </Wrapper>
+        <Wrapper>
+          <Navigate to="s">
+            <SettingsIcon />
+          </Navigate>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
 const Container = styled.div`
-  display: none;
+  ${transition('all')}
+  transform: translateY(100%);
   @media (${desktopVp}) {
-    display: block; // 대안 찾기
-    position: fixed;
-    ${transition('height', 'width')}
-    height: ${cssVarsPalette.mobile_nav_height};
-    @media (${desktopVp}) {
-      height: ${cssVarsPalette.desktop_nav_height};
-    }
-    width: 100%;
-    bottom: 0; // fix bottom
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: #ffffff;
+    transform: translateY(0);
   }
+  position: fixed;
+  height: ${cssVarsPalette.desktop_nav_height};
+  width: 100%;
+  bottom: 0; // fix bottom
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #ffffff;
 `;
 
 const Wrapper = styled.div`

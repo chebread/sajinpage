@@ -7,17 +7,17 @@ import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import ViewerMenu from '../ViewerMenu';
 
-// mobile은 header는 간략히 제공함
+// (0): mobile은 header는 간략히 제공함
+// (0): 컴포넌트를 분리하여 mobile, desktop 따로 처리하기
 
 const ViewerHeader = () => {
-  // const [clicked, setClicked] = useAtom(clickedAtom);
-  // const [loaded] = useAtom(loadedAtom); // check that current route is viewer
+  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [loaded] = useAtom(loadedAtom); // check that current route is viewer
 
-  // const onClick = () => {
-  //   setClicked(!clicked);
-  // };
+  const onClick = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <>
@@ -32,37 +32,39 @@ const ViewerHeader = () => {
         </LogoWrapper>
         <AsideRightWrapper>
           <ButtonWrapper>
-            {/* {loaded ? (
-                <Btn onClick={onClick}>
-                  <DotIcon />
-                </Btn>
-              ) : (
-                ''
-              )} */}
+            {loaded ? (
+              <Btn onClick={onClick}>
+                <DotIcon />
+              </Btn>
+            ) : (
+              ''
+            )}
           </ButtonWrapper>
         </AsideRightWrapper>
       </Container>
-      {/* <ViewerMenu /> */}
     </>
   );
 };
 
 const Container = styled.div`
-  display: none;
+  ${transition('all')}
+  margin-bottom: -3rem;
+  transform: translateY(-100%);
   @media (${desktopVp}) {
-    position: sticky; // (0): fixed로 구성하기
-    top: 0;
-    z-index: 10000;
-    ${transition('height', 'width')}
-    height: ${cssVarsPalette.mobile_header_height};
-    @media (${desktopVp}) {
-      height: ${cssVarsPalette.desktop_header_height};
-    }
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: #ffffff;
+    margin-bottom: auto;
+    transform: translateY(0);
   }
+  position: sticky; // (0): fixed로 구성하기
+  top: 0;
+  z-index: 10000;
+  height: ${cssVarsPalette.mobile_header_height};
+  @media (${desktopVp}) {
+    height: ${cssVarsPalette.desktop_header_height};
+  }
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
 `;
 
 const Wrapper = styled.div`
