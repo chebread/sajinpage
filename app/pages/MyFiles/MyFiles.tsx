@@ -6,6 +6,7 @@ import { eventChannel, onEventChannel } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
+import { toast } from 'react-hot-toast';
 
 // (0): 각각의 url 삭제할 수 있게 하기 (idb - del func)
 
@@ -15,7 +16,6 @@ const MyFiles = () => {
 
   useEffect(() => {
     const onLoad = async () => {
-      set('urls', [1, 2, 3, 4, 5, 6]);
       // get datas in db
       const buckets: any = await get('urls');
       setBuckets(buckets);
@@ -50,13 +50,17 @@ const MyFiles = () => {
     const newArr = arr.filter(element => element !== value);
     await set('urls', newArr);
     onEventChannel('delete');
+    toast.success('Deleted');
+  };
+  const onCopy = () => {
+    toast.success('Copied');
   };
 
   return (
     <Container>
       <h1>My files</h1>
       <div>
-        {buckets != undefined ? (
+        {buckets != undefined && buckets.length != 0 ? (
           buckets.map((value: any, index: number) => (
             <div key={index}>
               <button
@@ -68,9 +72,7 @@ const MyFiles = () => {
               </button>
               <CopyToClipboard
                 text={getWebsiteUrl(`/v/${value}`)}
-                onCopy={() => {
-                  // when copied
-                }}
+                onCopy={onCopy}
               >
                 <button>Share</button>
               </CopyToClipboard>

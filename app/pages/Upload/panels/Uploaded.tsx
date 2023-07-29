@@ -1,10 +1,8 @@
 import { docIdAtom } from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
-import { set, get } from 'idb-keyval';
 import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
-import { onEventChannel } from 'lib/broadcastChannel';
 
 // 업로드 완료 (모든 값을 초기화 해줌)
 

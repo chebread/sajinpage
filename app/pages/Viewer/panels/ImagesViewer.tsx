@@ -33,6 +33,7 @@ const CenterScreen = styled.div`
   display: flex;
   ${centerAlign}
   top: 0;
+  // (0): header를 왜 가리는지는 잘 모르겠음
 `;
 const Container = styled.div`
   ${transition('all')}

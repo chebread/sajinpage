@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Header from 'components/Header';
 import Navigator from 'components/Navigator';
-import Home from 'pages/Home';
+import Upload from 'pages/Upload';
 import NotFoundPage from 'pages/NotFoundPage';
 import ForbiddenPage from 'pages/ForbiddenPage';
 import Viewer from 'pages/Viewer';
@@ -48,7 +48,7 @@ const router = createBrowserRouter(
           </>
         }
       >
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Upload />} />
         <Route path="f" element={<MyFiles />} />
         <Route path="s" element={<Settings />} />
         <Route path="h" element={<Help />} />

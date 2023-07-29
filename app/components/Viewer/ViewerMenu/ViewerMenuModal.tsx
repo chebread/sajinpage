@@ -15,6 +15,7 @@ import fileDbAtom from 'atoms/fileDbAtom';
 import { clickedAtom } from 'atoms/viewerAtom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
+import ViewerNavigator from '../ViewerNavigator';
 
 // delete btn
 // turn on private mode btn
@@ -24,6 +25,7 @@ import getWebsiteUrl from 'lib/getWebsiteUrl';
 
 // (0): threads 모달 처럼 바꾸기
 // (0): safari에서 fixed가 적용되지 않아서 아래가 확인되는 현상이 발생함
+// (0): 검정으로 치환하기
 
 const ViewerMenuModal = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
@@ -99,48 +101,7 @@ const ViewerMenuModal = () => {
 
   return (
     <Container isVisible={clicked}>
-      <CopyToClipboard
-        text={getWebsiteUrl(`/v/${fileDb.docId}`)}
-        onCopy={() => {
-          // when copied
-        }}
-      >
-        <button>Share</button>
-      </CopyToClipboard>
-      <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
-      {fileDb.limit ? (
-        // limit mode
-        modeToggle ? (
-          <>
-            {resetToggle ? (
-              //  time limit 시간 설정하기 (같음)
-              <>
-                <Select onChange={onModeSelect} options={timeLimitOptions} />
-                <button onClick={onCancel}>Cancel</button>
-              </>
-            ) : (
-              <>
-                <button onClick={onResetToggle}>
-                  limit mode 값 재설정하기
-                </button>
-                <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-                <button onClick={onCancel}>Cancel</button>
-              </>
-            )}
-          </>
-        ) : (
-          <button onClick={onModeToggle}>limit mode 재설정하기</button>
-        )
-      ) : // normal mode
-      modeToggle ? (
-        //  time limit 시간 설정하기 (같음)
-        <>
-          <Select onChange={onModeSelect} options={timeLimitOptions} />
-          <button onClick={onCancel}>Cancel</button>
-        </>
-      ) : (
-        <button onClick={onModeToggle}>limit mode 켜기</button>
-      )}
+      <ViewerNavigator />
     </Container>
   );
 };
@@ -162,3 +123,46 @@ const Container = styled.div<ViewerMenuPropsType>`
 `;
 
 export default ViewerMenuModal;
+
+// <CopyToClipboard
+//         text={getWebsiteUrl(`/v/${fileDb.docId}`)}
+//         onCopy={() => {
+//           // when copied
+//         }}
+//       >
+//         <button>Share</button>
+//       </CopyToClipboard>
+//       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+//       {fileDb.limit ? (
+//         // limit mode
+//         modeToggle ? (
+//           <>
+//             {resetToggle ? (
+//               //  time limit 시간 설정하기 (같음)
+//               <>
+//                 <Select onChange={onModeSelect} options={timeLimitOptions} />
+//                 <button onClick={onCancel}>Cancel</button>
+//               </>
+//             ) : (
+//               <>
+//                 <button onClick={onResetToggle}>
+//                   limit mode 값 재설정하기
+//                 </button>
+//                 <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+//                 <button onClick={onCancel}>Cancel</button>
+//               </>
+//             )}
+//           </>
+//         ) : (
+//           <button onClick={onModeToggle}>limit mode 재설정하기</button>
+//         )
+//       ) : // normal mode
+//       modeToggle ? (
+//         //  time limit 시간 설정하기 (같음)
+//         <>
+//           <Select onChange={onModeSelect} options={timeLimitOptions} />
+//           <button onClick={onCancel}>Cancel</button>
+//         </>
+//       ) : (
+//         <button onClick={onModeToggle}>limit mode 켜기</button>
+//       )}

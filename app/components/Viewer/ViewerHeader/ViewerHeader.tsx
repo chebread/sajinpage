@@ -9,7 +9,7 @@ import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
-// (0): desktop menu modal 만들기
+// (0): desktop menu modal 만들기 => threads 처럼 구성하며, atom value를 사용함
 // (0): desktop 용이기에 mobile 대응 제거하기
 
 const ViewerHeader = () => {
@@ -45,31 +45,10 @@ const ViewerHeader = () => {
           </AsideRightWrapper>
         </Container>
       </ContainerWrapper>
-
-      {/* <MobileContainer>
-        <MobileLogoBtn to="/">
-          <Logo />
-        </MobileLogoBtn>
-      </MobileContainer> */}
-      {/* viewer modal */}
     </>
   );
 };
 
-const MobileContainer = styled.div`
-  ${transition('all')}
-  visibility: visible;
-  opacity: 1;
-  @media (${desktopVp}) {
-    visibility: hidden;
-    opacity: 0;
-  }
-  position: absolute;
-  top: 0;
-  padding: 1rem;
-  display: flex;
-  ${centerAlign}
-`;
 const ContainerWrapper = styled.div`
   ${transition('padding-top')}
   padding-top: ${cssVarsPalette.mobile_header_height};
@@ -97,7 +76,6 @@ const Container = styled.div`
   flex-direction: row;
   background-color: #ffffff;
 `;
-
 const Wrapper = styled.div`
   height: 100%;
   width: 33%;
@@ -139,31 +117,6 @@ const LogoBtn = styled(Link)`
     }
   }
 `;
-const MobileLogoBtn = styled(Link)`
-  all: unset;
-  cursor: pointer;
-  z-index: 10000;
-  ${disableTab}
-  svg {
-    ${transition('transform', 'height')}
-    height: 1.5rem;
-    @media (${desktopVp}) {
-      height: 2rem;
-    }
-    @media (${desktopVp}) {
-      &:hover {
-        transform: scale(1.07);
-      }
-    }
-    &:active {
-      transform: scale(0.88);
-      @media (${desktopVp}) {
-        transform: scale(0.98);
-      }
-    }
-  }
-`;
-
 const ButtonWrapper = styled.div`
   ${transition('all')}
   padding-left: 1rem;

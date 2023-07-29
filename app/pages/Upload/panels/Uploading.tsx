@@ -12,6 +12,7 @@ import {
   timeLimitAtom,
 } from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
+import PageLoading from 'pages/PageLoading';
 
 // 파일을 업로드하는 부분
 
@@ -54,11 +55,7 @@ const Uploading = () => {
     onLoad();
   }, []);
 
-  return (
-    <>
-      <div>Uploading...</div>
-    </>
-  );
+  return <PageLoading />;
 };
 
 export default Uploading;

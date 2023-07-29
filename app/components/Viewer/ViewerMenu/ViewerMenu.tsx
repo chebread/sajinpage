@@ -2,9 +2,7 @@ import { desktopVp } from 'layouts/properties';
 import mobileVp from 'layouts/properties/mobileVp';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
-import ViewerBackground from './ViewerBackground';
 import ViewerMenuBtn from './ViewerMenuBtn';
-import ViewerMenuModal from './ViewerMenuModal';
 
 const ViewerMenu = () => {
   return (
@@ -12,8 +10,6 @@ const ViewerMenu = () => {
       <Container>
         <ViewerMenuBtn />
       </Container>
-      <ViewerBackground />
-      <ViewerMenuModal />
     </>
   );
 };

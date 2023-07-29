@@ -46,6 +46,10 @@ const Container = styled.div`
   }
   position: fixed;
   height: ${cssVarsPalette.desktop_nav_height};
+  /* height: ${cssVarsPalette.moblie_nav_height};
+  @media (${desktopVp}) {
+    height: ${cssVarsPalette.desktop_nav_height};
+  } */
   width: 100%;
   bottom: 0; // fix bottom
   display: flex;

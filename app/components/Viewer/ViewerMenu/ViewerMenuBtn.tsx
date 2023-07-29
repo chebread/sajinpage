@@ -1,16 +1,23 @@
 import { clickedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
+import { centerAlign, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
-import { ReactComponent as MoreIcon } from 'assets/svg/DotIcon.svg';
+import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
+import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
+import ViewerMenuModal from './ViewerMenuModal';
+import ViewerBackground from './ViewerBackground';
+import { useNavigate } from 'react-router-dom';
 
-// (0): 위로 스크롤시 modal이 나오게 하거나 이미지 하단 클릭시 modal 나오게 하기 (유도 버튼 만들기)
-// (0): 아직은 btn 추가하지 않고 viewer만 수행함 (레이아웃 어떻게 해야할지 겁나게 고민임) 드래깅이 제일로서 나을 것 같은디...
+// 로고 버튼 클릭시 viewer nav 처럼 nav 가 나오며 또 ... 으로 되어있는 버튼이 나오게 됨 이 버튼은 menu btn으로 파일을 관리하는 버튼으로 동작함
 
 const ViewerMenuBtn = () => {
+  const navigate = useNavigate();
   const [clicked, setClicked] = useAtom(clickedAtom);
 
+  const onRedirect = () => {
+    navigate('/');
+  };
   const onClickMenu = () => {
     setClicked(!clicked);
   };
@@ -19,9 +26,14 @@ const ViewerMenuBtn = () => {
     <>
       <Wrapper>
         {/* <Btn onClick={onClickMenu}>
-          <MoreIcon />
+          <DotIcon />
         </Btn> */}
+        <Btn onClick={onClickMenu}>
+          <Logo />
+        </Btn>
       </Wrapper>
+      <ViewerBackground />
+      <ViewerMenuModal />
     </>
   );
 };
@@ -35,6 +47,7 @@ const Wrapper = styled.div`
   padding-top: 1.5rem;
   padding-left: 1.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   position: fixed;
 `;
@@ -44,14 +57,13 @@ const Btn = styled.button`
   ${transition('all')}
   z-index: 10000;
   cursor: pointer;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-  background-color: rgb(30, 30, 30);
+  background-color: #1e1e1e;
   &:active {
-    background-color: rgb(220, 220, 220);
     transform: scale(0.85);
     svg {
       transform: scale(0.85);
@@ -60,8 +72,9 @@ const Btn = styled.button`
   svg {
     ${transition('transform')}
     height: 1rem;
-    fill: white;
+    fill: #777777;
   }
+  /* margin-bottom: 0.5rem; */
 `;
 
 export default ViewerMenuBtn;
