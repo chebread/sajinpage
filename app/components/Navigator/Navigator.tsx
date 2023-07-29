@@ -74,6 +74,7 @@ const Navigate = styled(NavLink)`
       background-color: rgb(235, 235, 235);
       svg {
         transform: scale(1.07);
+        // (0): instagram 처럼 속이 채워지기 하기! (이건 다른 fill[ICONNAME]Icon 을 만들어서 대체하거나 여 코드에서 처리하기
       }
     }
   }

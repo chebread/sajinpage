@@ -16,8 +16,6 @@ import { clickedAtom } from 'atoms/viewerAtom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 
-// mobile만
-
 // delete btn
 // turn on private mode btn
 // turn off private mode btn
@@ -25,6 +23,7 @@ import getWebsiteUrl from 'lib/getWebsiteUrl';
 // copy url btn
 
 // (0): threads 모달 처럼 바꾸기
+// (0): safari에서 fixed가 적용되지 않아서 아래가 확인되는 현상이 발생함
 
 const ViewerMenuModal = () => {
   const [clicked, setClicked] = useAtom(clickedAtom);
@@ -33,7 +32,6 @@ const ViewerMenuModal = () => {
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
-  console.log(clicked);
 
   const initValues = () => {
     setModeToggle(false);

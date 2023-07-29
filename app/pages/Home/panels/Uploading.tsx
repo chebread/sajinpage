@@ -15,6 +15,8 @@ import initValuesAtom from 'atoms/initValuesAtom';
 
 // 파일을 업로드하는 부분
 
+// (0): 구 sajin과 똑같이 (원이 돌아가는 animation으로 or 그냥 page loading의 logo 그림으로 처리하기) svg size는 page loading 같이 구현하기
+
 const Uploading = () => {
   const [file] = useAtom(fileAtom);
   const [docId] = useAtom(docIdAtom);

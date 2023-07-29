@@ -23,7 +23,7 @@ const Uploaded = () => {
     });
   }, []);
 
-  return <Navigate to={`v/${localDocId.current}`} />;
+  return <Navigate to={`/v/${localDocId.current}`} />;
 };
 
 export default Uploaded;

@@ -15,6 +15,7 @@ const MyFiles = () => {
 
   useEffect(() => {
     const onLoad = async () => {
+      set('urls', [1, 2, 3, 4, 5, 6]);
       // get datas in db
       const buckets: any = await get('urls');
       setBuckets(buckets);
@@ -44,6 +45,12 @@ const MyFiles = () => {
       console.log(e.detail.data);
     }
   };
+  const onDelete = async (value: string) => {
+    const arr = [...buckets];
+    const newArr = arr.filter(element => element !== value);
+    await set('urls', newArr);
+    onEventChannel('delete');
+  };
 
   return (
     <Container>
@@ -67,21 +74,7 @@ const MyFiles = () => {
               >
                 <button>Share</button>
               </CopyToClipboard>
-              <button
-                onClick={async () => {
-                  const arr = [...buckets];
-                  console.log(arr);
-                  const index = arr.indexOf(value);
-                  console.log(index);
-                  const newArr = arr.splice(index, 1);
-                  console.log(arr.splice(3, 1));
-
-                  // await set('urls', newArr);
-                  // onEventChannel('delete');
-                }}
-              >
-                Delete
-              </button>
+              <button onClick={() => onDelete(value)}>Delete</button>
             </div>
           ))
         ) : (
