@@ -37,10 +37,7 @@ const Navigator = () => {
 const Container = styled.div`
   position: fixed;
   ${transition('height', 'width')}
-  height: ${cssVarsPalette.mobile_nav_height};
-  @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_nav_height};
-  }
+  height: ${cssVarsPalette.nav_height};
   width: 100%;
   bottom: 0; // fix bottom
   display: flex;

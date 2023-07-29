@@ -3,12 +3,14 @@ import mobileVp from 'layouts/properties/mobileVp';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
+// 이것의 용도는 그냥 요소 삭제되고 그것의 용도임
+
 const DesktopScreen = styled.div`
   ${transition('all')}
-  position:absolute;
+  visibility: hidden;
   opacity: 0;
   @media (${desktopVp}) {
-    position: static;
+    visibility: visible;
     opacity: 1;
   }
 `;

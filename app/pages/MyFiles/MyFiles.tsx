@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { get, set } from 'idb-keyval';
+import { get } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
 import { eventChannel, onEventChannel } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
-import { toast } from 'react-hot-toast';
+import onCopy from 'components/MyFiles/onCopy';
+import onDelete from 'components/MyFiles/onDelete';
 
-// (0): 각각의 url 삭제할 수 있게 하기 (idb - del func)
+// (0): buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
 
 const MyFiles = () => {
   const navigate = useNavigate();
@@ -45,16 +46,6 @@ const MyFiles = () => {
       console.log(e.detail.data);
     }
   };
-  const onDelete = async (value: string) => {
-    const arr = [...buckets];
-    const newArr = arr.filter(element => element !== value);
-    await set('urls', newArr);
-    onEventChannel('delete');
-    toast.success('Deleted');
-  };
-  const onCopy = () => {
-    toast.success('Copied');
-  };
 
   return (
     <Container>
@@ -76,12 +67,13 @@ const MyFiles = () => {
               >
                 <button>Share</button>
               </CopyToClipboard>
-              <button onClick={() => onDelete(value)}>Delete</button>
+              <button onClick={() => onDelete(buckets, value)}>Delete</button>
             </div>
           ))
         ) : (
-          // buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
-          <NotExistedBuckets />
+          <>
+            <div>Buckets이 비어 있습니다.</div>
+          </>
         )}
       </div>
     </Container>

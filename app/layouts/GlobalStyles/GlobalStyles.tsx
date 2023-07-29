@@ -1,9 +1,8 @@
-import { disableScrollbar } from 'layouts/properties';
+import { desktopVp } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
-import { appThemes, themedPalette } from 'layouts/themes';
+import { appThemes, themeVars } from 'layouts/themes';
 import initStyles from './initStyles';
-import buildCssVariables from 'lib/buildCssVariables';
-import { cssVars } from 'layouts/cssVars';
+import appCssVars from 'layouts/cssVars/appCssVars';
 
 // 770px 이하: mobile
 // 1200 이하: tablet and desktop
@@ -15,11 +14,17 @@ import { cssVars } from 'layouts/cssVars';
 const GlobalStyles = createGlobalStyle`
   // init styles
   ${initStyles}
-  // init css vars
+  // css variables
   body {
-    ${buildCssVariables(cssVars)}
+    ${appCssVars.mobile}
+  
   }
-  // init app's theme
+  @media (${desktopVp}) {
+    body {
+      ${appCssVars.desktop}
+    }
+  }
+  // theme
   body {
     ${appThemes.light};
   }
@@ -28,25 +33,23 @@ const GlobalStyles = createGlobalStyle`
       ${appThemes.dark}
     }
   }
-  // init typo
+  // fonts
   body {
-    font-family:  system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, Tossface; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, Tossface; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
   }
   // defaults
   html, body, #root {
     // screen
     position: relative;
     height: 100%;
-    margin: 0;
+    /* margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; */
     // background
-    background-color: white; // ${themedPalette.background}
+    background-color: ${themeVars.light.background_color};
     // font
-    color: #000; // ${themedPalette.color}
+    color: ${themeVars.light.color};
     font-weight: 500;
-    // scrollbar
-    ${disableScrollbar}
   }
 `;
 

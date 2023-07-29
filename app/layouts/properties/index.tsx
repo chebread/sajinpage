@@ -4,6 +4,7 @@ import disableSelection from './disabledSelection';
 import desktopVp from './desktopVp';
 import disableTab from './disableTab';
 import desktopHover from './desktopHover';
+import darkMode from './darkMode';
 
 export {
   centerAlign,
@@ -12,4 +13,5 @@ export {
   desktopVp,
   disableTab,
   desktopHover,
+  darkMode,
 };

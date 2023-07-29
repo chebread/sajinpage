@@ -1,12 +1,19 @@
-// 여기서만 편집하면 자동으로 css variable로 등록됨
+// desktop 사이즈면 desktop 객체의 값이 적용되며, mobile 사이즈면 mobile 객체의 값이 적용됨
+// 그냥 cssVars를 사용할때 귀찮게 @media (${destkopVp}) 를 사용하여 height를 구분지어서 사용할 필요 없이 미리 globalStyles에서 상황에 맞게 desktop viewport면 cssVars.desktop이 적용되며, mobile viewport면 cssVars.mobile이 적용되게 됨
+// 편리하게 cssVarsPalette.header_height로 접근할 수 있음!
+// 꼭 cssVars.desktop의 크기를 구분지어서 사용해야 하는 경우라면 그냥 styled에서 cssVars를 바로 접근하여 사용하면 됨!
 
 const cssVars = {
-  desktop_header_height: '4rem',
-  mobile_header_height: '3rem',
-  desktop_nav_height: '4rem',
-  mobile_nav_height: '3rem',
-  desktop_content_full_height: 'calc(100% - 8rem)', // header를 제외한 최대 height
-  mobile_content_full_height: 'calc(100% - 6rem)',
+  mobile: {
+    header_height: '3rem',
+    nav_height: '3rem',
+    content_full_height: 'calc(100% - 6rem)',
+  },
+  desktop: {
+    header_height: '4rem',
+    nav_height: '4rem',
+    content_full_height: 'calc(100% - 8rem)', // header를 제외한 최대 height
+  },
 };
 
 export default cssVars;

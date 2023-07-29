@@ -8,6 +8,7 @@ import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { clickedAtom, loadedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { themeVars } from 'layouts/themes';
 
 // (0): desktop menu modal 만들기 => threads 처럼 구성하며, atom value를 사용함
 // (0): desktop 용이기에 mobile 대응 제거하기
@@ -51,10 +52,7 @@ const ViewerHeader = () => {
 
 const ContainerWrapper = styled.div`
   ${transition('padding-top')}
-  padding-top: ${cssVarsPalette.mobile_header_height};
-  @media (${desktopVp}) {
-    padding-top: ${cssVarsPalette.desktop_header_height};
-  }
+  padding-top: ${cssVarsPalette.header_height};
 `;
 const Container = styled.div`
   ${transition('all')}
@@ -67,14 +65,11 @@ const Container = styled.div`
   }
   top: 0;
   z-index: 10000;
-  height: ${cssVarsPalette.mobile_header_height};
-  @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_header_height};
-  }
+  height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #ffffff;
+  background-color: ${themeVars.light.background_color};
 `;
 const Wrapper = styled.div`
   height: 100%;

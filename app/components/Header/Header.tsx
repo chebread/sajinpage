@@ -4,6 +4,7 @@ import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
+import { themeVars } from 'layouts/themes';
 
 const Header = () => {
   return (
@@ -29,24 +30,18 @@ const Header = () => {
 
 const ContainerWrapper = styled.div`
   ${transition('padding-top')}
-  padding-top: ${cssVarsPalette.mobile_header_height};
-  @media (${desktopVp}) {
-    padding-top: ${cssVarsPalette.desktop_header_height};
-  }
+  padding-top: ${cssVarsPalette.header_height};
 `;
 const Container = styled.div`
   position: fixed; // (0): fixed로 구성하기
   top: 0;
   z-index: 10000;
   ${transition('height', 'width')}
-  height: ${cssVarsPalette.mobile_header_height};
-  @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_header_height};
-  }
+  height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #ffffff;
+  background-color: ${themeVars.light.background_color};
 `;
 
 const Wrapper = styled.div`

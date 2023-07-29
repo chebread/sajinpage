@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import { useAtom } from 'jotai';
 import fileDbAtom from 'atoms/fileDbAtom';
 import { ImagesScreen } from 'layouts/screens';
-import FullContentScreen from 'layouts/screens/FullContentScreen';
 import transition from 'layouts/properties/transition';
-import { cssVarsPalette } from 'layouts/cssVars';
+import { cssVars } from 'layouts/cssVars';
 import { centerAlign, desktopVp } from 'layouts/properties';
-import ViewerMobileMenuBtn from 'components/Viewer/ViewerMenu/ViewerMenuBtn';
-import MobileScreen from 'layouts/screens/MobileScreen';
+import { themeVars } from 'layouts/themes';
 
 // (0): 세션 종료시 imageviewer 컴포넌트 / viewer menu 종료될때 천천히 사라지기 (transition) imageviewer 나타날때도 천천히 나타나기
 // (0): Threads 같은 zoom in-out 기능 구현하기
@@ -35,14 +33,15 @@ const CenterScreen = styled.div`
   top: 0;
   // (0): header를 왜 가리는지는 잘 모르겠음
 `;
+
 const Container = styled.div`
   ${transition('all')}
   position: absolute;
   height: 100%;
-  background-color: #101010;
+  background-color: ${themeVars.dark.background_color};
   @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_content_full_height};
-    background-color: #ffffff;
+    height: ${cssVars.desktop.content_full_height};
+    background-color: ${themeVars.light.background_color};
   }
   width: 100%;
 `;

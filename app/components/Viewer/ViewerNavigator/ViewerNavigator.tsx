@@ -45,11 +45,7 @@ const Container = styled.div`
     transform: translateY(0);
   }
   position: fixed;
-  height: ${cssVarsPalette.desktop_nav_height};
-  /* height: ${cssVarsPalette.moblie_nav_height};
-  @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_nav_height};
-  } */
+  height: ${cssVarsPalette.nav_height};
   width: 100%;
   bottom: 0; // fix bottom
   display: flex;

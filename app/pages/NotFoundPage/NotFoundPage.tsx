@@ -39,10 +39,7 @@ const NotFoundPage = () => {
 const Container = styled.div`
   position: relative;
   ${transition('height', 'width')}
-  height: ${cssVarsPalette.mobile_content_full_height};
-  @media (${desktopVp}) {
-    height: ${cssVarsPalette.desktop_content_full_height};
-  }
+  height: ${cssVarsPalette.content_full_height};
   width: 100%;
 `;
 

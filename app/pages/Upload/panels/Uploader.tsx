@@ -85,7 +85,7 @@ const Uploader = () => {
               <input {...getInputProps()} />
               {/* user custom components */}
             </DropZone>
-            <h1>Upload to Sajinpage</h1>
+            <h1>Sajinpage</h1>
             <Button onClick={open}>Import images</Button>
           </Container>
         )}

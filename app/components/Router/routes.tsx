@@ -12,7 +12,6 @@ import ForbiddenPage from 'pages/ForbiddenPage';
 import Viewer from 'pages/Viewer';
 import MyFiles from 'pages/MyFiles';
 import Settings from 'pages/Settings';
-import Help from 'pages/Help';
 import ViewerHeader from 'components/Viewer/ViewerHeader';
 import ViewerNavigator from 'components/Viewer/ViewerNavigator';
 
@@ -51,7 +50,6 @@ const router = createBrowserRouter(
         <Route path="/" element={<Upload />} />
         <Route path="f" element={<MyFiles />} />
         <Route path="s" element={<Settings />} />
-        <Route path="h" element={<Help />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route
