@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
   }
   // fonts
   body {
-    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, Tossface; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
   }
   // defaults
   html, body, #root {

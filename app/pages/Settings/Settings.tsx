@@ -9,7 +9,7 @@ const Settings = () => {
     <Container>
       <Category>Settings</Category>
       <Content>
-        {/* <Button onClick={onClearDb}>Clear my files's datas</Button> */}
+        <Button onClick={onClearDb}>Clear my files's datas</Button>
       </Content>
     </Container>
   );
@@ -19,6 +19,7 @@ const Container = styled.div`
   position: relative;
   height: calc(100% - 8rem);
   margin: 1rem 0.5rem 1rem 0.5rem; // trbl
+  background-image: url(https://careers.twitter.com/content/dam/careers-twitter/careers-redesign-2021/interior-page-bg.jpg.twimg.1920.jpg);
 `;
 const Category = styled.div`
   ${transition('all')}

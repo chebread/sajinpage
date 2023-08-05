@@ -14,7 +14,6 @@ import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { loadedAtom } from 'atoms/viewerAtom';
 import { addIdb } from 'lib/idb';
-import ViewerMenu from 'components/Viewer/ViewerMenu';
 
 // (0): viewer 확인할때마다 my files에 저장 (중복 있으면 저장 중지)
 
@@ -168,7 +167,6 @@ const Viewer = () => {
     // 2) 파일이 로드됨
     <>
       <ImagesViewer />
-      <ViewerMenu />
     </>
   ) : (
     // 1) 로딩

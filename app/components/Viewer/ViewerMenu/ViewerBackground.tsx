@@ -1,6 +1,5 @@
 import { clickedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import { desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
@@ -23,7 +22,7 @@ const Container = styled.div<ViewerMenuPropsType>`
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
   // backdrop-filter: blur(0.5rem);
   visibility: ${({ isVisible }) => (isVisible ? 'visble' : 'hidden')};
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};

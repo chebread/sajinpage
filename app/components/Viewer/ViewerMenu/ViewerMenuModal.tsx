@@ -101,7 +101,48 @@ const ViewerMenuModal = () => {
 
   return (
     <Container isVisible={clicked}>
-      <ViewerNavigator />
+      <CopyToClipboard
+        text={getWebsiteUrl(`/v/${fileDb.docId}`)}
+        onCopy={() => {
+          // when copied
+        }}
+      >
+        <button>Share</button>
+      </CopyToClipboard>
+      <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+      {fileDb.limit ? (
+        // limit mode
+        modeToggle ? (
+          <>
+            {resetToggle ? (
+              //  time limit 시간 설정하기 (같음)
+              <>
+                <Select onChange={onModeSelect} options={timeLimitOptions} />
+                <button onClick={onCancel}>Cancel</button>
+              </>
+            ) : (
+              <>
+                <button onClick={onResetToggle}>
+                  limit mode 값 재설정하기
+                </button>
+                <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+                <button onClick={onCancel}>Cancel</button>
+              </>
+            )}
+          </>
+        ) : (
+          <button onClick={onModeToggle}>limit mode 재설정하기</button>
+        )
+      ) : // normal mode
+      modeToggle ? (
+        //  time limit 시간 설정하기 (같음)
+        <>
+          <Select onChange={onModeSelect} options={timeLimitOptions} />
+          <button onClick={onCancel}>Cancel</button>
+        </>
+      ) : (
+        <button onClick={onModeToggle}>limit mode 켜기</button>
+      )}
     </Container>
   );
 };
@@ -123,46 +164,3 @@ const Container = styled.div<ViewerMenuPropsType>`
 `;
 
 export default ViewerMenuModal;
-
-// <CopyToClipboard
-//         text={getWebsiteUrl(`/v/${fileDb.docId}`)}
-//         onCopy={() => {
-//           // when copied
-//         }}
-//       >
-//         <button>Share</button>
-//       </CopyToClipboard>
-//       <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
-//       {fileDb.limit ? (
-//         // limit mode
-//         modeToggle ? (
-//           <>
-//             {resetToggle ? (
-//               //  time limit 시간 설정하기 (같음)
-//               <>
-//                 <Select onChange={onModeSelect} options={timeLimitOptions} />
-//                 <button onClick={onCancel}>Cancel</button>
-//               </>
-//             ) : (
-//               <>
-//                 <button onClick={onResetToggle}>
-//                   limit mode 값 재설정하기
-//                 </button>
-//                 <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-//                 <button onClick={onCancel}>Cancel</button>
-//               </>
-//             )}
-//           </>
-//         ) : (
-//           <button onClick={onModeToggle}>limit mode 재설정하기</button>
-//         )
-//       ) : // normal mode
-//       modeToggle ? (
-//         //  time limit 시간 설정하기 (같음)
-//         <>
-//           <Select onChange={onModeSelect} options={timeLimitOptions} />
-//           <button onClick={onCancel}>Cancel</button>
-//         </>
-//       ) : (
-//         <button onClick={onModeToggle}>limit mode 켜기</button>
-//       )}

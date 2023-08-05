@@ -13,69 +13,7 @@ import { useNavigate } from 'react-router-dom';
 // 아니면 로고 버튼 클릭시 그냥 viewer desktop 처럼 threads의 버튼 처럼 구성하기
 
 const ViewerMenuBtn = () => {
-  const navigate = useNavigate();
-  const [clicked, setClicked] = useAtom(clickedAtom);
-
-  const onRedirect = () => {
-    navigate('/');
-  };
-  const onClickMenu = () => {
-    setClicked(!clicked);
-  };
-
-  return (
-    <>
-      <Wrapper>
-        {/* <Btn onClick={onClickMenu}>
-          <DotIcon />
-        </Btn> */}
-        <Btn onClick={onClickMenu}>
-          <Logo />
-        </Btn>
-      </Wrapper>
-      <ViewerBackground />
-      <ViewerMenuModal />
-    </>
-  );
+  return <></>;
 };
-
-const Wrapper = styled.div`
-  ${transition('all')}
-  z-index: 10000;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 1.5rem;
-  padding-left: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-`;
-const Btn = styled.button`
-  all: unset;
-  ${disableTab}
-  ${transition('all')}
-  z-index: 10000;
-  cursor: pointer;
-  height: 3rem;
-  width: 3rem;
-  display: flex;
-  ${centerAlign}
-  border-radius: 50%;
-  background-color: #1e1e1e;
-  &:active {
-    transform: scale(0.85);
-    svg {
-      transform: scale(0.85);
-    }
-  }
-  svg {
-    ${transition('transform')}
-    height: 1rem;
-    fill: #6e6e6e;
-  }
-  /* margin-bottom: 0.5rem; */
-`;
 
 export default ViewerMenuBtn;

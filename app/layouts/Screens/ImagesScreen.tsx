@@ -1,6 +1,7 @@
 import { errorAtom } from 'atoms/errorAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp } from 'layouts/properties';
+import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
 // (0): border-radius 기능 추가하기
@@ -42,17 +43,22 @@ const Wrapper = styled.div`
   ${centerAlign}
 `;
 const ImageWrapper = styled.div`
+  ${transition('max-width')}
   max-height: 100%;
   max-width: 100%;
+  @media (${desktopVp}) {
+    max-width: calc(100% - 2rem);
+  }
 `;
 const Image = styled.img`
+  ${transition('border-radius')}
   display: block;
   height: 100%;
   width: 100%;
   margin: auto;
   object-fit: contain;
   object-position: center;
-  border-radius: 0.5rem;
+  border-radius: 0;
   @media (${desktopVp}) {
     border-radius: 1rem;
   }

@@ -6,6 +6,7 @@ import transition from 'layouts/properties/transition';
 import { cssVars } from 'layouts/cssVars';
 import { centerAlign, desktopVp } from 'layouts/properties';
 import { themeVars } from 'layouts/themes';
+import ViewerMenu from 'components/Viewer/ViewerMenu';
 
 // (0): 세션 종료시 imageviewer 컴포넌트 / viewer menu 종료될때 천천히 사라지기 (transition) imageviewer 나타날때도 천천히 나타나기
 // (0): Threads 같은 zoom in-out 기능 구현하기
@@ -15,11 +16,14 @@ const ImagesViewer = () => {
 
   // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
-    <CenterScreen>
-      <Container>
-        <ImagesScreen src={fileDb.url} />
-      </Container>
-    </CenterScreen>
+    <>
+      <CenterScreen>
+        <Container>
+          <ImagesScreen src={fileDb.url} />
+        </Container>
+      </CenterScreen>
+      <ViewerMenu />
+    </>
   );
 };
 
