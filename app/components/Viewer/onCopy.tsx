@@ -1,6 +1,13 @@
-const onCopy = () => {
-  // Run notify
-  alert('URL 복사됨');
-};
+import copyText from 'lib/copyText';
+import { toast } from 'react-hot-toast';
 
+const onCopy = async (text: string) => {
+  await copyText(text)
+    .then(() => {
+      toast.success('Copied');
+    })
+    .catch(() => {
+      toast.error('Copy error');
+    });
+};
 export default onCopy;

@@ -6,8 +6,8 @@ import { eventChannel, onEventChannel } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
-import onCopy from 'components/MyFiles/onCopy';
-import onDelete from 'components/MyFiles/onDelete';
+import onCopyBucket from 'components/MyFiles/onCopyBucket';
+import onDeleteBucket from 'components/MyFiles/onDeleteBucket';
 
 // (0): buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
 
@@ -63,11 +63,13 @@ const MyFiles = () => {
               </button>
               <CopyToClipboard
                 text={getWebsiteUrl(`/v/${value}`)}
-                onCopy={onCopy}
+                onCopy={onCopyBucket}
               >
                 <button>Share</button>
               </CopyToClipboard>
-              <button onClick={() => onDelete(buckets, value)}>Delete</button>
+              <button onClick={() => onDeleteBucket(buckets, value)}>
+                Delete
+              </button>
             </div>
           ))
         ) : (

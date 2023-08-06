@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 
-const onCopy = () => {
+const onCopyBucket = () => {
   toast.success('Copied');
 };
 
-export default onCopy;
+export default onCopyBucket;
