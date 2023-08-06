@@ -4,10 +4,10 @@ import { clickedAtom, modeToggleAtom, onCancelAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableSelection } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import copyText from 'lib/copyText';
-import getWebsiteUrl from 'lib/getWebsiteUrl';
-import { toast } from 'react-hot-toast';
+import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
+import onCopy from '../onCopy';
+import onDelete from '../onDelete';
 import FloatModal from './FloatModal';
 
 const MenuModal = () => {
@@ -19,31 +19,11 @@ const MenuModal = () => {
   const onModeToggle = () => {
     setModeToggle(!modeToggle);
   };
-  const onCopy = async () => {
-    const text = getWebsiteUrl(`/v/${fileDb.docId}`);
-    await copyText(text)
-      .then(() => {
-        toast.success('Copied');
-      })
-      .catch(() => {
-        toast.error('Copy error');
-      });
-    onCancel();
-  };
-  const onDelete = async () => {
-    await deleteFiles(fileDb.docId)
-      .then(() => {
-        toast.success('delete file');
-      })
-      .catch(() => {
-        toast.error('파일 삭제중 오류 발생');
-      });
-    onCancel();
-  };
+
   return (
     <>
       <MenuModalsContainer visible={clicked}>
-        <MenuModals onClick={onCopy}>
+        <MenuModals onClick={() => onCopy(getUrl())}>
           <MenuModalsWrapper>링크 복사</MenuModalsWrapper>
         </MenuModals>
         {fileDb.limit ? (
@@ -60,7 +40,7 @@ const MenuModal = () => {
             </MenuModals>
           </>
         )}
-        <MenuModals onClick={onDelete}>
+        <MenuModals onClick={() => onDelete(fileDb.docId)}>
           <MenuModalsWrapper>삭제</MenuModalsWrapper>
         </MenuModals>
       </MenuModalsContainer>

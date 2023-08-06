@@ -1,18 +1,18 @@
 import supabase from 'lib/supabase';
 
 type uploadFilesProps = {
-  file: any;
+  file: File;
   limit: boolean;
-  timeLimit: any;
-  accessTime: any;
-  fileId: any;
-  docId: any;
+  timeLimit: number;
+  accessTime: string;
+  fileId: string;
+  docId: string;
 };
 
 const uploadFiles = async ({
+  file,
   docId,
   fileId,
-  file,
   limit,
   timeLimit,
   accessTime,
@@ -51,12 +51,12 @@ const uploadFiles = async ({
     docId: docId,
     fileId: fileId,
     url: url,
-    limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
-    excess: false,
     accessTime: limit
       ? // 이미 acessTime은 string 타입임
         accessTime
       : '',
+    limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
+    excess: false,
   };
   // create table
   // create columns

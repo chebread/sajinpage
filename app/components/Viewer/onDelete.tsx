@@ -1,10 +1,14 @@
 import { deleteFiles } from 'api';
+import { toast } from 'react-hot-toast';
 
 const onDelete = async (docId: string) => {
-  console.log('delete file');
-  await deleteFiles(docId).catch(() => {
-    alert('파일 삭제중 오류 발생');
-  });
+  await deleteFiles(docId)
+    .then(() => {
+      toast.success('delete file');
+    })
+    .catch(() => {
+      toast.error('파일 삭제중 오류 발생');
+    });
 };
 
 export default onDelete;
