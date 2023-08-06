@@ -9,23 +9,22 @@ const ViewerBackground = () => {
     setClicked(!clicked);
   };
 
-  return <Container isVisible={clicked} onClick={onCancel} />;
+  return <Container visible={clicked} onClick={onCancel} />;
 };
 
 type ViewerMenuPropsType = {
-  isVisible?: boolean;
+  visible?: boolean;
 };
 const Container = styled.div<ViewerMenuPropsType>`
   display: block;
   ${transition('all')}
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: 1000;
-  // backdrop-filter: blur(0.5rem);
-  visibility: ${({ isVisible }) => (isVisible ? 'visble' : 'hidden')};
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
 `;
 
 export default ViewerBackground;

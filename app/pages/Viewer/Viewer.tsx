@@ -12,10 +12,11 @@ import checkFileSessionByAccessTime from 'api/checkFileSessionByAccessTime';
 import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
-import { loadedAtom } from 'atoms/viewerAtom';
+import { loadedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { addIdb } from 'lib/idb';
 
-// (0): viewer 확인할때마다 my files에 저장 (중복 있으면 저장 중지)
+// (0): youtube 효과처럼, spotify 효과처럼 색입혀서 지루하지 않게 하기 (pc)
+// (0): 세션 종료시 loaded 되어 있으면 버튼이 표시됨 이거 고치기.
 
 // 파일들을 확인하는 곳
 // 각각의 url들을 Bucket이라 칭함
@@ -34,11 +35,12 @@ const Viewer = () => {
   const [loaded, setLoaded] = useAtom(loadedAtom); // 파일 로드 유무
   const [, initValues] = useAtom(initValuesAtom);
   const navigate = useNavigate();
+  const [, setViewed] = useAtom(viewedAtom);
 
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
     // test code //
-    const onLoad = async () => {
+    /* const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
@@ -67,6 +69,8 @@ const Viewer = () => {
           setLoaded(true); // 여기서 값을 설정하더라도 useEffect 함수가 끝나야 반영됨
           // first run interval
           setDelay(true); // if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임
+          // viewerheader btn viewed 설정
+          setViewed(true);
         }
       }
     };
@@ -77,7 +81,7 @@ const Viewer = () => {
         // file update
         console.log('파일의 정보가 업데이트됨'); // toast 안함
         setFileDb(payload.new);
-        // console.log(payload.new);
+        console.log(payload.new);
       },
       onDelete: (payload: any) => {
         // file deleted
@@ -104,8 +108,9 @@ const Viewer = () => {
       supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
-    };
+    }; */
     setLoaded(true);
+    setViewed(true);
     setFileDb({
       url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
     });
@@ -120,10 +125,11 @@ const Viewer = () => {
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       if (isFileExcess) {
-        endedSession();
+        await endedSession();
         // console.log('killed interval');
         // kill interval
         setDelay(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
+        setViewed(false); // 메뉴 접근 중지
       }
     },
     delay && !isEmptyObject(error) && fileDb.limit && !fileDb.excess

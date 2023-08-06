@@ -28,7 +28,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@loadable/component", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:5.15.3"],\
             ["@supabase/supabase-js", "npm:2.21.0"],\
+            ["@types/loadable__component", "npm:5.13.4"],\
             ["@types/react", "npm:18.2.0"],\
             ["@types/react-copy-to-clipboard", "npm:5.0.4"],\
             ["@types/react-dom", "npm:18.2.1"],\
@@ -385,6 +387,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.21.5-7d058028a3-358f2779d3.zip/node_modules/@babel/runtime/",\
           "packageDependencies": [\
             ["@babel/runtime", "npm:7.21.5"],\
+            ["regenerator-runtime", "npm:0.13.11"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.22.6", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.22.6-493f6b7ad0-e585338287.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.22.6"],\
             ["regenerator-runtime", "npm:0.13.11"]\
           ],\
           "linkType": "HARD"\
@@ -924,6 +934,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@jridgewell/trace-mapping", "npm:0.3.18"],\
             ["@jridgewell/resolve-uri", "npm:3.1.0"],\
             ["@jridgewell/sourcemap-codec", "npm:1.4.14"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@loadable/component", [\
+        ["npm:5.15.3", {\
+          "packageLocation": "./.yarn/cache/@loadable-component-npm-5.15.3-ae5e6f6d3b-78ac341465.zip/node_modules/@loadable/component/",\
+          "packageDependencies": [\
+            ["@loadable/component", "npm:5.15.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:5.15.3", {\
+          "packageLocation": "./.yarn/__virtual__/@loadable-component-virtual-c3d2c43851/0/cache/@loadable-component-npm-5.15.3-ae5e6f6d3b-78ac341465.zip/node_modules/@loadable/component/",\
+          "packageDependencies": [\
+            ["@loadable/component", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:5.15.3"],\
+            ["@babel/runtime", "npm:7.22.6"],\
+            ["@types/react", "npm:18.2.0"],\
+            ["hoist-non-react-statics", "npm:3.3.2"],\
+            ["react", "npm:18.2.0"],\
+            ["react-is", "npm:16.13.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1639,6 +1674,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@types/keyv", "npm:3.1.4"],\
             ["@types/node", "npm:18.16.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/loadable__component", [\
+        ["npm:5.13.4", {\
+          "packageLocation": "./.yarn/cache/@types-loadable__component-npm-5.13.4-9f93602179-a2d1c77b95.zip/node_modules/@types/loadable__component/",\
+          "packageDependencies": [\
+            ["@types/loadable__component", "npm:5.13.4"],\
+            ["@types/react", "npm:18.2.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5220,7 +5265,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["sajinpage", "workspace:."],\
+            ["@loadable/component", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:5.15.3"],\
             ["@supabase/supabase-js", "npm:2.21.0"],\
+            ["@types/loadable__component", "npm:5.13.4"],\
             ["@types/react", "npm:18.2.0"],\
             ["@types/react-copy-to-clipboard", "npm:5.0.4"],\
             ["@types/react-dom", "npm:18.2.1"],\

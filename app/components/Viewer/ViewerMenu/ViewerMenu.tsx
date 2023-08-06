@@ -45,6 +45,7 @@ const Container = styled.div`
   ${transition('all')}
   visibility: visible;
   opacity: 1;
+  z-index: -1;
   @media (${desktopVp}) {
     visibility: hidden;
     opacity: 0;

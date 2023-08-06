@@ -4,6 +4,9 @@ import Dropzone from 'react-dropzone';
 import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
 import hashMaker from 'lib/hashMaker';
+import { cssVarsPalette } from 'layouts/cssVars';
+import transition from 'layouts/properties/transition';
+import { desktopVp } from 'layouts/properties';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성
 // (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가)
@@ -79,31 +82,39 @@ const Uploader = () => {
     <>
       <Dropzone onDrop={onDropFiles} accept={fileAcceptTypes} noClick>
         {({ getRootProps, getInputProps, open, isDragActive }) => (
-          <Container>
-            {/* file drag input */}
+          <>
             <DropZone {...getRootProps()}>
               <input {...getInputProps()} />
-              {/* user custom components */}
+              <Container>
+                <h1>Sajinpage {isDragActive}</h1>
+                <Button onClick={open}>Import images</Button>
+                <DropGuide visible={isDragActive}>hello</DropGuide>
+              </Container>
             </DropZone>
-            <h1>Sajinpage</h1>
-            <Button onClick={open}>Import images</Button>
-          </Container>
+          </>
         )}
       </Dropzone>
     </>
   );
 };
+const DropGuide = styled.div<{ visible: boolean }>`
+  position: absolute;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: ${({ visible }) =>
+    visible ? '0' : '-1'}; // modalcontainer모다는 항시 커야함
+`;
 
 const Container = styled.div`
+  ${transition('height')}
   position: relative;
+  height: 100%;
+  width: 100%;
 `;
 const DropZone = styled.div`
-  position: absolute;
-  z-index: 1;
+  height: ${cssVarsPalette.content_full_height};
+  width: 100%;
 `;
-const Button = styled.button`
-  position: absolute;
-  z-index: 1;
-`;
+const Button = styled.button``;
 
 export default Uploader;

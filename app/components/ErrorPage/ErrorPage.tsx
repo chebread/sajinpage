@@ -1,4 +1,4 @@
-import { centerAlign, disabledSelection } from 'layouts/properties';
+import { centerAlign, disableSelection } from 'layouts/properties';
 import { CenterScreen } from 'layouts/screens';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const ErrorPage = ({ errorCode, errorMessage, onClick }) => {
 };
 
 const Screen = styled(CenterScreen)`
-  ${disabledSelection}
+  ${disableSelection}
 `;
 
 const Notice = styled.button`

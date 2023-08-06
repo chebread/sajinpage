@@ -1,5 +1,6 @@
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { darkMode, desktopVp } from 'layouts/properties';
+import mobileVp from 'layouts/properties/mobileVp';
 import transition from 'layouts/properties/transition';
 import { CenterScreen } from 'layouts/screens';
 import { themedPalette, themeVars } from 'layouts/themes';
@@ -24,11 +25,11 @@ const Container = styled(CenterScreen)`
   background-color: ${themeVars.light.background_color};
   svg {
     ${transition('height')}
-    height: 5.5rem; // 12%
-    fill: ${themeVars.light.loading_logo_fill};
+    height: 5.5rem; // 12% // 이게 desktopvp에 영향을 주긴함 (max-height 설정시) 왜냐면 max-height와 height는 속성이 다르기에 desktopvp에서 height, Mobilevp는 max-height 설정시 속성이 다르기에 오류발생함. 항상 같은 속성을 지정해주어야함(mobilevp던 desktopvp던)
     @media (${desktopVp}) {
       height: 7.5rem; // 17% // 8rem
     }
+    fill: ${themeVars.light.loading_logo_fill};
   }
 `;
 

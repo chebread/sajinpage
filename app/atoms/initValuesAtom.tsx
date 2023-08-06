@@ -12,7 +12,7 @@ import {
   limitAtom,
   timeLimitAtom,
 } from './filesAtom';
-import { clickedAtom, loadedAtom } from './viewerAtom';
+import { clickedAtom, loadedAtom, viewedAtom } from './viewerAtom';
 
 const initValuesAtom = atom(null, (get, set) => {
   set(fileAtom, new File([''], ''));
@@ -28,6 +28,7 @@ const initValuesAtom = atom(null, (get, set) => {
   set(errorAtom, {});
   set(loadedAtom, false);
   set(clickedAtom, false);
+  set(viewedAtom, false);
 });
 
 export default initValuesAtom;
