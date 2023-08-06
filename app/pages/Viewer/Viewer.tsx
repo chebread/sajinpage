@@ -14,6 +14,7 @@ import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { loadedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { addIdb } from 'lib/idb';
+import { filesAtom } from 'atoms/filesAtom';
 
 // (0): youtube 효과처럼, spotify 효과처럼 색입혀서 지루하지 않게 하기 (pc)
 // (0): 세션 종료시 loaded 되어 있으면 버튼이 표시됨 이거 고치기.
@@ -40,7 +41,7 @@ const Viewer = () => {
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
     // test code //
-    /* const onLoad = async () => {
+    const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
@@ -108,11 +109,16 @@ const Viewer = () => {
       supabase.removeChannel(fetchRealtime);
       // console.log('unChannel');
       initValues();
-    }; */
+    };
     setLoaded(true);
     setViewed(true);
     setFileDb({
       url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
+      docId: '',
+      fileId: '',
+      accessTime: '',
+      limit: false,
+      excess: false,
     });
   }, []);
 

@@ -4,28 +4,26 @@ import { atom } from 'jotai';
 type filesObjectsType = {
   file: File;
   fileType: string;
-  url: string;
   docId: string;
   fileId: string;
   accessTime: string;
-  timeLimt: number;
-  isSelected: boolean; // selected로 변경
-  isUploaded: boolean; // uploaded로 변경
+  timeLimit: number;
+  selected: boolean; // is selected
+  uploaded: boolean; // is uploaded
   limit: boolean;
-  isFile: boolean; // (0):inputed로 변경
+  filed: boolean; // is file
 };
 const filesAtom = atom<filesObjectsType>({
   file: new File([''], ''),
   fileType: '',
-  url: '',
   docId: '',
   fileId: '',
   accessTime: '',
-  timeLimt: 0,
-  isSelected: false,
-  isUploaded: false,
+  timeLimit: 0,
+  selected: false,
+  uploaded: false,
   limit: false,
-  isFile: false,
+  filed: false,
 });
 
 const fileAtom = atom<File>(new File([''], '')); // 바이너리 파일 자체를 저장

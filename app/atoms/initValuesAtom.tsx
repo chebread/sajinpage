@@ -5,6 +5,7 @@ import {
   docIdAtom,
   fileAtom,
   fileIdAtom,
+  filesAtom,
   fileTypeAtom,
   isFileAtom,
   isSelectedAtom,
@@ -21,14 +22,33 @@ const initValuesAtom = atom(null, (get, set) => {
   set(docIdAtom, '');
   set(fileIdAtom, '');
   set(limitAtom, false);
-  set(timeLimitAtom, '');
+  set(timeLimitAtom, 0);
   set(isSelectedAtom, false);
   set(isUploadedAtom, false);
-  set(fileDbAtom, {});
+  set(fileDbAtom, {
+    docId: '',
+    fileId: '',
+    url: '',
+    accessTime: '',
+    limit: false,
+    excess: false,
+  });
   set(errorAtom, {});
   set(loadedAtom, false);
   set(clickedAtom, false);
   set(viewedAtom, false);
+  set(filesAtom, {
+    file: new File([''], ''),
+    fileType: '',
+    docId: '',
+    fileId: '',
+    accessTime: '',
+    timeLimit: 0,
+    selected: false,
+    uploaded: false,
+    limit: false,
+    filed: false,
+  });
 });
 
 export default initValuesAtom;

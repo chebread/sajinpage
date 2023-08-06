@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import { useCallback, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
-import { docIdAtom, fileAtom, isFileAtom, fileIdAtom } from 'atoms/filesAtom';
+import {
+  docIdAtom,
+  fileAtom,
+  isFileAtom,
+  fileIdAtom,
+  filesAtom,
+} from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
 import hashMaker from 'lib/hashMaker';
 import { cssVarsPalette } from 'layouts/cssVars';
@@ -17,6 +23,8 @@ import { desktopVp } from 'layouts/properties';
 // 파일을 사용자로부터 받아오는 부분
 
 const Uploader = () => {
+  const [, setFiles] = useAtom(filesAtom);
+
   const [, setFile] = useAtom(fileAtom);
   const [, setIsFile] = useAtom(isFileAtom);
   const [, setDocId] = useAtom(docIdAtom);
@@ -30,19 +38,8 @@ const Uploader = () => {
   const fileTypeRegex = /image/g;
   const fileMaxSize = 5000000; // 500000byte = 5mb
 
-  const onPaste = (e: any) => {
-    const {
-      clipboardData: { files },
-    } = e;
-    if (files.length != 0) {
-      // 파일이 붙여넣어 졌을때
-      onDropFiles(files);
-    }
-    // 그외는 문자열 같은 파일외의 데이터가 붙어넣어 졌을때임
-  };
-
   useEffect(() => {
-    // 이미지 붙여넣기시
+    // 파일 붙여넣기시
     window.addEventListener('paste', e => onPaste(e));
     return () => {
       window.removeEventListener('paste', onPaste);
@@ -72,11 +69,30 @@ const Uploader = () => {
     const fileId = hashMaker();
     // initialize file
     // 파일 최적화는 일단은 하지 않음
-    setIsFile(true);
-    setFile(file);
-    setDocId(docId);
-    setFileId(fileId);
+    setFiles(prevState => {
+      return {
+        ...prevState,
+        filed: true,
+        file: file,
+        docId: docId,
+        fileId: fileId,
+      };
+    });
+    // setIsFile(true);
+    // setFile(file);
+    // setDocId(docId);
+    // setFileId(fileId);
   }, []); // (0): useCallback에서 [] 전달해도 상관이없나? 일반함수보다 이게 더 효율적인가?
+  const onPaste = (e: any) => {
+    const {
+      clipboardData: { files },
+    } = e;
+    if (files.length != 0) {
+      // 파일이 붙여넣어 졌을때
+      onDropFiles(files);
+    }
+    // 그외는 문자열 같은 파일외의 데이터가 붙어넣어 졌을때임
+  };
 
   return (
     <>
@@ -97,6 +113,7 @@ const Uploader = () => {
     </>
   );
 };
+
 const DropGuide = styled.div<{ visible: boolean }>`
   position: absolute;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};

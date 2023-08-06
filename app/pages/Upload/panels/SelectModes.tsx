@@ -1,5 +1,6 @@
 import {
   accessTimeAtom,
+  filesAtom,
   isSelectedAtom,
   limitAtom,
   timeLimitAtom,
@@ -15,6 +16,8 @@ import Select from 'react-select';
 // 파일 업로드 모드를 설정하는 부분
 
 const SelectModes = () => {
+  const [files, setFiles] = useAtom(filesAtom);
+
   const [, setLimit] = useAtom(limitAtom);
   const [, setTimeLimit] = useAtom(timeLimitAtom);
   const [, setAcessTime] = useAtom(accessTimeAtom);
@@ -33,12 +36,26 @@ const SelectModes = () => {
       const accessTime = dateToString(
         addTime({ currentTime: currentTime, sec: timeLimit })
       ); // acessTime type = string
-      setAcessTime(accessTime);
-      setTimeLimit(timeLimit); // value는 시간초를 의미함
-      setLimit(true);
+      setFiles(prevState => {
+        return {
+          ...prevState,
+          accessTime: accessTime,
+          timeLimit: timeLimit,
+          limit: true,
+        };
+      });
+      // setAcessTime(accessTime);
+      // setTimeLimit(timeLimit); // value는 시간초를 의미함
+      // setLimit(true);
     }
     // normal mode && limit mode
-    setIsSelected(true); // 선택됨
+    setFiles(prevState => {
+      return {
+        ...prevState,
+        selected: true,
+      };
+    });
+    // setIsSelected(true); // 선택됨
   };
 
   const onGoHome = () => {

@@ -1,23 +1,37 @@
 import Uploading from './panels/Uploading';
 import Uploader from './panels/Uploader';
 import { useAtom } from 'jotai';
-import { isFileAtom, isSelectedAtom, isUploadedAtom } from 'atoms/filesAtom';
+import {
+  filesAtom,
+  isFileAtom,
+  isSelectedAtom,
+  isUploadedAtom,
+} from 'atoms/filesAtom';
 import Uploaded from './panels/Uploaded';
 import SelectModes from './panels/SelectModes';
 
 // 업로드의 중심부
 
 const Home = () => {
+  const [files, setFiles] = useAtom(filesAtom);
+
   const [isFile] = useAtom(isFileAtom);
   const [isSelected] = useAtom(isSelectedAtom);
   const [isUploaded] = useAtom(isUploadedAtom);
 
-  return !isFile ? (
+  console.log(files);
+  // useEffect(() => {
+  //   setFiles(prevState => {
+  //     return { ...prevState, url: 'hello', isFile: true };
+  //   });
+  // }, []);
+
+  return !files.filed ? (
     // 1) 입력된 파일이 없을때
     <Uploader />
   ) : // 파일이 입력됨
-  !isUploaded ? (
-    !isSelected ? (
+  !files.uploaded ? (
+    !files.selected ? (
       // 2) 모드 선택
       <SelectModes />
     ) : (
