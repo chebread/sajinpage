@@ -1,34 +1,21 @@
-import styled from 'styled-components';
 import { useCallback, useEffect } from 'react';
-import Dropzone from 'react-dropzone';
-import {
-  docIdAtom,
-  fileAtom,
-  isFileAtom,
-  fileIdAtom,
-  filesAtom,
-} from 'atoms/filesAtom';
 import { useAtom } from 'jotai';
+import styled from 'styled-components';
+import Dropzone from 'react-dropzone';
 import hashMaker from 'lib/hashMaker';
 import { cssVarsPalette } from 'layouts/cssVars';
 import transition from 'layouts/properties/transition';
-import { desktopVp } from 'layouts/properties';
+import filesAtom from 'atoms/filesAtom';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성
 // (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가)
 // (0): 여기서 setType하기 fileDb에 type이라는 것을 추가하기 (db에도) => video 허용시에
-
 // (0): Upload와 Home을 분립하기, Uploader는 /u/로 처리함 home에서는 help 제공하기 아니면 upload방법을 public / normal / limited / private 로 나누기
 
 // 파일을 사용자로부터 받아오는 부분
 
 const Uploader = () => {
   const [, setFiles] = useAtom(filesAtom);
-
-  const [, setFile] = useAtom(fileAtom);
-  const [, setIsFile] = useAtom(isFileAtom);
-  const [, setDocId] = useAtom(docIdAtom);
-  const [, setFileId] = useAtom(fileIdAtom);
   const fileAcceptTypes = {
     // MIME types를 사용함
     // []의 뜻은 없지만 꼭 써주어야 함
@@ -78,10 +65,6 @@ const Uploader = () => {
         fileId: fileId,
       };
     });
-    // setIsFile(true);
-    // setFile(file);
-    // setDocId(docId);
-    // setFileId(fileId);
   }, []); // (0): useCallback에서 [] 전달해도 상관이없나? 일반함수보다 이게 더 효율적인가?
   const onPaste = (e: any) => {
     const {

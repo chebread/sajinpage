@@ -1,14 +1,13 @@
-import { docIdAtom, filesAtom } from 'atoms/filesAtom';
-import initValuesAtom from 'atoms/initValuesAtom';
-import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
+import { useAtom } from 'jotai';
 import { Navigate } from 'react-router-dom';
+import filesAtom from 'atoms/filesAtom';
+import initValuesAtom from 'atoms/initValuesAtom';
 
 // 업로드 완료 (모든 값을 초기화 해줌)
 
 const Uploaded = () => {
-  const [files, setFiles] = useAtom(filesAtom);
-  const [docId] = useAtom(docIdAtom);
+  const [files] = useAtom(filesAtom);
   const localDocId = useRef(files.docId); // docId 초기화를 위해 미리 값을 컴포넌트 내부에 받아 둠
   const [, initValues] = useAtom(initValuesAtom);
 

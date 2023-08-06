@@ -1,27 +1,16 @@
-import {
-  accessTimeAtom,
-  filesAtom,
-  isSelectedAtom,
-  limitAtom,
-  timeLimitAtom,
-} from 'atoms/filesAtom';
-import initValuesAtom from 'atoms/initValuesAtom';
-import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import { useAtom } from 'jotai';
+import Select from 'react-select';
+import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
-import Select from 'react-select';
+import filesAtom from 'atoms/filesAtom';
+import initValuesAtom from 'atoms/initValuesAtom';
 
 // 파일 업로드 모드를 설정하는 부분
 
 const SelectModes = () => {
   const [files, setFiles] = useAtom(filesAtom);
-
-  const [, setLimit] = useAtom(limitAtom);
-  const [, setTimeLimit] = useAtom(timeLimitAtom);
-  const [, setAcessTime] = useAtom(accessTimeAtom);
-  const [, setIsSelected] = useAtom(isSelectedAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [, initValues] = useAtom(initValuesAtom);
 
@@ -40,22 +29,18 @@ const SelectModes = () => {
         return {
           ...prevState,
           accessTime: accessTime,
-          timeLimit: timeLimit,
+          timeLimit: timeLimit, // value는 시간초를 의미함
           limit: true,
         };
       });
-      // setAcessTime(accessTime);
-      // setTimeLimit(timeLimit); // value는 시간초를 의미함
-      // setLimit(true);
     }
     // normal mode && limit mode
     setFiles(prevState => {
       return {
         ...prevState,
-        selected: true,
+        selected: true, // 선택됨
       };
     });
-    // setIsSelected(true); // 선택됨
   };
 
   const onGoHome = () => {

@@ -1,19 +1,9 @@
 import { useEffect } from 'react';
 import { uploadFiles } from 'api';
 import { useAtom } from 'jotai';
-import {
-  urlAtom,
-  fileIdAtom,
-  isUploadedAtom,
-  accessTimeAtom,
-  docIdAtom,
-  fileAtom,
-  limitAtom,
-  timeLimitAtom,
-  filesAtom,
-} from 'atoms/filesAtom';
-import initValuesAtom from 'atoms/initValuesAtom';
 import PageLoading from 'pages/PageLoading';
+import filesAtom from 'atoms/filesAtom';
+import initValuesAtom from 'atoms/initValuesAtom';
 
 // 파일을 업로드하는 부분
 
@@ -21,14 +11,6 @@ import PageLoading from 'pages/PageLoading';
 
 const Uploading = () => {
   const [files, setFiles] = useAtom(filesAtom);
-
-  const [file] = useAtom(fileAtom);
-  const [docId] = useAtom(docIdAtom);
-  const [fileId] = useAtom(fileIdAtom);
-  const [, setIsUploaded] = useAtom(isUploadedAtom);
-  const [limit] = useAtom(limitAtom);
-  const [timeLimit] = useAtom(timeLimitAtom);
-  const [accessTime] = useAtom(accessTimeAtom);
   const [, initValues] = useAtom(initValuesAtom);
 
   useEffect(() => {
@@ -48,10 +30,9 @@ const Uploading = () => {
           setFiles(prevState => {
             return {
               ...prevState,
-              uploaded: true,
+              uploaded: true, // 파일이 업로드됨을 알림 (home에서 uploaded로 넘어가기 위해서)
             };
           });
-          // setIsUploaded(true); // 파일이 업로드됨을 알림 (home에서 uploaded로 넘어가기 위해서)
         })
         .catch(error => {
           console.log(error);
