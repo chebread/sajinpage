@@ -3,7 +3,7 @@ import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
 type BottomButtonProps = {
-  onClick: any;
+  onClick?: any;
   children: any;
 };
 
@@ -16,6 +16,7 @@ const BottomButton = ({ children, onClick }: BottomButtonProps) => {
 };
 
 const BtnWrapper = styled.div`
+  position: absolute;
   height: 100%;
   width: 100%;
   display: flex;
@@ -25,7 +26,7 @@ const BtnWrapper = styled.div`
 const Btn = styled.button`
   all: unset;
   position: fixed;
-  z-index: 10000;
+  z-index: 10000000;
   cursor: pointer;
   display: flex;
   flex-direction: row;

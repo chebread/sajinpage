@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { errorAtom } from './errorAtom';
 import fileDbAtom from './fileDbAtom';
 import filesAtom from './filesAtom';
-import { clickedAtom, loadedAtom, viewedAtom } from './viewerAtom';
+import { clickedAtom, viewedAtom } from './viewerAtom';
 
 const initValuesAtom = atom(null, (get, set) => {
   set(fileDbAtom, {
@@ -14,7 +14,6 @@ const initValuesAtom = atom(null, (get, set) => {
     excess: false,
   });
   set(errorAtom, {});
-  set(loadedAtom, false);
   set(clickedAtom, false);
   set(viewedAtom, false);
   set(filesAtom, {

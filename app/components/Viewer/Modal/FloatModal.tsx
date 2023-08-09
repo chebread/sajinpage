@@ -14,9 +14,11 @@ import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import supabase from 'lib/supabase';
-import Select from 'react-select';
 import styled from 'styled-components';
 import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
+import turnOffLimitedMode from '../turnOffLimitedMode';
+import turnOnLimitedMode from '../turnOnLimitedMode';
+// import Select from 'react-select';
 
 const FloatModal = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -28,51 +30,18 @@ const FloatModal = () => {
   const onResetToggle = () => {
     setResetToggle(!resetToggle);
   };
-  const onTurnOffLimitMode = async () => {
-    // turn on public mode
-    const { data: fileUrl, error: fileUrlError }: any = supabase.storage
-      .from('images')
-      .getPublicUrl(fileDb.fileId);
-    const url = fileUrl.publicUrl;
-    // update files
-    await updateFiles({
-      docId: fileDb.docId,
-      url: url,
-      limit: false,
-      accessTime: '',
-    }).catch(error => {
-      console.log(error);
-    });
-    onCancel();
-  };
-  const onModeSelect = async (e: any) => {
+
+  const onSelectMode = async (e: any) => {
     // turn on limit mode
-    const { value } = e; // value is timeLimit
-    if (value) {
-      const timeLimit = value;
-      // update accessTime
-      const currentTime = getCurrentTime();
-      const accessTime = dateToString(
-        addTime({ currentTime: currentTime, sec: timeLimit })
-      );
-      // update limit url
-      const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
-        .from('images')
-        .createSignedUrl(fileDb.fileId, timeLimit);
-      // signed url error checking
-      if (fileUrlError) {
-        // an error occurs
-        throw new Error('file signed url 생성중 오류 발생');
-      }
-      const url = fileUrl.signedUrl;
-      // update file
-      await updateFiles({
+    const {
+      target: { value },
+    } = e; // value is timeLimit
+    const timeLimit = value;
+    if (timeLimit) {
+      turnOnLimitedMode({
+        timeLimit: timeLimit,
         docId: fileDb.docId,
-        url: url,
-        limit: true,
-        accessTime: accessTime,
-      }).catch(error => {
-        console.log(error);
+        fileId: fileDb.fileId,
       });
       onCancel();
     }
@@ -83,11 +52,21 @@ const FloatModal = () => {
       {fileDb.limit ? (
         // (0): 이건 floatmodal을 2개가 아닌 1개로 하며, btn만 visible 감싸기!!! => 구분하자.
         <FloatModalsContainer visible={modeToggle}>
-          <Select onChange={onModeSelect} options={timeLimitOptions} />
+          {/* <Select onChange={onModeSelect} options={timeLimitOptions} /> */}
           <button onClick={() => setResetToggle(false)}>취소</button>
-
+          {/* 구분 필요 */}
           <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-          <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+          <button
+            onClick={() => {
+              turnOffLimitedMode({
+                docId: fileDb.docId,
+                fileId: fileDb.fileId,
+              });
+              onCancel();
+            }}
+          >
+            limit mode 끄기
+          </button>
           <button onClick={onCancel}>취소</button>
           <FloatModalsBackground onClick={onCancel} />
         </FloatModalsContainer>
@@ -95,12 +74,22 @@ const FloatModal = () => {
         <>
           <FloatModalsContainer visible={modeToggle}>
             <FloatModals>
-              <FloatModalsHeader>
-                <CancelButton onClick={onCancel}>
-                  <CancelIcon />
-                </CancelButton>
-              </FloatModalsHeader>
-              <Select onChange={onModeSelect} options={timeLimitOptions} />
+              <CancelButton onClick={onCancel}>
+                <CancelIcon />
+              </CancelButton>
+
+              <SelectWrapper>
+                <Select onChange={onSelectMode}>
+                  <option hidden disabled selected value="">
+                    시간 선택
+                  </option>
+                  {timeLimitOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Select>
+              </SelectWrapper>
             </FloatModals>
             <FloatModalsBackground onClick={onCancel} />
           </FloatModalsContainer>
@@ -110,15 +99,6 @@ const FloatModal = () => {
   );
 };
 
-const FloatModalsBackground = styled.div`
-  display: block;
-  ${transition('all')}
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  z-index: -1;
-`;
 const FloatModalsContainer = styled.div<{ visible?: boolean }>`
   ${transition('all')}
   visibility: hidden;
@@ -138,31 +118,44 @@ const FloatModalsContainer = styled.div<{ visible?: boolean }>`
   display: flex;
   ${centerAlign}
 `;
+const FloatModalsBackground = styled.div`
+  display: block;
+  ${transition('all')}
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+`;
 const FloatModals = styled.div`
   position: fixed;
   height: 28rem;
   width: 600px;
   border-radius: 1rem;
   background-color: #ffffff;
-  z-index: 1000000;
 `;
-const FloatModalsHeader = styled.div`
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  height: 53px;
+const SelectWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  ${centerAlign}
+  z-index: -1;
 `;
+const Select = styled.select``;
 const CancelButton = styled.button`
   all: unset;
-  margin-left: 0.5rem;
+  margin: 0.5rem;
   ${disableTab}
   ${transition('all')}
   z-index: 10000;
   cursor: pointer;
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  width: 3rem;
   display: flex;
   ${centerAlign}
   border-radius: 50%;
@@ -180,9 +173,132 @@ const CancelButton = styled.button`
   }
   svg {
     ${transition('transform')}
-    height: 13px; // 1rem
+    height: 1rem; // 1rem
     fill: #ffffff;
   }
 `;
 
 export default FloatModal;
+
+{
+  /* <SelectInput
+                classNamePrefix="Select"
+                placeholder="시간 선택"
+                onChange={onModeSelect}
+                options={timeLimitOptions}
+                isSearchable={false}
+                styles={{
+                  placeholder: defaultStyles => {
+                    return {
+                      ...defaultStyles,
+                      color: '#000000',
+                    };
+                  },
+                }}
+                // components={{
+                //   DropdownIndicator: () => null,
+                //   IndicatorSeparator: () => null,
+                // }}
+              /> */
+}
+// const SelectInput = styled(Select)`
+//   .Select__control {
+//     all: unset;
+//   }
+
+//   .Select__control:hover {
+//     all: unset;
+//   }
+
+//   .Select__control--is-focused {
+//     box-shadow: none;
+//     outline: none;
+//     border: none;
+//   }
+
+//   .Select__indicator-separator {
+//     display: none;
+//   }
+//   .Select__dropdown-indicator {
+//     display: none;
+//   }
+
+//   .Select__menu {
+//     color: #3c3d3e;
+//   }
+// `;
+
+{
+  /* <FloatModalContainer visible={resetToggle}>
+            <Select onChange={onModeSelect} options={timeLimitOptions} />
+            <button onClick={onCancel}>취소</button>
+          </FloatModalContainer>
+          <FloatModalContainer visible={modeToggle}>
+            <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
+            <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+            <button onClick={onCancel}>취소</button>
+          </FloatModalContainer> */
+}
+
+{
+  /* <FloatWrapper visible={resetToggle}>
+              <Select onChange={onModeSelect} options={timeLimitOptions} />
+              <button onClick={() => setResetToggle(false)}>취소</button>
+            </FloatWrapper>
+            <FloatWrapper visible={!resetToggle}>
+              <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
+              <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
+              <button onClick={onCancel}>취소</button>
+            </FloatWrapper> */
+}
+
+// const FloatWrapper = styled.div<ModalPropsType>`
+//   visibility: hidden;
+//   opacity: 0;
+//   z-index: -1;
+//   @media (${desktopVp}) {
+//     ${transition('all')}
+//     visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+//     opacity: ${({ visible }) => (visible ? 1 : 0)};
+//     z-index: ${({ visible }) => (visible ? '1000000' : '-1')};
+//   }
+//   background-color: seagreen;
+// `;
+
+/*
+const onModeSelect = async (e: any) => {
+  // turn on limit mode
+  const {
+    target: { value },
+  } = e; // value is timeLimit
+  console.log(value);
+
+  if (value) {
+    const timeLimit = value;
+    // update accessTime
+    const currentTime = getCurrentTime();
+    const accessTime = dateToString(
+      addTime({ currentTime: currentTime, sec: timeLimit })
+    );
+    // update limit url
+    const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
+      .from('images')
+      .createSignedUrl(fileDb.fileId, timeLimit);
+    // signed url error checking
+    if (fileUrlError) {
+      // an error occurs
+      throw new Error('file signed url 생성중 오류 발생');
+    }
+    const url = fileUrl.signedUrl;
+    // update file
+    await updateFiles({
+      docId: fileDb.docId,
+      url: url,
+      limit: true,
+      accessTime: accessTime,
+    }).catch(error => {
+      console.log(error);
+    });
+    onCancel();
+  }
+}; */

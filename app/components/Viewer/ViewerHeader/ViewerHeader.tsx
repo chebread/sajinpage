@@ -61,7 +61,6 @@ const Container = styled.div`
     transform: translateY(0);
   }
   top: 0;
-  z-index: 10000;
   height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
@@ -119,19 +118,19 @@ const ButtonWrapper = styled.div`
   }
 `;
 const Btn = styled.button<{ visible: boolean }>`
+  // 이거 menumodal시 띄워지게 하기
   all: unset;
-  cursor: pointer;
+  z-index: 10000; // (0): 왜 안먹히나.
   ${transition('all')}
+  cursor: pointer;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   z-index: ${({ visible }) => (visible ? '0' : '-1')};
-
   width: 3.5rem;
   height: 3.5rem;
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-  ${transition('background-color')}
   &:hover {
     background-color: rgb(235, 235, 235);
     svg {
@@ -145,46 +144,9 @@ const Btn = styled.button<{ visible: boolean }>`
     }
   }
   svg {
-    ${transition('transform')}
-    height: 1.1rem;
+    ${transition('all')}
+    height: 1.2rem; // 1.1rem
   }
 `;
 
 export default ViewerHeader;
-
-{
-  /* <FloatModalContainer visible={resetToggle}>
-            <Select onChange={onModeSelect} options={timeLimitOptions} />
-            <button onClick={onCancel}>취소</button>
-          </FloatModalContainer>
-          <FloatModalContainer visible={modeToggle}>
-            <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-            <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-            <button onClick={onCancel}>취소</button>
-          </FloatModalContainer> */
-}
-
-{
-  /* <FloatWrapper visible={resetToggle}>
-              <Select onChange={onModeSelect} options={timeLimitOptions} />
-              <button onClick={() => setResetToggle(false)}>취소</button>
-            </FloatWrapper>
-            <FloatWrapper visible={!resetToggle}>
-              <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-              <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-              <button onClick={onCancel}>취소</button>
-            </FloatWrapper> */
-}
-
-// const FloatWrapper = styled.div<ModalPropsType>`
-//   visibility: hidden;
-//   opacity: 0;
-//   z-index: -1;
-//   @media (${desktopVp}) {
-//     ${transition('all')}
-//     visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-//     opacity: ${({ visible }) => (visible ? 1 : 0)};
-//     z-index: ${({ visible }) => (visible ? '1000000' : '-1')};
-//   }
-//   background-color: seagreen;
-// `;

@@ -11,31 +11,22 @@ const ImagesScreen = ({ src }) => {
 
   return (
     <Container>
-      <Wrapper>
-        <ImageWrapper>
-          <Image
-            src={src}
-            onError={() => {
-              // Uxpected error tracking (avif browser 지원안할때, file url 손상시, ...)
-              onError({
-                code: 405,
-                message: 'ImagesViewer에서 image를 불러오는 중에 에러가 발생함',
-              });
-            }}
-          />
-        </ImageWrapper>
-      </Wrapper>
+      <ImageWrapper>
+        <Image
+          src={src}
+          onError={() => {
+            // Uxpected error tracking (avif browser 지원안할때, file url 손상시, ...)
+            onError({
+              code: 405,
+              message: 'ImagesViewer에서 image를 불러오는 중에 에러가 발생함',
+            });
+          }}
+        />
+      </ImageWrapper>
     </Container>
   );
 };
 const Container = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  ${centerAlign}
-`;
-const Wrapper = styled.div`
-  position: absolute;
   height: 100%;
   width: 100%;
   display: flex;

@@ -50,6 +50,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   ${centerAlign}
+  .active {
+    // (0): svg 다시 작성하여 fill 되는 것 구현하기
+  }
 `;
 
 const Navigate = styled(NavLink)`

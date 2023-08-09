@@ -42,6 +42,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   background-color: ${themeVars.light.background_color};
+  /* background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px); */
 `;
 
 const Wrapper = styled.div`

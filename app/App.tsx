@@ -2,6 +2,7 @@ import Router from 'components/Router/Router';
 import transition from 'layouts/properties/transition';
 import { Toaster } from 'react-hot-toast';
 import styled from 'styled-components';
+import BottomButton from 'components/BottomButton';
 
 // toast 및 router
 

@@ -5,6 +5,7 @@ import { useAtom } from 'jotai';
 import { desktopVp, disableSelection } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import getUrl from 'lib/getUrl';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 import onCopy from '../onCopy';
 import onDelete from '../onDelete';
@@ -18,12 +19,28 @@ const MenuModal = () => {
 
   const onModeToggle = () => {
     setModeToggle(!modeToggle);
+    setClicked(false); // menuModal 최소화
+  };
+
+  const onDelete = async (docId: string) => {
+    await deleteFiles(docId)
+      .then(() => {
+        toast.success('delete file');
+      })
+      .catch(() => {
+        toast.error('파일 삭제중 오류 발생');
+      });
   };
 
   return (
     <>
       <MenuModalsContainer visible={clicked}>
-        <MenuModals onClick={() => onCopy(getUrl())}>
+        <MenuModals
+          onClick={async () => {
+            await onCopy(getUrl());
+            onCancel();
+          }}
+        >
           <MenuModalsWrapper>링크 복사</MenuModalsWrapper>
         </MenuModals>
         {fileDb.limit ? (
@@ -40,7 +57,12 @@ const MenuModal = () => {
             </MenuModals>
           </>
         )}
-        <MenuModals onClick={() => onDelete(fileDb.docId)}>
+        <MenuModals
+          onClick={async () => {
+            await onDelete(fileDb.docId);
+            onCancel();
+          }}
+        >
           <MenuModalsWrapper>삭제</MenuModalsWrapper>
         </MenuModals>
       </MenuModalsContainer>
@@ -58,9 +80,10 @@ const MenuModalsBackground = styled.div<{ visible: boolean }>`
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
+  z-index: ${({ visible }) => (visible ? '1' : '-1')};
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
+  // (0): z-index: 10000시 버튼이 왜 안먹힐까?
 `;
 const MenuModalsContainer = styled.div<{ visible: boolean }>`
   ${transition('all')}
