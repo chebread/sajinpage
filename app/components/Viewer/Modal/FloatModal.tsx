@@ -1,8 +1,6 @@
-import { updateFiles } from 'api';
 import fileDbAtom from 'atoms/fileDbAtom';
 import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import {
-  clickedAtom,
   modeToggleAtom,
   onCancelAtom,
   resetToggleAtom,
@@ -10,15 +8,12 @@ import {
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import addTime from 'lib/addTime';
-import dateToString from 'lib/dateToString';
-import getCurrentTime from 'lib/getCurrentTime';
-import supabase from 'lib/supabase';
 import styled from 'styled-components';
 import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
 import turnOffLimitedMode from '../turnOffLimitedMode';
 import turnOnLimitedMode from '../turnOnLimitedMode';
-// import Select from 'react-select';
+import { toast } from 'react-hot-toast';
+import { useEffect, useRef } from 'react';
 
 const FloatModal = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -26,6 +21,11 @@ const FloatModal = () => {
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
   const [resetToggle, setResetToggle] = useAtom(resetToggleAtom);
   const [, onCancel] = useAtom(onCancelAtom);
+  const currentDatetime = useRef(
+    new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 19)
+  );
 
   const onResetToggle = () => {
     setResetToggle(!resetToggle);
@@ -36,16 +36,37 @@ const FloatModal = () => {
     const {
       target: { value },
     } = e; // value is timeLimit
-    const timeLimit = value;
-    if (timeLimit) {
+    if (value) {
+      const timeLimit = value;
       turnOnLimitedMode({
         timeLimit: timeLimit,
         docId: fileDb.docId,
         fileId: fileDb.fileId,
+      }).catch(() => {
+        toast.error('Turn on limited mode error');
       });
       onCancel();
     }
   };
+  const onTurnOffMode = async () => {
+    await turnOffLimitedMode({
+      docId: fileDb.docId,
+      fileId: fileDb.fileId,
+    }).catch(() => {
+      toast.error('Turn off limited mode error');
+    });
+    onCancel();
+  };
+
+  useEffect(() => {
+    console.log(currentDatetime.current);
+
+    console.log(
+      `${new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(0, 17)}` + '00'
+    );
+  }, []);
 
   return (
     <>
@@ -56,17 +77,7 @@ const FloatModal = () => {
           <button onClick={() => setResetToggle(false)}>취소</button>
           {/* 구분 필요 */}
           <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-          <button
-            onClick={() => {
-              turnOffLimitedMode({
-                docId: fileDb.docId,
-                fileId: fileDb.fileId,
-              });
-              onCancel();
-            }}
-          >
-            limit mode 끄기
-          </button>
+          <button onClick={onTurnOffMode}>limit mode 끄기</button>
           <button onClick={onCancel}>취소</button>
           <FloatModalsBackground onClick={onCancel} />
         </FloatModalsContainer>
@@ -80,15 +91,22 @@ const FloatModal = () => {
 
               <SelectWrapper>
                 <Select onChange={onSelectMode}>
-                  <option hidden disabled selected value="">
-                    시간 선택
-                  </option>
+                  <option value={''}>시간 선택</option>
                   {timeLimitOptions.map(option => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
                   ))}
                 </Select>
+                <input
+                  type="datetime-local"
+                  defaultValue={`${currentDatetime.current}`}
+                  min={`${
+                    `${new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
+                      .toISOString()
+                      .slice(0, 17)}` + '00' // (0): 시간은 제한이 안걸리니 현재 시간 이전으로 값이 설정되면 경고 띄우고 다시 설정하기
+                  }`}
+                />
               </SelectWrapper>
             </FloatModals>
             <FloatModalsBackground onClick={onCancel} />
@@ -145,6 +163,7 @@ const SelectWrapper = styled.div`
   display: flex;
   ${centerAlign}
   z-index: -1;
+  flex-direction: column;
 `;
 const Select = styled.select``;
 const CancelButton = styled.button`

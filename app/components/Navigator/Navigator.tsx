@@ -44,6 +44,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   background-color: #ffffff;
+  box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.3);
 `;
 
 const Wrapper = styled.div`

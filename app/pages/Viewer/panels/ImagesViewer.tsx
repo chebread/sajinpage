@@ -22,7 +22,7 @@ const ImagesViewer = () => {
           <ImagesScreen src={fileDb.url} />
         </Container>
       </CenterScreen>
-      {/* <ViewerMenu /> */}
+      <ViewerMenu />
     </>
   );
 };

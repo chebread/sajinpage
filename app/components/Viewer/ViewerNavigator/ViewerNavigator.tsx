@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 
 const ViewerNavigator = () => {
   return (
-    <>
+    <X>
       <Container>
         <Wrapper>
           <Navigate to="f" onTouchStart={() => {}}>
@@ -34,16 +34,23 @@ const ViewerNavigator = () => {
           </Navigate>
         </Wrapper>
       </Container>
-    </>
+    </X>
   );
 };
 
-const Container = styled.div`
+const X = styled.div`
   ${transition('all')}
   transform: translateY(100%);
   @media (${desktopVp}) {
     transform: translateY(0);
   }
+  position: fixed;
+  height: ${cssVarsPalette.nav_height};
+  width: 100%;
+  bottom: 0;
+`;
+const Container = styled.div`
+  ${transition('all')}
   position: fixed;
   height: ${cssVarsPalette.nav_height};
   width: 100%;

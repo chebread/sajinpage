@@ -85,7 +85,7 @@ const Uploader = () => {
             <DropZone {...getRootProps()}>
               <input {...getInputProps()} />
               <Container>
-                <h1>Sajinpage {isDragActive}</h1>
+                <h1>Upload {isDragActive}</h1>
                 <Button onClick={open}>Import images</Button>
                 <DropGuide visible={isDragActive}>hello</DropGuide>
               </Container>
