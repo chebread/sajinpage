@@ -9,6 +9,7 @@ import { clickedAtom, onCancelAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { themeVars } from 'layouts/themes';
 import MenuModal from '../Modal/MenuModal';
+import Header from 'components/Header';
 
 // (0): 여기에 background를 위치해서 modal 클릭시에 bg 클릭시 없어지게 구성하기! (menumodal or floatmodal 적용)
 
@@ -23,30 +24,27 @@ const ViewerHeader = () => {
 
   return (
     <>
-      <ContainerWrapper>
-        <Container>
-          <AsideLeftWrapper>
-            <ButtonWrapper></ButtonWrapper>
-          </AsideLeftWrapper>
-          <LogoWrapper>
-            <LogoBtn to="/">
-              <Logo />
-            </LogoBtn>
-          </LogoWrapper>
-          <AsideRightWrapper>
-            <ButtonWrapper>
-              <Btn visible={viewed} onClick={onMenu}>
-                <DotIcon />
-              </Btn>
-            </ButtonWrapper>
-          </AsideRightWrapper>
-        </Container>
-      </ContainerWrapper>
+      <X>
+        <Header />
+      </X>
       <MenuModal />
     </>
   );
 };
 
+const X = styled.div`
+  ${transition('all')}
+  margin-bottom: -3rem;
+  transform: translateY(-100%);
+  @media (${desktopVp}) {
+    margin-bottom: auto;
+    transform: translateY(0);
+  }
+  position: fixed;
+  top: 0;
+  height: ${cssVarsPalette.header_height};
+  width: 100%;
+`;
 const ContainerWrapper = styled.div`
   ${transition('padding-top')}
   padding-top: ${cssVarsPalette.header_height};
@@ -54,18 +52,12 @@ const ContainerWrapper = styled.div`
 const Container = styled.div`
   ${transition('all')}
   position: fixed;
-  margin-bottom: -3rem;
-  transform: translateY(-100%);
-  @media (${desktopVp}) {
-    margin-bottom: auto;
-    transform: translateY(0);
-  }
   top: 0;
   height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: ${themeVars.light.background_color};
+  background-color: #ffffff;
 `;
 const Wrapper = styled.div`
   height: 100%;

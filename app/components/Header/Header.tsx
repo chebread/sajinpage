@@ -4,9 +4,21 @@ import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
+import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { themeVars } from 'layouts/themes';
+import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { useAtom } from 'jotai';
+import MenuModal from 'components/Viewer/Modal/MenuModal';
 
 const Header = () => {
+  const [viewed, setViewed] = useAtom(viewedAtom); // check that current route is viewer
+  const [clicked, setClicked] = useAtom(clickedAtom);
+  console.log(viewed);
+
+  const onMenu = () => {
+    setClicked(!clicked);
+  };
+
   return (
     <>
       <ContainerWrapper>
@@ -20,7 +32,11 @@ const Header = () => {
             </LogoBtn>
           </LogoWrapper>
           <AsideRightWrapper>
-            <ButtonWrapper></ButtonWrapper>
+            <ButtonWrapper>
+              <Btn visible={viewed} onClick={onMenu}>
+                <DotIcon />
+              </Btn>
+            </ButtonWrapper>
           </AsideRightWrapper>
         </Container>
       </ContainerWrapper>
@@ -33,10 +49,10 @@ const ContainerWrapper = styled.div`
   padding-top: ${cssVarsPalette.header_height};
 `;
 const Container = styled.div`
+  ${transition('all')}
   position: fixed; // (0): fixed로 구성하기
   top: 0;
   z-index: 10000;
-  ${transition('height', 'width')}
   height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
@@ -95,15 +111,20 @@ const ButtonWrapper = styled.div`
     padding-right: 3rem;
   }
 `;
-const Btn = styled.button`
+const Btn = styled.button<{ visible?: boolean }>`
+  // 이거 menumodal시 띄워지게 하기
   all: unset;
+  z-index: 10000; // (0): 왜 안먹히나.
+  ${transition('all')}
   cursor: pointer;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: ${({ visible }) => (visible ? '0' : '-1')};
   width: 3.5rem;
   height: 3.5rem;
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-  ${transition('background-color')}
   &:hover {
     background-color: rgb(235, 235, 235);
     svg {
@@ -117,7 +138,7 @@ const Btn = styled.button`
     }
   }
   svg {
-    ${transition('transform')}
+    ${transition('all')}
     height: 1.2rem; // 1.1rem
   }
 `;

@@ -98,7 +98,9 @@ const MenuModalsContainer = styled.div<{ visible: boolean }>`
   }
   position: fixed;
   right: 0;
+  top: 0;
   margin-right: 3rem;
+  margin-top: 4rem;
   box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.08);
   border: 0.5px solid rgba(0, 0, 0, 0.04);
   display: flex;
