@@ -37,7 +37,7 @@ const FloatModal = () => {
       target: { value },
     } = e; // value is timeLimit
     if (value) {
-      const timeLimit = value;
+      const timeLimit: number = Number(value); // value is string type
       await turnOnLimitedMode({
         timeLimit: timeLimit,
         docId: fileDb.docId,
@@ -89,11 +89,13 @@ const FloatModal = () => {
               <SelectWrapper>
                 <Select onChange={onSelectMode}>
                   <option value={''}>시간 선택</option>
-                  {timeLimitOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  {timeLimitOptions.map(option => {
+                    return (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    );
+                  })}
                 </Select>
                 <input
                   type="datetime-local"

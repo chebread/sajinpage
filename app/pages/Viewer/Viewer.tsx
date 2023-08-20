@@ -19,6 +19,7 @@ import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
 
 // (0): 파일의 db를 idb에 저장하여서 다시 로딩되는 일 없게하기 만일 idb 삭제시 다시 불러오게 됨
+// (0): 탭이 달라도, 보는 버킷이 달라도 일단 어디 탭에서 삭제 하기만 하면 어떤 탭도 홈으로 가게 됨 => 이거 수정하기 (이렇게 onDelete로 실시간으로 받는 것이 아닌 postmessage를 통해서 delete 부분 수정하기)
 
 // 파일들을 확인하는 곳
 // 각각의 url들을 Bucket이라 칭함
@@ -38,8 +39,6 @@ const Viewer = () => {
   const [, initValues] = useAtom(initValuesAtom);
   const navigate = useNavigate();
   const [, setViewed] = useAtom(viewedAtom);
-
-  console.log(fileDb);
 
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
@@ -78,21 +77,27 @@ const Viewer = () => {
       }
     };
     // subscribe as realtime
-    const fetchRealtime = fetchRealtimeFiles({
+    const { realtimeChannel, broadcastChannel } = fetchRealtimeFiles({
       tableId: 'refs',
       onUpdate: (payload: any) => {
-        // (0): broadcast api로 상태 관리하기 onUpdate로 관리시 모든 앱에서 모든 사용자의 앱에서 이게 작동되게 됨 그니까 내부적으로만 관리할 수 있도록 바꿔야함
+        console.log('event update');
         // file update
-        console.log('파일의 정보가 업데이트됨');
-        setFileDb(payload.new);
-        console.log(payload.new);
+        if (payload.new.docId === docId) {
+          // 업데이트 된 파일의 docId와 현재 라우터의 docId가 일치시 업데이트가 반영됨
+          console.log('파일의 정보가 업데이트됨');
+          setFileDb(payload.new);
+        }
       },
-      onDelete: (payload: any) => {
+      onDelete: async (payload: any) => {
+        console.log('event delete');
         // file deleted
-        // console.log('파일이 삭제됨');
-        // initValues(); // 가기전에 초기화
-        // navigate('/'); // 라우트 안하고 홈으로 가기
-        // (0): 탭이 달라도, 보는 버킷이 달라도 일단 어디 탭에서 삭제 하기만 하면 어떤 탭도 홈으로 가게 됨 => 이거 수정하기 (이렇게 onDelete로 실시간으로 받는 것이 아닌 postmessage를 통해서 delete 부분 수정하기)
+        if (payload.payload.docId === docId) {
+          console.log('파일이 삭제됨');
+          const buckets = await get('urls');
+          deleteIdb(buckets, docId);
+          initValues(); // 가기전에 초기화
+          navigate('/'); // 라우트 안하고 홈으로 가기
+        }
       },
       onSubscribed: async () => {
         // realtime subscribed 후에 viewer를 실행함
@@ -108,37 +113,14 @@ const Viewer = () => {
         });
       },
     });
-    // for delete feature
-    const onMessage = async (e: any) => {
-      if (e.detail.data === 'delete') {
-        // my files에서 저장된 bucket 삭제하기
-        const buckets = await get('urls');
-        deleteIdb(buckets, docId);
-        initValues(); // 가기전에 초기화
-        navigate('/'); // 라우트 안하고 홈으로 가기
-        console.log('파일이 삭제됨');
-      }
-    };
-    // broadcast api 이 탭간 송신이 되기 때문에 일단은 사용하지 않음 나중에는 delete시 docId와 현재 docId 일치시 같으면 홈으로 가기 이렇게 구성함
-    window.addEventListener('evented', onMessage);
+
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
-      supabase.removeChannel(fetchRealtime);
+      supabase.removeChannel(realtimeChannel);
+      supabase.removeChannel(broadcastChannel);
       // console.log('unChannel');
       initValues();
-      // for delete feature
-      window.removeEventListener('evented', onMessage);
     };
-    /* setLoaded(true);
-    setViewed(true);
-    setFileDb({
-      url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
-      docId: '',
-      fileId: '',
-      accessTime: '',
-      limit: false,
-      excess: false,
-    }); */
   }, []);
 
   // check file session as realtime each 1sec

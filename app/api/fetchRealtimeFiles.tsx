@@ -1,4 +1,4 @@
-import supabase from 'lib/supabase';
+import clientChannels from './createClients';
 
 type fetchRealtimeFiles = {
   tableId: string;
@@ -8,8 +8,8 @@ type fetchRealtimeFiles = {
 
 // types: update, insert, delete
 const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
-  const fetchChannel = supabase
-    .channel('any')
+  const realtimeChannel = clientChannels()
+    .channel('realtime')
     .on(
       'postgres_changes',
       {
@@ -25,17 +25,27 @@ const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
       'postgres_changes',
       { event: 'DELETE', schema: 'public', table: tableId },
       payload => {
-        onDelete(payload);
+        // onDelete(payload);
       }
     )
     .subscribe(status => {
       // realtime subscribed 후에 viewer를 실행함
-      // console.log(status);
+      console.log(status);
+      if (status === 'SUBSCRIBED') {
+      }
+    });
+  const broadcastChannel = clientChannels()
+    .channel('broadcast')
+    .on('broadcast', { event: 'DELETE' }, payload => {
+      onDelete(payload);
+    })
+    .subscribe(status => {
+      console.log(status);
       if (status === 'SUBSCRIBED') {
         onSubscribed();
       }
     });
-  return fetchChannel;
+  return { realtimeChannel, broadcastChannel };
 };
 
 export default fetchRealtimeFiles;

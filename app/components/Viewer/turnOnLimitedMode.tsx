@@ -10,6 +10,7 @@ const turnOnLimitedMode = async ({ timeLimit, docId, fileId }) => {
   const accessTime = dateToString(
     addTime({ currentTime: currentTime, sec: timeLimit })
   );
+
   // update limit url
   const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
     .from('images')
@@ -20,6 +21,7 @@ const turnOnLimitedMode = async ({ timeLimit, docId, fileId }) => {
     throw new Error('file signed url 생성중 오류 발생');
   }
   const url = fileUrl.signedUrl;
+
   // update file
   await updateFiles({
     docId: docId,
