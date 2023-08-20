@@ -1,14 +1,14 @@
-import { deleteFiles } from 'api';
+import { deleteFiles, updateFiles } from 'api';
 import fileDbAtom from 'atoms/fileDbAtom';
 import { clickedAtom, modeToggleAtom, onCancelAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableSelection } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
+import { onEventChannel } from 'lib/broadcastChannel';
 import getUrl from 'lib/getUrl';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 import onCopy from '../onCopy';
-import onDelete from '../onDelete';
 import FloatModal from './FloatModal';
 
 const MenuModal = () => {
@@ -39,6 +39,14 @@ const MenuModal = () => {
           onClick={async () => {
             await onCopy(getUrl());
             onCancel();
+            updateFiles({
+              docId: fileDb.docId,
+              url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
+              fileId: '',
+              accessTime: '',
+              limit: false,
+              excess: false,
+            });
           }}
         >
           <MenuModalsWrapper>링크 복사</MenuModalsWrapper>
@@ -61,6 +69,7 @@ const MenuModal = () => {
           onClick={async () => {
             await onDelete(fileDb.docId);
             onCancel();
+            onEventChannel('delete');
           }}
         >
           <MenuModalsWrapper>삭제</MenuModalsWrapper>

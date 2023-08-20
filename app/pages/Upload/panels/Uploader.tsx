@@ -8,11 +8,9 @@ import transition from 'layouts/properties/transition';
 import filesAtom from 'atoms/filesAtom';
 
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성
-// (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가)
+// (0): 간략한 도움말 만들기 (하단에 도움말(/h)로 가기 버튼 추가) / 문의하기 / policy
 // (0): 여기서 setType하기 fileDb에 type이라는 것을 추가하기 (db에도) => video 허용시에
-// (0): Upload와 Home을 분립하기, Uploader는 /u/로 처리함 home에서는 help 제공하기 아니면 upload방법을 public / normal / limited / private 로 나누기
-
-// 파일을 사용자로부터 받아오는 부분
+// (0): pdf upload 기능 추가하기
 
 const Uploader = () => {
   const [, setFiles] = useAtom(filesAtom);
@@ -21,8 +19,9 @@ const Uploader = () => {
     // []의 뜻은 없지만 꼭 써주어야 함
     'image/*': [], // 이미지 타입 전체
     'image/avif': [], // firefox에서 avif 파일은 open시에 안뜨기에 추가함
+    'application/pdf': [],
   };
-  const fileTypeRegex = /image/g;
+  const fileTypeRegex = /(image)|(application\/pdf)/g;
   const fileMaxSize = 5000000; // 500000byte = 5mb
 
   useEffect(() => {
@@ -34,16 +33,17 @@ const Uploader = () => {
   }, []);
 
   const onDropFiles = useCallback(async (files: any) => {
+    const file = files[0];
+    const isImageFile = file.type.match(fileTypeRegex); // type이 image, pdf 인지 파일 체크
+    const docId = hashMaker();
+    const fileId = hashMaker();
+    // 1개 초과 파일은 받지 않음
     if (files.length > 1) {
-      // 1개 초과 파일은 받지 않음
       alert('한 개의 파일만 업로드 가능');
       return;
     }
-    const file = files[0];
     // check file's type
-    const isImageFile = file.type.match(fileTypeRegex); // type이 image, pdf, video 인지 파일 체크
     if (isImageFile === null) {
-      // Image 이외의 파일은 받지 않음
       alert('이 파일 형식은 업로드 될 수 없음');
       return;
     }
@@ -52,10 +52,7 @@ const Uploader = () => {
       alert('파일의 크기가 너무 커 업로드 될 수 없음');
       return;
     }
-    const docId = hashMaker();
-    const fileId = hashMaker();
     // initialize file
-    // 파일 최적화는 일단은 하지 않음
     setFiles(prevState => {
       return {
         ...prevState,
@@ -85,7 +82,7 @@ const Uploader = () => {
             <DropZone {...getRootProps()}>
               <input {...getInputProps()} />
               <Container>
-                <h1>Upload {isDragActive}</h1>
+                <h1>Upload</h1>
                 <Button onClick={open}>Import images</Button>
                 <DropGuide visible={isDragActive}>hello</DropGuide>
               </Container>

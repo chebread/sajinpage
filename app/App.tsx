@@ -1,8 +1,6 @@
 import Router from 'components/Router/Router';
-import transition from 'layouts/properties/transition';
 import { Toaster } from 'react-hot-toast';
 import styled from 'styled-components';
-import BottomButton from 'components/BottomButton';
 
 // toast 및 router
 
@@ -12,7 +10,6 @@ const App = () => {
       <Container>
         <Toaster
           position="bottom-center"
-          containerClassName="toast-container"
           toastOptions={{
             className: 'toast',
             duration: 1000,
@@ -24,13 +21,6 @@ const App = () => {
   );
 };
 
-const Container = styled.div`
-  .toast-container {
-  }
-  .toast {
-    ${transition('all')}
-    z-index: 100000;
-  }
-`;
+const Container = styled.div``;
 
 export default App;

@@ -125,7 +125,6 @@ const ViewerMenu = () => {
             >
               <button>Share</button>
             </CopyToClipboard>
-
             <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
             {fileDb.limit ? (
               // limit mode

@@ -10,10 +10,12 @@ import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import MenuModal from 'components/Viewer/Modal/MenuModal';
 
+// (0): svg safari 오류 해결하기 (chrome도 약간 불안정함)
+// (0): menu modal 삭제가 안됨
+
 const Header = () => {
-  const [viewed, setViewed] = useAtom(viewedAtom); // check that current route is viewer
+  const [viewed] = useAtom(viewedAtom); // check that current route is image-viewer
   const [clicked, setClicked] = useAtom(clickedAtom);
-  console.log(viewed);
 
   const onMenu = () => {
     setClicked(!clicked);
@@ -22,7 +24,7 @@ const Header = () => {
   return (
     <>
       <ContainerWrapper>
-        <Container>
+        <Container visible={viewed}>
           <AsideLeftWrapper>
             <ButtonWrapper></ButtonWrapper>
           </AsideLeftWrapper>
@@ -40,6 +42,7 @@ const Header = () => {
           </AsideRightWrapper>
         </Container>
       </ContainerWrapper>
+      <MenuModal />
     </>
   );
 };
@@ -48,11 +51,18 @@ const ContainerWrapper = styled.div`
   ${transition('padding-top')}
   padding-top: ${cssVarsPalette.header_height};
 `;
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
   ${transition('all')}
+  // for viewer
+  margin-bottom: ${({ visible }) => (visible ? '-3rem' : 'auto')};
+  transform: ${({ visible }) =>
+    visible ? 'translateY(-100%)' : 'translateY(0)'};
+  @media (${desktopVp}) {
+    margin-bottom: auto;
+    transform: translateY(0);
+  }
   position: fixed; // (0): fixed로 구성하기
   top: 0;
-  z-index: 10000;
   height: ${cssVarsPalette.header_height};
   width: 100%;
   display: flex;
@@ -85,6 +95,7 @@ const LogoBtn = styled(Link)`
   svg {
     ${transition('transform', 'height')}
     height: 1.5rem;
+    width: auto;
     @media (${desktopVp}) {
       height: 2rem;
     }
@@ -114,9 +125,9 @@ const ButtonWrapper = styled.div`
 const Btn = styled.button<{ visible?: boolean }>`
   // 이거 menumodal시 띄워지게 하기
   all: unset;
-  z-index: 10000; // (0): 왜 안먹히나.
   ${transition('all')}
   cursor: pointer;
+  z-index: 10000; // (0): 왜 안먹히나.
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   z-index: ${({ visible }) => (visible ? '0' : '-1')};

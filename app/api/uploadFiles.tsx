@@ -57,6 +57,7 @@ const uploadFiles = async ({
       : '',
     limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
     excess: false,
+    fileType: '',
   };
   // create table
   // create columns

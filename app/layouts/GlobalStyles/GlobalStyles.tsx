@@ -4,13 +4,6 @@ import { appThemes, themeVars } from 'layouts/themes';
 import initStyles from './initStyles';
 import appCssVars from 'layouts/cssVars/appCssVars';
 
-// 770px 이하: mobile
-// 1200 이하: tablet and desktop
-// 1200 이상: only desktop
-
-// 960 이하: table & mobile
-// 960 이상: desktop
-
 const GlobalStyles = createGlobalStyle`
   // init styles
   ${initStyles}
@@ -37,14 +30,10 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
   }
-  // defaults
   html, body, #root {
     // screen
     position: relative;
     height: 100%;
-    /* margin: 0;
-    padding: 0;
-    box-sizing: border-box; */
     // background
     background-color: ${themeVars.light.background_color};
     // font

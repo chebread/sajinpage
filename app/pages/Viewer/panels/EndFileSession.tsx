@@ -22,10 +22,10 @@ const EndFileSession = () => {
 };
 
 const Container = styled.div`
+  position: relative;
   height: ${cssVarsPalette.content_full_height};
   top: 0;
   width: 100%;
-  background-color: red;
 `;
 
 export default EndFileSession;

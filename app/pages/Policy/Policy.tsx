@@ -7,12 +7,12 @@ import Terms from './Panels/Terms';
 const Policy = () => {
   const params = useParams();
   const type = params.type;
-  return type === undefined || type === 'terms' ? (
+  return type === undefined || type === 't' ? (
     <>
       <PolicyHeader />
       <Terms />
     </>
-  ) : type === 'privacy' ? (
+  ) : type === 'p' ? (
     <>
       <PolicyHeader />
       <Privacy />

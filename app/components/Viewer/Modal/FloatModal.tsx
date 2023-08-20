@@ -38,7 +38,7 @@ const FloatModal = () => {
     } = e; // value is timeLimit
     if (value) {
       const timeLimit = value;
-      turnOnLimitedMode({
+      await turnOnLimitedMode({
         timeLimit: timeLimit,
         docId: fileDb.docId,
         fileId: fileDb.fileId,
@@ -58,22 +58,19 @@ const FloatModal = () => {
     onCancel();
   };
 
-  useEffect(() => {
-    console.log(currentDatetime.current);
-
-    console.log(
-      `${new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
-        .toISOString()
-        .slice(0, 17)}` + '00'
-    );
-  }, []);
-
   return (
     <>
       {fileDb.limit ? (
         // (0): 이건 floatmodal을 2개가 아닌 1개로 하며, btn만 visible 감싸기!!! => 구분하자.
         <FloatModalsContainer visible={modeToggle}>
-          {/* <Select onChange={onModeSelect} options={timeLimitOptions} /> */}
+          <Select onChange={onSelectMode}>
+            <option value={''}>시간 선택</option>
+            {timeLimitOptions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </Select>
           <button onClick={() => setResetToggle(false)}>취소</button>
           {/* 구분 필요 */}
           <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
@@ -132,6 +129,9 @@ const FloatModalsContainer = styled.div<{ visible?: boolean }>`
   height: 100%;
   width: 100%;
   top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   ${centerAlign}

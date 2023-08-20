@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from 'App';
 import GlobalStyles from 'layouts/GlobalStyles';
@@ -16,22 +16,3 @@ root.render(
     <App />
   </HelmetProvider>
 );
-
-// if (import.meta.env.PROD) {
-//   loadableReady(() => {
-//     ReactDOM.hydrateRoot(
-//       targetDom as HTMLElement,
-//       <HelmetProvider>
-//         <GlobalStyles />
-//         <App />
-//       </HelmetProvider>
-//     );
-//   });
-// } else {
-//   root.render(
-//     <HelmetProvider>
-//       <GlobalStyles />
-//       <App />
-//     </HelmetProvider>
-//   );
-// }

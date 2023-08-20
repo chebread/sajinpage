@@ -4,8 +4,6 @@ import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
-// (0): border-radius 기능 추가하기
-
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
 

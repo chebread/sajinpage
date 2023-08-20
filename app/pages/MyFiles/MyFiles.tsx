@@ -7,7 +7,8 @@ import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 import onCopyBucket from 'components/MyFiles/onCopyBucket';
-import onDeleteBucket from 'components/MyFiles/onDeleteBucket';
+import { toast } from 'react-hot-toast';
+import deleteIdb from 'lib/idb/deleteIdb';
 
 // (0): buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
 
@@ -37,13 +38,19 @@ const MyFiles = () => {
   }, []);
 
   const onMessage = async (e: any) => {
-    const newBuckets: any = await get('urls');
-    setBuckets(newBuckets);
     // test code //
     if (e.data != undefined) {
       console.log(e.data);
+      if (e.data === 'clear' || e.data === 'add') {
+        const newBuckets: any = await get('urls');
+        setBuckets(newBuckets);
+      }
     } else {
       console.log(e.detail.data);
+      if (e.detail.data === 'clear' || e.detail.data === 'add') {
+        const newBuckets: any = await get('urls');
+        setBuckets(newBuckets);
+      }
     }
   };
 
@@ -67,7 +74,12 @@ const MyFiles = () => {
               >
                 <button>Share</button>
               </CopyToClipboard>
-              <button onClick={() => onDeleteBucket(buckets, value)}>
+              <button
+                onClick={() => {
+                  deleteIdb(buckets, value);
+                  toast.success('Deleted');
+                }}
+              >
                 Delete
               </button>
             </div>

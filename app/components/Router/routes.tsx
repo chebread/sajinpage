@@ -59,9 +59,9 @@ const router = createBrowserRouter(
       <Route
         element={
           <>
-            <ViewerHeader />
+            <Header />
             <Outlet />
-            <ViewerNavigator />
+            <Navigator />
           </>
         }
       >

@@ -6,10 +6,14 @@ import { ReactComponent as UploadIcon } from 'assets/svg/UploadIcon.svg';
 import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { viewedAtom } from 'atoms/viewerAtom';
 
 const Navigator = () => {
+  const [viewed] = useAtom(viewedAtom);
+
   return (
-    <Container>
+    <Container visible={viewed}>
       <Wrapper>
         <Navigate to="f" onTouchStart={() => {}}>
           <MyFilesIcon />
@@ -29,9 +33,15 @@ const Navigator = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
+  ${transition('all')}
+  // for viewer
+  transform: ${({ visible }) =>
+    visible ? 'translateY(100%)' : ' translateY(0)'};
+  @media (${desktopVp}) {
+    transform: translateY(0);
+  }
   position: fixed;
-  ${transition('height', 'width')}
   height: ${cssVarsPalette.nav_height};
   width: 100%;
   bottom: 0; // fix bottom
@@ -39,7 +49,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   background-color: #ffffff;
-  box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 -0px 20px rgba(0, 0, 0, 0.08);
 `;
 
 const Wrapper = styled.div`
