@@ -1,11 +1,11 @@
 import { clear } from 'idb-keyval';
-import { onEventChannel } from 'lib/broadcastChannel';
+import { triggerEvent } from 'lib/broadcastChannel';
 import { toast } from 'react-hot-toast';
 
 const onClearDb = () => {
   clear()
     .then(async () => {
-      onEventChannel('clear');
+      triggerEvent('clear');
       toast.success('Cleared');
     })
     .catch(() => {

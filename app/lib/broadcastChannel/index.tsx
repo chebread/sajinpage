@@ -1,4 +1,4 @@
-import eventChannel from './eventChannel';
-import onEventChannel from './onEventChannel';
+import broadcastChannel from './broadcastChannel';
+import triggerEvent from './triggerEvent';
 
-export { eventChannel, onEventChannel };
+export { broadcastChannel, triggerEvent };

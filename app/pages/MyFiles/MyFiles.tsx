@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { get } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
-import { eventChannel, onEventChannel } from 'lib/broadcastChannel';
+import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
 import NotExistedBuckets from './panels/NotExistedBuckets';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
@@ -22,17 +22,17 @@ const MyFiles = () => {
       const buckets: any = await get('urls');
       setBuckets(buckets);
       // track events
-      eventChannel.addEventListener('message', onMessage); // BroadcastChannel 은 같은 라우트에서는 동작하지 않음. 같은 라우터는 이벤트 감지는 evented로 감지함 // 'message' 부분은 Broadcast channel api를 수신하는 방법임
+      broadcastChannel.addEventListener('message', onMessage); // BroadcastChannel 은 같은 라우트에서는 동작하지 않음. 같은 라우터는 이벤트 감지는 evented로 감지함 // 'message' 부분은 Broadcast channel api를 수신하는 방법임
       window.addEventListener('evented', onMessage); // 이것은 자체 del 사용시 필요함
-      // track events 아래에서 onEventChannel을 해야 이벤트가 감지됨
+      // track events 아래에서 triggerEvent을 해야 이벤트가 감지됨
       // test code
     };
     onLoad().catch(error => {
       console.log(error.url);
     });
     return () => {
-      // eventChannel.close() 는 하면 오류발생 함
-      eventChannel.removeEventListener('message', onMessage);
+      // broadcastChannel.close() 는 하면 오류발생 함
+      broadcastChannel.removeEventListener('message', onMessage);
       window.removeEventListener('evented', onMessage);
     };
   }, []);

@@ -15,7 +15,7 @@ const ImagesScreen = ({ src }) => {
           onError={() => {
             // Uxpected error tracking (avif browser 지원안할때, file url 손상시, ...)
             onError({
-              code: 405,
+              code: 400,
               message: 'ImagesViewer에서 image를 불러오는 중에 에러가 발생함',
             });
           }}
@@ -33,17 +33,20 @@ const Container = styled.div`
 `;
 const ImageWrapper = styled.div`
   ${transition('max-width')}
-  max-height: 100%;
-  max-width: 100%;
+  height: 100%;
+  width: 100%;
   @media (${desktopVp}) {
-    max-width: calc(100% - 2rem);
+    width: calc(100% - 2rem);
   }
+  display: flex;
+  flex-direction: column;
+  ${centerAlign}
 `;
 const Image = styled.img`
   ${transition('border-radius')}
   display: block;
-  height: 100%;
-  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
   margin: auto;
   object-fit: contain;
   object-position: center;

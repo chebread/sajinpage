@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { redirect, useNavigate, useParams } from 'react-router-dom';
 import { fetchRealtimeFiles, loadFiles, updateFiles } from 'api';
 import PageLoading from 'pages/PageLoading';
 import ImagesViewer from './panels/ImagesViewer';
@@ -14,7 +14,7 @@ import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { viewedAtom } from 'atoms/viewerAtom';
 import { addIdb } from 'lib/idb';
-import { eventChannel } from 'lib/broadcastChannel';
+import { broadcastChannel } from 'lib/broadcastChannel';
 import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
 
@@ -23,6 +23,7 @@ import { deleteIdb } from 'lib/idb';
 // 파일들을 확인하는 곳
 
 const Viewer = () => {
+  const navigate = useNavigate();
   const [delay, setDelay] = useState(false); // false가 중지, true가 실행
   // useInterval을 중지하는 토글 => kill (false) or run (true) 두 상태를 가짐
   // 처음부터 false 해야지 subscribed 되고 나서 활성화할 수 있음
@@ -73,22 +74,25 @@ const Viewer = () => {
         }
       }
     };
-    // subscribe as realtime
-    const { realtimeChannel, broadcastChannel } = fetchRealtimeFiles({
+    // track event
+    broadcastChannel.addEventListener('message', onMessage);
+    window.addEventListener('evented', onMessage);
+    // track event as realtime
+    const realtimeChannel = fetchRealtimeFiles({
       tableId: 'refs',
       onUpdate: (payload: any) => {
+        // console.log('update event', payload);
         // file update
-        console.log('update event', payload);
         if (payload.new.docId === docId) {
           // 업데이트 된 파일의 docId와 현재 라우터의 docId가 일치시 업데이트가 반영됨
           setFileDb(payload.new);
         }
       },
       onDelete: async (payload: any) => {
-        console.log('delete event', payload);
+        // console.log('delete event', payload);
         // file deleted
         if (payload.payload.docId === docId) {
-          await deleted();
+          await onDeleted();
         }
       },
       onSubscribed: async () => {
@@ -105,39 +109,33 @@ const Viewer = () => {
         });
       },
     });
-    eventChannel.addEventListener('message', onMessage);
-    window.addEventListener('evented', onMessage);
 
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
       supabase.removeChannel(realtimeChannel);
-      supabase.removeChannel(broadcastChannel);
-      eventChannel.removeEventListener('message', onMessage);
+      broadcastChannel.removeEventListener('message', onMessage);
       window.removeEventListener('evented', onMessage);
       initValues();
     };
   }, []);
 
   // if file is deleted
-  const deleted = async () => {
-    console.log('파일이 삭제됨');
+  const onDeleted = async () => {
+    // console.log('파일이 삭제됨');
     const buckets = await get('urls');
     deleteIdb(buckets, docId);
-    setViewed(false);
-    onError({
-      code: 200,
-      message: '파일이 삭제되었습니다.',
-    });
+    initValues();
+    navigate('/'); // 홈으로 갑니다
   };
 
   const onMessage = async (e: any) => {
     if (e.data != undefined) {
       if (e.data === 'DELETE') {
-        await deleted();
+        await onDeleted();
       }
     } else {
       if (e.detail.data === 'DELETE') {
-        await deleted();
+        await onDeleted();
       }
     }
   };
