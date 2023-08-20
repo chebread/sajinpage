@@ -26,6 +26,17 @@ const MenuModal = () => {
       <MenuModalsContainer visible={clicked}>
         <MenuModals
           onClick={async () => {
+            await updateFiles({
+              docId: fileDb.docId,
+              fileType: 'hellox',
+            });
+            onCancel();
+          }}
+        >
+          <MenuModalsWrapper>Test</MenuModalsWrapper>
+        </MenuModals>
+        <MenuModals
+          onClick={async () => {
             await onCopy(getUrl());
             onCancel();
           }}

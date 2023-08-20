@@ -35,7 +35,6 @@ const Viewer = () => {
   const [fileDb, setFileDb] = useAtom(fileDbAtom);
   const [loaded, setLoaded] = useState(false); // 파일 로드 유무
   const [, initValues] = useAtom(initValuesAtom);
-  const navigate = useNavigate();
   const [, setViewed] = useAtom(viewedAtom);
 
   useEffect(() => {
@@ -78,23 +77,18 @@ const Viewer = () => {
     const { realtimeChannel, broadcastChannel } = fetchRealtimeFiles({
       tableId: 'refs',
       onUpdate: (payload: any) => {
-        // console.log('event update');
         // file update
+        console.log('update event', payload);
         if (payload.new.docId === docId) {
           // 업데이트 된 파일의 docId와 현재 라우터의 docId가 일치시 업데이트가 반영됨
-          console.log('파일의 정보가 업데이트됨');
           setFileDb(payload.new);
         }
       },
       onDelete: async (payload: any) => {
-        // console.log('event delete');
+        console.log('delete event', payload);
         // file deleted
         if (payload.payload.docId === docId) {
-          console.log('파일이 삭제됨');
-          const buckets = await get('urls');
-          deleteIdb(buckets, docId);
-          initValues(); // 가기전에 초기화
-          navigate('/'); // 라우트 안하고 홈으로 가기
+          await deleted();
         }
       },
       onSubscribed: async () => {
@@ -107,31 +101,55 @@ const Viewer = () => {
             code: 404,
             message: '파일이 존재하지 않음',
           });
-          // kill interval 하지 않아도 되는 이유는 run interval 변경하기 전에 이미 404처리를 진행하게 됨
+          // kill interval 하지 않아도 되는 이유는 run interval 변경하기 전에 이미 false 상태임
         });
       },
     });
+    eventChannel.addEventListener('message', onMessage);
+    window.addEventListener('evented', onMessage);
 
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
       supabase.removeChannel(realtimeChannel);
       supabase.removeChannel(broadcastChannel);
-      // console.log('unChannel');
+      eventChannel.removeEventListener('message', onMessage);
+      window.removeEventListener('evented', onMessage);
       initValues();
     };
   }, []);
+
+  // if file is deleted
+  const deleted = async () => {
+    console.log('파일이 삭제됨');
+    const buckets = await get('urls');
+    deleteIdb(buckets, docId);
+    setViewed(false);
+    onError({
+      code: 200,
+      message: '파일이 삭제되었습니다.',
+    });
+  };
+
+  const onMessage = async (e: any) => {
+    if (e.data != undefined) {
+      if (e.data === 'DELETE') {
+        await deleted();
+      }
+    } else {
+      if (e.detail.data === 'DELETE') {
+        await deleted();
+      }
+    }
+  };
 
   // check file session as realtime each 1sec
   // 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode 일때만 useinterval이 작동함
   useInterval(
     async () => {
-      // console.log('running interval');
-      // if (!isEmptyObject(error) && fileDb.limit && !fileDb.excess) 이거 안해도 됨. 이미 useInterval이 작동되기전에 세션 초과되지 않았을때 && 에러가 나지 않을때 && limit mode를 체크함!
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       if (isFileExcess) {
         await endedSession();
-        // console.log('killed interval');
         // kill interval
         setDelay(false); // 세션이 종료되었다는 것은 excess = true 라는 것이니, 이때는 interval이 다음돌때에 돌지 않아야되니 그냥 updateFiles를 믿어도 되지만, onUpdate는 subscribed가 정확하게 되지 않기에 kill를 해주어 안심하게 interval을 중지해야함
         setViewed(false); // 메뉴 접근 중지
@@ -142,7 +160,6 @@ const Viewer = () => {
       : null
   );
   const endedSession = async () => {
-    // console.log('세션 종료');
     await updateFiles({
       docId: fileDb.docId,
       excess: true, // 파일 세션 종료됨
@@ -161,10 +178,8 @@ const Viewer = () => {
     if (document.visibilityState === 'hidden') {
       // 페이지가 안보일때
       setDelay(false); // 실시간 확인을 끔
-      // console.log('hidden');
     }
     if (document.visibilityState === 'visible') {
-      // console.log('visible');
       // 페이지가 보일때
       // 1초뒤에 실행되더라도, 이것은 감수해야함
       setDelay(true); // 실시간 확인을 켬 => normal 모드 이여도 켜야함! 이유는 if limit일때 setDalay 하지 않는 이유는 public에서 limit으로 전환되기 때문에 그냥 useInterval 내부에서 처리하는 것임 이다
