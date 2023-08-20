@@ -1,6 +1,4 @@
-import fileDbAtom from 'atoms/fileDbAtom';
 import { errorAtom } from 'atoms/errorAtom';
-import onDelete from 'components/Viewer/onDelete';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const CorruptedFileUrl = () => {
   const navigate = useNavigate();
   const [error] = useAtom(errorAtom);
-  const [fileDb] = useAtom(fileDbAtom);
 
   return (
     <>

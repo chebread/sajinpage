@@ -10,10 +10,10 @@ import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
-import turnOffLimitedMode from '../turnOffLimitedMode';
-import turnOnLimitedMode from '../turnOnLimitedMode';
+import turnOffLimitedMode from 'api/turnOffLimitedMode';
+import turnOnLimitedMode from 'api/turnOnLimitedMode';
 import { toast } from 'react-hot-toast';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const FloatModal = () => {
   const [fileDb] = useAtom(fileDbAtom);

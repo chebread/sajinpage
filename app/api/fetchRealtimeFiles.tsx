@@ -23,9 +23,13 @@ const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
     )
     .on(
       'postgres_changes',
-      { event: 'DELETE', schema: 'public', table: tableId },
+      {
+        event: 'DELETE',
+        schema: 'public',
+        table: tableId,
+      },
       payload => {
-        // onDelete(payload);
+        console.log(payload);
       }
     )
     .subscribe(status => {

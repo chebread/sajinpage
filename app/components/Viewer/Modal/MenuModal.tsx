@@ -1,15 +1,14 @@
-import { deleteFiles, updateFiles } from 'api';
-import clientChannels from 'api/createClients';
+import { updateFiles } from 'api';
 import fileDbAtom from 'atoms/fileDbAtom';
 import { clickedAtom, modeToggleAtom, onCancelAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableSelection } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import getUrl from 'lib/getUrl';
-import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
-import onCopy from '../onCopy';
+import onCopy from 'components/onCopy';
 import FloatModal from './FloatModal';
+import onDelete from 'components/onDelete';
 
 const MenuModal = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -22,30 +21,9 @@ const MenuModal = () => {
     setClicked(false); // menuModal 최소화
   };
 
-  const onDelete = async (docId: string) => {
-    await deleteFiles(docId)
-      .then(() => {
-        toast.success('delete file');
-      })
-      .catch(() => {
-        toast.error('파일 삭제중 오류 발생');
-      });
-  };
-
   return (
     <>
       <MenuModalsContainer visible={clicked}>
-        <MenuModals
-          onClick={async () => {
-            await updateFiles({
-              docId: fileDb.docId,
-              fileType: 'hellox',
-            });
-            onCancel();
-          }}
-        >
-          <MenuModalsWrapper>Test</MenuModalsWrapper>
-        </MenuModals>
         <MenuModals
           onClick={async () => {
             await onCopy(getUrl());
@@ -71,18 +49,6 @@ const MenuModal = () => {
         <MenuModals
           onClick={async () => {
             await onDelete(fileDb.docId);
-            const channel = clientChannels().channel('broadcast');
-            channel.subscribe(status => {
-              if (status === 'SUBSCRIBED') {
-                channel.send({
-                  type: 'broadcast',
-                  event: 'DELETE',
-                  payload: {
-                    docId: fileDb.docId,
-                  },
-                });
-              }
-            });
             onCancel();
           }}
         >

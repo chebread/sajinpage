@@ -1,12 +1,12 @@
 import { errorAtom } from 'atoms/errorAtom';
 import fileDbAtom from 'atoms/fileDbAtom';
-import onDelete from 'components/Viewer/onDelete';
+import onDelete from 'components/onDelete';
 import { useAtom } from 'jotai';
 import { cssVarsPalette } from 'layouts/cssVars';
 import styled from 'styled-components';
 
 // 파일 삭제할수 있는 버튼을 최대로 키우기
-const EndFileSession = () => {
+const EndedFileSession = () => {
   const [error] = useAtom(errorAtom);
   const [fileDb] = useAtom(fileDbAtom);
 
@@ -23,9 +23,8 @@ const EndFileSession = () => {
 
 const Container = styled.div`
   position: relative;
-  height: ${cssVarsPalette.content_full_height};
-  top: 0;
+  height: 100%;
   width: 100%;
 `;
 
-export default EndFileSession;
+export default EndedFileSession;

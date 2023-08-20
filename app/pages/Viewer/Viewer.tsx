@@ -19,10 +19,8 @@ import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
 
 // (0): 파일의 db를 idb에 저장하여서 다시 로딩되는 일 없게하기 만일 idb 삭제시 다시 불러오게 됨
-// (0): 탭이 달라도, 보는 버킷이 달라도 일단 어디 탭에서 삭제 하기만 하면 어떤 탭도 홈으로 가게 됨 => 이거 수정하기 (이렇게 onDelete로 실시간으로 받는 것이 아닌 postmessage를 통해서 delete 부분 수정하기)
 
 // 파일들을 확인하는 곳
-// 각각의 url들을 Bucket이라 칭함
 
 const Viewer = () => {
   const [delay, setDelay] = useState(false); // false가 중지, true가 실행
@@ -80,7 +78,7 @@ const Viewer = () => {
     const { realtimeChannel, broadcastChannel } = fetchRealtimeFiles({
       tableId: 'refs',
       onUpdate: (payload: any) => {
-        console.log('event update');
+        // console.log('event update');
         // file update
         if (payload.new.docId === docId) {
           // 업데이트 된 파일의 docId와 현재 라우터의 docId가 일치시 업데이트가 반영됨
@@ -89,7 +87,7 @@ const Viewer = () => {
         }
       },
       onDelete: async (payload: any) => {
-        console.log('event delete');
+        // console.log('event delete');
         // file deleted
         if (payload.payload.docId === docId) {
           console.log('파일이 삭제됨');
@@ -104,7 +102,7 @@ const Viewer = () => {
         // 이게 필요한 이유는 파일이 실시간을 사용할 수 있고 그다음에 업데이트, 제거 등등의 기능을 사용할 수 있도록 로딩 시간을 만들어 주는 역할임
         onLoad().catch(() => {
           // file not existed
-          console.log('파일이 존재하지 않음');
+          // console.log('파일이 존재하지 않음');
           onError({
             code: 404,
             message: '파일이 존재하지 않음',
