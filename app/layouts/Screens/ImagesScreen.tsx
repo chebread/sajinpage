@@ -4,6 +4,8 @@ import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
+// (0): mobile safari 에서 100vh 인데 갑자기 축소되서 이상해지는 현상
+
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
 

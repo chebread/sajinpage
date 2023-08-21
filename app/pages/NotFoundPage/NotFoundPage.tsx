@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { ReactComponent as WarningIcon } from 'assets/svg/WarningIcon.svg';
 import { ReactComponent as HomeIcon } from 'assets/svg/HomeIcon.svg';
 import transition from 'layouts/properties/transition';
-import BottomButton from 'components/BottomButton';
 
 // Page is not found
 
@@ -28,8 +27,9 @@ const NotFoundPage = () => {
 const Container = styled.div`
   position: relative;
   ${transition('height', 'width')}
-  height: ${cssVarsPalette.content_full_height};
+  height: 100%;
   width: 100%;
+  background-color: seagreen;
 `;
 
 const Wrapper = styled.div`

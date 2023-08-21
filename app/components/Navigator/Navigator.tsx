@@ -1,5 +1,10 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
+import {
+  centerAlign,
+  desktopVp,
+  disableSelection,
+  disableTab,
+} from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as UploadIcon } from 'assets/svg/UploadIcon.svg';
@@ -49,8 +54,8 @@ const Container = styled.div<{ visible: boolean }>`
   flex-direction: row;
   justify-content: space-around;
   background-color: #ffffff;
-  /* box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.3); */
   box-shadow: 0 -0px 20px rgba(0, 0, 0, 0.08);
+  // z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 `;
 
 const Wrapper = styled.div`

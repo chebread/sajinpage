@@ -12,6 +12,7 @@ import MenuModal from 'components/Viewer/Modal/MenuModal';
 
 // (0): svg safari 오류 해결하기 (chrome도 약간 불안정함)
 // (0): menu modal 삭제가 안됨
+// (0): safari transform y 속성이 위로 스크롤시 보이는 문제 해결하기
 
 const Header = () => {
   const [viewed] = useAtom(viewedAtom); // check that current route is image-viewer
@@ -68,6 +69,7 @@ const Container = styled.div<{ visible: boolean }>`
   display: flex;
   flex-direction: row;
   background-color: ${themeVars.light.background_color};
+  z-index: 10000;
 `;
 
 const Wrapper = styled.div`

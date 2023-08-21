@@ -25,7 +25,6 @@ const MyFiles = () => {
       broadcastChannel.addEventListener('message', onMessage); // BroadcastChannel 은 같은 라우트에서는 동작하지 않음. 같은 라우터는 이벤트 감지는 evented로 감지함 // 'message' 부분은 Broadcast channel api를 수신하는 방법임
       window.addEventListener('evented', onMessage); // 이것은 자체 del 사용시 필요함
       // track events 아래에서 triggerEvent을 해야 이벤트가 감지됨
-      // test code
     };
     onLoad().catch(error => {
       console.log(error.url);
@@ -38,15 +37,14 @@ const MyFiles = () => {
   }, []);
 
   const onMessage = async (e: any) => {
-    // test code //
     if (e.data != undefined) {
-      console.log(e.data);
+      // console.log(e.data);
       if (e.data === 'clear' || e.data === 'add') {
         const newBuckets: any = await get('urls');
         setBuckets(newBuckets);
       }
     } else {
-      console.log(e.detail.data);
+      // console.log(e.detail.data);
       if (e.detail.data === 'clear' || e.detail.data === 'add') {
         const newBuckets: any = await get('urls');
         setBuckets(newBuckets);

@@ -40,6 +40,8 @@ const Viewer = () => {
 
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
+    /* test code */
+    /*
     const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
@@ -115,6 +117,20 @@ const Viewer = () => {
       supabase.removeChannel(realtimeChannel);
       broadcastChannel.removeEventListener('message', onMessage);
       window.removeEventListener('evented', onMessage);
+      initValues();
+    };*/
+    /* test code */
+    setLoaded(true);
+    setViewed(true);
+    setFileDb({
+      url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
+      docId: '',
+      fileId: '',
+      accessTime: '',
+      limit: false,
+      excess: false,
+    });
+    return () => {
       initValues();
     };
   }, []);

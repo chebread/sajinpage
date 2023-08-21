@@ -69,7 +69,7 @@ const MenuModalsBackground = styled.div<{ visible: boolean }>`
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: ${({ visible }) => (visible ? '1' : '-1')};
+  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   // (0): z-index: 10000시 버튼이 왜 안먹힐까?

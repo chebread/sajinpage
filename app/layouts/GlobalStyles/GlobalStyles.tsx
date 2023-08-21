@@ -1,8 +1,10 @@
-import { desktopVp } from 'layouts/properties';
+import { desktopVp, disableScrollbar } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
 import { appThemes, themeVars } from 'layouts/themes';
 import initStyles from './initStyles';
 import appCssVars from 'layouts/cssVars/appCssVars';
+
+// (0): ios x 이상 시리즈 노치 대응하기
 
 const GlobalStyles = createGlobalStyle`
   // init styles
@@ -10,7 +12,6 @@ const GlobalStyles = createGlobalStyle`
   // css variables
   body {
     ${appCssVars.mobile}
-  
   }
   @media (${desktopVp}) {
     body {
@@ -34,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
     // screen
     position: relative;
     height: 100%;
+    ${disableScrollbar}
     // background
     background-color: ${themeVars.light.background_color};
     // font

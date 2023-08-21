@@ -29,7 +29,7 @@ const Container = styled(CenterScreen)`
     @media (${desktopVp}) {
       height: 7.5rem; // 17% // 8rem
     }
-    fill: ${themeVars.light.loading_logo_fill};
+    fill: ${themeVars.light.logo_color};
   }
 `;
 
