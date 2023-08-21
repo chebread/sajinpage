@@ -16,7 +16,7 @@ const SettingsBanner = () => {
 
 const Container = styled.div`
   /* padding: 34px 12px 12px; */
-  height: calc(100vh - 8rem);
+  height: 100%;
   min-width: 336px;
   background-color: seagreen;
 `;

@@ -125,7 +125,6 @@ const Container = styled.div`
   overflow-x: hidden;
   height: auto;
   width: 100%;
-  padding-bottom: 4rem;
 `;
 
 export default Preferences;
