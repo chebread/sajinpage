@@ -59,7 +59,7 @@ const Settings = () => {
 
 const Container = styled.div`
   ${transition('all')}
-  height: ${cssVarsPalette.content_full_height};
+  height: auto;
   width: 100%;
   display: flex;
   gap: 80px;

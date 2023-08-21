@@ -68,7 +68,8 @@ const Container = styled.div<{ visible: boolean }>`
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: ${themeVars.light.background_color};
+  background-color: ${themeVars.light.header_color};
+  backdrop-filter: blur(12px);
   z-index: 10000;
 `;
 

@@ -35,7 +35,6 @@ const GlobalStyles = createGlobalStyle`
     // screen
     position: relative;
     height: 100%;
-    ${disableScrollbar}
     // background
     background-color: ${themeVars.light.background_color};
     // font
