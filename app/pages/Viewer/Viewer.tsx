@@ -13,7 +13,7 @@ import ViewerErrorPage from './panels/ViewerErrorPage';
 import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { viewedAtom } from 'atoms/viewerAtom';
-import { addIdb } from 'lib/idb';
+import { insertIdb } from 'lib/idb';
 import { broadcastChannel } from 'lib/broadcastChannel';
 import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
@@ -47,7 +47,7 @@ const Viewer = () => {
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
       setFileDb(fileDb);
       // add data in idb for myfiles => 파일이 존재하지 않는 경우만 제외하고 모두 저장함
-      await addIdb(docId);
+      await insertIdb(docId);
       const accessTime = fileDb.accessTime;
       const isFileExcess = await checkFileSessionByAccessTime(accessTime);
       // check file excess (excess가 true가 아닌 경우 => 처음으로 파일이 excess인지 확인하기)
@@ -120,6 +120,7 @@ const Viewer = () => {
       initValues();
     };*/
     /* test code */
+    insertIdb(docId);
     setLoaded(true);
     setViewed(true);
     setFileDb({

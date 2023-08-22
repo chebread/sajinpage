@@ -1,7 +1,7 @@
 const Help = () => {
   return (
     <>
-      <h1>도움말</h1>
+      <div>도움말</div>
     </>
   );
 };

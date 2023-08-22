@@ -25,11 +25,9 @@ const NotFoundPage = () => {
 };
 
 const Container = styled.div`
-  position: relative;
   ${transition('height', 'width')}
-  height: 100%;
+
   width: 100%;
-  background-color: seagreen;
 `;
 
 const Wrapper = styled.div`

@@ -88,8 +88,7 @@ const MenuModalsContainer = styled.div<{ visible: boolean }>`
   position: fixed;
   right: 0;
   top: 0;
-  margin-right: 3rem;
-  margin-top: 4rem;
+  margin: 4rem 3rem;
   box-shadow: 0 10.5px 21px rgba(0, 0, 0, 0.08);
   border: 0.5px solid rgba(0, 0, 0, 0.04);
   display: flex;
@@ -117,7 +116,7 @@ const MenuModals = styled.div`
   ${disableSelection}
   font-weight: 600;
   &:last-child {
-    color: #ff2f40; // #e03131
+    color: #ff2f40;
   }
   @media (${desktopVp}) {
     &:hover {

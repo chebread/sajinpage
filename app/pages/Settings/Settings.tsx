@@ -13,7 +13,6 @@ import transition from 'layouts/properties/transition';
 const Settings = () => {
   const params = useParams();
   const type = params.type;
-  console.log(type);
 
   return (
     <>
@@ -59,13 +58,13 @@ const Settings = () => {
 
 const Container = styled.div`
   ${transition('all')}
+  display: flex;
   height: auto;
   width: 100%;
-  display: flex;
-  gap: 80px;
   flex-direction: column;
   @media (${desktopVp}) {
     flex-direction: row;
+    gap: 5rem;
   }
 `;
 

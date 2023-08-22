@@ -1,4 +1,4 @@
-import addIdb from './addIdb';
+import insertIdb from './insertIdb';
 import deleteIdb from './deleteIdb';
 
-export { addIdb, deleteIdb };
+export { insertIdb, deleteIdb };

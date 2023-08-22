@@ -1,10 +1,5 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import {
-  centerAlign,
-  desktopVp,
-  disableSelection,
-  disableTab,
-} from 'layouts/properties';
+import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as UploadIcon } from 'assets/svg/UploadIcon.svg';

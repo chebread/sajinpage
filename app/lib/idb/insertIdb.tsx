@@ -1,7 +1,7 @@
 import { get, set } from 'idb-keyval';
 import { triggerEvent } from 'lib/broadcastChannel';
 
-const addIdb = async (data: string) => {
+const insertIdb = async (data: string) => {
   const urls = await get('urls');
   const notExistedUrls = urls === undefined;
   if (!notExistedUrls) {
@@ -10,14 +10,14 @@ const addIdb = async (data: string) => {
     if (isEqual) {
       // idb에 중복된 값이 없음 => idb에 저장함
       await set('urls', [...urls, data]);
-      triggerEvent('add');
+      triggerEvent('INSERT');
     }
     // idb에 중복된 값이 있음 => idb에 저장하지 않음
   } else {
     // idb가 비어있음
     await set('urls', [data]);
-    triggerEvent('add');
+    triggerEvent('INSERT');
   }
 };
 
-export default addIdb;
+export default insertIdb;

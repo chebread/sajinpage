@@ -2,10 +2,10 @@ import { clear } from 'idb-keyval';
 import { triggerEvent } from 'lib/broadcastChannel';
 import { toast } from 'react-hot-toast';
 
-const onClearDb = () => {
+const onClear = () => {
   clear()
     .then(async () => {
-      triggerEvent('clear');
+      triggerEvent('CLEAR');
       toast.success('Cleared');
     })
     .catch(() => {
@@ -13,4 +13,4 @@ const onClearDb = () => {
     });
 };
 
-export default onClearDb;
+export default onClear;
