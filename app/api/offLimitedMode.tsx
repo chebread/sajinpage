@@ -1,7 +1,7 @@
 import { updateFiles } from 'api';
 import supabase from 'lib/supabase';
 
-const turnOffLimitedMode = async ({ docId, fileId }) => {
+const offLimitedMode = async ({ docId, fileId }) => {
   // turn on public mode
   const { data: fileUrl, error: fileUrlError }: any = supabase.storage
     .from('images')
@@ -19,4 +19,4 @@ const turnOffLimitedMode = async ({ docId, fileId }) => {
   return;
 };
 
-export default turnOffLimitedMode;
+export default offLimitedMode;

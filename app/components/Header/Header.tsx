@@ -96,7 +96,7 @@ const LogoBtn = styled(Link)`
   cursor: pointer;
   ${disableTab}
   svg {
-    ${transition('transform', 'height')}
+    ${transition('all')}
     height: 1.5rem;
     width: auto;
     @media (${desktopVp}) {
@@ -108,9 +108,9 @@ const LogoBtn = styled(Link)`
       }
     }
     &:active {
-      transform: scale(0.85);
+      transform: scale(0.89);
       @media (${desktopVp}) {
-        transform: scale(0.98);
+        transform: scale(0.97);
       }
     }
   }
@@ -147,9 +147,7 @@ const Btn = styled.button<{ visible?: boolean }>`
   }
   &:active {
     background-color: rgb(220, 220, 220);
-    svg {
-      transform: scale(0.98);
-    }
+    transform: scale(0.93);
   }
   svg {
     ${transition('all')}

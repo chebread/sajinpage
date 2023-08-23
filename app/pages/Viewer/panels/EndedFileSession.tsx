@@ -1,6 +1,6 @@
 import { errorAtom } from 'atoms/errorAtom';
 import fileDbAtom from 'atoms/fileDbAtom';
-import onDelete from 'components/onDelete';
+import onDeleteFile from 'components/onDeleteFile';
 import { useAtom } from 'jotai';
 import { cssVarsPalette } from 'layouts/cssVars';
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ const EndedFileSession = () => {
       <div>{error.code}</div>
       <div>{error.message}</div>
       <div>
-        <button onClick={() => onDelete(fileDb.docId)}>Delete</button>
+        <button onClick={() => onDeleteFile(fileDb.docId)}>Delete</button>
       </div>
     </Container>
   );

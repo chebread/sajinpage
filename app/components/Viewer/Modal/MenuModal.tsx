@@ -8,7 +8,7 @@ import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
 import onCopy from 'components/onCopy';
 import FloatModal from './FloatModal';
-import onDelete from 'components/onDelete';
+import onDeleteFile from 'components/onDeleteFile';
 
 const MenuModal = () => {
   const [fileDb] = useAtom(fileDbAtom);
@@ -48,7 +48,7 @@ const MenuModal = () => {
         )}
         <MenuModals
           onClick={async () => {
-            await onDelete(fileDb.docId);
+            await onDeleteFile(fileDb.docId);
             onCancel();
           }}
         >

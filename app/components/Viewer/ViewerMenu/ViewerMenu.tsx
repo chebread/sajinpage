@@ -9,7 +9,7 @@ import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 import fileDbAtom from 'atoms/fileDbAtom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import onDelete from 'components/onDelete';
+import onDeleteFile from 'components/onDeleteFile';
 import Select from 'react-select';
 import getUrl from 'lib/getUrl';
 import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
@@ -125,7 +125,9 @@ const ViewerMenu = () => {
             >
               <button>Share</button>
             </CopyToClipboard>
-            <button onClick={() => onDelete(fileDb.docId)}>delete file</button>
+            <button onClick={() => onDeleteFile(fileDb.docId)}>
+              delete file
+            </button>
             {fileDb.limit ? (
               // limit mode
               modeToggle ? (

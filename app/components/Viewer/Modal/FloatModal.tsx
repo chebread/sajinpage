@@ -10,8 +10,8 @@ import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
-import turnOffLimitedMode from 'api/turnOffLimitedMode';
-import turnOnLimitedMode from 'api/turnOnLimitedMode';
+import offLimitedMode from 'api/offLimitedMode';
+import onLimitedMode from 'api/onLimitedMode';
 import { toast } from 'react-hot-toast';
 import { useRef } from 'react';
 
@@ -38,7 +38,7 @@ const FloatModal = () => {
     } = e; // value is timeLimit
     if (value) {
       const timeLimit: number = Number(value); // value is string type
-      await turnOnLimitedMode({
+      await onLimitedMode({
         timeLimit: timeLimit,
         docId: fileDb.docId,
         fileId: fileDb.fileId,
@@ -49,7 +49,7 @@ const FloatModal = () => {
     }
   };
   const onTurnOffMode = async () => {
-    await turnOffLimitedMode({
+    await offLimitedMode({
       docId: fileDb.docId,
       fileId: fileDb.fileId,
     }).catch(() => {
@@ -188,9 +188,7 @@ const CancelButton = styled.button`
   }
   &:active {
     background-color: rgb(220, 220, 220);
-    svg {
-      transform: scale(0.98);
-    }
+    transform: scale(0.93);
   }
   svg {
     ${transition('transform')}

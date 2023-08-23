@@ -8,6 +8,7 @@ import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { viewedAtom } from 'atoms/viewerAtom';
+import mobileVp from 'layouts/properties/mobileVp';
 
 const Navigator = () => {
   const [viewed] = useAtom(viewedAtom);
@@ -49,7 +50,7 @@ const Container = styled.div<{ visible: boolean }>`
   flex-direction: row;
   justify-content: space-around;
   background-color: #ffffff;
-  box-shadow: 0 -0px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   // z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 `;
 
@@ -78,20 +79,19 @@ const Navigate = styled(NavLink)`
   ${transition('background-color', 'all')}
   @media (${desktopVp}) {
     &:hover {
+      // hover시는 svg만 커짐
       background-color: rgb(235, 235, 235);
       svg {
         transform: scale(1.07);
-        // (0): instagram 처럼 속이 채워지기 하기! (이건 다른 fill[ICONNAME]Icon 을 만들어서 대체하거나 여 코드에서 처리하기
       }
     }
   }
   &:active {
+    // active는 전체적으로 다 축소됨
     background-color: rgb(220, 220, 220);
-    svg {
-      transform: scale(0.85);
-      @media (${desktopVp}) {
-        transform: scale(0.98);
-      }
+    transform: scale(0.85);
+    @media (${desktopVp}) {
+      transform: scale(0.93);
     }
   }
   svg {

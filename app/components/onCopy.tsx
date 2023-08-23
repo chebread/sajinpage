@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 const onCopy = async (text: string) => {
   await copyText(text)
     .then(() => {
-      toast.success('Copied');
+      toast('Copied');
     })
     .catch(() => {
       toast.error('Copy error');

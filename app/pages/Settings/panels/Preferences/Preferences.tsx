@@ -1,24 +1,26 @@
 import { desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import { ReactComponent as DeleteIcon } from 'assets/svg/DeleteIcon.svg';
-import { ReactComponent as DisableIcon } from 'assets/svg/DisableIcon.svg';
+import { ReactComponent as SaveIcon } from 'assets/svg/SaveIcon.svg';
 import styled from 'styled-components';
-import onClear from 'components/Settings/onClear';
+import onClearIdb from 'components/Settings/onClearIdb';
 import { useEffect, useState } from 'react';
 import { get, set } from 'idb-keyval';
 import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
+import { toast } from 'react-hot-toast';
+import { cssVarsPalette } from 'layouts/cssVars';
 
 // (0): viewer 확인시에 저장되는 자동 My files 저장 기능 끄기 기능 추가하기 (idb myfiles enabled로 관리 boolean으로 지정함 만약 myfiles: false 라면 viewer에서 저장 안됨 my files 접속시 버킷 자동 저장 기능이 비활성화 되어 있습니다 이런 것은 띄우지 않음)
 
 const Preferences = () => {
-  const [enabled, setEnabled] = useState<boolean>(false);
+  const [enabled, setEnabled] = useState<boolean>(true);
 
   useEffect(() => {
     const onLoad = async () => {
-      const enabled: any = await get('enabled_myfiles');
-      setEnabled(enabled === undefined ? false : enabled);
+      const enabled: boolean = await get('enabled_myfiles');
+      setEnabled(enabled === undefined ? true : enabled);
       broadcastChannel.addEventListener('message', onMessage);
-      // window.addEventListener('evented', onMessage);
+      window.addEventListener('evented', onMessage);
     };
     onLoad();
     return () => {
@@ -29,18 +31,21 @@ const Preferences = () => {
   const onEnable = async () => {
     await set('enabled_myfiles', !enabled);
     triggerEvent('UPDATE');
+    if (!enabled) {
+      toast('On');
+    } else {
+      toast('Off');
+    }
   };
   const onMessage = async (e: any) => {
     if (e.data != undefined) {
-      console.log(e.data);
       if (e.data === 'UPDATE') {
-        const enabled: any = await get('urls');
+        const enabled: any = await get('enabled_myfiles');
         setEnabled(enabled);
       }
     } else {
-      console.log(e.detail.data);
       if (e.detail.data === 'UPDATE') {
-        const enabled: any = await get('urls');
+        const enabled: any = await get('enabled_myfiles');
         setEnabled(enabled);
       }
     }
@@ -49,14 +54,14 @@ const Preferences = () => {
   return (
     <Container>
       <Category>My files</Category>
-      <Description>My files를 맞춤설정 해보세요.</Description>
+      <Description>My files를 맞춤 설정하세요.</Description>
       <ButtonWrapper>
-        <Button onClick={onClear}>
+        <Button onClick={onClearIdb}>
           <DeleteIcon />
           버킷 비우기
         </Button>
         <Button onClick={onEnable}>
-          <DisableIcon />
+          <SaveIcon />
           {enabled ? '버킷 저장 기능 끄기' : '버킷 저장 기능 켜기'}
         </Button>
       </ButtonWrapper>
@@ -67,22 +72,29 @@ const Preferences = () => {
 const Container = styled.div`
   height: 100%;
   width: auto;
-  padding: 2rem 1rem 1rem;
+  margin-bottom: ${cssVarsPalette.nav_height};
+  padding: 2rem 1rem 2rem 1rem;
   @media (${desktopVp}) {
     width: 40rem;
-    padding: 2rem 1rem 1rem;
   }
 `;
 const Category = styled.div`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
+  @media (${desktopVp}) {
+    font-weight: 500;
+    font-size: 2rem;
+  }
   padding-bottom: 1rem;
   &:not(:first-child) {
     padding-top: 2rem;
   }
 `;
 const Description = styled.div`
-  font-size: 1rem;
+  font-size: 0.9rem;
+  @media (${desktopVp}) {
+    font-size: 1rem;
+  }
   font-weight: 400;
   padding-bottom: 1rem;
 `;
@@ -98,12 +110,15 @@ const Button = styled.button`
   ${transition('all')}
   cursor: pointer;
   width: auto;
-  padding: 24px 20px;
+  padding: 1.5rem 1.25rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   border-radius: 1rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  @media (${desktopVp}) {
+    font-size: 1rem;
+  }
   font-weight: 500;
   background-color: rgb(245, 245, 245);
   @media (${desktopVp}) {

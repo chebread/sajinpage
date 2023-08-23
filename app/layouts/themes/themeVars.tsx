@@ -9,7 +9,7 @@ const themeVars = {
   },
   dark: {
     color: '#ffffff',
-    background_color: 'rgb(15, 15, 15)',
+    background_color: '#0f0f0f',
     logo_color: '#ffffff',
     header: 'rgba(0, 0, 0, 0.65)',
   },

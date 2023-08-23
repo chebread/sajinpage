@@ -6,7 +6,7 @@ const onClear = () => {
   clear()
     .then(async () => {
       triggerEvent('CLEAR');
-      toast.success('Cleared');
+      toast('Cleared');
     })
     .catch(() => {
       toast.error('Error during clear db');

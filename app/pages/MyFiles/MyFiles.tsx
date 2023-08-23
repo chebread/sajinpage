@@ -5,9 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { broadcastChannel } from 'lib/broadcastChannel';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
+import onDeleteBucket from 'components/MyFiles/onDeleteBucket';
 import onCopyBucket from 'components/MyFiles/onCopyBucket';
-import { toast } from 'react-hot-toast';
-import deleteIdb from 'lib/idb/deleteIdb';
 
 // (0): buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
 // (0): broadcast도 같은 라우터에서 처리가능함 그래서 evented 없엠 => 일단 경과 지켜봐야할듯, 에러나면 바로 복귀함
@@ -22,38 +21,32 @@ const MyFiles = () => {
       const buckets: any = await get('urls');
       setBuckets(buckets);
       // track events
-      broadcastChannel.addEventListener('message', onMessage); // BroadcastChannel 은 같은 라우트에서는 동작하지 않음. 같은 라우터는 이벤트 감지는 evented로 감지함 // 'message' 부분은 Broadcast channel api를 수신하는 방법임
-      // window.addEventListener('evented', onMessage); // 이것은 자체 del 사용시 필요함
-      // track events 아래에서 triggerEvent을 해야 이벤트가 감지됨
+      broadcastChannel.addEventListener('message', onMessage);
+      window.addEventListener('evented', onMessage);
     };
     onLoad().catch(error => {
       console.log(error.url);
     });
     return () => {
-      // broadcastChannel.close() 는 하면 오류발생 함
       broadcastChannel.removeEventListener('message', onMessage);
-      // window.removeEventListener('evented', onMessage);
+      window.removeEventListener('evented', onMessage);
     };
   }, []);
 
   const onMessage = async (e: any) => {
-    if (e.data === 'CLEAR' || e.data === 'INSERT') {
-      const newBuckets: any = await get('urls');
-      setBuckets(newBuckets);
+    if (e.data != undefined) {
+      console.log(e.data);
+      if (e.data === 'CLEAR' || e.data === 'INSERT') {
+        const newBuckets: any = await get('urls');
+        setBuckets(newBuckets);
+      }
+    } else {
+      console.log(e.detail.data);
+      if (e.detail.data === 'CLEAR' || e.detail.data === 'INSERT') {
+        const newBuckets: any = await get('urls');
+        setBuckets(newBuckets);
+      }
     }
-    // if (e.data != undefined) {
-    //   console.log(e.data);
-    //   if (e.data === 'CLEAR' || e.data === 'INSERT') {
-    //     const newBuckets: any = await get('urls');
-    //     setBuckets(newBuckets);
-    //   }
-    // } else {
-    //   console.log(e.detail.data);
-    //   if (e.detail.data === 'CLEAR' || e.detail.data === 'INSERT') {
-    //     const newBuckets: any = await get('urls');
-    //     setBuckets(newBuckets);
-    //   }
-    // }
   };
 
   return (
@@ -76,12 +69,7 @@ const MyFiles = () => {
               >
                 <button>Share</button>
               </CopyToClipboard>
-              <button
-                onClick={() => {
-                  deleteIdb(buckets, value);
-                  toast.success('Deleted');
-                }}
-              >
+              <button onClick={() => onDeleteBucket(buckets, value)}>
                 Delete
               </button>
             </div>

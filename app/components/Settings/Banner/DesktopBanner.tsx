@@ -1,47 +1,27 @@
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab } from 'layouts/properties';
-import { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
-// (0): settingsbanner desktop / mobile 나누어서 mobile은 설정 / 추가 리소스로 전달함
-
-const SettingsBanner = () => {
-  // const [isMobile, setIsMobile] = useState<boolean>();
-
-  // useEffect(() => {
-  //   const win = window as Window;
-  //   setWidth(win.innerWidth);
-
-  //   function handleResize() {
-  //     setWidth(win.innerWidth);
-  //   }
-  //   window.addEventListener('resize', handleResize);
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-
+const DesktopBanner = () => {
   return (
-    <>
-      <Container>
-        <Navigate to="/s" end>
-          <SettingsIcon />
-          설정
-        </Navigate>
-        <Navigate to="/s/h" end>
-          <HelpIcon />
-          도움말
-        </Navigate>
-        <Navigate to="/s/p" end>
-          <PolicyIcon />
-          서비스 정책
-        </Navigate>
-      </Container>
-    </>
+    <Container>
+      <Navigate to="/s" end>
+        <SettingsIcon />
+        설정
+      </Navigate>
+      <Navigate to="/s/h" end>
+        <HelpIcon />
+        도움말
+      </Navigate>
+      <Navigate to="/s/p" end>
+        <PolicyIcon />
+        서비스 정책
+      </Navigate>
+    </Container>
   );
 };
 
@@ -103,4 +83,4 @@ const Navigate = styled(NavLink)<{ active?: any }>`
   }
 `;
 
-export default SettingsBanner;
+export default DesktopBanner;

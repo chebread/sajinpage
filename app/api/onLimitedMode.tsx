@@ -4,7 +4,7 @@ import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import supabase from 'lib/supabase';
 
-const turnOnLimitedMode = async ({ timeLimit, docId, fileId }) => {
+const onLimitedMode = async ({ timeLimit, docId, fileId }) => {
   // update accessTime
   const currentTime = getCurrentTime();
   const accessTime = dateToString(
@@ -34,4 +34,4 @@ const turnOnLimitedMode = async ({ timeLimit, docId, fileId }) => {
   return;
 };
 
-export default turnOnLimitedMode;
+export default onLimitedMode;
