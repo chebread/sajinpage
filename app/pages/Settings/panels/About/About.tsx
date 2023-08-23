@@ -5,26 +5,35 @@ import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
+import Settings from 'pages/Settings/Settings';
 
 // this page provide only mobile
 
 const About = () => {
   return (
-    <Container>
-      <NavigateWrapper>
-        <Navigate to="/s/h" end>
-          <HelpIcon />
-          도움말
-        </Navigate>
-        <Navigate to="/s/p" end>
-          <PolicyIcon />
-          서비스 정책
-        </Navigate>
-      </NavigateWrapper>
-    </Container>
+    <>
+      <Container>
+        <NavigateWrapper>
+          <Navigate to="/s/h" end>
+            <HelpIcon />
+            도움말
+          </Navigate>
+          <Navigate to="/s/p" end>
+            <PolicyIcon />
+            서비스 정책
+          </Navigate>
+        </NavigateWrapper>
+      </Container>
+    </>
   );
 };
 
+const X = styled.div`
+  display: none;
+  @media (${desktopVp}) {
+    display: block;
+  }
+`;
 const NavigateWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,11 +66,12 @@ const Navigate = styled(NavLink)`
   }
 `;
 const Container = styled.div`
+  display: block;
+  @media (${desktopVp}) {
+    display: none;
+  }
   height: 100%;
   width: auto;
-  @media (${desktopVp}) {
-    width: 100%;
-  }
   margin-bottom: ${cssVarsPalette.nav_height};
   padding: 2rem 1rem 2rem 1rem;
 `;

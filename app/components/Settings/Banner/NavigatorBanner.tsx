@@ -91,6 +91,6 @@ const Container = styled.div`
   backdrop-filter: blur(12px);
   height: 3rem;
   width: 100%;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
 `;
 export default NavigatorBanner;

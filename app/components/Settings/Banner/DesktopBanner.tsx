@@ -31,13 +31,14 @@ const Container = styled.div`
   visibility: hidden;
   transform: translateX(-100%);
   height: 0;
+  display: none;
   @media (${desktopVp}) {
     position: sticky;
     visibility: visible;
     transform: translateX(0);
     height: 100%;
+    display: flex;
   }
-  display: flex;
   flex-direction: column;
   top: 4rem;
   padding: 2rem 1rem 1rem;
