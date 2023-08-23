@@ -1,18 +1,40 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
-import Settings from 'pages/Settings/Settings';
+import NotFoundPage from 'pages/NotFoundPage';
+import { useEffect } from 'react';
 
 // this page provide only mobile
 
 const About = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.innerWidth >= 961) {
+      navigate('/s'); // desktop에서는 /s로 리다이렉트 됩니다
+    }
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
+  const onResize = () => {
+    if (window.innerWidth >= 961) {
+      navigate('/s');
+    }
+  };
+
   return (
     <>
-      <Container>
+      <DesktopContainer>
+        <NotFoundPage />
+      </DesktopContainer>
+      <MobileContainer>
         <NavigateWrapper>
           <Navigate to="/s/h" end>
             <HelpIcon />
@@ -23,17 +45,11 @@ const About = () => {
             서비스 정책
           </Navigate>
         </NavigateWrapper>
-      </Container>
+      </MobileContainer>
     </>
   );
 };
 
-const X = styled.div`
-  display: none;
-  @media (${desktopVp}) {
-    display: block;
-  }
-`;
 const NavigateWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,7 +81,7 @@ const Navigate = styled(NavLink)`
     fill: #000;
   }
 `;
-const Container = styled.div`
+const MobileContainer = styled.div`
   display: block;
   @media (${desktopVp}) {
     display: none;
@@ -74,6 +90,13 @@ const Container = styled.div`
   width: auto;
   margin-bottom: ${cssVarsPalette.nav_height};
   padding: 2rem 1rem 2rem 1rem;
+`;
+const DesktopContainer = styled.div`
+  // 리다이렉트가 안될 경우를 대비해서 404 페이지 준비함
+  display: none;
+  @media (${desktopVp}) {
+    display: block;
+  }
 `;
 
 export default About;
