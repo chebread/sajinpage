@@ -10,8 +10,6 @@ import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
 import { toast } from 'react-hot-toast';
 import { cssVarsPalette } from 'layouts/cssVars';
 
-// (0): viewer 확인시에 저장되는 자동 My files 저장 기능 끄기 기능 추가하기 (idb myfiles enabled로 관리 boolean으로 지정함 만약 myfiles: false 라면 viewer에서 저장 안됨 my files 접속시 버킷 자동 저장 기능이 비활성화 되어 있습니다 이런 것은 띄우지 않음)
-
 const Preferences = () => {
   const [enabled, setEnabled] = useState<boolean>(true);
 

@@ -1,23 +1,26 @@
 import { desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MobileBanner = () => {
+  const params = useParams();
+  const type = params.type;
+
   return (
     <Container>
-      <Navigate end to="/s">
+      <Navigate className={type === undefined ? 'active' : ''} to="/s">
         설정
       </Navigate>
-
-      <Navigate end to="/s/a">
+      <Navigate className={type === 'a' ? 'active' : ''} to="/s/a">
         추가 리소스
       </Navigate>
     </Container>
   );
 };
 
-const Navigate = styled(NavLink)`
+const Navigate = styled(Link)`
   all: unset;
   cursor: pointer;
   ${disableTab}

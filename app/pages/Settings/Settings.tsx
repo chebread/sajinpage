@@ -1,7 +1,7 @@
 import Help from './panels/Help';
 import NotFoundPage from 'pages/NotFoundPage';
 import Policy from './panels/Policy';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import About from './panels/About';
 import Preferences from './panels/Preferences';
 import styled from 'styled-components';

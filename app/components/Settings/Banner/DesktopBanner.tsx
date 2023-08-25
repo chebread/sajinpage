@@ -3,21 +3,28 @@ import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab } from 'layouts/properties';
-import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const DesktopBanner = () => {
+  const params = useParams();
+  const type = params.type;
+
   return (
     <Container>
-      <Navigate to="/s" end>
+      <Navigate
+        className={type === 'a' || type === undefined ? 'active' : ''}
+        to="/s"
+      >
         <SettingsIcon />
         설정
       </Navigate>
-      <Navigate to="/s/h" end>
+      <Navigate className={type === 'h' ? 'active' : ''} to="/s/h">
         <HelpIcon />
         도움말
       </Navigate>
-      <Navigate to="/s/p" end>
+      <Navigate className={type === 'p' ? 'active' : ''} to="/s/p">
         <PolicyIcon />
         서비스 정책
       </Navigate>
@@ -44,17 +51,17 @@ const Container = styled.div`
   padding: 2rem 1rem 1rem;
   min-width: 20rem;
 `;
-const Navigate = styled(NavLink)<{ active?: any }>`
+const Navigate = styled(Link)<{ $active?: boolean }>`
   all: unset;
   ${transition('all')}
   ${disableTab}
   cursor: pointer;
-  height: 56px;
+  height: 3.5rem;
   min-width: auto;
-  padding: 0 16px;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   &.active {
     background-color: #e6f0ff; // #e8f0fe // rgb(21, 88, 214)
     color: #1969d2;

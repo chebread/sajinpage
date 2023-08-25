@@ -8,7 +8,6 @@ import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { viewedAtom } from 'atoms/viewerAtom';
-import mobileVp from 'layouts/properties/mobileVp';
 
 const Navigator = () => {
   const [viewed] = useAtom(viewedAtom);

@@ -56,6 +56,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-helmet-async", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:1.3.0"],\
             ["react-hot-toast", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:2.4.1"],\
             ["react-hotkeys-hook", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:4.4.0"],\
+            ["react-i18next", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:13.2.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-pdf", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:7.3.3"],\
             ["react-router-dom", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:6.15.0"],\
@@ -390,6 +391,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@babel/runtime", "npm:7.21.5"],\
             ["regenerator-runtime", "npm:0.13.11"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.22.11", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.22.11-88b2589067-a5cd6683a8.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.22.11"],\
+            ["regenerator-runtime", "npm:0.14.0"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -3673,6 +3682,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["html-parse-stringify", [\
+        ["npm:3.0.1", {\
+          "packageLocation": "./.yarn/cache/html-parse-stringify-npm-3.0.1-5762cd4b01-334fdebd4b.zip/node_modules/html-parse-stringify/",\
+          "packageDependencies": [\
+            ["html-parse-stringify", "npm:3.0.1"],\
+            ["void-elements", "npm:3.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["http-cache-semantics", [\
         ["npm:4.1.1", {\
           "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.1.1-1120131375-83ac0bc60b.zip/node_modules/http-cache-semantics/",\
@@ -5118,6 +5137,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-i18next", [\
+        ["npm:13.2.0", {\
+          "packageLocation": "./.yarn/cache/react-i18next-npm-13.2.0-0d52c144f8-6f7e375b22.zip/node_modules/react-i18next/",\
+          "packageDependencies": [\
+            ["react-i18next", "npm:13.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:13.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-i18next-virtual-25d10980e1/0/cache/react-i18next-npm-13.2.0-0d52c144f8-6f7e375b22.zip/node_modules/react-i18next/",\
+          "packageDependencies": [\
+            ["react-i18next", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:13.2.0"],\
+            ["@babel/runtime", "npm:7.22.11"],\
+            ["@types/i18next", null],\
+            ["@types/react", "npm:18.2.0"],\
+            ["@types/react-dom", "npm:18.2.1"],\
+            ["@types/react-native", null],\
+            ["html-parse-stringify", "npm:3.0.1"],\
+            ["i18next", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:18.2.0"],\
+            ["react-native", null]\
+          ],\
+          "packagePeers": [\
+            "@types/i18next",\
+            "@types/react-dom",\
+            "@types/react-native",\
+            "@types/react",\
+            "i18next",\
+            "react-dom",\
+            "react-native",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-is", [\
         ["npm:16.13.1", {\
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
@@ -5389,6 +5444,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regenerator-runtime", "npm:0.13.11"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.14.0", {\
+          "packageLocation": "./.yarn/cache/regenerator-runtime-npm-0.14.0-e060897cf7-1c977ad82a.zip/node_modules/regenerator-runtime/",\
+          "packageDependencies": [\
+            ["regenerator-runtime", "npm:0.14.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["repeat-string", [\
@@ -5539,6 +5601,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-helmet-async", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:1.3.0"],\
             ["react-hot-toast", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:2.4.1"],\
             ["react-hotkeys-hook", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:4.4.0"],\
+            ["react-i18next", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:13.2.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-pdf", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:7.3.3"],\
             ["react-router-dom", "virtual:bda71a85a4fbe86ccad36d9dc19d7f0ad528143f965378e2b9371ce507af844f5e5d1524ea8ec924dcff8bf7af388d0126e1ca89b2c6e2e9cda680ffda2df222#npm:6.15.0"],\
@@ -6581,6 +6644,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "playwright",\
             "safaridriver",\
             "webdriverio"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["void-elements", [\
+        ["npm:3.1.0", {\
+          "packageLocation": "./.yarn/cache/void-elements-npm-3.1.0-4f43780839-0390f81810.zip/node_modules/void-elements/",\
+          "packageDependencies": [\
+            ["void-elements", "npm:3.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\

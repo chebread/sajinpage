@@ -5,9 +5,21 @@ import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 
 // (0): mobile safari 에서 100vh 인데 갑자기 축소되서 이상해지는 현상
+// (0): image 클릭시 전체화면으로 (모바일 처럼) 되는 것 구현하기 (부드럽게 적용함)
+// (0): zoom은 그냥 스크롤 사용하여 구현하기 (자체 구현 x)
 
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
+
+  function onClick() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
 
   return (
     <Container>
@@ -46,6 +58,7 @@ const ImageWrapper = styled.div`
 `;
 const Image = styled.img`
   ${transition('border-radius')}
+  cursor: pointer;
   display: block;
   max-height: 100%;
   max-width: 100%;

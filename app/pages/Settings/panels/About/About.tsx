@@ -1,60 +1,37 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
-import NotFoundPage from 'pages/NotFoundPage';
-import { useEffect } from 'react';
+import DesktopBanner from 'components/Settings/Banner/DesktopBanner';
+import Preferences from '../Preferences';
 
 // this page provide only mobile
+// desktop에서는 s/ 페이지와 동일시하게 보여주기
 
 const About = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (window.innerWidth >= 961) {
-      navigate('/s'); // desktop에서는 /s로 리다이렉트 됩니다
-    }
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-    };
-  }, []);
-
-  const onResize = () => {
-    if (window.innerWidth >= 961) {
-      navigate('/s');
-    }
-  };
-
   return (
     <>
       <DesktopContainer>
-        <NotFoundPage />
+        <DesktopBanner />
+        <Preferences />
       </DesktopContainer>
-      <MobileContainer>
-        <NavigateWrapper>
-          <Navigate to="/s/h" end>
-            <HelpIcon />
-            도움말
-          </Navigate>
-          <Navigate to="/s/p" end>
-            <PolicyIcon />
-            서비스 정책
-          </Navigate>
-        </NavigateWrapper>
-      </MobileContainer>
+      <Container>
+        <Navigate to="/s/h" end>
+          <HelpIcon />
+          도움말
+        </Navigate>
+        <Navigate to="/s/p" end>
+          <PolicyIcon />
+          서비스 정책
+        </Navigate>
+      </Container>
     </>
   );
 };
 
-const NavigateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
 const Navigate = styled(NavLink)`
   all: unset;
   ${disableTab}
@@ -78,11 +55,10 @@ const Navigate = styled(NavLink)`
   }
   svg {
     height: 1.5rem;
-    fill: #000;
+    fill: #1969d2;
   }
 `;
-const MobileContainer = styled.div`
-  display: block;
+const Container = styled.div`
   @media (${desktopVp}) {
     display: none;
   }
@@ -90,13 +66,37 @@ const MobileContainer = styled.div`
   width: auto;
   margin-bottom: ${cssVarsPalette.nav_height};
   padding: 2rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 const DesktopContainer = styled.div`
-  // 리다이렉트가 안될 경우를 대비해서 404 페이지 준비함
   display: none;
   @media (${desktopVp}) {
-    display: block;
+    display: flex;
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    gap: 5rem;
   }
 `;
 
 export default About;
+
+// const navigate = useNavigate();
+
+//   useEffect(() => {
+//     if (window.innerWidth >= 961) {
+//       navigate('/s'); // desktop에서는 /s로 리다이렉트 됩니다
+//     }
+//     window.addEventListener('resize', onResize);
+//     return () => {
+//       window.removeEventListener('resize', onResize);
+//     };
+//   }, []);
+
+//   const onResize = () => {
+//     if (window.innerWidth >= 961) {
+//       navigate('/s');
+//     }
+//   };

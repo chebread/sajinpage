@@ -17,6 +17,7 @@ import { toast } from 'react-hot-toast';
 // *(0): upload시 사진 업로드 or 이미있는 사진 url로 업로드 기능을 추가하기=> 이때는 limited mode를 사진이 아닌 파일 자체에 제공하는 처음에 내가 실수로 제공한 제한 모드 같이 파일에 acesstime timelimit 등등으로 관리해야함
 // => 이미있는 pdf 링크로도 업로드 가능케하기 (paste도 가능케하기)
 // (0): paste로 하는 것도 있지만, "복사한 url 업로드하기" or "복사한 파일 업로드하기" 기능을 통해 복사한 url 혹은 파일을 클립보드에 접근후 버튼 클릭시 paste 같이 동작하도록 하기
+// (0): isDragActive 이용하지 않고 전체 화면에 listener를 두어서 전체에 파일이 drop 인식시 화면에 active 나오게 하기
 
 const Uploader = () => {
   const [, setFiles] = useAtom(filesAtom);
@@ -91,19 +92,27 @@ const Uploader = () => {
 
   return (
     <>
-      <Dropzone onDrop={onDropFiles} accept={fileAcceptTypes} noClick>
-        {({ getRootProps, getInputProps, open, isDragActive }) => (
-          <>
-            <DropZone {...getRootProps()}>
-              <input {...getInputProps()} />
-              <Container>
-                <div>Upload</div>
-                <Button onClick={open}>Import an image</Button>
-                <DropGuide visible={isDragActive}>hello</DropGuide>
-              </Container>
-            </DropZone>
-          </>
-        )}
+      <Dropzone
+        onDrop={onDropFiles}
+        accept={fileAcceptTypes}
+        noClick
+        noKeyboard
+        multiple={false}
+      >
+        {({ getRootProps, getInputProps, open, isDragActive }) => {
+          return (
+            <>
+              <DropZone {...getRootProps()}>
+                <input {...getInputProps()} />
+                <Container>
+                  <div>Upload</div>
+                  <Button onClick={open}>Import an image</Button>
+                  <DropGuide visible={isDragActive}>hello</DropGuide>
+                </Container>
+              </DropZone>
+            </>
+          );
+        }}
       </Dropzone>
     </>
   );

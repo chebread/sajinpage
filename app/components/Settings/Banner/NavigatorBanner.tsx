@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import { ReactComponent as LeftArrow } from 'assets/svg/LeftArrow.svg';
 import { useNavigate, useParams } from 'react-router-dom';
 
+// (0): blur가 header에도 있어서 약간 이중 blur로 되는 것 twitter 참고하여 이거 없에기
+
 const NavigatorBanner = () => {
   const params = useParams();
   const navigate = useNavigate();

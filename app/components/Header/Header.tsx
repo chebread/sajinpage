@@ -11,7 +11,7 @@ import { useAtom } from 'jotai';
 import MenuModal from 'components/Viewer/Modal/MenuModal';
 
 // (0): svg safari 오류 해결하기 (chrome도 약간 불안정함)
-// (0): menu modal 삭제가 안됨
+// (0): menu modal시 @keyframes로 threads 같이 구현하기 (visible 사용 x, display 사용 o)
 // (0): safari transform y 속성이 위로 스크롤시 보이는 문제 해결하기
 
 const Header = () => {
