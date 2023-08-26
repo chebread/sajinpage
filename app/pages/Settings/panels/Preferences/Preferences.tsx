@@ -1,9 +1,4 @@
-import {
-  desktopVp,
-  disableTab,
-  landscapeVp,
-  safeArea,
-} from 'layouts/properties';
+import { desktopVp, disableTab, landscapeVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import { ReactComponent as DeleteIcon } from 'assets/svg/DeleteIcon.svg';
 import { ReactComponent as SaveIcon } from 'assets/svg/SaveIcon.svg';

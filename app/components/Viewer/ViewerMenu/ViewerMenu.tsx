@@ -1,4 +1,4 @@
-import { clickedAtom } from 'atoms/viewerAtom';
+import { clickedAtom, menuClickedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
@@ -19,18 +19,20 @@ import { updateFiles } from 'api';
 import getCurrentTime from 'lib/getCurrentTime';
 import dateToString from 'lib/dateToString';
 import addTime from 'lib/addTime';
+import onCopy from 'components/onCopy';
 
 // mobile에서만 보이며, viewermenu에서 mobile에서 viewermenu를 구현하기 위해 사용되는 컴포넌트임
 // (0): 화면 클릭시 활성화 되며 아래에 모달이 나오며,상단에는 뒤로가기 버튼 존재함. 뒤로가기는 뒤로갈 history가 있으면 가고 없으면 홈으로 리다이렉트 됨
 
 const ViewerMenu = () => {
   const navigate = useNavigate();
-  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [fileDb] = useAtom(fileDbAtom);
   const url = getUrl(); // current app url
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useState(false);
   const [resetToggle, setResetToggle] = useState(false);
+  const [clicked, setClicked] = useAtom(clickedAtom);
 
   const initValues = () => {
     setModeToggle(false);
@@ -96,35 +98,30 @@ const ViewerMenu = () => {
     setResetToggle(false);
   };
 
-  const onRedirect = () => {
-    navigate('/');
-  };
-  const onClickMenu = () => {
-    setClicked(!clicked);
-  };
   const onCancelBg = () => {
-    setClicked(!clicked);
+    setMenuClicked(false);
+    // setClicked(false);
   };
 
   return (
     <>
       <Container>
-        <Wrapper>
+        {/* <Wrapper>
           <Btn onClick={onClickMenu}>
             <DotIcon />
           </Btn>
-        </Wrapper>
-        <Background visible={clicked} onClick={onCancelBg} />
+        </Wrapper> */}
+        <Background visible={menuClicked} onClick={onCancelBg} />
         <>
-          <ContainerX visible={clicked}>
-            <CopyToClipboard
-              text={getWebsiteUrl(`/v/${fileDb.docId}`)}
-              onCopy={() => {
-                // when copied
+          <ContainerX visible={menuClicked}>
+            <button
+              onClick={async () => {
+                await onCopy(getUrl());
+                onCancelBg();
               }}
             >
-              <button>Share</button>
-            </CopyToClipboard>
+              Share
+            </button>
             <button onClick={() => onDeleteFile(fileDb.docId)}>
               delete file
             </button>
@@ -185,15 +182,13 @@ const Container = styled.div`
 `;
 
 const Background = styled.div<{ visible: boolean }>`
-  display: block;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
   ${transition('all')}
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
-  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: 10000;
 `;
 
 const ContainerX = styled.div<{ visible: boolean }>`

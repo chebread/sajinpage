@@ -12,7 +12,7 @@ import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { viewedAtom } from 'atoms/viewerAtom';
+import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
 
 // z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 // (0): landscape에서 nav safe area 설정시 "도구 막대 축소"시 safe area 없어지는 문제 있음 (https://developer.apple.com/forums/thread/716552)
@@ -20,9 +20,10 @@ import { viewedAtom } from 'atoms/viewerAtom';
 
 const Navigator = () => {
   const [viewed] = useAtom(viewedAtom);
+  const [clicked] = useAtom(clickedAtom);
 
   return (
-    <Container visible={viewed}>
+    <Container visible={viewed ? (clicked ? true : false) : true}>
       <Wrapper>
         <Navigate to="f" onTouchStart={() => {}}>
           <MyFilesIcon />
@@ -46,7 +47,7 @@ const Container = styled.div<{ visible: boolean }>`
   ${transition('all')}
   // for viewer
   transform: ${({ visible }) =>
-    visible ? 'translateY(100%)' : ' translateY(0)'};
+    visible ? ' translateY(0)' : 'translateY(100%)'};
   @media (${desktopVp}) {
     transform: translateY(0);
   }
@@ -57,7 +58,7 @@ const Container = styled.div<{ visible: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #ffffff;
+  background-color: #fff;
   @media (${landscapeVp}) {
     padding-bottom: env(safe-area-inset-bottom);
   }

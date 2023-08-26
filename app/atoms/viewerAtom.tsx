@@ -5,10 +5,12 @@ const clickedAtom = atom(false);
 const modeToggleAtom = atom(false);
 const resetToggleAtom = atom(false);
 const onCancelAtom = atom(null, (get, set) => {
-  set(clickedAtom, false);
+  set(menuClickedAtom, false);
   set(modeToggleAtom, false);
   set(resetToggleAtom, false);
+  set(clickedAtom, false);
 });
+const menuClickedAtom = atom(false);
 
 export {
   clickedAtom,
@@ -16,4 +18,5 @@ export {
   modeToggleAtom,
   resetToggleAtom,
   onCancelAtom,
+  menuClickedAtom,
 };

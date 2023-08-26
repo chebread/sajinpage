@@ -1,9 +1,18 @@
 import { updateFiles } from 'api';
 import fileDbAtom from 'atoms/fileDbAtom';
-import { clickedAtom, modeToggleAtom, onCancelAtom } from 'atoms/viewerAtom';
+import {
+  clickedAtom,
+  menuClickedAtom,
+  modeToggleAtom,
+  onCancelAtom,
+} from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import { desktopVp, disableSelection } from 'layouts/properties';
-import transition from 'layouts/properties/transition';
+import {
+  animation,
+  desktopVp,
+  disableSelection,
+  transition,
+} from 'layouts/properties';
 import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
 import onCopy from 'components/onCopy';
@@ -12,18 +21,18 @@ import onDeleteFile from 'components/onDeleteFile';
 
 const MenuModal = () => {
   const [fileDb] = useAtom(fileDbAtom);
-  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
   const [, onCancel] = useAtom(onCancelAtom);
 
   const onModeToggle = () => {
     setModeToggle(!modeToggle);
-    setClicked(false); // menuModal 최소화
+    setMenuClicked(false); // menuModal 최소화
   };
 
   return (
     <>
-      <MenuModalsContainer visible={clicked}>
+      <MenuModalsContainer visible={menuClicked}>
         <MenuModals
           onClick={async () => {
             await onCopy(getUrl());
@@ -56,7 +65,7 @@ const MenuModal = () => {
         </MenuModals>
       </MenuModalsContainer>
       {/* (0): 수정필요 */}
-      <MenuModalsBackground visible={clicked} onClick={onCancel} />
+      <MenuModalsBackground visible={menuClicked} onClick={onCancel} />
       <FloatModal />
     </>
   );
@@ -75,15 +84,16 @@ const MenuModalsBackground = styled.div<{ visible: boolean }>`
   // (0): z-index: 10000시 버튼이 왜 안먹힐까?
 `;
 const MenuModalsContainer = styled.div<{ visible: boolean }>`
-  ${transition('all')}
+  /* ${transition('all')} */
   cursor: pointer;
-  visibility: hidden; // mobile은 다른 하단 modal이 튀어나옴!
+  visibility: hidden;
   opacity: 0;
   z-index: -1;
   @media (${desktopVp}) {
     visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
     opacity: ${({ visible }) => (visible ? 1 : 0)};
     z-index: ${({ visible }) => (visible ? '100000' : '-1')};
+    display: ${({ visible }) => (visible ? 'block' : 'none')};
   }
   position: fixed;
   right: 0;
@@ -95,6 +105,17 @@ const MenuModalsContainer = styled.div<{ visible: boolean }>`
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 1rem;
+
+  ${animation('x')}
+  @keyframes x {
+    0% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 const MenuModals = styled.div`
   ${transition('all')}

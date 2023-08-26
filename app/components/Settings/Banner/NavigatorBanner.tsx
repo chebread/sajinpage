@@ -4,12 +4,12 @@ import {
   disableSelection,
   disableTab,
   landscapeVp,
-  safeArea,
 } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { ReactComponent as LeftArrow } from 'assets/svg/LeftArrow.svg';
 import { useNavigate, useParams } from 'react-router-dom';
+import { cssVarsPalette } from 'layouts/cssVars';
 
 // (0): blur가 header에도 있어서 약간 이중 blur로 되는 것 twitter 참고하여 이거 없에기
 
@@ -99,10 +99,8 @@ const Container = styled.div`
   z-index: 1000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   @media (${landscapeVp}) {
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    padding-left: constant(safe-area-inset-left);
-    padding-right: constant(safe-area-inset-right);
+    padding-left: ${cssVarsPalette.sal};
+    padding-right: ${cssVarsPalette.sar};
   }
 `;
 export default NavigatorBanner;

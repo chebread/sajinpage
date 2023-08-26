@@ -41,7 +41,6 @@ const Viewer = () => {
   useEffect(() => {
     // 여기서 발생되는 처리는 처음 접근시임
     /* test code */
-    /*
     const onLoad = async () => {
       // file db 가져오기
       const fileDb = await loadFiles(docId); // 최초 접근시 파일이 삭제되면 여기서 에러가 발생하게 됨
@@ -124,7 +123,7 @@ const Viewer = () => {
       window.removeEventListener('evented', onMessage);
       initValues();
     };
-    */
+
     /* test code */
     insertIdb(docId);
     setLoaded(true);

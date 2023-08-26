@@ -1,12 +1,17 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
+import {
+  centerAlign,
+  desktopVp,
+  disableTab,
+  landscapeVp,
+} from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { themeVars } from 'layouts/themes';
-import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { clickedAtom, menuClickedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import MenuModal from 'components/Viewer/Modal/MenuModal';
 
@@ -16,16 +21,18 @@ import MenuModal from 'components/Viewer/Modal/MenuModal';
 
 const Header = () => {
   const [viewed] = useAtom(viewedAtom); // check that current route is image-viewer
+  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [clicked, setClicked] = useAtom(clickedAtom);
 
   const onMenu = () => {
-    setClicked(!clicked);
+    setMenuClicked(!menuClicked);
+    setClicked(true); // (중요): mobile에서도 동일시하게 적용하기 위해 clicked도 true 함 (토글 하면 안됨, 이유는 이미 모바일에서 true 인데 메뉴 클릭하면 false 되니까 안되요!)
   };
 
   return (
     <>
       <ContainerWrapper>
-        <Container visible={viewed}>
+        <Container visible={viewed ? (clicked ? true : false) : true}>
           <AsideLeftWrapper>
             <ButtonWrapper></ButtonWrapper>
           </AsideLeftWrapper>
@@ -55,9 +62,9 @@ const ContainerWrapper = styled.div`
 const Container = styled.div<{ visible: boolean }>`
   ${transition('all')}
   // for viewer
-  margin-bottom: ${({ visible }) => (visible ? '-3rem' : 'auto')};
+  margin-bottom: ${({ visible }) => (visible ? 'auto' : '-3rem')};
   transform: ${({ visible }) =>
-    visible ? 'translateY(-100%)' : 'translateY(0)'};
+    visible ? 'translateY(0)' : 'translateY(-100%)'};
   @media (${desktopVp}) {
     margin-bottom: auto;
     transform: translateY(0);
@@ -119,8 +126,12 @@ const LogoBtn = styled(Link)`
 
 const ButtonWrapper = styled.div`
   ${transition('all')}
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  @media (${landscapeVp}) {
+    padding-left: calc(${cssVarsPalette.sal} + 1.5rem);
+    padding-right: calc(${cssVarsPalette.sar} + 1.5rem);
+  }
   @media (${desktopVp}) {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -136,8 +147,12 @@ const Btn = styled.button<{ visible?: boolean }>`
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   z-index: ${({ visible }) => (visible ? '0' : '-1')};
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  @media (${desktopVp}) {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
   display: flex;
   ${centerAlign}
   border-radius: 50%;
@@ -153,9 +168,9 @@ const Btn = styled.button<{ visible?: boolean }>`
   }
   svg {
     ${transition('all')}
-    height: 16px; // 1.1rem
+    height: 16px;
     @media (${desktopVp}) {
-      height: 19px; // 1.1rem
+      height: 19px;
     }
   }
 `;
