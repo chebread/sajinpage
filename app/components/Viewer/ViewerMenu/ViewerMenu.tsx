@@ -21,7 +21,7 @@ import dateToString from 'lib/dateToString';
 import addTime from 'lib/addTime';
 
 // mobile에서만 보이며, viewermenu에서 mobile에서 viewermenu를 구현하기 위해 사용되는 컴포넌트임
-// (0): 아래에서 위로 스크롤시 edit menu 활성화 됨
+// (0): 화면 클릭시 활성화 되며 아래에 모달이 나오며,상단에는 뒤로가기 버튼 존재함. 뒤로가기는 뒤로갈 history가 있으면 가고 없으면 홈으로 리다이렉트 됨
 
 const ViewerMenu = () => {
   const navigate = useNavigate();

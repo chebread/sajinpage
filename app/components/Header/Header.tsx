@@ -128,6 +128,7 @@ const ButtonWrapper = styled.div`
 const Btn = styled.button<{ visible?: boolean }>`
   // 이거 menumodal시 띄워지게 하기
   all: unset;
+  ${disableTab}
   ${transition('all')}
   cursor: pointer;
   z-index: 10000; // (0): 왜 안먹히나.
@@ -151,7 +152,10 @@ const Btn = styled.button<{ visible?: boolean }>`
   }
   svg {
     ${transition('all')}
-    height: 1.2rem; // 1.1rem
+    height: 16px; // 1.1rem
+    @media (${desktopVp}) {
+      height: 19px; // 1.1rem
+    }
   }
 `;
 

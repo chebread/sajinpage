@@ -14,6 +14,16 @@ const cssVars = {
     nav_height: '4rem',
     content_full_height: 'calc(100% - 8rem)', // header를 제외한 최대 height
   },
+  custom: {
+    env_sat: 'env(safe-area-inset-top)',
+    env_sar: 'env(safe-area-inset-right)',
+    env_sab: 'env(safe-area-inset-bottom)',
+    env_sal: 'env(safe-area-inset-left)',
+    constant_sat: 'constant(safe-area-inset-top)',
+    constant_sar: 'constant(safe-area-inset-right)',
+    constant_sab: 'constant(safe-area-inset-bottom)',
+    constant_sal: 'constant(safe-area-inset-left)',
+  },
 };
 
 export default cssVars;

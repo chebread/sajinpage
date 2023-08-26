@@ -5,6 +5,8 @@ import desktopVp from './desktopVp';
 import disableTab from './disableTab';
 import desktopHover from './desktopHover';
 import darkMode from './darkMode';
+import landscapeVp from './landscapeVp';
+import safeArea from './safeArea';
 
 export {
   centerAlign,
@@ -14,4 +16,6 @@ export {
   disableTab,
   desktopHover,
   darkMode,
+  landscapeVp,
+  safeArea,
 };

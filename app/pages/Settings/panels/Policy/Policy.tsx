@@ -1,5 +1,5 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { desktopVp } from 'layouts/properties';
+import { desktopVp, landscapeVp } from 'layouts/properties';
 import styled from 'styled-components';
 
 const Policy = () => {
@@ -135,6 +135,13 @@ const Container = styled.div`
   padding: 2rem 1rem 2rem 1rem;
   @media (${desktopVp}) {
     width: 50rem;
+  }
+
+  @media (${landscapeVp}) {
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-left: calc(1rem + constant(safe-area-inset-left));
+    padding-right: calc(1rem + constant(safe-area-inset-right));
   }
 `;
 

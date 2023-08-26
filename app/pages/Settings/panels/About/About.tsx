@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
-import { desktopVp, disableTab } from 'layouts/properties';
+import { desktopVp, disableTab, landscapeVp } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
 import DesktopBanner from 'components/Settings/Banner/DesktopBanner';
 import Preferences from '../Preferences';
@@ -69,6 +69,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (${landscapeVp}) {
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-left: calc(1rem + constant(safe-area-inset-left));
+    padding-right: calc(1rem + constant(safe-area-inset-right));
+  }
 `;
 const DesktopContainer = styled.div`
   display: none;

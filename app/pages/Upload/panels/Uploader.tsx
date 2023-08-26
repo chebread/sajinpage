@@ -7,6 +7,7 @@ import { cssVarsPalette } from 'layouts/cssVars';
 import filesAtom from 'atoms/filesAtom';
 import checkUrlFormat from 'lib/checkUrlFormat';
 import { toast } from 'react-hot-toast';
+import { landscapeVp } from 'layouts/properties';
 
 // (0): useCallback에서 [] 전달해도 상관이없나? 일반함수보다 이게 더 효율적인가?
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성

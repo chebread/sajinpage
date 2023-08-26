@@ -1,4 +1,9 @@
-import { desktopVp, disableTab } from 'layouts/properties';
+import {
+  desktopVp,
+  disableTab,
+  landscapeVp,
+  safeArea,
+} from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import { ReactComponent as DeleteIcon } from 'assets/svg/DeleteIcon.svg';
 import { ReactComponent as SaveIcon } from 'assets/svg/SaveIcon.svg';
@@ -9,6 +14,8 @@ import { get, set } from 'idb-keyval';
 import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
 import { toast } from 'react-hot-toast';
 import { cssVarsPalette } from 'layouts/cssVars';
+
+// 버킷 저장 기능의 기본값은 undefined로 true임
 
 const Preferences = () => {
   const [enabled, setEnabled] = useState<boolean>(true);
@@ -70,10 +77,17 @@ const Preferences = () => {
 const Container = styled.div`
   height: 100%;
   width: auto;
-  margin-bottom: ${cssVarsPalette.nav_height};
-  padding: 2rem 1rem 2rem 1rem;
   @media (${desktopVp}) {
     width: 40rem;
+  }
+  margin-bottom: ${cssVarsPalette.nav_height};
+  padding: 2rem 1rem 2rem 1rem;
+
+  @media (${landscapeVp}) {
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-left: calc(1rem + constant(safe-area-inset-left));
+    padding-right: calc(1rem + constant(safe-area-inset-right));
   }
 `;
 const Category = styled.div`

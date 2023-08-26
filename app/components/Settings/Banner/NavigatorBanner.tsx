@@ -3,6 +3,8 @@ import {
   desktopVp,
   disableSelection,
   disableTab,
+  landscapeVp,
+  safeArea,
 } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
@@ -92,7 +94,13 @@ const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   height: 3rem;
-  width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+
+  @media (${landscapeVp}) {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-left: constant(safe-area-inset-left);
+    padding-right: constant(safe-area-inset-right);
+  }
 `;
 export default NavigatorBanner;

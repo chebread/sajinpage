@@ -7,6 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 import onDeleteBucket from 'components/MyFiles/onDeleteBucket';
 import onCopyBucket from 'components/MyFiles/onCopyBucket';
+import { landscapeVp } from 'layouts/properties';
 
 // (0): buckets에 아무 값도 없을때 => 아무것도 없다고하는 라우터로 처리하기
 // (0): broadcast도 같은 라우터에서 처리가능함 그래서 evented 없엠 => 일단 경과 지켜봐야할듯, 에러나면 바로 복귀함
