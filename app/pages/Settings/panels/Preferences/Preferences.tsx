@@ -75,19 +75,22 @@ const Preferences = () => {
 };
 
 const Container = styled.div`
+  position: relative;
   height: 100%;
   width: auto;
   @media (${desktopVp}) {
     width: 40rem;
   }
+  margin-top: ${cssVarsPalette.header_height}; // for mobile banner
   margin-bottom: ${cssVarsPalette.nav_height};
+  margin-bottom: calc(${cssVarsPalette.nav_height} + ${cssVarsPalette.sab});
+  @media (${desktopVp}) {
+    margin-top: 0;
+  }
   padding: 2rem 1rem 2rem 1rem;
-
   @media (${landscapeVp}) {
-    padding-left: calc(1rem + env(safe-area-inset-left));
-    padding-right: calc(1rem + env(safe-area-inset-right));
-    padding-left: calc(1rem + constant(safe-area-inset-left));
-    padding-right: calc(1rem + constant(safe-area-inset-right));
+    padding-left: calc(1rem + ${cssVarsPalette.sal});
+    padding-right: calc(1rem + ${cssVarsPalette.sar});
   }
 `;
 const Category = styled.div`

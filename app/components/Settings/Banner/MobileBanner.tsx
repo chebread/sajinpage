@@ -1,5 +1,6 @@
 import { desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
+import { themeVars } from 'layouts/themes';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -41,14 +42,17 @@ const Container = styled.div`
     display: none;
   }
   top: 3rem;
-  position: sticky;
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
+  position: fixed;
+  /* background-color: ${themeVars.light.header_color};
+  backdrop-filter: blur(12px); */
+  background-color: #fff;
   height: 3rem;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  z-index: 1000; // z-index를 10000으로 하면 shadow가 header를 덮게 됨
+  /* box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.08); */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
 `;
 

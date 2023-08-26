@@ -4,7 +4,7 @@ import { ReactComponent as HelpIcon } from 'assets/svg/HelpIcon.svg';
 import { ReactComponent as PolicyIcon } from 'assets/svg/PolicyIcon.svg';
 import transition from 'layouts/properties/transition';
 import { desktopVp, disableTab, landscapeVp } from 'layouts/properties';
-import { cssVarsPalette } from 'layouts/cssVars';
+import { cssVars, cssVarsPalette } from 'layouts/cssVars';
 import DesktopBanner from 'components/Settings/Banner/DesktopBanner';
 import Preferences from '../Preferences';
 
@@ -64,17 +64,19 @@ const Container = styled.div`
   }
   height: 100%;
   width: auto;
+  margin-top: ${cssVarsPalette.header_height}; // for mobile banner
   margin-bottom: ${cssVarsPalette.nav_height};
+  margin-bottom: calc(${cssVarsPalette.nav_height} + ${cssVarsPalette.sab});
   padding: 2rem 1rem 2rem 1rem;
+  @media (${desktopVp}) {
+    margin-top: 0;
+  }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
   @media (${landscapeVp}) {
-    padding-left: calc(1rem + env(safe-area-inset-left));
-    padding-right: calc(1rem + env(safe-area-inset-right));
-    padding-left: calc(1rem + constant(safe-area-inset-left));
-    padding-right: calc(1rem + constant(safe-area-inset-right));
+    padding-left: calc(1rem + ${cssVarsPalette.sal});
+    padding-right: calc(1rem + ${cssVarsPalette.sar});
   }
 `;
 const DesktopContainer = styled.div`

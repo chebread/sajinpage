@@ -11,16 +11,6 @@ import styled from 'styled-components';
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
 
-  function onClick() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    }
-  }
-
   return (
     <Container>
       <ImageWrapper>

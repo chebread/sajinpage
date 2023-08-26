@@ -7,6 +7,7 @@ import appCssVars from 'layouts/cssVars/appCssVars';
 const GlobalStyles = createGlobalStyle`
   ${initStyles}
   body {
+    ${appCssVars.all}
     ${appCssVars.mobile}
   }
   @media (${desktopVp}) {

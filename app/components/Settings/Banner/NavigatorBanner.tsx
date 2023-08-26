@@ -90,12 +90,14 @@ const Container = styled.div`
     display: none;
   }
   top: 3rem;
-  position: sticky;
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
+  position: fixed;
+  /* background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px); */
+  background-color: #fff;
   height: 3rem;
+  width: 100%;
+  z-index: 1000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-
   @media (${landscapeVp}) {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
