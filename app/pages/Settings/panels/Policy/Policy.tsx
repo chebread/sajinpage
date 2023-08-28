@@ -82,6 +82,66 @@ const Policy = () => {
           사진페이지(이하 "회사")는 수집한 개인정보를 서비스 제공의 목적을 위해
           활용합니다.
         </Content>
+        <Content>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus
+          exercitationem explicabo repudiandae ipsum autem at doloremque quasi,
+          voluptate assumenda sed facilis ea et nisi magni iusto eaque velit ex
+          rerum incidunt earum corporis voluptatibus, quisquam quam vel. Nisi
+          nulla voluptates adipisci, magni dignissimos debitis sit, eos ipsum
+          doloribus, necessitatibus dolorum temporibus iure pariatur dolor
+          veritatis natus nemo commodi? Fugit magni non dolorem culpa corporis
+          id dignissimos dolores accusantium eum quia possimus excepturi impedit
+          quas iusto quisquam dicta explicabo numquam rerum labore consequatur
+          commodi, mollitia officia. Illo necessitatibus obcaecati sapiente
+          illum? Dicta necessitatibus aperiam natus ratione recusandae, quasi
+          est consectetur neque ex. Earum aliquid ullam ab, fugit nesciunt
+          inventore odio dolore rerum porro recusandae. Molestiae, minima
+          tempore? Aliquam autem incidunt atque eius ex fuga, assumenda eos
+          totam esse sunt inventore quaerat officia consequuntur veritatis at
+          fugit, harum repellendus molestiae distinctio quidem minus quo eveniet
+          impedit dignissimos. Quis amet facere ipsam aliquam voluptas impedit
+          nostrum excepturi neque distinctio iste, debitis suscipit perspiciatis
+          expedita ex cupiditate consequuntur est, maiores a. Velit, veniam.
+          Necessitatibus, magni nobis. Illo suscipit vitae recusandae quos
+          soluta libero officiis iure, animi repellat quia ab? Veritatis, velit
+          incidunt et delectus sed facere perspiciatis neque consequuntur cumque
+          similique corrupti mollitia ab, recusandae laborum quasi aliquam
+          aperiam vero nam, eum rerum distinctio fugit ea aut eos. Iure
+          laudantium voluptatibus quisquam repudiandae sit eaque asperiores quos
+          cupiditate mollitia, porro minima quaerat modi eligendi. Magnam neque,
+          esse saepe id consequuntur tenetur aut alias aliquid numquam
+          repellendus asperiores adipisci. Quisquam labore laboriosam et non,
+          rem, accusantium nemo incidunt tempore ullam, inventore adipisci odio
+          illo. A officia laudantium quia esse accusamus consequuntur libero!
+          Similique corporis voluptate, blanditiis, soluta harum est mollitia
+          adipisci quos natus minima obcaecati excepturi ex autem commodi vel
+          nam atque! Nam, molestiae? Reiciendis voluptatum vero, iste
+          necessitatibus harum, ut fugiat labore magnam voluptates inventore
+          perspiciatis id excepturi similique nulla molestiae recusandae nihil!
+          Adipisci necessitatibus nesciunt tempora corrupti doloremque molestias
+          praesentium blanditiis repudiandae consequatur porro cupiditate,
+          sapiente quasi cumque perspiciatis, quos a asperiores, commodi vitae
+          ut officia placeat! Doloremque in, incidunt, quo maiores deserunt
+          beatae at hic vitae, molestias dolor minima. Facere deleniti officia
+          nobis natus dolore eveniet, animi cumque accusamus iste possimus
+          vitae. Porro sequi error dignissimos voluptates. Atque obcaecati
+          dolore similique iure! Id iste illum inventore deleniti sequi
+          consectetur eum earum dolore sunt quasi. Illum facilis ea ipsum eaque
+          magnam explicabo impedit aliquid, molestiae, quae, similique nemo!
+          Molestias possimus adipisci, illo obcaecati ipsam similique aliquid
+          nobis beatae ratione placeat totam vel illum aliquam saepe modi,
+          suscipit atque quia impedit quae tempora explicabo et, doloremque
+          fuga? Nisi sit mollitia voluptatem veritatis quos commodi quasi
+          consequatur repellat laboriosam facere tenetur omnis similique
+          cupiditate odit molestiae ad dicta, necessitatibus odio provident
+          doloremque minima, veniam iusto recusandae. Aperiam eligendi
+          voluptatibus cumque provident, quas deserunt, rem accusantium omnis
+          voluptatum facere esse totam cum eveniet minima expedita voluptate non
+          laborum nesciunt velit error amet. Ex, quibusdam accusantium?
+          Accusamus accusantium inventore quo voluptate iure reprehenderit
+          sequi, a fuga facere deserunt possimus porro eligendi vel neque
+          nesciunt nostrum illo sit!
+        </Content>
       </Wrapper>
     </Container>
   );

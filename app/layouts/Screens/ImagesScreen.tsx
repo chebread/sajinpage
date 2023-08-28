@@ -1,9 +1,8 @@
 import { errorAtom } from 'atoms/errorAtom';
-import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { clickedAtom, expandedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 // (0): mobile safari 에서 100vh 인데 갑자기 축소되서 이상해지는 현상
@@ -12,14 +11,15 @@ import styled from 'styled-components';
 
 const ImagesScreen = ({ src }) => {
   const [, onError] = useAtom(errorAtom);
-  const [clicked, setClicked] = useAtom(clickedAtom);
-  console.log(clicked);
+  const [clicked, setClicked] = useAtom(clickedAtom); // nav, header 활성화 / 비활성화
+  const [expanded, setExpanded] = useAtom(expandedAtom); // 전체화면 축소 / 확대
 
   return (
     <Container>
       <ImageWrapper
+        expanded={expanded}
         onClick={() => {
-          // 모바일 에서만 사용할 수 있기에 데스크탑에서는 비활성화함
+          // only mobile
           const currentWidth = window.innerWidth;
           if (currentWidth < 961) {
             setClicked(!clicked);
@@ -28,7 +28,14 @@ const ImagesScreen = ({ src }) => {
       >
         <Image
           src={src}
-          // onClick={onClick}
+          expanded={expanded}
+          onClick={() => {
+            // only desktop
+            const currentWidth = window.innerWidth;
+            if (currentWidth >= 961) {
+              setExpanded(!expanded);
+            }
+          }}
           onError={() => {
             // Uxpected error tracking (avif browser 지원안할때, file url 손상시, ...)
             onError({
@@ -48,22 +55,19 @@ const Container = styled.div`
   flex-direction: column;
   ${centerAlign}
 `;
-const ImageWrapper = styled.div`
-  ${transition('max-width')}
-  cursor: pointer;
+const ImageWrapper = styled.div<{ expanded: boolean }>`
+  ${transition('all')}
   height: 100%;
   width: 100%;
   @media (${desktopVp}) {
-    width: calc(100% - 2rem);
-    cursor: text;
+    width: ${({ expanded }) => (expanded ? '100%' : 'calc(100% - 2rem)')};
   }
   display: flex;
   flex-direction: column;
   ${centerAlign}
 `;
-const Image = styled.img`
+const Image = styled.img<{ expanded: boolean }>`
   ${transition('border-radius')}
-  cursor: pointer;
   display: block;
   max-height: 100%;
   max-width: 100%;
@@ -72,7 +76,8 @@ const Image = styled.img`
   object-position: center;
   border-radius: 0;
   @media (${desktopVp}) {
-    border-radius: 1rem;
+    cursor: pointer;
+    border-radius: ${({ expanded }) => (expanded ? '0' : '1rem')};
   }
 `;
 export default ImagesScreen;

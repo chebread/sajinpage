@@ -1,5 +1,5 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp } from 'layouts/properties';
+import { centerAlign, desktopVp, landscapeVp } from 'layouts/properties';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as WarningIcon } from 'assets/svg/WarningIcon.svg';
@@ -17,58 +17,39 @@ const NotFoundPage = () => {
 
   return (
     <Container>
-      <h1>404</h1>
-      <div>This page is not found</div>
-      <button onClick={onRedirect}>Go home</button>
+      <MessageWrapper>
+        <Message>죄송합니다. 페이지를 찾을 수 없습니다.</Message>
+        <Message>
+          클릭하신 링크가 잘못되었거나 페이지가 삭제되었을 수 있습니다.
+        </Message>
+      </MessageWrapper>
     </Container>
   );
 };
 
-const Container = styled.div`
-  ${transition('height', 'width')}
-
-  width: 100%;
-`;
-
-const Wrapper = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  ${centerAlign}
-`;
-const IconWrapper = styled.div`
-  svg {
-    cursor: pointer;
-    ${transition('transform', 'height', 'width')}
-    height: 5.5rem; //
-    @media (${desktopVp}) {
-      height: 7.5rem;
-    }
-    &:hover {
-      transform: scale(1.07);
-    }
-    &:active {
-      transform: scale(0.98);
-    }
-  }
-`;
-const MessageWrapper = styled.div`
-  margin: 1rem; //
+const Code = styled.div`
+  font-size: 2rem;
+  font-weight: 600;
 `;
 const Message = styled.div`
-  ${transition('all')}
-  font-size: 20px; //
-  @media (${desktopVp}) {
-    font-size: 24px;
-  }
-  /* &:hover {
-    transform: scale(1.07);
-  }
-  &:active {
-    transform: scale(0.98);
-  } */
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+`;
+const MessageWrapper = styled.div`
+  width: 22.5rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  margin-top: 2rem;
+  justify-content: center;
+  height: ${cssVarsPalette.content_full_height};
+  width: 100%;
 `;
 
 export default NotFoundPage;

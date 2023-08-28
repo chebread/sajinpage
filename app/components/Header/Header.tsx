@@ -11,7 +11,12 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
 import { themeVars } from 'layouts/themes';
-import { clickedAtom, menuClickedAtom, viewedAtom } from 'atoms/viewerAtom';
+import {
+  clickedAtom,
+  expandedAtom,
+  menuClickedAtom,
+  viewedAtom,
+} from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import MenuModal from 'components/Viewer/Modal/MenuModal';
 
@@ -23,6 +28,7 @@ const Header = () => {
   const [viewed] = useAtom(viewedAtom); // check that current route is image-viewer
   const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [clicked, setClicked] = useAtom(clickedAtom);
+  const [expanded] = useAtom(expandedAtom);
 
   const onMenu = () => {
     setMenuClicked(!menuClicked);
@@ -32,7 +38,10 @@ const Header = () => {
   return (
     <>
       <ContainerWrapper>
-        <Container visible={viewed ? (clicked ? true : false) : true}>
+        <Container
+          visible={viewed ? (clicked ? true : false) : true}
+          expanded={expanded}
+        >
           <AsideLeftWrapper>
             <ButtonWrapper></ButtonWrapper>
           </AsideLeftWrapper>
@@ -59,15 +68,16 @@ const ContainerWrapper = styled.div`
   ${transition('padding-top')}
   padding-top: ${cssVarsPalette.header_height};
 `;
-const Container = styled.div<{ visible: boolean }>`
+const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   ${transition('all')}
   // for viewer
   margin-bottom: ${({ visible }) => (visible ? 'auto' : '-3rem')};
   transform: ${({ visible }) =>
     visible ? 'translateY(0)' : 'translateY(-100%)'};
   @media (${desktopVp}) {
-    margin-bottom: auto;
-    transform: translateY(0);
+    margin-bottom: ${({ expanded }) => (expanded ? '-3rem' : 'auto')};
+    transform: ${({ expanded }) =>
+      expanded ? 'translateY(-100%)' : 'translateY(0)'};
   }
   position: fixed; // (0): fixed로 구성하기
   top: 0;
@@ -78,7 +88,7 @@ const Container = styled.div<{ visible: boolean }>`
   /* background-color: ${themeVars.light.header_color};
   backdrop-filter: blur(12px); */
   background-color: #fff;
-  z-index: 10000;
+  z-index: 100000;
 `;
 
 const Wrapper = styled.div`
@@ -156,15 +166,20 @@ const Btn = styled.button<{ visible?: boolean }>`
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-  &:hover {
-    background-color: rgb(235, 235, 235);
-    svg {
-      transform: scale(1.07);
+  @media (${desktopVp}) {
+    &:hover {
+      background-color: rgb(235, 235, 235);
+      svg {
+        transform: scale(1.07);
+      }
     }
   }
   &:active {
     background-color: rgb(220, 220, 220);
-    transform: scale(0.93);
+    transform: scale(0.85);
+    @media (${desktopVp}) {
+      transform: scale(0.93);
+    }
   }
   svg {
     ${transition('all')}

@@ -16,7 +16,7 @@ const PageLoading = () => {
 
 const Container = styled(CenterScreen)`
   position: fixed;
-  z-index: 10000;
+  z-index: 1000000;
   left: 0;
   right: 0;
   top: 0;

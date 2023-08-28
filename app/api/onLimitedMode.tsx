@@ -28,8 +28,6 @@ const onLimitedMode = async ({ timeLimit, docId, fileId }) => {
     url: url,
     limit: true,
     accessTime: accessTime,
-  }).catch(error => {
-    console.log(error);
   });
   return;
 };

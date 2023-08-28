@@ -12,18 +12,21 @@ import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { clickedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { clickedAtom, expandedAtom, viewedAtom } from 'atoms/viewerAtom';
 
-// z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 // (0): landscape에서 nav safe area 설정시 "도구 막대 축소"시 safe area 없어지는 문제 있음 (https://developer.apple.com/forums/thread/716552)
 // (0): svg 다시 작성하여 nav icon fill 되는 것 구현하기
 
 const Navigator = () => {
   const [viewed] = useAtom(viewedAtom);
   const [clicked] = useAtom(clickedAtom);
+  const [expanded] = useAtom(expandedAtom);
 
   return (
-    <Container visible={viewed ? (clicked ? true : false) : true}>
+    <Container
+      visible={viewed ? (clicked ? true : false) : true}
+      expanded={expanded}
+    >
       <Wrapper>
         <Navigate to="f" onTouchStart={() => {}}>
           <MyFilesIcon />
@@ -43,13 +46,14 @@ const Navigator = () => {
   );
 };
 
-const Container = styled.div<{ visible: boolean }>`
+const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   ${transition('all')}
   // for viewer
   transform: ${({ visible }) =>
     visible ? ' translateY(0)' : 'translateY(100%)'};
   @media (${desktopVp}) {
-    transform: translateY(0);
+    transform: ${({ expanded }) =>
+      expanded ? 'translateY(100%)' : 'translateY(0)'};
   }
   position: fixed;
   height: ${cssVarsPalette.nav_height};
@@ -64,6 +68,7 @@ const Container = styled.div<{ visible: boolean }>`
   }
   /* box-shadow: 0px -20px 20px -20px rgba(0, 0, 0, 0.08); */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  // z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 `;
 
 const Wrapper = styled.div`

@@ -1,18 +1,12 @@
-import { updateFiles } from 'api';
 import fileDbAtom from 'atoms/fileDbAtom';
 import {
-  clickedAtom,
+  expandedAtom,
   menuClickedAtom,
   modeToggleAtom,
   onCancelAtom,
 } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import {
-  animation,
-  desktopVp,
-  disableSelection,
-  transition,
-} from 'layouts/properties';
+import { desktopVp, disableSelection, transition } from 'layouts/properties';
 import getUrl from 'lib/getUrl';
 import styled from 'styled-components';
 import onCopy from 'components/onCopy';
@@ -24,15 +18,16 @@ const MenuModal = () => {
   const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
   const [, onCancel] = useAtom(onCancelAtom);
+  const [expanded] = useAtom(expandedAtom); // mobile에서 menu clicked시 expand이면 출력되는 현상을 막기 위해 사용함
 
   const onModeToggle = () => {
     setModeToggle(!modeToggle);
-    setMenuClicked(false); // menuModal 최소화
+    // setMenuClicked(false); // 모바일에서도 mode toggle 되기에 menuModal은 최소화 하지 않음 => (0): mode, reset Toggle은 모바일과 공유하지 않아도 될 것 같은데... 일단 최소화 하지는 않는데 일단 생각은 해보자
   };
 
   return (
     <>
-      <MenuModalsContainer visible={menuClicked}>
+      <MenuModalsContainer visible={menuClicked} expanded={expanded}>
         <MenuModals
           onClick={async () => {
             await onCopy(getUrl());
@@ -65,35 +60,48 @@ const MenuModal = () => {
         </MenuModals>
       </MenuModalsContainer>
       {/* (0): 수정필요 */}
-      <MenuModalsBackground visible={menuClicked} onClick={onCancel} />
+      <MenuModalsBackground
+        visible={menuClicked}
+        expanded={expanded}
+        onClick={onCancel}
+      />
       <FloatModal />
     </>
   );
 };
 
-const MenuModalsBackground = styled.div<{ visible: boolean }>`
+const MenuModalsBackground = styled.div<{
+  visible: boolean;
+  expanded: boolean;
+}>`
   display: block;
   ${transition('all')}
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
-  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: ${({ visible, expanded }) =>
+    visible ? (expanded ? -1 : 10000) : '-1'};
+  visibility: ${({ visible, expanded }) =>
+    visible ? (expanded ? 'hidden' : 'visible') : 'hidden'};
+  opacity: ${({ visible, expanded }) => (visible ? (expanded ? 0 : 1) : 0)};
   // (0): z-index: 10000시 버튼이 왜 안먹힐까?
 `;
-const MenuModalsContainer = styled.div<{ visible: boolean }>`
-  /* ${transition('all')} */
+const MenuModalsContainer = styled.div<{
+  visible: boolean;
+  expanded: boolean;
+}>`
+  ${transition('all')}
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
   z-index: -1;
   @media (${desktopVp}) {
-    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-    opacity: ${({ visible }) => (visible ? 1 : 0)};
-    z-index: ${({ visible }) => (visible ? '100000' : '-1')};
-    display: ${({ visible }) => (visible ? 'block' : 'none')};
+    visibility: ${({ visible, expanded }) =>
+      visible ? (expanded ? 'hidden' : 'visible') : 'hidden'};
+    opacity: ${({ visible, expanded }) => (visible ? (expanded ? 0 : 1) : 0)};
+    z-index: ${({ visible, expanded }) =>
+      visible ? (expanded ? -1 : '100000') : '-1'};
   }
   position: fixed;
   right: 0;
@@ -105,17 +113,6 @@ const MenuModalsContainer = styled.div<{ visible: boolean }>`
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 1rem;
-
-  ${animation('x')}
-  @keyframes x {
-    0% {
-      transform: scale(0);
-    }
-
-    100% {
-      transform: scale(1);
-    }
-  }
 `;
 const MenuModals = styled.div`
   ${transition('all')}

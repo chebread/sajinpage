@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+// (0): google 검색 설정 같이 파랑 line 구현하기
+
 const MobileBanner = () => {
   const params = useParams();
   const type = params.type;
@@ -34,6 +36,12 @@ const Navigate = styled(Link)`
   &.active {
     color: #1969d2;
   }
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  ${transition('all')}
 `;
 const Container = styled.div`
   ${transition('all')}

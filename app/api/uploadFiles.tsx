@@ -26,7 +26,7 @@ const uploadFiles = async ({
       upsert: false,
     });
   if (uploadStorageError) {
-    console.log(uploadStorageError);
+    // console.log(uploadStorageError);
     throw new Error('file을 storage에 업로드중 오류 발생');
   }
   // create file viewer url

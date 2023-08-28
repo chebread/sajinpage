@@ -2,7 +2,12 @@ import { atom } from 'jotai';
 import { errorAtom } from './errorAtom';
 import fileDbAtom from './fileDbAtom';
 import filesAtom from './filesAtom';
-import { clickedAtom, menuClickedAtom, viewedAtom } from './viewerAtom';
+import {
+  clickedAtom,
+  expandedAtom,
+  menuClickedAtom,
+  viewedAtom,
+} from './viewerAtom';
 
 const initValuesAtom = atom(null, (get, set) => {
   set(fileDbAtom, {
@@ -17,6 +22,7 @@ const initValuesAtom = atom(null, (get, set) => {
   set(clickedAtom, false);
   set(menuClickedAtom, false);
   set(viewedAtom, false);
+  set(expandedAtom, false);
   set(filesAtom, {
     file: new File([''], ''),
     fileType: '',

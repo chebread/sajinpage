@@ -13,8 +13,6 @@ const offLimitedMode = async ({ docId, fileId }) => {
     url: url,
     limit: false,
     accessTime: '',
-  }).catch(error => {
-    console.log(error);
   });
   return;
 };

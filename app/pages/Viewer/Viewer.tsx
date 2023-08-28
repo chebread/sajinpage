@@ -14,7 +14,7 @@ import isEmptyObject from 'lib/isEmptyObject';
 import supabase from 'lib/supabase';
 import { viewedAtom } from 'atoms/viewerAtom';
 import { insertIdb } from 'lib/idb';
-import { broadcastChannel } from 'lib/broadcastChannel';
+import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
 import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
 
@@ -119,7 +119,7 @@ const Viewer = () => {
     return () => {
       // viewer 컴포넌트 끝날시에 값 초기화 && Realtime channel을 unchannel함
       supabase.removeChannel(realtimeChannel);
-      broadcastChannel.removeEventListener('message', onMessage);
+      broadcastChannel.removeEventListener('message', onMessage); // (0): broadcast만 써도 작동되는 것 같던데, 일단 보류하고 점검하기
       window.removeEventListener('evented', onMessage);
       initValues();
     };
@@ -146,6 +146,7 @@ const Viewer = () => {
     // console.log('파일이 삭제됨');
     const buckets = await get('urls');
     deleteIdb(buckets, docId);
+    triggerEvent('CLEAR');
     initValues();
     navigate('/'); // 홈으로 갑니다
   };
@@ -184,6 +185,9 @@ const Viewer = () => {
       docId: fileDb.docId,
       excess: true, // 파일 세션 종료됨
     });
+    // const buckets = await get('urls');
+    // deleteIdb(buckets, docId);
+    // triggerEvent('CLEAR');
     onError({ code: 403, message: '파일 세션 종료됨' });
   };
 

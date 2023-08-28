@@ -193,7 +193,7 @@ const CancelButton = styled.button`
   svg {
     ${transition('transform')}
     height: 1rem; // 1rem
-    fill: #ffffff;
+    fill: #000000;
   }
 `;
 

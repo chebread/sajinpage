@@ -1,14 +1,15 @@
-import { clickedAtom, menuClickedAtom } from 'atoms/viewerAtom';
+import {
+  clickedAtom,
+  menuClickedAtom,
+  modeToggleAtom,
+  resetToggleAtom,
+} from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
-import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
-import getWebsiteUrl from 'lib/getWebsiteUrl';
 import fileDbAtom from 'atoms/fileDbAtom';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import onDeleteFile from 'components/onDeleteFile';
 import Select from 'react-select';
 import getUrl from 'lib/getUrl';
@@ -22,16 +23,14 @@ import addTime from 'lib/addTime';
 import onCopy from 'components/onCopy';
 
 // mobile에서만 보이며, viewermenu에서 mobile에서 viewermenu를 구현하기 위해 사용되는 컴포넌트임
-// (0): 화면 클릭시 활성화 되며 아래에 모달이 나오며,상단에는 뒤로가기 버튼 존재함. 뒤로가기는 뒤로갈 history가 있으면 가고 없으면 홈으로 리다이렉트 됨
+// (0): background 검정색으로 변할때 약간 틱 하고 끊기고 바뀌는 거 해결하기
 
 const ViewerMenu = () => {
-  const navigate = useNavigate();
   const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
   const [fileDb] = useAtom(fileDbAtom);
-  const url = getUrl(); // current app url
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
-  const [modeToggle, setModeToggle] = useState(false);
-  const [resetToggle, setResetToggle] = useState(false);
+  const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
+  const [resetToggle, setResetToggle] = useAtom(resetToggleAtom);
   const [clicked, setClicked] = useAtom(clickedAtom);
 
   const initValues = () => {
@@ -56,8 +55,6 @@ const ViewerMenu = () => {
       url: url,
       limit: false,
       accessTime: '',
-    }).catch(error => {
-      console.log(error);
     });
     initValues();
   };
@@ -87,8 +84,6 @@ const ViewerMenu = () => {
         url: url,
         limit: true,
         accessTime: accessTime,
-      }).catch(error => {
-        console.log(error);
       });
       initValues();
     }
@@ -100,17 +95,14 @@ const ViewerMenu = () => {
 
   const onCancelBg = () => {
     setMenuClicked(false);
-    // setClicked(false);
+    setClicked(false);
+    setModeToggle(false);
+    setResetToggle(false);
   };
 
   return (
     <>
       <Container>
-        {/* <Wrapper>
-          <Btn onClick={onClickMenu}>
-            <DotIcon />
-          </Btn>
-        </Wrapper> */}
         <Background visible={menuClicked} onClick={onCancelBg} />
         <>
           <ContainerX visible={menuClicked}>
@@ -182,13 +174,23 @@ const Container = styled.div`
 `;
 
 const Background = styled.div<{ visible: boolean }>`
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
   ${transition('all')}
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
+  @media (${desktopVp}) {
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+  }
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: 10000;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 const ContainerX = styled.div<{ visible: boolean }>`
@@ -196,11 +198,14 @@ const ContainerX = styled.div<{ visible: boolean }>`
   bottom: 0;
   height: 20%;
   width: 100%;
-  z-index: 10000;
+  z-index: 100000;
   transform-origin: 0 100%;
   ${transition('transform')}
   transform: ${({ visible }) =>
     visible ? 'translateY(0)' : 'translateY(100%)'};
+  @media (${desktopVp}) {
+    transform: translateY(100%);
+  }
   background-color: #fff;
 `;
 
