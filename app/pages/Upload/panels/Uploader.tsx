@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
@@ -6,8 +6,13 @@ import hashMaker from 'lib/hashMaker';
 import { cssVarsPalette } from 'layouts/cssVars';
 import filesAtom from 'atoms/filesAtom';
 import checkUrlFormat from 'lib/checkUrlFormat';
+import { desktopVp, landscapeVp, transition } from 'layouts/properties';
+import DropGuide from 'components/Upload/DropGuide';
+import { LinkUploaderClickedAtom } from 'atoms/uploadAtom';
+import LinkUploaderModal from 'components/Upload/LinkUploaderModal';
 import { toast } from 'react-hot-toast';
-import { landscapeVp } from 'layouts/properties';
+
+// 모바일은 바로 + 누르면 editmodal 처럼 (like youtube) 처럼 업로더 기능 제공함
 
 // (0): useCallback에서 [] 전달해도 상관이없나? 일반함수보다 이게 더 효율적인가?
 // (0): (Style) 제한 공유 모드 추가 - 파일 받고 중앙 모달로 공유 방식 선택하는 모달 뜸 or 다르게 구성
@@ -30,7 +35,10 @@ const Uploader = () => {
     'application/pdf': [],
   };
   const fileTypeRegex = /(image)|(application\/pdf)/g;
-  const fileMaxSize = 5000000; // 500000byte = 5mb
+  const fileMaxSize = 5000000; // 5mb
+  const [linkUploaderClicked, setLinkUploaderClicked] = useAtom(
+    LinkUploaderClickedAtom
+  );
 
   useEffect(() => {
     // 파일 붙여넣기시
@@ -76,19 +84,24 @@ const Uploader = () => {
     const pastedText =
       clipboardData.getData('Text') || (window as any).clipboardData;
     const pastedFiles = clipboardData.files;
-    // console.log(pastedText);
-    // console.log(pastedFiles);
-    if (
-      pastedText != '' &&
-      checkUrlFormat(pastedText) &&
-      pastedText != undefined
-    ) {
-      // 파일 url이 붙여넣어 졌을때
+    console.log(pastedText);
+    console.log(pastedFiles);
+    if (pastedText != '' && pastedText != undefined) {
+      if (checkUrlFormat(pastedText)) {
+        // 파일 링크가 붙여넣어 졌을때
+        toast('정상적인 링크.');
+      } else {
+        toast.error('링크를 붙여넣어 주세요.');
+      }
     }
     if (pastedFiles.length != 0) {
       // 파일이 붙여넣어 졌을때
       onDropFiles(pastedFiles);
     }
+  };
+
+  const onClickUrlUpload = () => {
+    toast('복사한 이미지 링크를 이 페이지에 붙여넣어 주세요.');
   };
 
   return (
@@ -106,10 +119,10 @@ const Uploader = () => {
               <DropZone {...getRootProps()}>
                 <input {...getInputProps()} />
                 <Container>
-                  <div>Upload</div>
-                  <Button onClick={open}>Import an image</Button>
-                  <DropGuide visible={isDragActive}>hello</DropGuide>
+                  <Button onClick={open}>이미지 업로드</Button>
+                  <Button onClick={onClickUrlUpload}>이미지 링크 업로드</Button>
                 </Container>
+                <DropGuide visible={isDragActive} />
               </DropZone>
             </>
           );
@@ -119,20 +132,12 @@ const Uploader = () => {
   );
 };
 
-const DropGuide = styled.div<{ visible: boolean }>`
-  position: absolute;
-  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  z-index: ${({ visible }) =>
-    visible ? '0' : '-1'}; // modalcontainer모다는 항시 커야함
-`;
-
 const Container = styled.div`
-  position: relative;
   height: 100%;
   width: 100%;
 `;
 const DropZone = styled.div`
+  position: relative;
   height: ${cssVarsPalette.content_full_height};
   width: 100%;
 `;

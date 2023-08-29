@@ -12,21 +12,17 @@ import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { clickedAtom, expandedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { expandedAtom, viewedAtom } from 'atoms/viewerAtom';
 
 // (0): landscape에서 nav safe area 설정시 "도구 막대 축소"시 safe area 없어지는 문제 있음 (https://developer.apple.com/forums/thread/716552)
 // (0): svg 다시 작성하여 nav icon fill 되는 것 구현하기
 
-const Navigator = () => {
+const Navigation = () => {
   const [viewed] = useAtom(viewedAtom);
-  const [clicked] = useAtom(clickedAtom);
   const [expanded] = useAtom(expandedAtom);
 
   return (
-    <Container
-      visible={viewed ? (clicked ? true : false) : true}
-      expanded={expanded}
-    >
+    <Container visible={viewed ? false : true} expanded={expanded}>
       <Wrapper>
         <Navigate to="f" onTouchStart={() => {}}>
           <MyFilesIcon />
@@ -68,7 +64,6 @@ const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   }
   /* box-shadow: 0px -20px 20px -20px rgba(0, 0, 0, 0.08); */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-  // z-index: 10000; // (0): menumodal background 부분에서 이거 안되는 현상있음 menumodal 부분의 background 완전히 다시 구성해야 할듯
 `;
 
 const Wrapper = styled.div`
@@ -94,7 +89,7 @@ const Navigate = styled(NavLink)`
   @media (${desktopVp}) {
     &:hover {
       // hover시는 svg만 커짐
-      background-color: rgb(235, 235, 235);
+      /* background-color: rgb(235, 235, 235); */
       svg {
         transform: scale(1.07);
       }
@@ -102,7 +97,7 @@ const Navigate = styled(NavLink)`
   }
   &:active {
     // active는 전체적으로 다 축소됨
-    background-color: rgb(220, 220, 220);
+    /* background-color: rgb(220, 220, 220); */
     transform: scale(0.85);
     @media (${desktopVp}) {
       transform: scale(0.93);
@@ -117,4 +112,4 @@ const Navigate = styled(NavLink)`
   }
 `;
 
-export default Navigator;
+export default Navigation;

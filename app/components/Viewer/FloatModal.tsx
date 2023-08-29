@@ -160,6 +160,9 @@ const FloatModals = styled.div`
 const SelectWrapper = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -183,11 +186,11 @@ const CancelButton = styled.button`
   &:hover {
     background-color: rgb(235, 235, 235);
     svg {
-      transform: scale(1.07);
+      /* transform: scale(1.07); */
     }
   }
   &:active {
-    background-color: rgb(220, 220, 220);
+    /* background-color: rgb(220, 220, 220); */
     transform: scale(0.93);
   }
   svg {
@@ -198,126 +201,3 @@ const CancelButton = styled.button`
 `;
 
 export default FloatModal;
-
-{
-  /* <SelectInput
-                classNamePrefix="Select"
-                placeholder="시간 선택"
-                onChange={onModeSelect}
-                options={timeLimitOptions}
-                isSearchable={false}
-                styles={{
-                  placeholder: defaultStyles => {
-                    return {
-                      ...defaultStyles,
-                      color: '#000000',
-                    };
-                  },
-                }}
-                // components={{
-                //   DropdownIndicator: () => null,
-                //   IndicatorSeparator: () => null,
-                // }}
-              /> */
-}
-// const SelectInput = styled(Select)`
-//   .Select__control {
-//     all: unset;
-//   }
-
-//   .Select__control:hover {
-//     all: unset;
-//   }
-
-//   .Select__control--is-focused {
-//     box-shadow: none;
-//     outline: none;
-//     border: none;
-//   }
-
-//   .Select__indicator-separator {
-//     display: none;
-//   }
-//   .Select__dropdown-indicator {
-//     display: none;
-//   }
-
-//   .Select__menu {
-//     color: #3c3d3e;
-//   }
-// `;
-
-{
-  /* <FloatModalContainer visible={resetToggle}>
-            <Select onChange={onModeSelect} options={timeLimitOptions} />
-            <button onClick={onCancel}>취소</button>
-          </FloatModalContainer>
-          <FloatModalContainer visible={modeToggle}>
-            <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-            <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-            <button onClick={onCancel}>취소</button>
-          </FloatModalContainer> */
-}
-
-{
-  /* <FloatWrapper visible={resetToggle}>
-              <Select onChange={onModeSelect} options={timeLimitOptions} />
-              <button onClick={() => setResetToggle(false)}>취소</button>
-            </FloatWrapper>
-            <FloatWrapper visible={!resetToggle}>
-              <button onClick={onResetToggle}>limit mode 값 재설정하기</button>
-              <button onClick={onTurnOffLimitMode}>limit mode 끄기</button>
-              <button onClick={onCancel}>취소</button>
-            </FloatWrapper> */
-}
-
-// const FloatWrapper = styled.div<ModalPropsType>`
-//   visibility: hidden;
-//   opacity: 0;
-//   z-index: -1;
-//   @media (${desktopVp}) {
-//     ${transition('all')}
-//     visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-//     opacity: ${({ visible }) => (visible ? 1 : 0)};
-//     z-index: ${({ visible }) => (visible ? '1000000' : '-1')};
-//   }
-//   background-color: seagreen;
-// `;
-
-/*
-const onModeSelect = async (e: any) => {
-  // turn on limit mode
-  const {
-    target: { value },
-  } = e; // value is timeLimit
-  console.log(value);
-
-  if (value) {
-    const timeLimit = value;
-    // update accessTime
-    const currentTime = getCurrentTime();
-    const accessTime = dateToString(
-      addTime({ currentTime: currentTime, sec: timeLimit })
-    );
-    // update limit url
-    const { data: fileUrl, error: fileUrlError }: any = await supabase.storage
-      .from('images')
-      .createSignedUrl(fileDb.fileId, timeLimit);
-    // signed url error checking
-    if (fileUrlError) {
-      // an error occurs
-      throw new Error('file signed url 생성중 오류 발생');
-    }
-    const url = fileUrl.signedUrl;
-    // update file
-    await updateFiles({
-      docId: fileDb.docId,
-      url: url,
-      limit: true,
-      accessTime: accessTime,
-    }).catch(error => {
-      console.log(error);
-    });
-    onCancel();
-  }
-}; */

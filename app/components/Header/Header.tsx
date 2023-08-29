@@ -10,15 +10,18 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/svg/Logo.svg';
 import { ReactComponent as DotIcon } from 'assets/svg/DotIcon.svg';
+import { ReactComponent as MenuIcon } from 'assets/svg/MenuIcon.svg';
+import { ReactComponent as BackIcon } from 'assets/svg/BackIcon.svg';
 import { themeVars } from 'layouts/themes';
 import {
-  clickedAtom,
   expandedAtom,
-  menuClickedAtom,
+  editClickedAtom,
   viewedAtom,
+  menuClickedAtom,
 } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import MenuModal from 'components/Viewer/Modal/MenuModal';
+import EditDialog from 'components/Viewer/EditDialog';
+import NavigationMenu from 'components/Viewer/NavigationMenu';
 
 // (0): svg safari 오류 해결하기 (chrome도 약간 불안정함)
 // (0): menu modal시 @keyframes로 threads 같이 구현하기 (visible 사용 x, display 사용 o)
@@ -26,24 +29,34 @@ import MenuModal from 'components/Viewer/Modal/MenuModal';
 
 const Header = () => {
   const [viewed] = useAtom(viewedAtom); // check that current route is image-viewer
-  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
-  const [clicked, setClicked] = useAtom(clickedAtom);
+  const [editClicked, setEditClicked] = useAtom(editClickedAtom);
   const [expanded] = useAtom(expandedAtom);
+  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
+  console.log(menuClicked);
 
-  const onMenu = () => {
+  const onClickEdit = () => {
+    setEditClicked(!editClicked);
+    setEditClicked(true);
+  };
+  const onClickMenu = () => {
     setMenuClicked(!menuClicked);
-    setClicked(true); // (중요): mobile에서도 동일시하게 적용하기 위해 clicked도 true 함 (토글 하면 안됨, 이유는 이미 모바일에서 true 인데 메뉴 클릭하면 false 되니까 안되요!)
   };
 
   return (
     <>
       <ContainerWrapper>
-        <Container
-          visible={viewed ? (clicked ? true : false) : true}
-          expanded={expanded}
-        >
+        <Container visible={viewed ? editClicked : true} expanded={expanded}>
           <AsideLeftWrapper>
-            <ButtonWrapper></ButtonWrapper>
+            <MenuWrapper>
+              <MenuBtn visible={viewed} onClick={onClickMenu}>
+                <MenuIconWraper visible={menuClicked ? false : true}>
+                  <MenuIcon />
+                </MenuIconWraper>
+                <MenuIconWraper visible={menuClicked ? true : false}>
+                  <BackIcon />
+                </MenuIconWraper>
+              </MenuBtn>
+            </MenuWrapper>
           </AsideLeftWrapper>
           <LogoWrapper>
             <LogoBtn to="/">
@@ -52,17 +65,63 @@ const Header = () => {
           </LogoWrapper>
           <AsideRightWrapper>
             <ButtonWrapper>
-              <Btn visible={viewed} onClick={onMenu}>
+              <Btn visible={viewed} onClick={onClickEdit}>
                 <DotIcon />
               </Btn>
             </ButtonWrapper>
           </AsideRightWrapper>
         </Container>
       </ContainerWrapper>
-      <MenuModal />
+      <NavigationMenu />
+      <EditDialog />
     </>
   );
 };
+
+const MenuWrapper = styled.div`
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  ${centerAlign}
+  @media (${landscapeVp}) {
+    padding-left: ${cssVarsPalette.sal};
+    padding-right: ${cssVarsPalette.sar};
+  }
+`;
+const MenuIconWraper = styled.span<{ visible: boolean }>`
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  height: 1.5rem;
+  width: auto;
+`;
+const MenuBtn = styled.button<{ visible: boolean }>`
+  all: unset;
+  cursor: pointer;
+  ${disableTab}
+  ${transition('all')}
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.85);
+  }
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  z-index: ${({ visible }) => (visible ? '0' : '-1')};
+  @media (${desktopVp}) {
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+  }
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  svg {
+    ${transition('all')}
+    height: 1.5rem;
+    width: auto;
+  }
+`;
 
 const ContainerWrapper = styled.div`
   ${transition('padding-top')}
@@ -86,11 +145,13 @@ const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   display: flex;
   flex-direction: row;
   /* background-color: ${themeVars.light.header_color};
-  backdrop-filter: blur(12px); */
+  backdrop-filter: blur(1rem); */
   background-color: #fff;
-  z-index: 100000;
+  z-index: ${({ visible }) => (visible ? '10000' : '0')};
+  @media (${desktopVp}) {
+    z-index: 0;
+  }
 `;
-
 const Wrapper = styled.div`
   height: 100%;
   width: 33%;
@@ -108,7 +169,6 @@ const AsideRightWrapper = styled(Wrapper)`
 const LogoWrapper = styled(Wrapper)`
   justify-content: center;
 `;
-
 const LogoBtn = styled(Link)`
   all: unset;
   cursor: pointer;
@@ -153,10 +213,14 @@ const Btn = styled.button<{ visible?: boolean }>`
   ${disableTab}
   ${transition('all')}
   cursor: pointer;
-  z-index: 10000; // (0): 왜 안먹히나.
-  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  z-index: ${({ visible }) => (visible ? '0' : '-1')};
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  @media (${desktopVp}) {
+    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+    opacity: ${({ visible }) => (visible ? 1 : 0)};
+    z-index: ${({ visible }) => (visible ? '0' : '-1')};
+  }
   width: 2.5rem;
   height: 2.5rem;
   @media (${desktopVp}) {
@@ -170,12 +234,12 @@ const Btn = styled.button<{ visible?: boolean }>`
     &:hover {
       background-color: rgb(235, 235, 235);
       svg {
-        transform: scale(1.07);
+        /* transform: scale(1.07); */
       }
     }
   }
   &:active {
-    background-color: rgb(220, 220, 220);
+    /* background-color: rgb(220, 220, 220); */
     transform: scale(0.85);
     @media (${desktopVp}) {
       transform: scale(0.93);

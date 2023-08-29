@@ -133,11 +133,11 @@ const Button = styled.button`
   background-color: rgb(245, 245, 245);
   @media (${desktopVp}) {
     &:hover {
-      background-color: rgb(235, 235, 235);
+      /* background-color: rgb(235, 235, 235); */
     }
   }
   &:active {
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(235, 235, 235);
     transform: scale(0.98);
   }
   svg {

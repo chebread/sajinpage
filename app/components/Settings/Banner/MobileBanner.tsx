@@ -51,9 +51,9 @@ const Container = styled.div`
   }
   top: 3rem;
   position: fixed;
-  /* background-color: ${themeVars.light.header_color};
-  backdrop-filter: blur(12px); */
-  background-color: #fff;
+  background-color: ${themeVars.light.header_color};
+  backdrop-filter: blur(1rem);
+  /* background-color: #fff; */
   height: 3rem;
   width: 100%;
   display: flex;

@@ -4,6 +4,7 @@ import fileDbAtom from './fileDbAtom';
 import filesAtom from './filesAtom';
 import {
   clickedAtom,
+  editClickedAtom,
   expandedAtom,
   menuClickedAtom,
   viewedAtom,
@@ -21,6 +22,7 @@ const initValuesAtom = atom(null, (get, set) => {
   set(errorAtom, {});
   set(clickedAtom, false);
   set(menuClickedAtom, false);
+  set(editClickedAtom, false);
   set(viewedAtom, false);
   set(expandedAtom, false);
   set(filesAtom, {

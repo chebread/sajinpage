@@ -1,7 +1,7 @@
 import Help from './panels/Help';
 import NotFoundPage from 'pages/NotFoundPage';
 import Policy from './panels/Policy';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import About from './panels/About';
 import Preferences from './panels/Preferences';
 import styled from 'styled-components';
@@ -9,11 +9,14 @@ import { desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import DesktopBanner from 'components/Settings/Banner/DesktopBanner';
 import MobileBanner from 'components/Settings/Banner/MobileBanner';
-import NavigatorBanner from 'components/Settings/Banner/NavigatorBanner';
+import NavigationBanner from 'components/Settings/Banner/NavigationBanner';
 
 const Settings = () => {
   const params = useParams();
   const type = params.type;
+  console.log(type);
+  const { hash } = useLocation();
+  console.log(hash);
 
   return (
     <>
@@ -39,7 +42,7 @@ const Settings = () => {
               return (
                 <>
                   <DesktopBanner />
-                  <NavigatorBanner />
+                  <NavigationBanner />
                   <Help />
                 </>
               );
@@ -47,7 +50,7 @@ const Settings = () => {
               return (
                 <>
                   <DesktopBanner />
-                  <NavigatorBanner />
+                  <NavigationBanner />
                   <Policy />
                 </>
               );

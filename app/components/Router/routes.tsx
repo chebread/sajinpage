@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Header from 'components/Header';
-import Navigator from 'components/Navigator';
+import Navigator from 'components/Navigation';
 import Upload from 'pages/Upload';
 import NotFoundPage from 'pages/NotFoundPage';
 import ForbiddenPage from 'pages/ForbiddenPage';

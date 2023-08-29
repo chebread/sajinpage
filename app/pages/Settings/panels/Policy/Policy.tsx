@@ -154,8 +154,8 @@ const Content = styled.div`
   }
   line-height: 1.7rem;
   font-weight: 400;
-  word-break: keep-all;
-  overflow-wrap: break-word;
+  /* word-break: keep-all;
+  overflow-wrap: break-word; */
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
@@ -196,7 +196,8 @@ const Container = styled.div`
   margin-bottom: calc(${cssVarsPalette.nav_height} + ${cssVarsPalette.sab});
   padding: 2rem 1rem 2rem 1rem;
   @media (${desktopVp}) {
-    width: 50rem;
+    width: 40rem;
+
     margin-top: 0;
   }
   @media (${landscapeVp}) {

@@ -1,4 +1,4 @@
-import { desktopVp } from 'layouts/properties';
+import { desktopVp, disableSelection } from 'layouts/properties';
 import { createGlobalStyle } from 'styled-components';
 import { appThemes, themeVars } from 'layouts/themes';
 import initStyles from './initStyles';
@@ -32,6 +32,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${themeVars.light.background_color};
     color: ${themeVars.light.color};
     font-weight: 500;
+    ${disableSelection}
   }
 `;
 

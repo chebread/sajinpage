@@ -2,6 +2,7 @@ import fileDbAtom from 'atoms/fileDbAtom';
 import {
   expandedAtom,
   menuClickedAtom,
+  editClickedAtom,
   modeToggleAtom,
   onCancelAtom,
 } from 'atoms/viewerAtom';
@@ -13,9 +14,11 @@ import onCopy from 'components/onCopy';
 import FloatModal from './FloatModal';
 import onDeleteFile from 'components/onDeleteFile';
 
-const MenuModal = () => {
+// for desktop
+
+const EditDialog = () => {
   const [fileDb] = useAtom(fileDbAtom);
-  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
+  const [editClicked, setEditClicked] = useAtom(editClickedAtom);
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
   const [, onCancel] = useAtom(onCancelAtom);
   const [expanded] = useAtom(expandedAtom); // mobile에서 menu clicked시 expand이면 출력되는 현상을 막기 위해 사용함
@@ -27,41 +30,36 @@ const MenuModal = () => {
 
   return (
     <>
-      <MenuModalsContainer visible={menuClicked} expanded={expanded}>
+      <MenuModalsContainer visible={editClicked} expanded={expanded}>
         <MenuModals
           onClick={async () => {
             await onCopy(getUrl());
             onCancel();
           }}
         >
-          <MenuModalsWrapper>링크 복사</MenuModalsWrapper>
+          <MenuModalsWrapper>
+            <span>링크 복사</span>
+          </MenuModalsWrapper>
         </MenuModals>
-        {fileDb.limit ? (
-          <>
-            <MenuModals onClick={onModeToggle}>
-              <MenuModalsWrapper>제한모드 재설정</MenuModalsWrapper>
-            </MenuModals>
-          </>
-        ) : (
-          // normal mode
-          <>
-            <MenuModals onClick={onModeToggle}>
-              <MenuModalsWrapper>제한모드 켜기</MenuModalsWrapper>
-            </MenuModals>
-          </>
-        )}
+
+        <MenuModals onClick={onModeToggle}>
+          <MenuModalsWrapper>
+            <span>{fileDb.limit ? '제한모드 재설정' : '제한모드 켜기'}</span>
+          </MenuModalsWrapper>
+        </MenuModals>
         <MenuModals
           onClick={async () => {
             await onDeleteFile(fileDb.docId);
             onCancel();
           }}
         >
-          <MenuModalsWrapper>삭제</MenuModalsWrapper>
+          <MenuModalsWrapper>
+            <span>삭제</span>
+          </MenuModalsWrapper>
         </MenuModals>
       </MenuModalsContainer>
-      {/* (0): 수정필요 */}
       <MenuModalsBackground
-        visible={menuClicked}
+        visible={editClicked}
         expanded={expanded}
         onClick={onCancel}
       />
@@ -80,12 +78,21 @@ const MenuModalsBackground = styled.div<{
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: ${({ visible, expanded }) =>
-    visible ? (expanded ? -1 : 10000) : '-1'};
-  visibility: ${({ visible, expanded }) =>
-    visible ? (expanded ? 'hidden' : 'visible') : 'hidden'};
-  opacity: ${({ visible, expanded }) => (visible ? (expanded ? 0 : 1) : 0)};
-  // (0): z-index: 10000시 버튼이 왜 안먹힐까?
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  z-index: -1;
+  @media (${desktopVp}) {
+    display: ${({ visible, expanded }) =>
+      visible ? (expanded ? 'none' : 'block') : 'none'};
+    z-index: ${({ visible, expanded }) =>
+      visible
+        ? expanded
+          ? '-1'
+          : '10000'
+        : '-1'}; // (0): 전체 말고 button 들은 클릭할 수 있도록 바꾸기
+  }
 `;
 const MenuModalsContainer = styled.div<{
   visible: boolean;
@@ -133,20 +140,21 @@ const MenuModals = styled.div`
   }
   ${disableSelection}
   font-weight: 600;
+  font-size: 1rem;
   &:last-child {
     color: #ff2f40;
   }
   @media (${desktopVp}) {
     &:hover {
-      background-color: rgb(235, 235, 235);
+      /* background-color: rgb(235, 235, 235); */
     }
   }
   &:active {
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(235, 235, 235);
   }
 `;
 const MenuModalsWrapper = styled.div`
   padding-left: 1rem;
 `;
 
-export default MenuModal;
+export default EditDialog;

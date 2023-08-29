@@ -12,7 +12,7 @@ const App = () => {
           position="bottom-center"
           toastOptions={{
             className: 'toast',
-            duration: 1000,
+            duration: 2000,
           }}
         />
       </Container>

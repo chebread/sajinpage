@@ -1,6 +1,5 @@
 import {
-  clickedAtom,
-  menuClickedAtom,
+  editClickedAtom,
   modeToggleAtom,
   resetToggleAtom,
 } from 'atoms/viewerAtom';
@@ -22,16 +21,14 @@ import dateToString from 'lib/dateToString';
 import addTime from 'lib/addTime';
 import onCopy from 'components/onCopy';
 
-// mobile에서만 보이며, viewermenu에서 mobile에서 viewermenu를 구현하기 위해 사용되는 컴포넌트임
-// (0): background 검정색으로 변할때 약간 틱 하고 끊기고 바뀌는 거 해결하기
+// for mobile
 
 const ViewerMenu = () => {
-  const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
+  const [editClicked, setEditClicked] = useAtom(editClickedAtom);
   const [fileDb] = useAtom(fileDbAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
   const [resetToggle, setResetToggle] = useAtom(resetToggleAtom);
-  const [clicked, setClicked] = useAtom(clickedAtom);
 
   const initValues = () => {
     setModeToggle(false);
@@ -94,8 +91,7 @@ const ViewerMenu = () => {
   };
 
   const onCancelBg = () => {
-    setMenuClicked(false);
-    setClicked(false);
+    setEditClicked(false);
     setModeToggle(false);
     setResetToggle(false);
   };
@@ -103,9 +99,9 @@ const ViewerMenu = () => {
   return (
     <>
       <Container>
-        <Background visible={menuClicked} onClick={onCancelBg} />
+        <Background visible={editClicked} onClick={onCancelBg} />
         <>
-          <ContainerX visible={menuClicked}>
+          <ContainerX visible={editClicked}>
             <button
               onClick={async () => {
                 await onCopy(getUrl());
@@ -177,7 +173,7 @@ const Background = styled.div<{ visible: boolean }>`
   ${transition('all')}
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
-  z-index: ${({ visible }) => (visible ? '10000' : '-1')};
+  z-index: ${({ visible }) => (visible ? '1' : '-1')};
   @media (${desktopVp}) {
     visibility: hidden;
     opacity: 0;

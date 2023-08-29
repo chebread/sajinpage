@@ -50,7 +50,8 @@ const Navigate = styled(NavLink)`
   font-weight: 500;
   background-color: rgb(245, 245, 245);
   &:active {
-    background-color: rgb(220, 220, 220);
+    /* background-color: rgb(220, 220, 220); */
+    background-color: rgb(235, 235, 235);
     transform: scale(0.98);
   }
   svg {

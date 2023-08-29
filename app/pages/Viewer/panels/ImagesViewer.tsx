@@ -6,7 +6,7 @@ import transition from 'layouts/properties/transition';
 import { cssVarsPalette } from 'layouts/cssVars';
 import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import { themeVars } from 'layouts/themes';
-import ViewerMenu from 'components/Viewer/ViewerMenu';
+import ViewerMenu from 'components/Viewer/EditModal';
 import { expandedAtom } from 'atoms/viewerAtom';
 import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
 
@@ -29,21 +29,21 @@ const ImagesViewer = () => {
           <ImagesScreen src={fileDb.url} />
         </Container>
       </CenterScreen>
-      <X expanded={expanded}>
-        <Wrapper>
-          <Btn onClick={onCollapse}>
+      <CancelContainer expanded={expanded}>
+        <ButtonWrapper>
+          <CancelButton onClick={onCollapse}>
             <CancelIcon />
-          </Btn>
-        </Wrapper>
-      </X>
+          </CancelButton>
+        </ButtonWrapper>
+      </CancelContainer>
       <ViewerMenu />
     </>
   );
 };
 
-const X = styled.div<{ expanded: boolean }>`
+const CancelContainer = styled.div<{ expanded: boolean }>`
   transition: all;
-  transition-duration: 0s; // animation 있으면 눈이 너무 아픔 // 근데 에니메이션 없에면 즉각 반영으로 이상함으로 ease-out을 동작시키기 위해 0s라고 설정함
+  transition-duration: 0s;
   transition-timing-function: ease-out;
   visibility: hidden;
   opacity: 0;
@@ -55,7 +55,7 @@ const X = styled.div<{ expanded: boolean }>`
   }
 `;
 
-const Wrapper = styled.div`
+const ButtonWrapper = styled.div`
   z-index: 10000;
   position: absolute;
   top: 0;
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
   align-items: center;
   position: fixed;
 `;
-const Btn = styled.button`
+const CancelButton = styled.button`
   all: unset;
   ${transition('all')}
   ${disableTab}
@@ -80,12 +80,12 @@ const Btn = styled.button`
   border-radius: 50%;
   background-color: rgb(30, 30, 30);
   &:hover {
+    /* background-color: rgb(35, 35, 35); */
     svg {
-      transform: scale(1.07);
+      /* transform: scale(1.07); */
     }
   }
   &:active {
-    background-color: rgb(35, 35, 35);
     transform: scale(0.93);
   }
   svg {
@@ -104,14 +104,18 @@ const CenterScreen = styled.div<{ expanded: boolean }>`
       expanded ? '100%' : `${cssVarsPalette.content_full_height}`};
   }
   width: 100%;
+  // 중앙 정렬
+  /* top: 50%;
+  transform: translate(0, -50%); */
   top: 0;
-  top: 50%;
-  transform: translate(0, -50%); // 중앙정렬
+  @media (${desktopVp}) {
+    top: ${({ expanded }) => (expanded ? '0' : '4rem')};
+  }
 `;
 
 const Container = styled.div<{ expanded: boolean }>`
   transition: background-color;
-  transition-duration: 0.125s; // 0.15s // 0.2s animation은 눈이 너무 아픔
+  transition-duration: 0.125s;
   transition-timing-function: ease-out;
   height: 100%;
   width: 100%;

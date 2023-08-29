@@ -13,7 +13,7 @@ import { cssVarsPalette } from 'layouts/cssVars';
 
 // (0): blur가 header에도 있어서 약간 이중 blur로 되는 것 twitter 참고하여 이거 없에기
 
-const NavigatorBanner = () => {
+const NavigationBanner = () => {
   const params = useParams();
   const navigate = useNavigate();
   const type = params.type;
@@ -54,7 +54,8 @@ const Button = styled.button`
   ${disableTab}
   ${transition('all')}
   &:active {
-    background-color: rgb(220, 220, 220);
+    /* background-color: rgb(220, 220, 220); */
+    background-color: rgb(235, 235, 235);
     transform: scale(0.85);
   }
   height: 2rem;
@@ -62,17 +63,16 @@ const Button = styled.button`
   display: flex;
   ${centerAlign}
   border-radius: 50%;
-`;
-const Back = styled.div`
-  all: unset;
-  height: 3rem;
-  width: 3rem;
-  display: flex;
-  ${centerAlign}
   svg {
     ${transition('all')}
     height: 1.5rem;
   }
+`;
+const Back = styled.div`
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  ${centerAlign}
 `;
 const Navigator = styled.div`
   ${disableSelection}
@@ -92,7 +92,7 @@ const Container = styled.div`
   top: 3rem;
   position: fixed;
   /* background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px); */
+  backdrop-filter: blur(1rem); */
   background-color: #fff;
   height: 3rem;
   width: 100%;
@@ -103,4 +103,4 @@ const Container = styled.div`
     padding-right: ${cssVarsPalette.sar};
   }
 `;
-export default NavigatorBanner;
+export default NavigationBanner;
