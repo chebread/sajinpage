@@ -24,6 +24,7 @@ const Uploading = () => {
         accessTime: files.accessTime,
         url: files.url, // upload type이 url일때는 string or ''
         uploadType: files.uploadType,
+        fileType: files.fileType,
       })
         .then(() => {
           // 파일 업로드 완료

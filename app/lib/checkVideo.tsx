@@ -18,8 +18,4 @@ const checkVideo = (url: string, timeoutT?: number) => {
   });
 };
 
-const checkVideos = (url: string) => {
-  return url.match(/\.(mp4)/g) != null;
-};
-
 export default checkVideo;

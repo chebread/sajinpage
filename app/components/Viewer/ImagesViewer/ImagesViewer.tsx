@@ -37,7 +37,6 @@ const ImagesViewer = ({ src }) => {
             }
           }}
           onError={() => {
-            // Uxpected error tracking (avif browser 지원안할때, file url 손상시, ...)
             onError({
               code: 400,
               message: '이미지 로딩중 알 수 없는 에러가 발생했습니다.',

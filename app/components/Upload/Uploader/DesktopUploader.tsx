@@ -1,5 +1,3 @@
-import { linkClickedAtom } from 'atoms/uploadAtom';
-import { useAtom } from 'jotai';
 import { desktopVp, transition } from 'layouts/properties';
 import styled from 'styled-components';
 

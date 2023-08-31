@@ -9,64 +9,46 @@ import { cssVarsPalette } from 'layouts/cssVars';
 import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
 import { themeVars } from 'layouts/themes';
 import { expandedAtom } from 'atoms/viewerAtom';
-import { useEffect, useState } from 'react';
-import { errorAtom } from 'atoms/errorAtom';
-import checkImage from 'lib/checkImage';
-import checkVideo from 'lib/checkVideo';
 
-// (0): 세션 종료시 imageviewer 컴포넌트 / viewer menu 종료될때 천천히 사라지기 (transition) imageviewer 나타날때도 천천히 나타나기
 // (0): Threads 같은 zoom in-out 기능 구현하기
-// (0): 링크 업로드 기능시 여기서 type을 주소에 mp4있으면 video, jpg있으면 img로 체킹후 video / image 보여주기
+// (0): Threads 같은 음소거 / 비음소거 버튼 구현하기
 
 const FilesViewer = () => {
   const [fileDb] = useAtom(fileDbAtom);
   const [expanded, setExpanded] = useAtom(expandedAtom);
-  const [, onError] = useAtom(errorAtom);
 
   const onCollapse = () => {
-    // 축소
     setExpanded(false);
   };
 
-  // useEffect(() => {
-  //   const onLoad = async () => {
-  //     console.log('URL');
-  //     const url = fileDb.url;
-  //     await checkImage(url)
-  //       .then(() => {
-  //         console.log('image true');
-  //       })
-  //       .catch(() => {
-  //         console.log('image false');
-  //         onError({
-  //           code: 400,
-  //           message: '업로드한 파일이 이미지가 아닙니다.',
-  //         });
-  //       });
-  //   };
-  //   onLoad();
-  // }, []);
-
-  // 기능을 작동시키는 버튼만 존재. 버튼의 component는 따로 구현
   return (
     <>
       <CenterScreen expanded={expanded}>
         <Container expanded={expanded}>
-          <ImagesViewer src={fileDb.url} />
+          {(() => {
+            switch (fileDb.fileType) {
+              case 'image':
+                return <ImagesViewer src={fileDb.url} />;
+              case 'video':
+                return <VideosViewer src={fileDb.url} />;
+              default:
+                null;
+            }
+          })()}
         </Container>
       </CenterScreen>
-      <CancelContainer expanded={expanded}>
-        <ButtonWrapper>
-          <CancelButton onClick={onCollapse}>
+      <CancelBtnContainer expanded={expanded}>
+        <CancelBtnWrapper>
+          <Btn onClick={onCollapse}>
             <CancelIcon />
-          </CancelButton>
-        </ButtonWrapper>
-      </CancelContainer>
+          </Btn>
+        </CancelBtnWrapper>
+      </CancelBtnContainer>
     </>
   );
 };
 
-const CancelContainer = styled.div<{ expanded: boolean }>`
+const CancelBtnContainer = styled.div<{ expanded: boolean }>`
   transition: all;
   transition-duration: 0s;
   transition-timing-function: ease-out;
@@ -80,7 +62,7 @@ const CancelContainer = styled.div<{ expanded: boolean }>`
   }
 `;
 
-const ButtonWrapper = styled.div`
+const CancelBtnWrapper = styled.div`
   z-index: 10000;
   position: absolute;
   top: 0;
@@ -92,7 +74,7 @@ const ButtonWrapper = styled.div`
   align-items: center;
   position: fixed;
 `;
-const CancelButton = styled.button`
+const Btn = styled.button`
   all: unset;
   ${transition('all')}
   ${disableTab}

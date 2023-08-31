@@ -11,6 +11,7 @@ import MobileUploader from 'components/Upload/Uploader/MobileUploader';
 import DropZone from 'components/Upload/Uploader/DropZone';
 import checkImage from 'lib/checkImage';
 import checkVideo from 'lib/checkVideo';
+import ReactPlayer from 'react-player';
 
 // (0): 모바일은 바로 + 누르면 editmodal 처럼 (like youtube) 처럼 모달이 홈에서 제공함 select mode도 동일함 (데스크탑과는)
 // (0): pdf upload 기능 추가하기

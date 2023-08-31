@@ -45,16 +45,17 @@ const Viewer = () => {
   useEffect(() => {
     const onLoad = async () => {
       // import file db
-      const fileDb: fileDbType = await loadFiles(docId);
-      setFileDb(fileDb);
-      // check if file is image file
-      await checkImage(fileDb.url).catch(() => {
-        console.log('image false');
-        onError({
-          code: 400,
-          message: '업로드한 파일이 이미지가 아닙니다.',
-        });
+      const fileDb: fileDbType = await loadFiles(docId).catch(() => {
+        throw new Error('404');
       });
+
+      setFileDb(fileDb);
+      // // check if file is image file
+      // await checkImage(fileDb.url).catch(() => {
+      //   throw new Error('400');
+      // });
+      console.log(1);
+
       // add data in idb for MyFiles
       const enabled = await get('enabled_myfiles');
       if (enabled === undefined ? true : enabled) {
@@ -106,12 +107,15 @@ const Viewer = () => {
       },
       onSubscribed: async () => {
         // run onLoad after subscribed
-        onLoad().catch(() => {
-          // file isn't existent
-          onError({
-            code: 404,
-            message: '파일이 존재하지 않음',
-          });
+        onLoad().catch(error => {
+          const errorCode = Number(error.message);
+          if (errorCode === 404) {
+            // file isn't existent
+            onError({
+              code: 404,
+              message: '파일이 존재하지 않음',
+            });
+          }
         });
       },
     });
@@ -129,13 +133,14 @@ const Viewer = () => {
     setLoaded(true);
     setViewed(true);
     setFileDb({
-      url: 'https://velog.velcdn.com/images/haneum/post/12b05acf-6022-4f12-87c7-090e72739e5e/image.avif',
+      url: 'https://63c605548c76513e84ac879d-cpnrofmfjd.chromatic.com/starwars.mp4',
       docId: '',
       fileId: '',
       accessTime: '',
       limit: false,
       excess: false,
       uploadType: 'url',
+      fileType: 'video',
     });
     return () => {
       initValues();

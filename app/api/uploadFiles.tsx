@@ -9,6 +9,7 @@ type uploadFilesProps = {
   docId: string;
   url: string;
   uploadType: string;
+  fileType: string;
 };
 
 const uploadFiles = async ({
@@ -20,6 +21,7 @@ const uploadFiles = async ({
   accessTime,
   uploadType,
   url,
+  fileType,
 }: uploadFilesProps) => {
   // check bucket
   // create bucket
@@ -61,8 +63,8 @@ const uploadFiles = async ({
         : '',
       limit: limit, // limit: true => limit upload mode / limit: false => normal upload mode
       excess: false,
-      fileType: '',
-      uploadType: 'file',
+      fileType: fileType,
+      uploadType: uploadType,
     };
     // create table
     // create columns
@@ -83,8 +85,8 @@ const uploadFiles = async ({
       accessTime: limit ? accessTime : '',
       limit: limit,
       excess: false,
-      fileType: '',
-      uploadType: 'url',
+      fileType: fileType,
+      uploadType: uploadType,
     };
 
     const { data: uploadDb, error: uploadDbError } = await supabase

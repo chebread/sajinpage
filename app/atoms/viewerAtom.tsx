@@ -14,6 +14,8 @@ const onCancelAtom = atom(null, (get, set) => {
 const menuClickedAtom = atom(false);
 const expandedAtom = atom(false);
 const editClickedAtom = atom(false);
+const playingAtom = atom(true);
+const mutedAtom = atom(true);
 
 export {
   clickedAtom,
@@ -24,4 +26,6 @@ export {
   menuClickedAtom,
   expandedAtom,
   editClickedAtom,
+  playingAtom,
+  mutedAtom,
 };

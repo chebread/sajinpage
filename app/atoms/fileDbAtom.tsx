@@ -9,6 +9,7 @@ const fileDbAtom = atom<fileDbType>({
   limit: false,
   excess: false,
   uploadType: '',
+  fileType: '',
 });
 
 export default fileDbAtom;

@@ -6,6 +6,7 @@ type fileDbType = {
   limit: boolean;
   excess: boolean;
   uploadType: string;
+  fileType: string;
 };
 
 export default fileDbType;
