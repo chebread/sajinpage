@@ -20,8 +20,8 @@ import {
   menuClickedAtom,
 } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import EditDialog from 'components/Viewer/EditDialog';
-import NavigationMenu from 'components/Viewer/NavigationMenu';
+import EditMenu from 'components/Viewer/ViewerMenu/ViewerMenu';
+import NavigationMenu from 'components/Viewer/NavigationMenu/NavigationMenu';
 
 // (0): svg safari 오류 해결하기 (chrome도 약간 불안정함)
 // (0): menu modal시 @keyframes로 threads 같이 구현하기 (visible 사용 x, display 사용 o)
@@ -32,7 +32,6 @@ const Header = () => {
   const [editClicked, setEditClicked] = useAtom(editClickedAtom);
   const [expanded] = useAtom(expandedAtom);
   const [menuClicked, setMenuClicked] = useAtom(menuClickedAtom);
-  console.log(menuClicked);
 
   const onClickEdit = () => {
     setEditClicked(!editClicked);
@@ -73,7 +72,7 @@ const Header = () => {
         </Container>
       </ContainerWrapper>
       <NavigationMenu />
-      <EditDialog />
+      <EditMenu />
     </>
   );
 };

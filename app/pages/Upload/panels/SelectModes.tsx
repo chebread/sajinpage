@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai';
-import Select from 'react-select';
 import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import addTime from 'lib/addTime';
 import dateToString from 'lib/dateToString';
@@ -10,17 +9,17 @@ import initValuesAtom from 'atoms/initValuesAtom';
 // 파일 업로드 모드를 설정하는 부분
 
 const SelectModes = () => {
-  const [files, setFiles] = useAtom(filesAtom);
+  const [, setFiles] = useAtom(filesAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [, initValues] = useAtom(initValuesAtom);
 
   const onModeSelect = (e: any) => {
-    const { value } = e; // value = limit sec
-    // normal upload mode = e.value가 존재하지 않음
-    // limit upload mode = e.value가 존재
-    if (value) {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === 'limited') {
       // limit mode
-      const timeLimit = value; // limit time = sec
+      const timeLimit: number = Number(value); // time limit = sec
       const currentTime = getCurrentTime();
       const accessTime = dateToString(
         addTime({ currentTime: currentTime, sec: timeLimit })
@@ -34,7 +33,7 @@ const SelectModes = () => {
         };
       });
     }
-    // normal mode && limit mode
+    // normal mode && limit mode 둘다 selected를 true로 설정합니다.
     setFiles(prevState => {
       return {
         ...prevState,
@@ -50,11 +49,20 @@ const SelectModes = () => {
   return (
     <div>
       <h1>Normal upload mode</h1>
-      <button onClick={onModeSelect} value="normal">
+      <button onClick={onModeSelect} name="normal">
         Normal upload mode
       </button>
       <h1>Limit upload mode</h1>
-      <Select onChange={onModeSelect} options={timeLimitOptions} />
+      <select onChange={onModeSelect} name="limited">
+        <option value={''}>시간 선택</option>
+        {timeLimitOptions.map(option => {
+          return (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
+      </select>
       <h1>Navigator</h1>
       <button onClick={onGoHome}>Cancel</button>
     </div>

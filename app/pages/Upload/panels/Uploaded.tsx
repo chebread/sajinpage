@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import { Navigate } from 'react-router-dom';
 import filesAtom from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
+import { toast } from 'react-hot-toast';
 
 // 업로드 완료 (모든 값을 초기화 해줌)
 
@@ -17,7 +18,8 @@ const Uploaded = () => {
       initValues(); // 값을 초기화하여 다시 홈에 갈것을 대비함
     };
     onLoad().catch(error => {
-      console.log(error);
+      console.error(error);
+      toast.error('에러가 발생했습니다.');
     });
   }, []);
 

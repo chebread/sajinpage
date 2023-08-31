@@ -1,20 +1,14 @@
 import { atom } from 'jotai';
+import type fileDbType from 'types/fileDbType';
 
-type fileDbObjectsType = {
-  docId: string;
-  fileId: string;
-  url: string;
-  accessTime: string;
-  limit: boolean;
-  excess: boolean;
-};
-const fileDbAtom = atom<fileDbObjectsType>({
+const fileDbAtom = atom<fileDbType>({
   docId: '',
   fileId: '',
   url: '',
   accessTime: '',
   limit: false,
   excess: false,
+  uploadType: '',
 });
 
 export default fileDbAtom;

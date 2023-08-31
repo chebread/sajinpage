@@ -1,10 +1,6 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp, landscapeVp } from 'layouts/properties';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as WarningIcon } from 'assets/svg/WarningIcon.svg';
-import { ReactComponent as HomeIcon } from 'assets/svg/HomeIcon.svg';
-import transition from 'layouts/properties/transition';
 
 // Page is not found
 

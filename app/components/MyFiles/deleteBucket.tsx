@@ -1,11 +1,16 @@
-import { deleteFiles } from 'api';
-import { set } from 'idb-keyval';
 import { triggerEvent } from 'lib/broadcastChannel';
 import { deleteIdb } from 'lib/idb';
+import { toast } from 'react-hot-toast';
 
-const deleteBucket = async (datas: any, value: any) => {
-  await Promise.all([deleteFiles(datas), deleteIdb(datas, value)]);
-  triggerEvent('DELETE_BUCKET');
+const onDeleteBucket = async (datas: any, value: any) => {
+  await deleteIdb(datas, value)
+    .then(() => {
+      triggerEvent('CLEAR');
+      toast('삭제됨');
+    })
+    .catch(() => {
+      toast.error('삭제중 에러 발생');
+    });
 };
 
-export default deleteBucket;
+export default onDeleteBucket;

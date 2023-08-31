@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-const LinkUploaderClickedAtom = atom(false);
+const linkClickedAtom = atom(false);
 
-export { LinkUploaderClickedAtom };
+export { linkClickedAtom };

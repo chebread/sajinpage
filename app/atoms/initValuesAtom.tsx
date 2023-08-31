@@ -18,6 +18,7 @@ const initValuesAtom = atom(null, (get, set) => {
     accessTime: '',
     limit: false,
     excess: false,
+    uploadType: '',
   });
   set(errorAtom, {});
   set(clickedAtom, false);
@@ -36,6 +37,8 @@ const initValuesAtom = atom(null, (get, set) => {
     uploaded: false,
     limit: false,
     filed: false,
+    uploadType: '',
+    url: '',
   });
 });
 

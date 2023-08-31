@@ -11,9 +11,8 @@ const checkFileSessionByAccessTime = async (accessTime: any) => {
     currentTime: currentTime,
     endTime: timeLimit,
   });
-  // console.log(`check file's session`);
   if (isSessionEnded) {
-    // file excessed
+    // file is excessed
     return true;
   } else {
     return false;

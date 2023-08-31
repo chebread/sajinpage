@@ -1,18 +1,7 @@
 import { atom } from 'jotai';
+import type filesType from 'types/filesType';
 
-type filesObjectsType = {
-  file: File;
-  fileType: string;
-  docId: string;
-  fileId: string;
-  accessTime: string;
-  timeLimit: number;
-  selected: boolean; // is selected
-  uploaded: boolean; // is uploaded
-  limit: boolean;
-  filed: boolean; // is file
-};
-const filesAtom = atom<filesObjectsType>({
+const filesAtom = atom<filesType>({
   file: new File([''], ''), // 바이너리 파일 자체를 저장
   fileType: '', // 파일의 type을 저장
   docId: '', // 파일의 docId를 저장
@@ -23,6 +12,8 @@ const filesAtom = atom<filesObjectsType>({
   uploaded: false, // 파일이 업로드 됬는지를 저장함
   limit: false, // limit 설정되어 있는지 저장하는 불리언값
   filed: false, // 파일의 전송 유무를 저장
+  uploadType: '', // 파일 업로드의 타입을 저장 (FILE / URL)
+  url: '',
 });
 
 export default filesAtom;

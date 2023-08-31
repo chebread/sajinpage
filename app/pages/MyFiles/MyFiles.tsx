@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { get, set } from 'idb-keyval';
+import { get } from 'idb-keyval';
 import { useNavigate } from 'react-router-dom';
 import { broadcastChannel } from 'lib/broadcastChannel';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
-import { toast } from 'react-hot-toast';
 import onCopy from 'components/onCopy';
-import { ReactComponent as DeleteIcon } from 'assets/svg/DeleteIcon.svg';
-import { ReactComponent as CopyIcon } from 'assets/svg/CopyIcon.svg';
-import {
-  desktopVp,
-  disableTab,
-  landscapeVp,
-  transition,
-} from 'layouts/properties';
+import { desktopVp, landscapeVp } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
+import onDeleteBucket from 'components/MyFiles/deleteBucket';
 
 // (0): urls를 my_files로 바꾸고, my_files에 [{ docId: ..., url: ..., excess: ..., accessTime: ..., limited: ...}. { .... }] 로 저장하기 (즉, fileDb를 완전 복사하여 저장하기)
 // (0): 아이폰 갤러리 처럼 구성하기 (내가 올린 사진을 전체로 볼 수 있는 용도)
@@ -95,6 +88,9 @@ const MyFiles = () => {
                 <Button onClick={() => onCopy(getWebsiteUrl(`/v/${docId}`))}>
                   링크 복사
                 </Button>
+                <Button onClick={() => onDeleteBucket(buckets, docId)}>
+                  삭제
+                </Button>
               </CardWrapper>
             ))
           ) : (
@@ -135,16 +131,7 @@ const CardWrapper = styled.div`
   width: 100%;
   height: auto;
 `;
-const Image = styled.img`
-  display: block;
-  max-height: 100%;
-  max-width: 100%;
-  margin: auto;
-  object-fit: contain;
-  object-position: center;
-
-  border-radius: 1rem;
-`;
+const Image = styled.img``;
 const Button = styled.button``;
 
 export default MyFiles;

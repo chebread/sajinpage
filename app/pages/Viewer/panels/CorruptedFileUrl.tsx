@@ -7,16 +7,12 @@ import { useNavigate } from 'react-router-dom';
 // 아니면 아예 모르는, 예기치 않은 오류가 발생할때 여기서 처리함 발생함
 
 const CorruptedFileUrl = () => {
-  const navigate = useNavigate();
   const [error] = useAtom(errorAtom);
 
   return (
     <>
       <h1>{error.code}</h1>
       <div>{error.message}</div>
-      <div>
-        <button onClick={() => navigate(0)}>Refresh</button>
-      </div>
     </>
   );
 };
