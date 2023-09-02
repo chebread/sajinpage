@@ -26,7 +26,7 @@ const deleteFiles = async (docId: string) => {
     throw new Error('file을 db에서 삭제중 오류발생');
   }
   // occur delete event
-  triggerEvent('DELETE');
+  triggerEvent(`DELETE ${docId}`);
   // occur delete event for realtime
   triggerSupabaseEvent({
     docId: docId,

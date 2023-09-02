@@ -17,6 +17,8 @@ import { ReactComponent as CancelIcon } from 'assets/svg/CancelIcon.svg';
 // normal mode에서 나오는 Modal
 
 const OnLimitedModeModal = ({ visible }) => {
+  const selectRef = useRef<any>(null);
+  const inputRef = useRef<any>(null);
   const [fileDb] = useAtom(fileDbAtom);
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const currentDatetime = useRef(
@@ -25,8 +27,6 @@ const OnLimitedModeModal = ({ visible }) => {
       .slice(0, 19)
   );
   const [, onCancel] = useAtom(onCancelAtom);
-  const selectRef = useRef<any>(null);
-  const inputRef = useRef<any>(null);
 
   useEffect(() => {
     if (visible) {
@@ -74,16 +74,6 @@ const OnLimitedModeModal = ({ visible }) => {
                 );
               })}
             </Select>
-            <input
-              ref={inputRef}
-              type="datetime-local"
-              defaultValue={`${currentDatetime.current}`}
-              min={`${
-                `${new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
-                  .toISOString()
-                  .slice(0, 17)}` + '00' // (0): 시간은 제한이 안걸리니 현재 시간 이전으로 값이 설정되면 경고 띄우고 다시 설정하기
-              }`}
-            />
           </SelectWrapper>
         </FloatModals>
         <FloatModalsBackground onClick={onCancel} />

@@ -35,8 +35,8 @@ const NavigationBanner = () => {
       <Navigator>
         {(() => {
           switch (type) {
-            case 'h':
-              return '도움말';
+            case 'f':
+              return '피드백 및 문의';
             case 'p':
               return '서비스 정책';
             default:

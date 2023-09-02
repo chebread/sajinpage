@@ -12,6 +12,7 @@ import ForbiddenPage from 'pages/ForbiddenPage';
 import Viewer from 'pages/Viewer';
 import MyFiles from 'pages/MyFiles';
 import Settings from 'pages/Settings';
+import Home from 'pages/Home';
 
 const forbiddenRouter = ({ code, message }) =>
   createBrowserRouter(
@@ -45,7 +46,8 @@ const router = createBrowserRouter(
           </>
         }
       >
-        <Route path="/" element={<Upload />} />
+        <Route path="/" element={<Home />} />
+        <Route path="u" element={<Upload />} />
         <Route path="v/:id" element={<Viewer />} />
         <Route path="f" element={<MyFiles />} />
         <Route path="s/:type?" element={<Settings />} />

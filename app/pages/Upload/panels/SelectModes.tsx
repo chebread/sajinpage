@@ -5,6 +5,13 @@ import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import filesAtom from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
+import Modal from 'components/Modal';
+import styled from 'styled-components';
+import { desktopVp, disableTab, transition } from 'layouts/properties';
+import ModalHeader from 'components/Modal/ModalHeader';
+import ModalCancelBtn from 'components/Modal/ModalCancelBtn';
+import ModalWrapper from 'components/Modal/ModalWrapper';
+import { ReactComponent as LeftArrowIcon } from 'assets/svg/LeftArrow.svg';
 
 // 파일 업로드 모드를 설정하는 부분
 
@@ -42,31 +49,93 @@ const SelectModes = () => {
     });
   };
 
-  const onGoHome = () => {
+  const onBack = () => {
     initValues();
   };
 
   return (
-    <div>
-      <h1>Normal upload mode</h1>
-      <button onClick={onModeSelect} name="normal">
-        Normal upload mode
-      </button>
-      <h1>Limit upload mode</h1>
-      <select onChange={onModeSelect} name="limited">
-        <option value={''}>시간 선택</option>
-        {timeLimitOptions.map(option => {
-          return (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          );
-        })}
-      </select>
-      <h1>Navigator</h1>
-      <button onClick={onGoHome}>Cancel</button>
-    </div>
+    <Modal onBack={onBack}>
+      <ModalHeader>
+        <ModalCancelBtn onClick={onBack}>
+          <LeftArrowIcon />
+        </ModalCancelBtn>
+      </ModalHeader>
+      <ModalWrapper>
+        <Button onClick={onModeSelect} name="normal">
+          일반 업로드
+        </Button>
+        <Select onChange={onModeSelect} name="limited" defaultValue={'DEFAULT'}>
+          <option value="DEFAULT" disabled>
+            시간 선택
+          </option>
+          {timeLimitOptions.map(option => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            );
+          })}
+        </Select>
+      </ModalWrapper>
+    </Modal>
   );
 };
+
+const Select = styled.select`
+  all: unset;
+  ${disableTab}
+  ${transition('all')}
+  cursor: pointer;
+  padding: 1.5rem 1.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  @media (${desktopVp}) {
+    &:hover {
+      /* background-color: rgb(235, 235, 235); */
+    }
+  }
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
+  }
+  svg {
+    height: 1.5rem;
+  }
+`;
+const Button = styled.button`
+  all: unset;
+  ${disableTab}
+  ${transition('all')}
+  cursor: pointer;
+  padding: 1.5rem 1.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  @media (${desktopVp}) {
+    &:hover {
+      /* background-color: rgb(235, 235, 235); */
+    }
+  }
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
+  }
+  svg {
+    height: 1.5rem;
+  }
+`;
 
 export default SelectModes;

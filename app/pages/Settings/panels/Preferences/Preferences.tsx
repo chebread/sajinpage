@@ -58,11 +58,11 @@ const Preferences = () => {
       <ButtonWrapper>
         <Button onClick={onClearIdb}>
           <DeleteIcon />
-          버킷 비우기
+          파일 비우기
         </Button>
         <Button onClick={onEnable}>
           <SaveIcon />
-          {enabled ? '버킷 저장 기능 끄기' : '버킷 저장 기능 켜기'}
+          {enabled ? '파일 저장 기능 끄기' : '파일 저장 기능 켜기'}
         </Button>
       </ButtonWrapper>
     </Container>

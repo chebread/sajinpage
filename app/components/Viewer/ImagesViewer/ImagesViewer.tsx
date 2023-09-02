@@ -1,5 +1,5 @@
 import { errorAtom } from 'atoms/errorAtom';
-import { editClickedAtom, expandedAtom } from 'atoms/viewerAtom';
+import { editClickedAtom, expandedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components';
 // (0): click 하는 것을 하나의 컨테이너로 관리하기
 
 const ImagesViewer = ({ src }) => {
+  const [, setViewed] = useAtom(viewedAtom);
   const [, onError] = useAtom(errorAtom);
   const [editClicked, setEditClicked] = useAtom(editClickedAtom);
   const [expanded, setExpanded] = useAtom(expandedAtom); // 전체화면 축소 / 확대
@@ -39,8 +40,9 @@ const ImagesViewer = ({ src }) => {
           onError={() => {
             onError({
               code: 400,
-              message: '이미지 로딩중 알 수 없는 에러가 발생했습니다.',
+              message: '이미지 로드 중 알 수 없는 에러가 발생했습니다.',
             });
+            setViewed(false); // (0): onError 함수에 통합하는 방향 검토
           }}
         />
       </ImageWrapper>
@@ -75,14 +77,7 @@ const Image = styled.img<{ expanded: boolean }>`
   object-position: center;
   border-radius: 0;
   @media (${desktopVp}) {
-    ${({ expanded }) =>
-      expanded
-        ? css`
-            cursor: pointer;
-          `
-        : css`
-            cursor: pointer;
-          `}
+    cursor: pointer;
     border-radius: ${({ expanded }) => (expanded ? '0' : '1rem')};
     &:active {
       transform: ${({ expanded }) => (expanded ? 'scale(1)' : 'scale(0.98)')};

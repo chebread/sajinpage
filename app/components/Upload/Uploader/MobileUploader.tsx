@@ -1,7 +1,7 @@
 import { desktopVp } from 'layouts/properties';
 import styled from 'styled-components';
 
-const MobileUploader = ({ open }) => {
+const MobileUploader = ({ open, onDropUrl }) => {
   return (
     <>
       <Container>hello</Container>

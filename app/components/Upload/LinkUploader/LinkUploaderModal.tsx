@@ -18,7 +18,7 @@ const LinkUploaderModal = () => {
 
   return (
     <>
-      <FloatModalsContainer visible={linkClicked}>
+      <FloatModalsContainer visible={true}>
         <FloatModals>
           <CancelButton onClick={onCancel}>
             <CancelIcon />

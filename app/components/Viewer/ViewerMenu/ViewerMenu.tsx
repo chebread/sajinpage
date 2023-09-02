@@ -5,6 +5,7 @@ import {
   modeToggleAtom,
   onCancelAtom,
   resetToggleAtom,
+  viewedAtom,
 } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableSelection, transition } from 'layouts/properties';
@@ -17,6 +18,7 @@ import ViewerEditModal from '../ViewerEditModal';
 // for desktop
 
 const DesktopEditMenu = () => {
+  const [viewed] = useAtom(viewedAtom);
   const [fileDb] = useAtom(fileDbAtom);
   const [editClicked] = useAtom(editClickedAtom);
   const [modeToggle, setModeToggle] = useAtom(modeToggleAtom);
@@ -29,7 +31,7 @@ const DesktopEditMenu = () => {
 
   return (
     <>
-      <MenuModalsContainer visible={editClicked} expanded={expanded}>
+      <MenuModalsContainer visible={editClicked && viewed} expanded={expanded}>
         <MenuModals
           onClick={async () => {
             await onCopy(getUrl());

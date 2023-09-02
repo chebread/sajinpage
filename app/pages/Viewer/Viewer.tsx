@@ -48,14 +48,7 @@ const Viewer = () => {
       const fileDb: fileDbType = await loadFiles(docId).catch(() => {
         throw new Error('404');
       });
-
       setFileDb(fileDb);
-      // // check if file is image file
-      // await checkImage(fileDb.url).catch(() => {
-      //   throw new Error('400');
-      // });
-      console.log(1);
-
       // add data in idb for MyFiles
       const enabled = await get('enabled_myfiles');
       if (enabled === undefined ? true : enabled) {
@@ -88,8 +81,8 @@ const Viewer = () => {
       }
     };
     // track event
-    broadcastChannel.addEventListener('message', onMessage);
-    window.addEventListener('evented', onMessage);
+    broadcastChannel.addEventListener('message', onMessage); // (i(중요)): 이것은 꼭 필요함. 왜냐하면 supabase broadcast api는 같은 라우터에서 동작하지 않음
+    window.addEventListener('evented', onMessage); // (0): broadcast channel만 사용하기 window.add...는 이제 없에기
     // track event as realtime
     const realtimeChannel = fetchRealtimeFiles({
       tableId: 'refs',
@@ -158,12 +151,13 @@ const Viewer = () => {
   };
 
   const onMessage = async (e: any) => {
+    // (0): 같은 docId인지 판단하기 (onDelete 처럼)
     if (e.data != undefined) {
-      if (e.data === 'DELETE') {
+      if (e.data === `DELETE ${docId}`) {
         await onDeleted();
       }
     } else {
-      if (e.detail.data === 'DELETE') {
+      if (e.detail.data === `DELETE ${docId}`) {
         await onDeleted();
       }
     }

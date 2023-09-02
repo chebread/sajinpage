@@ -8,6 +8,7 @@ import onCopy from 'components/onCopy';
 import { desktopVp, landscapeVp } from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
 import onDeleteBucket from 'components/MyFiles/deleteBucket';
+import NotExistedBuckets from './panels/NotExistedBuckets';
 
 // (0): urls를 my_files로 바꾸고, my_files에 [{ docId: ..., url: ..., excess: ..., accessTime: ..., limited: ...}. { .... }] 로 저장하기 (즉, fileDb를 완전 복사하여 저장하기)
 // (0): 아이폰 갤러리 처럼 구성하기 (내가 올린 사진을 전체로 볼 수 있는 용도)
@@ -65,42 +66,34 @@ const MyFiles = () => {
     }
   };
 
-  return (
-    <>
-      <Container>
-        <Wrapper>
-          {buckets != undefined && buckets.length != 0 ? (
-            buckets.map((docId: any, index: number) => (
-              <CardWrapper key={index}>
-                {/* <Image
+  return buckets != undefined && buckets.length != 0 ? (
+    <Container>
+      <Wrapper>
+        {buckets.map((docId: any, index: number) => (
+          <CardWrapper key={index}>
+            {/* <Image
                   src={data.url}
                   onClick={() => {
                     navigate(`/v/${data.docId}`);
                   }}
                 /> */}
-                <Button
-                  onClick={() => {
-                    navigate(`/v/${docId}`);
-                  }}
-                >
-                  {docId}
-                </Button>
-                <Button onClick={() => onCopy(getWebsiteUrl(`/v/${docId}`))}>
-                  링크 복사
-                </Button>
-                <Button onClick={() => onDeleteBucket(buckets, docId)}>
-                  삭제
-                </Button>
-              </CardWrapper>
-            ))
-          ) : (
-            <>
-              <div>Buckets이 비어 있습니다.</div>
-            </>
-          )}
-        </Wrapper>
-      </Container>
-    </>
+            <Button
+              onClick={() => {
+                navigate(`/v/${docId}`);
+              }}
+            >
+              {docId}
+            </Button>
+            <Button onClick={() => onCopy(getWebsiteUrl(`/v/${docId}`))}>
+              링크 복사
+            </Button>
+            <Button onClick={() => onDeleteBucket(buckets, docId)}>삭제</Button>
+          </CardWrapper>
+        ))}
+      </Wrapper>
+    </Container>
+  ) : (
+    <NotExistedBuckets />
   );
 };
 

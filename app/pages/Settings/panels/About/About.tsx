@@ -19,9 +19,9 @@ const About = () => {
         <Preferences />
       </DesktopContainer>
       <Container>
-        <Navigate to="/s/h" end>
+        <Navigate to="/s/f" end>
           <HelpIcon />
-          도움말
+          피드백 및 문의
         </Navigate>
         <Navigate to="/s/p" end>
           <PolicyIcon />

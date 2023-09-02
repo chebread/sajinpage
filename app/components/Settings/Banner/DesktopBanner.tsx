@@ -20,9 +20,9 @@ const DesktopBanner = () => {
         <SettingsIcon />
         설정
       </Navigate>
-      <Navigate className={type === 'h' ? 'active' : ''} to="/s/h">
+      <Navigate className={type === 'f' ? 'active' : ''} to="/s/f">
         <HelpIcon />
-        도움말
+        피드백 및 문의
       </Navigate>
       <Navigate className={type === 'p' ? 'active' : ''} to="/s/p">
         <PolicyIcon />

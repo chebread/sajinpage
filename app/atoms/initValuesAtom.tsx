@@ -7,6 +7,7 @@ import {
   editClickedAtom,
   expandedAtom,
   menuClickedAtom,
+  mutedAtom,
   viewedAtom,
 } from './viewerAtom';
 
@@ -19,6 +20,7 @@ const initValuesAtom = atom(null, (get, set) => {
     limit: false,
     excess: false,
     uploadType: '',
+    fileType: '',
   });
   set(errorAtom, {});
   set(clickedAtom, false);
@@ -26,6 +28,7 @@ const initValuesAtom = atom(null, (get, set) => {
   set(editClickedAtom, false);
   set(viewedAtom, false);
   set(expandedAtom, false);
+  set(mutedAtom, true);
   set(filesAtom, {
     file: new File([''], ''),
     fileType: '',

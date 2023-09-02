@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import { ReactComponent as UploadIcon } from 'assets/svg/UploadIcon.svg';
 import { ReactComponent as SettingsIcon } from 'assets/svg/SettingsIcon.svg';
 import { ReactComponent as MyFilesIcon } from 'assets/svg/MyFilesIcon.svg';
+import { ReactComponent as HomeIcon } from 'assets/svg/HomeIcon.svg';
+
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { expandedAtom, viewedAtom } from 'atoms/viewerAtom';
@@ -24,13 +26,18 @@ const Navigation = () => {
   return (
     <Container visible={viewed ? false : true} expanded={expanded}>
       <Wrapper>
-        <Navigate to="f" onTouchStart={() => {}}>
-          <MyFilesIcon />
+        <Navigate to="/">
+          <HomeIcon />
         </Navigate>
       </Wrapper>
       <Wrapper>
-        <Navigate to="/">
+        <Navigate to="u">
           <UploadIcon />
+        </Navigate>
+      </Wrapper>
+      <Wrapper>
+        <Navigate to="f">
+          <MyFilesIcon />
         </Navigate>
       </Wrapper>
       <Wrapper>
@@ -64,12 +71,14 @@ const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   }
   /* box-shadow: 0px -20px 20px -20px rgba(0, 0, 0, 0.08); */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  z-index: 0;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   ${centerAlign}
+  width: 33.3333%;
 `;
 
 const Navigate = styled(NavLink)`
@@ -88,16 +97,12 @@ const Navigate = styled(NavLink)`
   ${transition('background-color', 'all')}
   @media (${desktopVp}) {
     &:hover {
-      // hover시는 svg만 커짐
-      /* background-color: rgb(235, 235, 235); */
       svg {
         transform: scale(1.07);
       }
     }
   }
   &:active {
-    // active는 전체적으로 다 축소됨
-    /* background-color: rgb(220, 220, 220); */
     transform: scale(0.85);
     @media (${desktopVp}) {
       transform: scale(0.93);

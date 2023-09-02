@@ -166,17 +166,13 @@ const CancelButton = styled.button`
   border-radius: 50%;
   &:hover {
     background-color: rgb(235, 235, 235);
-    svg {
-      /* transform: scale(1.07); */
-    }
   }
   &:active {
-    /* background-color: rgb(220, 220, 220); */
     transform: scale(0.93);
   }
   svg {
     ${transition('transform')}
-    height: 2rem; // 1rem
+    height: 1rem;
     fill: #000000;
   }
 `;

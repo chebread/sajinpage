@@ -11,7 +11,6 @@ import MobileUploader from 'components/Upload/Uploader/MobileUploader';
 import DropZone from 'components/Upload/Uploader/DropZone';
 import checkImage from 'lib/checkImage';
 import checkVideo from 'lib/checkVideo';
-import ReactPlayer from 'react-player';
 
 // (0): 모바일은 바로 + 누르면 editmodal 처럼 (like youtube) 처럼 모달이 홈에서 제공함 select mode도 동일함 (데스크탑과는)
 // (0): pdf upload 기능 추가하기
@@ -43,34 +42,39 @@ const Uploader = () => {
     const pastedFiles = clipboardData.files;
     if (pastedUrl != '' && pastedUrl != undefined) {
       if (checkUrlFormat(pastedUrl)) {
-        onDropUrls(pastedUrl);
+        onDropUrl(pastedUrl);
       } else {
         toast.error('링크를 붙여넣어 주세요');
       }
     }
     if (pastedFiles.length != 0) {
-      await onDropFiles(pastedFiles);
+      await onDropFile(pastedFiles);
     }
   };
-  const onDropFiles = useCallback(async (files: any) => {
+  const onDropFile = useCallback(async (files: any) => {
+    // 1개 초과 파일은 받지 않음
+    if (files.length === 0) {
+      toast.error('하나의 파일만 업로드 가능합니다');
+      return;
+    }
+    toast.loading('업로드중');
     const file = files[0];
     const isImageFile = file.type.match(/(image)/g); // type이 image, pdf 인지 파일 체크
     const docId = hashMaker();
     const fileId = hashMaker();
-    // 1개 초과 파일은 받지 않음
-    if (files.length > 1) {
-      toast.error('하나의 파일만 업로드 가능합니다');
-      return;
-    }
     // check file's type
     if (isImageFile === null) {
+      toast.dismiss();
       toast.error('업로드 할 수 없는 파일입니다');
       return;
     }
     // check file's size (limit 5MB)
     if (file.size >= FILE_MAX_SIZE) {
+      toast.dismiss();
       toast.error('5MB 이하의 파일만 업로드 가능합니다');
       return;
+    } else {
+      toast.dismiss();
     }
     // initialize file
     setFiles(prevState => {
@@ -85,7 +89,8 @@ const Uploader = () => {
       };
     });
   }, []);
-  const onDropUrls = async (url: string) => {
+  const onDropUrl = async (url: string) => {
+    toast.loading('업로드중');
     const docId = hashMaker();
     // check if file url can be loaded
     const isImage = await checkImage(url)
@@ -111,6 +116,7 @@ const Uploader = () => {
           };
         });
       }
+      toast.dismiss();
       setFiles(prevState => {
         return {
           ...prevState,
@@ -121,13 +127,14 @@ const Uploader = () => {
         };
       });
     } else {
+      toast.dismiss();
       toast.error('업로드 할 수 없는 파일입니다');
     }
   };
 
   return (
     <Dropzone
-      onDrop={onDropFiles}
+      onDrop={onDropFile}
       accept={fileAcceptTypes}
       noClick
       noKeyboard
@@ -138,8 +145,8 @@ const Uploader = () => {
           <>
             <DropZone {...getRootProps()}>
               <input {...getInputProps()} />
-              <MobileUploader open={open} />
-              <DesktopUploader open={open} />
+              <MobileUploader open={open} onDropUrl={onDropUrl} />
+              <DesktopUploader open={open} onDropUrl={onDropUrl} />
               <DropGuide visible={isDragActive} />
             </DropZone>
           </>
