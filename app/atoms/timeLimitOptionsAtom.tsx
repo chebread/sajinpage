@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 
 const timeLimitOptionsAtom = atom([
-  { value: 5, label: '5초' },
+  // { value: 5, label: '5초' }, // for test
   { value: 300, label: '5분' },
   { value: 900, label: '15분' },
   { value: 1800, label: '30분' },
