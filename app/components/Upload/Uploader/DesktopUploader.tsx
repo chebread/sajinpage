@@ -9,7 +9,6 @@ import ModalHeader from 'components/Modal/ModalHeader';
 import ModalWrapper from 'components/Modal/ModalWrapper';
 import ModalCancelIcon from 'components/Modal/ModalCancelIcon';
 import { ReactComponent as LeftArrowIcon } from 'assets/svg/LeftArrow.svg';
-import { useState } from 'react';
 import { linkUploaderClickedAtom } from 'atoms/uploaderAtom';
 import { useAtom } from 'jotai';
 

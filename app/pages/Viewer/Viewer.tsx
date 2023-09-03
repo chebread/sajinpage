@@ -120,29 +120,10 @@ const Viewer = () => {
       window.removeEventListener('evented', onMessage);
       initValues();
     };
-
-    /* test code */
-    insertIdb(docId);
-    setLoaded(true);
-    setViewed(true);
-    setFileDb({
-      url: 'https://63c605548c76513e84ac879d-cpnrofmfjd.chromatic.com/starwars.mp4',
-      docId: '',
-      fileId: '',
-      accessTime: '',
-      limit: false,
-      excess: false,
-      uploadType: 'url',
-      fileType: 'video',
-    });
-    return () => {
-      initValues();
-    };
   }, []);
 
   // if file is deleted
   const onDeleted = async () => {
-    // console.log('파일이 삭제됨');
     const buckets = await get('urls');
     deleteIdb(buckets, docId);
     triggerEvent('CLEAR');

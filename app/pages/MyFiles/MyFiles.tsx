@@ -14,6 +14,7 @@ import {
 import { cssVarsPalette } from 'layouts/cssVars';
 import onDeleteBucket from 'components/MyFiles/deleteBucket';
 import NotExistedBuckets from './panels/NotExistedBuckets';
+import { toast } from 'react-hot-toast';
 
 // (0): urls를 my_files로 바꾸고, my_files에 [{ docId: ..., url: ..., excess: ..., accessTime: ..., limited: ...}. { .... }] 로 저장하기 (즉, fileDb를 완전 복사하여 저장하기)
 // (0): 아이폰 갤러리 처럼 구성하기 (내가 올린 사진을 전체로 볼 수 있는 용도)
@@ -25,20 +26,6 @@ const MyFiles = () => {
 
   useEffect(() => {
     const onLoad = async () => {
-      // await set('urls', [
-      //   {
-      //     docId: 'sfkasjkdjfsajfjasfs',
-      //     url: 'https://newjeans.kr/imgs/getup/photos/NJ_GetUp_24.jpg',
-      //   },
-      //   {
-      //     docId: 'csdfhaeISfcsdfsfsf',
-      //     url: 'https://newjeans.kr/imgs/getup/photos/NJ_GetUp_27.jpg',
-      //   },
-      //   {
-      //     docId: 'sfajfjakfjsfBSc23',
-      //     url: 'https://newjeans.kr/imgs/getup/photos/NJ_GetUp_28.jpg',
-      //   },
-      // ]);
       // get datas in db
       const buckets: any = await get('urls');
       setBuckets(buckets);
@@ -46,8 +33,8 @@ const MyFiles = () => {
       broadcastChannel.addEventListener('message', onMessage);
       window.addEventListener('evented', onMessage);
     };
-    onLoad().catch(error => {
-      console.log(error.url);
+    onLoad().catch(() => {
+      toast.error('My files 데이터 로딩 중 에러 발생');
     });
     return () => {
       broadcastChannel.removeEventListener('message', onMessage);
@@ -57,13 +44,11 @@ const MyFiles = () => {
 
   const onMessage = async (e: any) => {
     if (e.data != undefined) {
-      // console.log(e.data);
       if (e.data === 'CLEAR' || e.data === 'INSERT') {
         const newBuckets: any = await get('urls');
         setBuckets(newBuckets);
       }
     } else {
-      // console.log(e.detail.data);
       if (e.detail.data === 'CLEAR' || e.detail.data === 'INSERT') {
         const newBuckets: any = await get('urls');
         setBuckets(newBuckets);

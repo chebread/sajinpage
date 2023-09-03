@@ -1,4 +1,3 @@
-import filesAtom from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
 import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import Modal from 'components/Modal';
@@ -9,13 +8,23 @@ import { useAtom } from 'jotai';
 import { disableTab, transition } from 'layouts/properties';
 import styled from 'styled-components';
 import { ReactComponent as LeftArrowIcon } from 'assets/svg/LeftArrow.svg';
+import { useNavigate } from 'react-router-dom';
+import { linkUploaderClickedAtom } from 'atoms/uploaderAtom';
 
 const DesktopSelectModes = ({ onSelectMode }) => {
+  const navigate = useNavigate();
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [, initValues] = useAtom(initValuesAtom);
+  const [, setClicked] = useAtom(linkUploaderClickedAtom);
 
   return (
-    <Modal onBack={initValues}>
+    <Modal
+      onBack={() => {
+        initValues();
+        navigate(-1);
+        setClicked(false);
+      }}
+    >
       <ModalHeader>
         <ModalCancelBtn onClick={initValues}>
           <LeftArrowIcon />

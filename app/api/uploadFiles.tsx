@@ -33,7 +33,6 @@ const uploadFiles = async ({
         upsert: false,
       });
     if (uploadStorageError) {
-      // console.log(uploadStorageError);
       throw new Error('file을 storage에 업로드중 오류 발생');
     }
     // create file viewer url
@@ -93,8 +92,6 @@ const uploadFiles = async ({
       .from('refs')
       .insert(db);
     if (uploadDbError) {
-      console.log(uploadDbError);
-
       throw new Error('file을 db에 업로드중 오류 발생');
     }
   }

@@ -24,7 +24,6 @@ const fetchRealtimeFiles = ({ tableId, onUpdate, onDelete, onSubscribed }) => {
       onDelete(payload);
     })
     .subscribe(status => {
-      // console.log(status);
       if (status === 'SUBSCRIBED') {
         // realtime subscribed 후에 viewer를 실행함
         onSubscribed();

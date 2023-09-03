@@ -4,8 +4,10 @@ import { linkUploaderClickedAtom } from 'atoms/uploaderAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableTab, transition } from 'layouts/properties';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const MobileSelectModes = ({ onSelectMode }) => {
+  const navigate = useNavigate();
   const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
   const [, initValues] = useAtom(initValuesAtom);
   const [, setClicked] = useAtom(linkUploaderClickedAtom);
@@ -37,7 +39,13 @@ const MobileSelectModes = ({ onSelectMode }) => {
           취소
         </Button>
       </Wrapper>
-      <Background onClick={initValues} />
+      <Background
+        onClick={() => {
+          initValues();
+          navigate(-1);
+          setClicked(false);
+        }}
+      />
     </Container>
   );
 };

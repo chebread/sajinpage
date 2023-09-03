@@ -57,7 +57,7 @@ const ResetLimitedModeModal = ({ visible }) => {
   };
 
   return (
-    <Modal onBack={onBack} visible={visible}>
+    <Modal onBack={onCancel} visible={visible}>
       <ModalHeader>
         <ModalCancelBtn onClick={onBack}>
           <LeftArrowIcon />
