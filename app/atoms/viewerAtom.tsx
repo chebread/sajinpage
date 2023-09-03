@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-const viewedAtom = atom(false); // 버튼이 보여짐을 설정함 (viewerheader)
+const viewedAtom = atom(false); // 파일이 정상적으로 보이는 지를 판단함
 const clickedAtom = atom(false);
 const modeToggleAtom = atom(false);
 const resetToggleAtom = atom(false);

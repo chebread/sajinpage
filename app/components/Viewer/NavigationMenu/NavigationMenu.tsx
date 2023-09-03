@@ -1,4 +1,4 @@
-import { menuClickedAtom } from 'atoms/viewerAtom';
+import { menuClickedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { cssVarsPalette } from 'layouts/cssVars';
 import {
@@ -17,10 +17,12 @@ import { ReactComponent as HomeIcon } from 'assets/svg/HomeIcon.svg';
 // header component 내부에서 출력됨
 
 const NavigationMenu = () => {
+  const [viewed] = useAtom(viewedAtom);
   const [menuClicked] = useAtom(menuClickedAtom);
+
   return (
     <>
-      <Container visible={menuClicked}>
+      <Container visible={viewed ? menuClicked : false}>
         <Navigate to="/" end>
           <HomeIcon />홈
         </Navigate>
