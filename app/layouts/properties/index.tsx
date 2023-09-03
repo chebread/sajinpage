@@ -6,7 +6,6 @@ import disableTab from './disableTab';
 import desktopHover from './desktopHover';
 import darkMode from './darkMode';
 import landscapeVp from './landscapeVp';
-import animation from './animation';
 import transition from './transition';
 
 export {
@@ -18,6 +17,5 @@ export {
   desktopHover,
   darkMode,
   landscapeVp,
-  animation,
   transition,
 };
