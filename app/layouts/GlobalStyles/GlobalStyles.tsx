@@ -24,7 +24,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
   body {
-    font-family:  system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; // -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; // -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
   }
   html, body, #root {
     position: relative;

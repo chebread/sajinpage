@@ -18,7 +18,11 @@ const Feedback = () => {
         피드백 및 지원 관련 문의는 아래의 링크에서 부탁드립니다.
       </Description>
       <ButtonWrapper>
-        <Button href="https://sajinpage.canny.io/feedback">
+        <Button
+          href="https://sajinpage.canny.io/feedback"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
           <AskIcon />
           피드백 및 문의하기
         </Button>
