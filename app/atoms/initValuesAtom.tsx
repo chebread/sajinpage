@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 import { errorAtom } from './errorAtom';
 import fileDbAtom from './fileDbAtom';
 import filesAtom from './filesAtom';
+import { linkUploaderClickedAtom } from './uploaderAtom';
 import {
   clickedAtom,
   editClickedAtom,

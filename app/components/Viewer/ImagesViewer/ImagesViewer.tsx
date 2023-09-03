@@ -3,10 +3,9 @@ import { editClickedAtom, expandedAtom, viewedAtom } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
 import { centerAlign, desktopVp } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 // (0): mobile safari 에서 100vh 인데 갑자기 축소되서 이상해지는 현상
-// (0): click 하는 것을 하나의 컨테이너로 관리하기
 
 const ImagesViewer = ({ src }) => {
   const [, setViewed] = useAtom(viewedAtom);
@@ -15,40 +14,59 @@ const ImagesViewer = ({ src }) => {
   const [expanded, setExpanded] = useAtom(expandedAtom); // 전체화면 축소 / 확대
 
   return (
-    <Container>
-      <ImageWrapper
-        expanded={expanded}
-        onClick={() => {
-          // only mobile
-          const currentWidth = window.innerWidth;
-          if (currentWidth < 961) {
-            setEditClicked(!editClicked);
-          }
-        }}
-      >
-        <Image
-          src={src}
-          draggable={false}
+    <>
+      <Container>
+        <ImageWrapper
           expanded={expanded}
           onClick={() => {
-            // only desktop
+            // only mobile
             const currentWidth = window.innerWidth;
-            if (currentWidth >= 961 && expanded === false) {
-              setExpanded(!expanded);
+            if (currentWidth < 961) {
+              setEditClicked(!editClicked);
             }
           }}
-          onError={() => {
-            onError({
-              code: 400,
-              message: '이미지 로드 중 알 수 없는 에러가 발생했습니다.',
-            });
-            setViewed(false); // (0): onError 함수에 통합하는 방향 검토
-          }}
-        />
-      </ImageWrapper>
-    </Container>
+        >
+          <Image
+            src={src}
+            draggable={false}
+            expanded={expanded}
+            onClick={() => {
+              // only desktop
+              const currentWidth = window.innerWidth;
+              if (currentWidth >= 961 && expanded === false) {
+                setExpanded(!expanded);
+              }
+            }}
+            onError={() => {
+              onError({
+                code: 400,
+                message: '이미지 로드 중 알 수 없는 에러가 발생했습니다.',
+              });
+              setViewed(false); // (0): onError 함수에 통합하는 방향 검토
+            }}
+          ></Image>
+          <ExpandBackground
+            expanded={expanded}
+            onClick={() => {
+              // only desktop
+              const currentWidth = window.innerWidth;
+              if (currentWidth >= 961 && expanded === true) {
+                setExpanded(!expanded);
+              }
+            }}
+          ></ExpandBackground>
+        </ImageWrapper>
+      </Container>
+    </>
   );
 };
+const ExpandBackground = styled.div<{ expanded: boolean }>`
+  position: absolute;
+  display: ${({ expanded }) => (expanded ? 'block' : 'none')};
+  ${transition('all')}
+  height: 100%;
+  width: 100%;
+`;
 const Container = styled.div`
   height: 100%;
   width: 100%;
@@ -58,6 +76,7 @@ const Container = styled.div`
 `;
 const ImageWrapper = styled.div<{ expanded: boolean }>`
   ${transition('all')}
+  position: relative;
   height: 100%;
   width: 100%;
   @media (${desktopVp}) {
@@ -69,6 +88,8 @@ const ImageWrapper = styled.div<{ expanded: boolean }>`
 `;
 const Image = styled.img<{ expanded: boolean }>`
   ${transition('all')}
+  position: absolute;
+  z-index: 1000;
   display: block;
   height: 100%; // max-height: 100% 은 이미지가 작다면 화면에 꽉 차지 않음
   max-width: 100%;

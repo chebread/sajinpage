@@ -5,9 +5,6 @@
 ## Website link
 [sajin.page](https://sajin.page/)
 
-# Usage
-- 파일을 공유하고 싶으면, 링크 복사후 url에 입력하세요!
-
 ## Stacks
 - React
 - Supabase

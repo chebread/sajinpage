@@ -15,6 +15,7 @@ import { ReactComponent as HomeIcon } from 'assets/svg/HomeIcon.svg';
 import { NavLink } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { expandedAtom, viewedAtom } from 'atoms/viewerAtom';
+import { Link } from 'react-router-dom';
 
 // (0): landscape에서 nav safe area 설정시 "도구 막대 축소"시 safe area 없어지는 문제 있음 (https://developer.apple.com/forums/thread/716552)
 // (0): svg 다시 작성하여 nav icon fill 되는 것 구현하기
@@ -75,10 +76,11 @@ const Container = styled.div<{ visible: boolean; expanded: boolean }>`
 `;
 
 const Wrapper = styled.div`
+  all: unset;
   display: flex;
   flex-direction: row;
   ${centerAlign}
-  width: 33.3333%;
+  width: 25%;
 `;
 
 const Navigate = styled(NavLink)`

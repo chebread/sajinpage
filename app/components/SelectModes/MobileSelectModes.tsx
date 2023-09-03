@@ -1,53 +1,48 @@
+import initValuesAtom from 'atoms/initValuesAtom';
+import timeLimitOptionsAtom from 'atoms/timeLimitOptionsAtom';
 import { linkUploaderClickedAtom } from 'atoms/uploaderAtom';
 import { useAtom } from 'jotai';
 import { desktopVp, disableTab, transition } from 'layouts/properties';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MobileUploader = ({ open, onDropUrl }) => {
-  const navigate = useNavigate();
-  const [clicked, setClicked] = useAtom(linkUploaderClickedAtom);
-
-  const onBack = () => {
-    navigate(-1);
-    setClicked(false);
-  };
-  const onEnter = (e: any) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      onDropUrl(e.target.value);
-    }
-  };
-  const toggleClicked = () => {
-    setClicked(!clicked);
-  };
+const MobileSelectModes = ({ onSelectMode }) => {
+  const [timeLimitOptions] = useAtom(timeLimitOptionsAtom);
+  const [, initValues] = useAtom(initValuesAtom);
+  const [, setClicked] = useAtom(linkUploaderClickedAtom);
 
   return (
     <Container>
       <Wrapper>
-        {clicked ? (
-          <>
-            <Input
-              type="text"
-              placeholder="복사한 파일 링크를 붙여넣어 주세요."
-              onKeyUp={onEnter}
-            />
-            <Button onClick={toggleClicked}>취소</Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={open}>파일 업로드</Button>
-            <Button onClick={toggleClicked}>파일 링크 업로드</Button>
-            <Button onClick={onBack}>취소</Button>
-          </>
-        )}
+        <Button onClick={onSelectMode} name="normal">
+          일반 업로드
+        </Button>
+        <Select onChange={onSelectMode} name="limited" defaultValue={'DEFAULT'}>
+          <option value="DEFAULT" disabled>
+            제한모드 시간 선택
+          </option>
+          {timeLimitOptions.map(option => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            );
+          })}
+        </Select>
+        <Button
+          onClick={() => {
+            initValues();
+            setClicked(false);
+          }}
+        >
+          취소
+        </Button>
       </Wrapper>
-      <Background onClick={onBack} />
+      <Background onClick={initValues} />
     </Container>
   );
 };
 
-const Input = styled.input`
+const Select = styled.select`
   all: unset;
   ${disableTab}
   ${transition('all')}
@@ -59,11 +54,17 @@ const Input = styled.input`
   align-items: center;
   gap: 1rem;
   border-radius: 1rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   background-color: rgb(245, 245, 245);
-  &::placeholder {
-    color: #70757a;
+  @media (${desktopVp}) {
+    &:hover {
+      /* background-color: rgb(235, 235, 235); */
+    }
+  }
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
   }
 `;
 const Button = styled.button`
@@ -129,8 +130,6 @@ const Container = styled.div`
     opacity: 0;
     z-index: -1;
   }
-  height: 100%;
-  width: 100%;
 `;
 
-export default MobileUploader;
+export default MobileSelectModes;

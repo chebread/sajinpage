@@ -7,7 +7,7 @@ import {
 } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
-import { ReactComponent as LeftArrow } from 'assets/svg/LeftArrow.svg';
+import { ReactComponent as SmallLeftArrow } from 'assets/svg/SmallLeftArrow.svg';
 import { useNavigate, useParams } from 'react-router-dom';
 import { cssVarsPalette } from 'layouts/cssVars';
 
@@ -29,7 +29,7 @@ const NavigationBanner = () => {
     <Container>
       <Back>
         <Button onClick={onRedirect}>
-          <LeftArrow />
+          <SmallLeftArrow />
         </Button>
       </Back>
       <Navigator>

@@ -1,3 +1,5 @@
+import { viewedAtom } from 'atoms/viewerAtom';
+import { useAtom } from 'jotai';
 import {
   centerAlign,
   desktopVp,
@@ -6,9 +8,15 @@ import {
 } from 'layouts/properties';
 import styled from 'styled-components';
 
-const Modal = ({ onBack, children }) => {
+type ModalProps = {
+  onBack: any;
+  children: any;
+  visible?: boolean;
+};
+
+const Modal = ({ onBack, children, visible = true }: ModalProps) => {
   return (
-    <FloatModalsContainer>
+    <FloatModalsContainer visible={visible}>
       <FloatModals>{children}</FloatModals>
       <FloatModalsBackground onClick={onBack} />
     </FloatModalsContainer>
@@ -21,9 +29,9 @@ const FloatModalsContainer = styled.div<{ visible?: boolean }>`
   opacity: 0;
   z-index: -1;
   @media (${desktopVp}) {
-    visibility: visible;
-    opacity: 1;
-    z-index: 1;
+    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+    opacity: ${({ visible }) => (visible ? 1 : 0)};
+    z-index: ${({ visible }) => (visible ? '1000000' : '-1')};
   }
   position: fixed;
   height: 100%;

@@ -5,7 +5,7 @@ import {
   resetToggleAtom,
 } from 'atoms/viewerAtom';
 import { useAtom } from 'jotai';
-import { centerAlign, desktopVp, disableTab } from 'layouts/properties';
+import { desktopVp, disableTab } from 'layouts/properties';
 import transition from 'layouts/properties/transition';
 import styled from 'styled-components';
 import fileDbAtom from 'atoms/fileDbAtom';
@@ -67,65 +67,150 @@ const EditBottomModal = () => {
     });
     onCancel();
   };
-  return (
-    <>
-      <Container>
-        <Background visible={editClicked} onClick={onCancel} />
-        <>
-          <ContainerX visible={editClicked}>
-            <button
-              onClick={async () => {
-                await onCopy(getUrl());
-                onCancel();
-              }}
+
+  return fileDb.limit ? (
+    modeToggle ? (
+      resetToggle ? (
+        <Container>
+          <Wrapper visible={editClicked}>
+            <Select
+              onChange={onSelectMode}
+              name="limited"
+              defaultValue={'DEFAULT'}
             >
-              Share
-            </button>
-            <button onClick={() => onDeleteFile(fileDb.docId)}>
-              delete file
-            </button>
-            {fileDb.limit ? (
-              // limit mode
-              modeToggle ? (
-                <>
-                  {resetToggle ? (
-                    //  time limit 시간 설정하기 (같음)
-                    <>
-                      {/* <Select
-                        onChange={onModeSelect}
-                        options={timeLimitOptions}
-                      /> */}
-                      <button onClick={onCancel}>Cancel</button>
-                    </>
-                  ) : (
-                    <>
-                      <button onClick={onResetToggle}>
-                        limit mode 값 재설정하기
-                      </button>
-                      <button onClick={offMode}>limit mode 끄기</button>
-                      <button onClick={onCancel}>Cancel</button>
-                    </>
-                  )}
-                </>
-              ) : (
-                <button onClick={onResetToggle}>limit mode 재설정하기</button>
-              )
-            ) : // normal mode
-            modeToggle ? (
-              //  time limit 시간 설정하기 (같음)
-              <>
-                {/* <Select onChange={onModeSelect} options={timeLimitOptions} /> */}
-                <button onClick={onCancel}>Cancel</button>
-              </>
-            ) : (
-              <button onClick={onModeToggle}>limit mode 켜기</button>
-            )}
-          </ContainerX>
-        </>
+              <option value="DEFAULT" disabled>
+                제한모드 시간 선택
+              </option>
+              {timeLimitOptions.map(option => {
+                return (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                );
+              })}
+            </Select>
+            <Button onClick={onResetToggle}>취소</Button>
+          </Wrapper>
+          <Background visible={editClicked} onClick={onCancel} />
+        </Container>
+      ) : (
+        <Container>
+          <Wrapper visible={editClicked}>
+            <Button onClick={onResetToggle}>제한모드 재설정하기</Button>
+            <Button onClick={offMode}>제한모드 끄기</Button>
+            <Button onClick={onModeToggle}>취소</Button>
+          </Wrapper>
+          <Background visible={editClicked} onClick={onCancel} />
+        </Container>
+      )
+    ) : (
+      <Container>
+        <Wrapper visible={editClicked}>
+          <Button
+            onClick={async () => {
+              await onCopy(getUrl());
+              onCancel();
+            }}
+          >
+            공유
+          </Button>
+          <Button onClick={onModeToggle}>제한모드 재설정하기</Button>
+          <DeleteButton onClick={() => onDeleteFile(fileDb.docId)}>
+            삭제
+          </DeleteButton>
+        </Wrapper>
+        <Background visible={editClicked} onClick={onCancel} />
       </Container>
-    </>
+    )
+  ) : modeToggle ? (
+    // on limited
+    <Container>
+      <Wrapper visible={editClicked}>
+        <Select onChange={onSelectMode} name="limited" defaultValue={'DEFAULT'}>
+          <option value="DEFAULT" disabled>
+            제한모드 시간 선택
+          </option>
+          {timeLimitOptions.map(option => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            );
+          })}
+        </Select>
+        <Button onClick={onModeToggle}>취소</Button>
+      </Wrapper>
+      <Background visible={editClicked} onClick={onCancel} />
+    </Container>
+  ) : (
+    <Container>
+      <Wrapper visible={editClicked}>
+        <Button
+          onClick={async () => {
+            await onCopy(getUrl());
+            onCancel();
+          }}
+        >
+          공유
+        </Button>
+        <Button onClick={onModeToggle}>제한모드 켜기</Button>
+        <DeleteButton onClick={() => onDeleteFile(fileDb.docId)}>
+          삭제
+        </DeleteButton>
+      </Wrapper>
+      <Background visible={editClicked} onClick={onCancel} />
+    </Container>
   );
 };
+
+const Select = styled.select`
+  all: unset;
+  ${disableTab}
+  ${transition('all')}
+  cursor: pointer;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  @media (${desktopVp}) {
+    &:hover {
+      /* background-color: rgb(235, 235, 235); */
+    }
+  }
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
+  }
+`;
+const Button = styled.button`
+  all: unset;
+  ${disableTab}
+  ${transition('all')}
+  cursor: pointer;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
+  }
+`;
+const DeleteButton = styled(Button)`
+  color: #ff2f40;
+`;
 
 const Container = styled.div`
   ${transition('all')}
@@ -158,10 +243,10 @@ const Background = styled.div<{ visible: boolean }>`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-const ContainerX = styled.div<{ visible: boolean }>`
+const Wrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   bottom: 0;
-  height: 20%;
+  height: auto;
   width: 100%;
   z-index: 100000;
   transform-origin: 0 100%;
@@ -172,45 +257,13 @@ const ContainerX = styled.div<{ visible: boolean }>`
     transform: translateY(100%);
   }
   background-color: #fff;
-`;
-
-const Wrapper = styled.div`
-  ${transition('all')}
-  z-index: 10000;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 1.5rem;
-  padding-left: 1.5rem;
+  padding: 1rem 1rem 1rem 1rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: fixed;
-`;
-const Btn = styled.button`
-  all: unset;
-  ${disableTab}
-  ${transition('all')}
-  z-index: 10000;
-  cursor: pointer;
-  height: 3rem;
-  width: 3rem;
-  display: flex;
-  ${centerAlign}
-  border-radius: 50%;
-  background-color: #1e1e1e;
-  &:active {
-    transform: scale(0.85);
-    svg {
-      transform: scale(0.85);
-    }
-  }
-  svg {
-    ${transition('transform')}
-    height: 1rem;
-    fill: #ffffff;
-  }
-  /* margin-bottom: 0.5rem; */
+  gap: 0.5rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 `;
 
 export default EditBottomModal;

@@ -10,13 +10,16 @@ import ModalWrapper from 'components/Modal/ModalWrapper';
 import ModalCancelIcon from 'components/Modal/ModalCancelIcon';
 import { ReactComponent as LeftArrowIcon } from 'assets/svg/LeftArrow.svg';
 import { useState } from 'react';
+import { linkUploaderClickedAtom } from 'atoms/uploaderAtom';
+import { useAtom } from 'jotai';
 
 const DesktopUploader = ({ open, onDropUrl }) => {
   const navigate = useNavigate();
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useAtom(linkUploaderClickedAtom);
 
   const onBack = () => {
     navigate(-1);
+    setClicked(false);
   };
   const onEnter = (e: any) => {
     if (e.keyCode === 13) {
@@ -24,16 +27,15 @@ const DesktopUploader = ({ open, onDropUrl }) => {
       onDropUrl(e.target.value);
     }
   };
+  const toggleClicked = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <Modal onBack={onBack}>
       <ModalHeader>
         {clicked ? (
-          <ModalCancelBtn
-            onClick={() => {
-              setClicked(false);
-            }}
-          >
+          <ModalCancelBtn onClick={toggleClicked}>
             <LeftArrowIcon />
           </ModalCancelBtn>
         ) : (
@@ -46,7 +48,7 @@ const DesktopUploader = ({ open, onDropUrl }) => {
         {clicked ? (
           <Input
             type="text"
-            placeholder="복사한 파일 링크를 붙여넣어 주세요"
+            placeholder="복사한 파일 링크를 붙여넣어 주세요."
             onKeyUp={onEnter}
           />
         ) : (
@@ -55,11 +57,7 @@ const DesktopUploader = ({ open, onDropUrl }) => {
               <AddIcon />
               파일 업로드
             </Button>
-            <Button
-              onClick={() => {
-                setClicked(!clicked);
-              }}
-            >
+            <Button onClick={toggleClicked}>
               <LinkIcon />
               파일 링크 업로드
             </Button>

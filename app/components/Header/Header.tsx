@@ -146,7 +146,7 @@ const Container = styled.div<{ visible: boolean; expanded: boolean }>`
   /* background-color: ${themeVars.light.header_color};
   backdrop-filter: blur(1rem); */
   background-color: #fff;
-  z-index: ${({ visible }) => (visible ? '10000' : '0')};
+  z-index: ${({ visible }) => (visible ? '10000' : '0')}; // for mobile header
   @media (${desktopVp}) {
     z-index: 0;
   }

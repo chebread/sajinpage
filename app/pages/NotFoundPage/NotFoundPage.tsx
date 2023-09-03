@@ -1,5 +1,5 @@
 import { cssVarsPalette } from 'layouts/cssVars';
-import { centerAlign, desktopVp, transition } from 'layouts/properties';
+import { desktopVp, transition } from 'layouts/properties';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

@@ -39,7 +39,7 @@ const DesktopEditMenu = () => {
           }}
         >
           <MenuModalsWrapper>
-            <span>링크 복사</span>
+            <span>공유</span>
           </MenuModalsWrapper>
         </MenuModals>
 

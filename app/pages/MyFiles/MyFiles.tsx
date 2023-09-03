@@ -5,7 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { broadcastChannel } from 'lib/broadcastChannel';
 import getWebsiteUrl from 'lib/getWebsiteUrl';
 import onCopy from 'components/onCopy';
-import { desktopVp, landscapeVp } from 'layouts/properties';
+import {
+  desktopVp,
+  disableTab,
+  landscapeVp,
+  transition,
+} from 'layouts/properties';
 import { cssVarsPalette } from 'layouts/cssVars';
 import onDeleteBucket from 'components/MyFiles/deleteBucket';
 import NotExistedBuckets from './panels/NotExistedBuckets';
@@ -71,21 +76,15 @@ const MyFiles = () => {
       <Wrapper>
         {buckets.map((docId: any, index: number) => (
           <CardWrapper key={index}>
-            {/* <Image
-                  src={data.url}
-                  onClick={() => {
-                    navigate(`/v/${data.docId}`);
-                  }}
-                /> */}
             <Button
               onClick={() => {
                 navigate(`/v/${docId}`);
               }}
             >
-              {docId}
+              <span>{docId}</span>
             </Button>
             <Button onClick={() => onCopy(getWebsiteUrl(`/v/${docId}`))}>
-              링크 복사
+              공유
             </Button>
             <Button onClick={() => onDeleteBucket(buckets, docId)}>삭제</Button>
           </CardWrapper>
@@ -123,8 +122,44 @@ const CardWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   height: auto;
+  gap: 0.5rem;
 `;
-const Image = styled.img``;
-const Button = styled.button``;
+const Button = styled.button`
+  all: unset;
+  white-space: nowrap;
+  &:first-child {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+  &:last-child {
+    color: #ff2f40;
+  }
+  ${disableTab}
+  ${transition('all')}
+  cursor: pointer;
+  padding: 1.5rem 1.25rem;
+  gap: 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  @media (${desktopVp}) {
+    font-size: 1rem;
+  }
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  @media (${desktopVp}) {
+    &:hover {
+      /* background-color: rgb(235, 235, 235); */
+    }
+  }
+  &:active {
+    background-color: rgb(235, 235, 235);
+    transform: scale(0.98);
+  }
+  svg {
+    height: 1.5rem;
+  }
+`;
 
 export default MyFiles;
