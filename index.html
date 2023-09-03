@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Sajinpage</title>
+    <!--favicon-->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!--typos-->
+    <!--custom-->
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0f0f0f"
+    />
+    <!--(0): safari 작은 검색창에서 white로 표시되는 현상 없에기-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      {
+        `
+      (function() {
+        var info = console.info
+        console.info = function (message) {
+          if (!/Download the React DevTools/.test(message)) info.apply(console, arguments) 
+        }
+      })()
+    `;
+      }
+    </script>
+    <script type="module" src="/app/index.tsx"></script>
+  </body>
+</html>
