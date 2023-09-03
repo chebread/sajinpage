@@ -14,7 +14,7 @@ import MyFiles from 'pages/MyFiles';
 import Settings from 'pages/Settings';
 import Home from 'pages/Home';
 
-const forbiddenRouter = ({ code, message }) =>
+const forbiddenRouter = ({ message }) =>
   createBrowserRouter(
     createRoutesFromElements(
       <Route
@@ -26,10 +26,7 @@ const forbiddenRouter = ({ code, message }) =>
           </>
         }
       >
-        <Route
-          path="*"
-          element={<ForbiddenPage code={code} message={message} />}
-        />
+        <Route path="*" element={<ForbiddenPage message={message} />} />
       </Route>
     )
   );
