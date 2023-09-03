@@ -60,6 +60,7 @@ const Message = styled.div`
   margin-bottom: 1rem;
 `;
 const Wrapper = styled.div`
+  margin: 2rem 1rem 2rem 1rem;
   width: 22.5rem;
   height: auto;
   display: flex;
@@ -72,7 +73,6 @@ const Container = styled.div`
   justify-content: center;
   height: ${cssVarsPalette.content_full_height};
   width: 100%;
-  margin-top: 2rem;
 `;
 
 export default EndedFileSession;
