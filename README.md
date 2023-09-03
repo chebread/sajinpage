@@ -5,13 +5,6 @@
 ## Website link
 [sajin.page](https://sajin.page/)
 
-## Stacks
-- React
-- Supabase
-- React Router Dom
-- Jotai
-- React Helmet Async
-
 ## License
 - [MIT LICENSE &copy; 2023 Cha Haneum](.github/LICENSE)
 - [Copyright © 2010-2023 Freepik Company S.L.](https://www.flaticon.com/)
