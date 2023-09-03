@@ -1,5 +1,4 @@
 # Sajinpage
-
 > Sajinpage (pronounced /sɑdʑin,peɪdʒ/) shares photos and provides an intuitive photo view
 
 ## Website link
