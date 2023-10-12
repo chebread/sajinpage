@@ -5,13 +5,6 @@ import dateToString from 'lib/dateToString';
 import getCurrentTime from 'lib/getCurrentTime';
 import filesAtom from 'atoms/filesAtom';
 import initValuesAtom from 'atoms/initValuesAtom';
-import Modal from 'components/Modal';
-import styled from 'styled-components';
-import { desktopVp, disableTab, transition } from 'layouts/properties';
-import ModalHeader from 'components/Modal/ModalHeader';
-import ModalCancelBtn from 'components/Modal/ModalCancelBtn';
-import ModalWrapper from 'components/Modal/ModalWrapper';
-import { ReactComponent as LeftArrowIcon } from 'assets/svg/LeftArrow.svg';
 import DesktopSelectModes from 'components/SelectModes/DesktopSelectModes';
 import MobileSelectModes from 'components/SelectModes/MobileSelectModes';
 
