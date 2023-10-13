@@ -28,16 +28,9 @@ const CollapseBtn = () => {
 };
 
 const Container = styled.div<{ expanded: boolean }>`
-  transition: all;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-out;
-  visibility: hidden;
-  opacity: 0;
-  z-index: -1;
+  display: none;
   @media (${desktopVp}) {
-    visibility: ${({ expanded }) => (expanded ? 'visible' : 'hidden')};
-    opacity: ${({ expanded }) => (expanded ? '1' : '0')};
-    z-index: ${({ expanded }) => (expanded ? '0' : '-1')};
+    display: ${({ expanded }) => (expanded ? 'block' : 'none')};
   }
 `;
 

@@ -18,7 +18,6 @@ import { broadcastChannel, triggerEvent } from 'lib/broadcastChannel';
 import { get } from 'idb-keyval';
 import { deleteIdb } from 'lib/idb';
 import ViewerBottomModal from 'components/Viewer/ViewerBottomModal';
-import checkImage from 'lib/checkImage';
 import type fileDbType from 'types/fileDbType';
 
 // (0): 파일의 db를 idb에 저장하여서 다시 로딩되는 일 없게하기 만일 idb 삭제시 다시 불러오게 됨
