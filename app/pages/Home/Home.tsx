@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <Container>
-      <Wrapper>
-        <Message>반갑습니다. 사진페이지입니다.</Message>
-        <Sub>링크로 사진을 자유롭게 공유하고 저장해보세요.</Sub>
-        <Redirect to="u">파일 업로드 하기</Redirect>
-      </Wrapper>
-    </Container>
+    <>
+      <Container>
+        <Wrapper>
+          <Message>반갑습니다. 사진페이지입니다.</Message>
+          <Sub>링크로 사진을 자유롭게 공유하고 저장해보세요.</Sub>
+          <Redirect to="u">파일 업로드 하기</Redirect>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
