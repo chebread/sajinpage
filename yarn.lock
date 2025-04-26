@@ -2501,13 +2501,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gsap@npm:^3.11.4":
-  version: 3.12.2
-  resolution: "gsap@npm:3.12.2"
-  checksum: e3e9709f9ca60cee0ef7fd91f45a232a48b550f95b6df090dfffe2511fccc651408476de575b69c1c2ce80b6089b6ad0d4854beb58ea427f14e51a30b0640a70
-  languageName: node
-  linkType: hard
-
 "has-flag@npm:^3.0.0":
   version: 3.0.0
   resolution: "has-flag@npm:3.0.0"
@@ -3687,9 +3680,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sajinpage@workspace:.":
+"sajinpage-v1@workspace:.":
   version: 0.0.0-use.local
-  resolution: "sajinpage@workspace:."
+  resolution: "sajinpage-v1@workspace:."
   dependencies:
     "@supabase/supabase-js": ^2.21.0
     "@types/react": ^18.0.28
@@ -3701,7 +3694,6 @@ __metadata:
     "@vitejs/plugin-react": ^4.0.0
     "@yarnpkg/sdks": ^3.0.0-rc.42
     bowser: ^2.11.0
-    gsap: ^3.11.4
     idb-keyval: ^6.2.1
     jotai: ^2.1.0
     react: ^18.2.0
